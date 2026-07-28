@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cettire Search Results Fixture</title>
+  <script type="application/ld+json">
+  [
+    {
+      "@type": "Product",
+      "name": "Leather Tote Bag",
+      "brand": {"@type": "Brand", "name": "Gucci"},
+      "sku": "GUC-001",
+      "image": "https://www.cettire.com/images/tote.jpg",
+      "offers": {
+        "@type": "Offer",
+        "price": "890.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.cettire.com/products/leather-tote-bag"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "Suede Loafers",
+      "brand": {"@type": "Brand", "name": "Prada"},
+      "sku": "PRD-002",
+      "image": "/images/loafers.jpg",
+      "offers": {
+        "@type": "Offer",
+        "price": "450.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/OutOfStock",
+        "url": "/products/suede-loafers"
+      }
+    }
+  ]
+  </script>
+</head>
+<body>
+  <main class="search-results">
+    <div class="product-card">
+      <a class="product-card__link" href="https://www.cettire.com/products/leather-tote-bag">
+        <img class="product-card__image" src="/images/tote-thumb.jpg" alt="Leather Tote Bag">
+        <span class="product-card__brand">Gucci</span>
+        <h2 class="product-card__title">Leather Tote Bag Duplicate</h2>
+        <span class="product-card__price">$890.00</span>
+      </a>
+    </div>
+
+    <div class="product-card">
+      <a class="product-card__link" href="/products/wool-coat">
+        <img class="product-card__image" src="/images/coat.jpg" data-src="/images/coat.jpg" alt="Wool Coat">
+        <span class="product-card__brand">Burberry</span>
+        <h2 class="product-card__title">Wool Coat</h2>
+        <span class="product-card__price">$1,200.00</span>
+        <span data-product-sku="BUR-003"></span>
+      </a>
+    </div>
+
+    <div class="product-card">
+      <a class="product-card__link" href="/products/sale-sneakers">
+        <img class="product-card__image" src="/images/sneakers.jpg" alt="Sale Sneakers">
+        <span class="product-card__brand">Balenciaga</span>
+        <h2 class="product-card__title">Sale Sneakers</h2>
+        <span class="sale-price">$599.00</span>
+        <span class="original-price">$799.00</span>
+        <span class="product-sku">BAL-004</span>
+      </a>
+    </div>
+
+    <div class="product-card">
+      <span class="product-card__brand">Unknown</span>
+      <h2 class="product-card__title"></h2>
+      <span class="product-card__price">$100.00</span>
+    </div>
+
+    <div class="product-card">
+      <a class="product-card__link" href="not-a-valid-url">
+        <span class="product-card__brand">Broken URL Brand</span>
+        <h2 class="product-card__title">Broken URL Item</h2>
+        <span class="product-card__price">$50.00</span>
+      </a>
+    </div>
+  </main>
+</body>
+</html>
