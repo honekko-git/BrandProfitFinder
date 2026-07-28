@@ -95,7 +95,7 @@ Phase 9 adds Vestiaire Collective integration foundation (fixture-based, no live
 
 Phase 10 adds Fashionphile integration foundation (fixture-based, no live API)
 
-Phase 11 adds The RealReal integration foundation (fixture-based, no live API)
+Phase 12 adds Grailed integration foundation (fixture-based, no live API)
 
 ---
 
@@ -275,4 +275,26 @@ Or:
 
 ```
 python main.py --demo-therealreal
+```
+
+### Grailed Phase 12 notes
+
+- Phase 12 is a **Grailed integration foundation** (not a live site connection)
+- Does **not** use official Grailed API format; internal standard fixture JSON only
+- Reuses Phase 8 used luxury models and Phase 9–11 integration patterns
+- Individual seller info, offers, inventory, discounts, and item condition are kept separate
+- Offer/minimum offer and discount metadata are not auto-applied to profit (`offer_applied=false`, `discount_applied=false`)
+- Seller claim and platform authentication are not conflated
+- Demo only: `--demo-grailed` with `FakeGrailedClient`
+- Without demo, `--marketplace grailed` logs a clear error and falls back safely
+
+```
+GRAILED_DEMO_ENABLED=true
+python main.py --marketplace grailed --demo-grailed
+```
+
+Or:
+
+```
+python main.py --demo-grailed
 ```

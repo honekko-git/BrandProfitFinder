@@ -8,7 +8,7 @@ import unicodedata
 from dataclasses import dataclass
 from decimal import Decimal
 
-from config.constants import MARKETPLACE_FASHIONPHILE, MARKETPLACE_THEREALREAL, MARKETPLACE_USED_DEMO, MARKETPLACE_VESTIAIRE, MARKETPLACE_YAHOO_AUCTION
+from config.constants import MARKETPLACE_FASHIONPHILE, MARKETPLACE_GRAILED, MARKETPLACE_THEREALREAL, MARKETPLACE_USED_DEMO, MARKETPLACE_VESTIAIRE, MARKETPLACE_YAHOO_AUCTION
 from models.marketplace_listing import MarketplaceListing
 from models.product import Product
 from marketplace.listing_validator import validate_listing
@@ -73,6 +73,7 @@ class ListingMatcher:
                 MARKETPLACE_VESTIAIRE,
                 MARKETPLACE_FASHIONPHILE,
                 MARKETPLACE_THEREALREAL,
+                MARKETPLACE_GRAILED,
             }
             and product_sku == _normalize_text(listing.listing_id)
         ):

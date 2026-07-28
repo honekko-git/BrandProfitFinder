@@ -42,6 +42,11 @@ _CONDITION_RULES: tuple[tuple[re.Pattern[str], UsedItemCondition, float, str], .
     (re.compile(r"^moderate\s*wear$"), UsedItemCondition.USED_GENERIC, 0.5, "moderate_wear"),
     (re.compile(r"^heavy\s*wear$"), UsedItemCondition.POOR, 0.85, "heavy_wear"),
     (re.compile(r"^used$"), UsedItemCondition.USED_GENERIC, 0.5, "ambiguous_used"),
+    (re.compile(r"^gently\s*used$"), UsedItemCondition.USED_GENERIC, 0.55, "grailed_gently_used"),
+    (re.compile(r"^well\s*worn$"), UsedItemCondition.FAIR, 0.75, "grailed_well_worn"),
+    (re.compile(r"^new\s*with\s*tags$"), UsedItemCondition.LIKE_NEW, 0.7, "grailed_new_with_tags"),
+    (re.compile(r"^new\s*without\s*tags$"), UsedItemCondition.LIKE_NEW, 0.65, "grailed_new_without_tags"),
+    (re.compile(r"^distressed$"), UsedItemCondition.USED_GENERIC, 0.45, "grailed_distressed"),
 )
 
 
@@ -99,6 +104,16 @@ class ConditionNormalizer:
                     warnings.append("moderate wear does not imply good condition grade")
                 if rule == "heavy_wear":
                     warnings.append("heavy wear indicates significant wear")
+                if rule == "grailed_gently_used":
+                    warnings.append("gently used normalized conservatively; not upgraded to ranked grade")
+                if rule == "grailed_well_worn":
+                    warnings.append("well worn indicates significant wear")
+                if rule == "grailed_new_with_tags":
+                    warnings.append("new with tags describes tags; not conflated with accessories")
+                if rule == "grailed_new_without_tags":
+                    warnings.append("new without tags does not assert unused guarantee")
+                if rule == "grailed_distressed":
+                    warnings.append("distressed may be design or damage; requires caution")
                 return ConditionNormalizationResult(
                     normalized_condition=condition,
                     raw_condition=raw_text,

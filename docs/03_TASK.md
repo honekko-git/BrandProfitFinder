@@ -222,3 +222,22 @@ Set values in `.env` (see `.env.example`):
 - Internal fixture JSON only; not claimed as official API format
 
 ---
+
+## Phase 12
+
+- [x] Grailed integration foundation (no live communication)
+- [x] GrailedClientProtocol and FakeGrailedClient
+- [x] GrailedResponseParser (BrandProfitFinder internal standard JSON)
+- [x] GrailedMarketplace with pagination, inventory/sale/offer/seller filters
+- [x] Phase 8 UsedItemEnricher integration; offer and seller metadata in source fields
+- [x] MarketplaceFactory aliases: grailed, grailed_market, grailed-market, gr
+- [x] Demo: `python main.py --marketplace grailed --demo-grailed`
+- [ ] Official Grailed API, partner data feed, or CSV import client
+
+### Phase 12 test status
+
+- Total tests: 849+ (including prior regression tests)
+- No external Grailed communication in tests or default `main.py`
+- Internal fixture JSON only; not claimed as official API format
+
+---

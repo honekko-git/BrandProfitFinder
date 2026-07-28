@@ -5,6 +5,7 @@ Marketplace factory for creating domestic marketplace instances.
 from config.constants import (
     MARKETPLACE_AMAZON_JP,
     MARKETPLACE_FASHIONPHILE,
+    MARKETPLACE_GRAILED,
     MARKETPLACE_THEREALREAL,
     MARKETPLACE_LOCAL,
     MARKETPLACE_MERCARI,
@@ -23,6 +24,9 @@ from marketplace.fashionphile_settings import FashionphileSettings
 from marketplace.therealreal_client import TheRealRealClientProtocol
 from marketplace.therealreal_marketplace import create_therealreal_marketplace
 from marketplace.therealreal_settings import TheRealRealSettings
+from marketplace.grailed_client import GrailedClientProtocol
+from marketplace.grailed_marketplace import create_grailed_marketplace
+from marketplace.grailed_settings import GrailedSettings
 from marketplace.local_marketplace import LocalMarketplace
 from marketplace.rakuten_client import RakutenClientProtocol
 from marketplace.rakuten_marketplace import create_rakuten_marketplace
@@ -50,6 +54,9 @@ _FASHIONPHILE_ALIASES = frozenset(
 _THEREALREAL_ALIASES = frozenset(
     {"therealreal", "the_real_real", "the-real-real", "realreal", "trr"}
 )
+_GRAILED_ALIASES = frozenset(
+    {"grailed", "grailed_market", "grailed-market", "gr"}
+)
 
 
 def _normalize_marketplace_name(marketplace_name: str) -> str:
@@ -62,6 +69,8 @@ def _normalize_marketplace_name(marketplace_name: str) -> str:
         return MARKETPLACE_FASHIONPHILE
     if normalized in _THEREALREAL_ALIASES:
         return MARKETPLACE_THEREALREAL
+    if normalized in _GRAILED_ALIASES:
+        return MARKETPLACE_GRAILED
     return normalized
 
 
@@ -82,6 +91,8 @@ def create_marketplace(
     fashionphile_client: FashionphileClientProtocol | None = None,
     therealreal_settings: TheRealRealSettings | None = None,
     therealreal_client: TheRealRealClientProtocol | None = None,
+    grailed_settings: GrailedSettings | None = None,
+    grailed_client: GrailedClientProtocol | None = None,
 ) -> BaseMarketplace:
     """
     Create a marketplace instance for the given name.
@@ -103,6 +114,8 @@ def create_marketplace(
         fashionphile_client: Optional Fashionphile client override (required for fashionphile).
         therealreal_settings: Optional The RealReal settings override.
         therealreal_client: Optional The RealReal client override (required for therealreal).
+        grailed_settings: Optional Grailed settings override.
+        grailed_client: Optional Grailed client override (required for grailed).
 
     Returns:
         Configured marketplace instance.
@@ -150,6 +163,12 @@ def create_marketplace(
             settings=therealreal_settings,
         )
 
+    if normalized == MARKETPLACE_GRAILED.lower():
+        return create_grailed_marketplace(
+            client=grailed_client,
+            settings=grailed_settings,
+        )
+
     not_implemented = {
         MARKETPLACE_MERCARI.lower(): "Mercari marketplace is not yet implemented",
     }
@@ -174,11 +193,13 @@ def get_all_marketplaces(
     fashionphile_client: FashionphileClientProtocol | None = None,
     therealreal_settings: TheRealRealSettings | None = None,
     therealreal_client: TheRealRealClientProtocol | None = None,
+    grailed_settings: GrailedSettings | None = None,
+    grailed_client: GrailedClientProtocol | None = None,
 ) -> list[BaseMarketplace]:
     """
     Return marketplace instances for all implemented marketplaces.
 
-    Vestiaire, Fashionphile, and The RealReal are omitted unless a client is injected.
+    Vestiaire, Fashionphile, The RealReal, and Grailed are omitted unless a client is injected.
     """
     yahoo = yahoo_settings or YahooApiSettings.from_env()
     amazon = amazon_settings or AmazonConfig.from_env()
@@ -225,6 +246,14 @@ def get_all_marketplaces(
                 MARKETPLACE_THEREALREAL,
                 therealreal_settings=therealreal_settings,
                 therealreal_client=therealreal_client,
+            )
+        )
+    if grailed_client is not None:
+        marketplaces.append(
+            create_marketplace(
+                MARKETPLACE_GRAILED,
+                grailed_settings=grailed_settings,
+                grailed_client=grailed_client,
             )
         )
     return marketplaces

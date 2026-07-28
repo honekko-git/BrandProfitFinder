@@ -279,3 +279,77 @@ THEREALREAL_INCLUDE_DISCOUNTED_ONLY = os.getenv(
     "yes",
     "on",
 )
+
+GRAILED_ENABLED = os.getenv("GRAILED_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+GRAILED_DEMO_ENABLED = os.getenv("GRAILED_DEMO_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+GRAILED_TIMEOUT_SECONDS = max(1, int(os.getenv("GRAILED_TIMEOUT_SECONDS", "10")))
+GRAILED_PAGE_SIZE = max(1, min(50, int(os.getenv("GRAILED_PAGE_SIZE", "20"))))
+GRAILED_MAX_PAGES = max(1, min(20, int(os.getenv("GRAILED_MAX_PAGES", "1"))))
+GRAILED_DEFAULT_CURRENCY = os.getenv("GRAILED_DEFAULT_CURRENCY", "JPY").strip().upper()
+GRAILED_DEMO_FIXTURE_PATH = os.getenv(
+    "GRAILED_DEMO_FIXTURE_PATH", "grailed_search_normal.json"
+).strip()
+GRAILED_ALLOW_UNKNOWN_CURRENCY = os.getenv(
+    "GRAILED_ALLOW_UNKNOWN_CURRENCY", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+GRAILED_INCLUDE_UNAVAILABLE = os.getenv(
+    "GRAILED_INCLUDE_UNAVAILABLE", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+GRAILED_INCLUDE_SOLD = os.getenv("GRAILED_INCLUDE_SOLD", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+GRAILED_INCLUDE_RESERVED = os.getenv(
+    "GRAILED_INCLUDE_RESERVED", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+GRAILED_INCLUDE_OFFER_ENABLED_ONLY = os.getenv(
+    "GRAILED_INCLUDE_OFFER_ENABLED_ONLY", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+GRAILED_INCLUDE_DISCOUNTED_ONLY = os.getenv(
+    "GRAILED_INCLUDE_DISCOUNTED_ONLY", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+GRAILED_REQUIRE_VERIFIED_SELLER = os.getenv(
+    "GRAILED_REQUIRE_VERIFIED_SELLER", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)

@@ -1,0 +1,23 @@
+{
+  "marketplace": "grailed",
+  "query": "Rick Owens Ramones",
+  "page": 1,
+  "page_size": 20,
+  "total": 1,
+  "items": [
+    {
+      "listing_id": "grailed-min-001",
+      "title": "Minimal Listing",
+      "price": {
+        "amount": 50000,
+        "currency": "JPY"
+      },
+      "url": "https://example.invalid/grailed/grailed-min-001",
+      "sale_status": "ACTIVE",
+      "inventory": {
+        "status": "IN_STOCK",
+        "quantity": 1
+      }
+    }
+  ]
+}
