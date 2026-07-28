@@ -1,0 +1,75 @@
+{
+  "marketplace": "stockx",
+  "query": "comparison demo phase3",
+  "page": 1,
+  "page_size": 20,
+  "total": 3,
+  "items": [
+    {
+      "listing_id": "cmp-stockx-p3-001",
+      "product_id": "cmp-stockx-product-001",
+      "variant_id": "cmp-stockx-variant-001",
+      "title": "GUCCI Marmont Comparison Demo Bag",
+      "brand": "GUCCI",
+      "model_number": "GG-MARMONT",
+      "style_code": "GG-MARMONT",
+      "sku": "P3-001",
+      "condition": {"raw": "New"},
+      "price": {"amount": 27000, "currency": "JPY", "source": "LOWEST_ASK"},
+      "shipping": {"known": false},
+      "fees": {"known": false},
+      "market": {
+        "lowest_ask": {"amount": 27000, "currency": "JPY", "known": true},
+        "highest_bid": {"amount": 25000, "currency": "JPY", "known": true},
+        "last_sale": {"amount": 26000, "currency": "JPY", "known": true}
+      },
+      "inventory": {"status": "AVAILABLE"},
+      "sale_status": "ACTIVE",
+      "url": "https://example.invalid/stockx/cmp-stockx-p3-001",
+      "metadata": {
+        "source_format": "brandprofitfinder_internal_fixture",
+        "fixture_note": "Synthetic comparison demo data"
+      }
+    },
+    {
+      "listing_id": "cmp-stockx-p3-002",
+      "product_id": "cmp-stockx-product-002",
+      "variant_id": "cmp-stockx-variant-002",
+      "title": "PRADA Loafer Comparison Demo Shoes",
+      "brand": "PRADA",
+      "model_number": "PRD-LOAFER",
+      "style_code": "PRD-LOAFER",
+      "sku": "P3-002",
+      "condition": {"raw": "New"},
+      "price": {"amount": 19000, "currency": "JPY", "source": "LOWEST_ASK"},
+      "shipping": {"known": false},
+      "fees": {"known": false},
+      "market": {
+        "lowest_ask": {"amount": 19000, "currency": "JPY", "known": true}
+      },
+      "inventory": {"status": "AVAILABLE"},
+      "sale_status": "ACTIVE",
+      "url": "https://example.invalid/stockx/cmp-stockx-p3-002"
+    },
+    {
+      "listing_id": "cmp-stockx-p3-003",
+      "product_id": "cmp-stockx-product-003",
+      "variant_id": "cmp-stockx-variant-003",
+      "title": "DEMO BRAND Comparison Loss Candidate",
+      "brand": "DEMO BRAND",
+      "model_number": "LOSS-003",
+      "style_code": "LOSS-003",
+      "sku": "P3-003",
+      "condition": {"raw": "Used"},
+      "price": {"amount": 16000, "currency": "JPY", "source": "LOWEST_ASK"},
+      "shipping": {"known": false},
+      "fees": {"known": false},
+      "market": {
+        "lowest_ask": {"amount": 16000, "currency": "JPY", "known": true}
+      },
+      "inventory": {"status": "AVAILABLE"},
+      "sale_status": "ACTIVE",
+      "url": "https://example.invalid/stockx/cmp-stockx-p3-003"
+    }
+  ]
+}

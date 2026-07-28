@@ -57,3 +57,4 @@ MARKETPLACE_GOAT: Final[str] = "goat"
 MARKETPLACE_USED_DEMO: Final[str] = "used_demo"
 
 SHEET_DOMESTIC_LISTINGS: Final[str] = "Domestic Listings"
+SHEET_MARKETPLACE_COMPARISON: Final[str] = "Marketplace Comparison"

@@ -34,7 +34,14 @@ from config.settings import (
     FARFETCH_DEMO_ENABLED,
     STOCKX_DEMO_ENABLED,
     GOAT_DEMO_ENABLED,
+    COMPARISON_DEMO_ENABLED,
 )
+from comparison.config import ComparisonConfig
+from comparison.demo_providers import (
+    build_comparison_demo_marketplaces,
+    comparison_demo_expected_marketplaces,
+)
+from comparison.service import CrossMarketplaceComparisonService
 from excel.exporter import ExcelExporter
 from marketplace.amazon_client import FakeAmazonClient
 from marketplace.amazon_settings import AmazonConfig
@@ -249,6 +256,20 @@ def build_phase3_listings() -> dict[str, list[MarketplaceListing]]:
         ],
         "P3-003": [],
     }
+
+
+def build_phase3_calculator() -> ProfitCalculator:
+    """Build the standard Phase 3 profit calculator used by demo pipelines."""
+    return ProfitCalculator(
+        ProfitConfig(
+            international_shipping_jpy=Decimal("2500"),
+            customs_duty_rate=Decimal("0.08"),
+            import_tax_rate=Decimal("0.10"),
+            domestic_shipping_jpy=Decimal("800"),
+            marketplace_fee_rate=Decimal("0.12"),
+            other_costs_jpy=Decimal("500"),
+        )
+    )
 
 
 def resolve_marketplace_name(argv: list[str] | None = None) -> str:
@@ -620,6 +641,16 @@ def build_cli_parser() -> argparse.ArgumentParser:
         add_help=True,
     )
     parser.add_argument(
+        "--comparison-demo",
+        "--demo-comparison",
+        action="store_true",
+        dest="comparison_demo",
+        help=(
+            "Run cross-marketplace comparison demo using synthetic StockX and GOAT "
+            "fixtures only (no live marketplace access)."
+        ),
+    )
+    parser.add_argument(
         "--demo-goat",
         action="store_true",
         help=(
@@ -648,6 +679,62 @@ def is_profit_intelligence_requested(argv: list[str] | None = None) -> bool:
     parser = build_cli_parser()
     namespace, _unknown = parser.parse_known_args(args)
     return bool(namespace.profit_intelligence)
+
+
+def is_comparison_demo_requested(argv: list[str] | None = None) -> bool:
+    """Return True when cross-marketplace comparison demo is requested."""
+    args = argv if argv is not None else sys.argv[1:]
+    if "--help" in args or "-h" in args:
+        return False
+    parser = build_cli_parser()
+    namespace, _unknown = parser.parse_known_args(args)
+    return bool(namespace.comparison_demo) or COMPARISON_DEMO_ENABLED
+
+
+def run_comparison_demo(
+    *,
+    profit_intelligence: bool | None = None,
+) -> Path:
+    """Run cross-marketplace comparison demo and export workbook."""
+    if profit_intelligence is None:
+        profit_intelligence = is_profit_intelligence_requested()
+    products = build_phase3_products()
+    marketplaces = build_comparison_demo_marketplaces()
+    if not marketplaces:
+        logger.warning(
+            "Comparison demo marketplaces unavailable; falling back to local marketplace"
+        )
+        return run_phase3(marketplace_name="local", profit_intelligence=profit_intelligence)
+
+    calculator = build_phase3_calculator()
+    service = CrossMarketplaceComparisonService(config=ComparisonConfig.from_env())
+    run_result = service.compare_products(
+        products,
+        marketplaces,
+        calculator,
+        profit_intelligence=profit_intelligence,
+        expected_marketplaces=comparison_demo_expected_marketplaces(),
+    )
+    ranked = RankingEngine(calculator.config).apply_ranking_scores(
+        run_result.ranked_price_results
+    )
+    exporter = ExcelExporter(output_dir=OUTPUT_DIR, filename=EXCEL_FILENAME)
+    output_path = exporter.export_phase3_workbook(
+        products,
+        run_result.all_listings,
+        ranked,
+        comparison_results=run_result.products,
+    )
+    logger.info(
+        "Comparison demo export completed: %s (products=%d, marketplaces=%d, listings=%d, results=%d, comparisons=%d)",
+        output_path,
+        len(products),
+        len(marketplaces),
+        len(run_result.all_listings),
+        len(ranked),
+        len(run_result.products),
+    )
+    return output_path
 
 
 def _rank_phase3_results(
@@ -1300,10 +1387,13 @@ def main() -> None:
     if "--help" in sys.argv or "-h" in sys.argv:
         build_cli_parser().print_help()
         return
-    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14/15/16/17 started")
+    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14/15/16/17/18 started")
     with patch("utils.http.fetch_url"), patch("utils.http.HttpClient"):
-        output_path = run()
-    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14/15/16/17 finished: %s", output_path)
+        if is_comparison_demo_requested():
+            output_path = run_comparison_demo()
+        else:
+            output_path = run()
+    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14/15/16/17/18 finished: %s", output_path)
 
 
 if __name__ == "__main__":

@@ -103,6 +103,8 @@ Phase 15 adds StockX integration foundation (fixture-based, no live API)
 
 Phase 17 adds GOAT marketplace foundation (fixture-based, no live API)
 
+Phase 18 adds cross-marketplace comparison foundation (deterministic, advisory)
+
 ---
 
 ## Domestic Marketplaces
@@ -401,6 +403,32 @@ python main.py --demo-goat --profit-intelligence
 ```
 
 The `--ai-score` flag remains a compatibility alias for `--profit-intelligence`.
+
+### Cross-Marketplace Comparison Phase 18 notes
+
+- Phase 18 adds a **cross-marketplace comparison foundation** for evaluating the same product across multiple marketplaces
+- Consumes existing marketplace search and profit outputs; does not replace per-marketplace logic
+- Deterministic identity matching reuses `ListingMatcher` (JAN, SKU, style code, model, brand, title overlap)
+- No fuzzy AI matching, no automatic currency conversion, and no invented certainty
+- Unknown shipping, fees, duties, and tax remain unknown (not treated as zero)
+- Mixed currencies produce warnings; profit comparison uses authoritative JPY profit results only
+- Non-JPY source amounts are never treated as JPY; comparable profit remains unknown without conversion
+- **selected_review_marketplace** is the deterministic review candidate under ranking policy
+- **highest_profit_marketplace** is the highest observed JPY-comparable profit (may differ from selected review)
+- Ranking order for eligible candidates: intelligence score → profit → margin → completeness → warnings → order
+- Profit Intelligence remains optional and advisory; comparison consumes intelligence when enabled
+- Demo: `--comparison-demo` (alias: `--demo-comparison`) using synthetic StockX + GOAT fixtures
+- `best_marketplace` / `best_profit_jpy` / `best_profit_margin` remain documented compatibility aliases for selected review fields
+- P3-003 used StockX listing may be excluded when preowned filtering is disabled; GOAT still contributes in the demo
+- Validate CLI demos sequentially when inspecting `output/profit_ranking.xlsx`; concurrent writes to the same file can corrupt the workbook
+
+```
+python main.py --comparison-demo
+python main.py --comparison-demo --profit-intelligence
+```
+
+Excel export appends a **Marketplace Comparison** sheet when comparison results are included.
+Existing sheets remain unchanged.
 
 ### Profit Intelligence Phase 16 notes
 

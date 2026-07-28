@@ -35,6 +35,8 @@ class FakeStockXClient:
         payload: dict[str, object] | None = None,
         pages: dict[int, dict[str, object]] | None = None,
         error: Exception | None = None,
+        *,
+        filter_by_query: bool = False,
     ) -> None:
         if pages is not None:
             self._pages = {key: deepcopy(value) for key, value in pages.items()}
@@ -43,6 +45,7 @@ class FakeStockXClient:
         else:
             self._pages = {1: {"marketplace": "stockx", "items": [], "total": 0, "page": 1}}
         self.error = error
+        self.filter_by_query = filter_by_query
         self.last_query: str = ""
         self.last_page: int = 1
         self.last_page_size: int | None = None
@@ -70,7 +73,19 @@ class FakeStockXClient:
             "total": 0,
             "page": page,
         }
-        return deepcopy(self._pages.get(page, empty))
+        payload = deepcopy(self._pages.get(page, empty))
+        if self.filter_by_query and query.strip():
+            items = payload.get("items")
+            if isinstance(items, list):
+                needle = query.strip().lower()
+                filtered = [
+                    item
+                    for item in items
+                    if isinstance(item, dict) and _fixture_matches_query(item, needle)
+                ]
+                payload["items"] = filtered
+                payload["total"] = len(filtered)
+        return payload
 
     def set_payload(self, payload: dict[str, object]) -> None:
         self._pages = {1: deepcopy(payload)}
@@ -80,3 +95,18 @@ class FakeStockXClient:
 
     def set_error(self, error: Exception | None) -> None:
         self.error = error
+
+
+def _fixture_matches_query(item: dict[str, object], needle: str) -> bool:
+    fields = [
+        str(item.get("title") or "").lower(),
+        str(item.get("brand") or "").lower(),
+        str(item.get("style_code") or "").lower(),
+        str(item.get("sku") or "").lower(),
+        str(item.get("model_number") or "").lower(),
+        str(item.get("model") or "").lower(),
+    ]
+    return any(
+        field and (needle in field or field in needle)
+        for field in fields
+    )

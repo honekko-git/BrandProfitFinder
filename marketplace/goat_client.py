@@ -90,12 +90,7 @@ class FakeGoatClient:
                 filtered = [
                     item
                     for item in items
-                    if isinstance(item, dict)
-                    and (
-                        needle in str(item.get("title") or "").lower()
-                        or needle in str(item.get("brand") or "").lower()
-                        or needle in str(item.get("style_code") or "").lower()
-                    )
+                    if isinstance(item, dict) and _goat_fixture_matches_query(item, needle)
                 ]
                 payload["items"] = filtered
                 payload["total"] = len(filtered)
@@ -109,3 +104,17 @@ class FakeGoatClient:
 
     def set_error(self, error: Exception | None) -> None:
         self.error = error
+
+
+def _goat_fixture_matches_query(item: dict[str, object], needle: str) -> bool:
+    fields = [
+        str(item.get("title") or "").lower(),
+        str(item.get("brand") or "").lower(),
+        str(item.get("style_code") or "").lower(),
+        str(item.get("sku") or "").lower(),
+        str(item.get("model") or "").lower(),
+    ]
+    return any(
+        field and (needle in field or field in needle)
+        for field in fields
+    )

@@ -738,3 +738,33 @@ GOAT_REQUIRE_KNOWN_PRICE = os.getenv(
     "yes",
     "on",
 )
+
+COMPARISON_DEMO_ENABLED = os.getenv("COMPARISON_DEMO_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+COMPARISON_MIN_MATCH_SCORE = max(
+    0,
+    min(100, int(os.getenv("COMPARISON_MIN_MATCH_SCORE", "30"))),
+)
+COMPARISON_REQUIRE_IDENTITY_MATCH = os.getenv(
+    "COMPARISON_REQUIRE_IDENTITY_MATCH", "true"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+COMPARISON_INCLUDE_INVALID = os.getenv(
+    "COMPARISON_INCLUDE_INVALID", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+COMPARISON_EXPECTED_MARKETPLACES = os.getenv(
+    "COMPARISON_EXPECTED_MARKETPLACES", "stockx,goat"
+).strip()

@@ -353,3 +353,32 @@ Set values in `.env` (see `.env.example`):
 - No external GOAT communication in tests or default `main.py`
 
 ---
+
+## Phase 18
+
+- [x] Cross-marketplace comparison foundation (`comparison/`)
+- [x] `CrossMarketplaceComparisonService` consuming existing marketplace outputs
+- [x] Deterministic identity matching via `ListingMatcher`
+- [x] Comparison ranking: intelligence (when present), profit, margin, completeness, warnings, stable order
+- [x] Currency safety: non-JPY amounts never treated as JPY; no automatic conversion
+- [x] Honest output fields: `selected_review_*` vs `highest_profit_*` (no misleading best label)
+- [x] Optional Profit Intelligence integration (consumes, does not replace)
+- [x] Excel **Marketplace Comparison** sheet appended when comparison enabled
+- [x] CLI demo: `python main.py --comparison-demo` (alias: `--demo-comparison`)
+
+### Phase 18 limitations
+
+- Demo uses synthetic StockX + GOAT fixtures only
+- No live multi-marketplace orchestration API
+- Recommendations are advisory review labels only
+- `best_marketplace` remains a compatibility alias for `selected_review_marketplace`
+- P3-003 used StockX listing may be excluded when preowned filtering is disabled
+- Sequential CLI validation required when reopening `output/profit_ranking.xlsx`
+- Future marketplaces require only marketplace adapter + comparison config entry
+
+### Phase 18 test status
+
+- Comprehensive tests under `tests/test_comparison_*.py`
+- No network, scraping, or profit-formula changes introduced
+
+---

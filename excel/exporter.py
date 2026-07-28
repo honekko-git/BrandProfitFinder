@@ -8,10 +8,18 @@ from pathlib import Path
 import pandas as pd
 from openpyxl import load_workbook
 
-from config.constants import SHEET_DOMESTIC_LISTINGS, SHEET_PROFIT_RANKING, SHEET_ROI_RANKING
+from config.constants import (
+    SHEET_DOMESTIC_LISTINGS,
+    SHEET_MARKETPLACE_COMPARISON,
+    SHEET_PROFIT_RANKING,
+    SHEET_ROI_RANKING,
+)
 from config.settings import EXCEL_FILENAME, OUTPUT_DIR
+from comparison.formatter import comparison_result_to_dict
+from comparison.models import ProductComparisonResult
 from excel.formatter import apply_listing_formatting, apply_price_result_formatting, apply_sheet_layout
 from excel.template import (
+    MARKETPLACE_COMPARISON_COLUMNS,
     MARKETPLACE_LISTING_COLUMNS,
     PRICE_RESULT_COLUMNS,
     PRODUCT_COLUMNS,
@@ -88,6 +96,7 @@ class ExcelExporter:
         products: list[Product],
         listings: list[MarketplaceListing],
         results: list[PriceResult],
+        comparison_results: list[ProductComparisonResult] | None = None,
     ) -> Path:
         """
         Export products, domestic listings, and profit results.
@@ -96,6 +105,7 @@ class ExcelExporter:
             products: Product list for backward-compatible export.
             listings: Domestic marketplace listing candidates.
             results: Profit calculation results.
+            comparison_results: Optional cross-marketplace comparison rows.
 
         Returns:
             Path to the generated workbook.
@@ -104,6 +114,11 @@ class ExcelExporter:
         listing_rows = [listing.to_dict() for listing in listings]
         result_rows = [result.to_dict() for result in results]
         result_columns = price_result_columns(results)
+        comparison_rows = (
+            [comparison_result_to_dict(item) for item in comparison_results]
+            if comparison_results
+            else None
+        )
         output_path = self.output_path
 
         with pd.ExcelWriter(output_path, engine="openpyxl") as writer:
@@ -133,6 +148,12 @@ class ExcelExporter:
                 ],
                 columns=["rank", "label", "score"],
             ).to_excel(writer, index=False, sheet_name=SHEET_ROI_RANKING)
+            if comparison_rows is not None:
+                pd.DataFrame(comparison_rows, columns=MARKETPLACE_COMPARISON_COLUMNS).to_excel(
+                    writer,
+                    index=False,
+                    sheet_name=SHEET_MARKETPLACE_COMPARISON,
+                )
 
         workbook = load_workbook(output_path)
         if SHEET_PROFIT_RANKING in workbook.sheetnames:
@@ -147,13 +168,19 @@ class ExcelExporter:
             apply_price_result_formatting(sheet, result_columns, len(results))
         if SHEET_ROI_RANKING in workbook.sheetnames:
             apply_sheet_layout(workbook[SHEET_ROI_RANKING], 3)
+        if comparison_rows is not None and SHEET_MARKETPLACE_COMPARISON in workbook.sheetnames:
+            apply_sheet_layout(
+                workbook[SHEET_MARKETPLACE_COMPARISON],
+                len(MARKETPLACE_COMPARISON_COLUMNS),
+            )
         workbook.save(output_path)
 
         logger.info(
-            "Exported Phase 3 workbook with %d products, %d listings, %d results to %s",
+            "Exported Phase 3 workbook with %d products, %d listings, %d results%s to %s",
             len(products),
             len(listings),
             len(results),
+            f", {len(comparison_rows)} comparisons" if comparison_rows is not None else "",
             output_path,
         )
         return output_path
