@@ -8,6 +8,7 @@ from urllib.parse import urlparse
 
 from config.constants import MARKETPLACE_AMAZON_JP, MARKETPLACE_RAKUTEN, MARKETPLACE_YAHOO_AUCTION
 from models.marketplace_listing import MarketplaceListing
+from used_luxury.used_item_validator import validate_used_item_details
 
 logger = logging.getLogger(__name__)
 
@@ -60,6 +61,10 @@ def validate_listing(listing: MarketplaceListing) -> tuple[bool, str]:
     if listing.sold_count is not None and listing.sold_count < 0:
         return False, "sold_count must not be negative"
 
+    used_valid, used_reason = validate_used_item_details(listing.used_item_details)
+    if not used_valid:
+        return False, used_reason
+
     return True, ""
 
 
@@ -110,6 +115,7 @@ def validate_listings(
             shipping_unknown=listing.shipping_unknown,
             point_rate=listing.point_rate,
             source_metadata=dict(listing.source_metadata),
+            used_item_details=listing.used_item_details,
         )
         if is_valid:
             valid.append(checked)

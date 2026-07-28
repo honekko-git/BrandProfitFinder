@@ -140,3 +140,26 @@ Set values in `.env` (see `.env.example`):
 - Unknown shipping is not treated as free shipping
 
 ---
+
+## Phase 8
+
+- [x] Used luxury common domain models (condition, defects, accessories, authentication, seller, risk)
+- [x] ConditionNormalizer with confidence and warnings
+- [x] ConditionScorer (comparison aid, not auto-applied to profit)
+- [x] UsedItemRiskEvaluator (warnings, not counterfeit declarations)
+- [x] PriceAdjustmentCalculator (suggestions only, applied=false)
+- [x] UsedItemDetails on MarketplaceListing (optional, backward compatible)
+- [x] ListingValidator/Matcher/ProfitService/Excel integration
+- [x] FakeUsedLuxuryProvider demo with internal standard JSON fixtures
+- [x] Demo: `python main.py --marketplace used_demo --demo-used-luxury`
+- [ ] Vestiaire Collective / Fashionphile / The RealReal / Grailed site clients
+- [ ] Category-specific accessory requirement rules
+- [ ] Auto-apply condition adjustments to profit (explicit opt-in future phase)
+
+### Phase 8 test status
+
+- Total tests: 575+ (including prior regression tests)
+- No external site communication in tests or default `main.py`
+- Demo uses fixture JSON only; default run unchanged
+
+---

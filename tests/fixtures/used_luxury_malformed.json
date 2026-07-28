@@ -1,0 +1,11 @@
+{
+  "items": [
+    null,
+    "bad-item",
+    {
+      "listing_id": "used-bad-001",
+      "title": "",
+      "price_jpy": 0
+    }
+  ]
+}

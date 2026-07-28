@@ -24,6 +24,7 @@ from config.settings import (
     YAHOO_API_ENABLED,
     YAHOO_AUCTION_DEMO_ENABLED,
     YAHOO_AUCTION_ENABLED,
+    USED_LUXURY_DEMO_ENABLED,
 )
 from excel.exporter import ExcelExporter
 from marketplace.amazon_client import FakeAmazonClient
@@ -34,6 +35,8 @@ from marketplace.rakuten_settings import RakutenConfig
 from marketplace.yahoo_auction_client import FakeYahooAuctionClient
 from marketplace.yahoo_auction_settings import YahooAuctionConfig
 from marketplace.yahoo_settings import YahooApiSettings
+from used_luxury.demo_marketplace import create_used_luxury_demo_marketplace
+from used_luxury.demo_provider import FakeUsedLuxuryProvider
 from models.marketplace_listing import MarketplaceListing
 from models.product import Product
 from price_compare.marketplace_profit_service import calculate_profit_from_search_results
@@ -221,11 +224,34 @@ def resolve_marketplace_name(argv: list[str] | None = None) -> str:
         YAHOO_AUCTION_DEMO_ENABLED or "--demo-yahoo-auction" in args
     ):
         return "yahoo_auction"
+    if USED_LUXURY_DEMO_ENABLED or "--demo-used-luxury" in args:
+        return "used_demo"
     if AMAZON_JP_ENABLED and (AMAZON_JP_DEMO_ENABLED or "--demo-amazon" in args):
         return "amazon_jp"
     if YAHOO_API_ENABLED:
         return "yahoo"
     return "local"
+
+
+def is_used_luxury_demo_requested(argv: list[str] | None = None) -> bool:
+    """Return True when used luxury demo mode is explicitly requested."""
+    args = argv if argv is not None else sys.argv[1:]
+    return USED_LUXURY_DEMO_ENABLED or "--demo-used-luxury" in args
+
+
+def build_used_luxury_demo_provider() -> FakeUsedLuxuryProvider | None:
+    """
+    Build a fake used luxury provider from local fixture JSON.
+
+    Returns:
+        FakeUsedLuxuryProvider when demo fixture exists, otherwise None.
+    """
+    fixture_path = FIXTURES_DIR / "used_luxury_normal.json"
+    if not fixture_path.exists():
+        logger.warning("Used luxury demo fixture not found: %s", fixture_path)
+        return None
+    payload = json.loads(fixture_path.read_text(encoding="utf-8"))
+    return FakeUsedLuxuryProvider(payload)
 
 
 def is_yahoo_auction_demo_requested(argv: list[str] | None = None) -> bool:
@@ -296,6 +322,8 @@ def _normalize_selected_marketplace(selected: str) -> str:
     normalized = selected.strip().lower()
     if normalized in {"yahoo_auction", "yahoo-auction", "yahooauction", "auctions"}:
         return "yahoo_auction"
+    if normalized in {"used_demo", "used-luxury", "usedluxury"}:
+        return "used_demo"
     return normalized
 
 
@@ -351,6 +379,11 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
         elif not yahoo_auction_settings.has_live_data_source:
             logger.warning("Yahoo Auction live data source is not configured; skipping search.")
 
+    if selected == "used_demo":
+        if not is_used_luxury_demo_requested():
+            logger.warning("Used luxury demo is not enabled; falling back to local marketplace")
+            selected = "local"
+
     if selected == "yahoo" and not yahoo_settings.can_execute:
         logger.warning(
             "Yahoo API is enabled but Client ID is missing; falling back to local marketplace"
@@ -359,6 +392,45 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
 
     products = build_phase3_products()
     listings_map = build_phase3_listings() if selected == "local" else None
+
+    if selected == "used_demo":
+        provider = build_used_luxury_demo_provider()
+        if provider is None:
+            logger.warning("Used luxury demo provider unavailable; falling back to local marketplace")
+            selected = "local"
+        else:
+            marketplace = create_used_luxury_demo_marketplace(provider=provider)
+            calculator = ProfitCalculator(
+                ProfitConfig(
+                    international_shipping_jpy=Decimal("2500"),
+                    customs_duty_rate=Decimal("0.08"),
+                    import_tax_rate=Decimal("0.10"),
+                    domestic_shipping_jpy=Decimal("800"),
+                    marketplace_fee_rate=Decimal("0.12"),
+                    other_costs_jpy=Decimal("500"),
+                )
+            )
+            search_results = [marketplace.search(product) for product in products]
+            all_listings = [listing for result in search_results for listing in result.listings]
+            valid_count = sum(len(result.valid_listings) for result in search_results)
+            results = calculate_profit_from_search_results(search_results, calculator)
+            ranked = RankingEngine(calculator.config).rank(
+                results,
+                sort_key=RankingSortKey.PROFIT,
+                descending=True,
+            )
+            exporter = ExcelExporter(output_dir=OUTPUT_DIR, filename=EXCEL_FILENAME)
+            output_path = exporter.export_phase3_workbook(products, all_listings, ranked)
+            logger.info(
+                "Used luxury demo export completed: %s (products=%d, listings=%d, valid=%d, results=%d)",
+                output_path,
+                len(products),
+                len(all_listings),
+                valid_count,
+                len(ranked),
+            )
+            return output_path
+
     marketplace = create_marketplace(
         selected,
         listings_by_product_key=listings_map,
@@ -434,10 +506,10 @@ def run(marketplace_name: str | None = None) -> Path:
 def main() -> None:
     """CLI entry point."""
     setup_logging()
-    logger.info("BrandProfitFinder Phase 3/4/5A/6/7 started")
+    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8 started")
     with patch("utils.http.fetch_url"), patch("utils.http.HttpClient"):
         output_path = run()
-    logger.info("BrandProfitFinder Phase 3/4/5A/6/7 finished: %s", output_path)
+    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8 finished: %s", output_path)
 
 
 if __name__ == "__main__":

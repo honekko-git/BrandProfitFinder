@@ -89,6 +89,8 @@ Phase 7
 
 Yahoo!オークション domestic marketplace foundation (API-agnostic, fixture-based)
 
+Phase 8 adds used luxury brand common foundation (site-independent)
+
 ---
 
 ## Domestic Marketplaces
@@ -183,3 +185,28 @@ python main.py --marketplace yahoo_auction --demo-yahoo-auction
 ```
 
 When enabled without a live data source (`YAHOO_AUCTION_DATA_SOURCE`), `main.py` logs a skip message and continues without network access.
+
+### Used Luxury Phase 8 notes
+
+- Phase 8 is a **site-independent common foundation** for used luxury brand items
+- Does **not** connect to Vestiaire Collective, Fashionphile, The RealReal, Grailed, or other specific sites
+- No unofficial scraping, browser automation, HTML parsing, or login cookies
+- Common models cover condition, defects, accessories, authentication, seller, returns, risk, and price adjustment suggestions
+- **UNKNOWN** and missing information are distinct from "no problems"
+- Seller claims are **not** treated as third-party authentication
+- Condition score is a **comparison aid**, not a substitute for factual inspection
+- Risk evaluation warns about concerns but does **not** declare items counterfeit
+- Price adjustments are **suggestions only** (`adjustment_applied=false`); profit calculation is unchanged
+- Demo mode uses internal standard JSON fixtures under `tests/fixtures/`
+
+### Used luxury demo mode (optional)
+
+```
+USED_LUXURY_DEMO_ENABLED=true
+```
+
+Or:
+
+```
+python main.py --marketplace used_demo --demo-used-luxury
+```

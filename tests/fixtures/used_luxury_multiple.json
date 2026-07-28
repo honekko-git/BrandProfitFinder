@@ -1,0 +1,38 @@
+{
+  "total_results": 3,
+  "page": 1,
+  "page_count": 1,
+  "items": [
+    {
+      "listing_id": "used-demo-101",
+      "marketplace_name": "used_demo",
+      "title": "GUCCI GG Marmont Small Shoulder Bag Black",
+      "price_jpy": 128000,
+      "free_shipping": true,
+      "url": "https://example.invalid/used/used-demo-101",
+      "brand": "GUCCI",
+      "model_number": "447632",
+      "condition": {"raw": "Excellent", "normalized": "EXCELLENT", "description": "Light use"}
+    },
+    {
+      "listing_id": "used-demo-102",
+      "marketplace_name": "used_demo",
+      "title": "GUCCI Marmont Bag Brown",
+      "price_jpy": 98000,
+      "shipping_jpy": 800,
+      "url": "https://example.invalid/used/used-demo-102",
+      "brand": "GUCCI",
+      "model_number": "447632",
+      "condition": {"raw": "Good", "normalized": "GOOD"}
+    },
+    {
+      "listing_id": "used-demo-103",
+      "marketplace_name": "used_demo",
+      "title": "Other Brand Bag",
+      "price_jpy": 45000,
+      "url": "https://example.invalid/used/used-demo-103",
+      "brand": "Other",
+      "condition": {"raw": "Fair", "normalized": "FAIR"}
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "listing_id": "used-parts-001",
+      "title": "For Parts Watch",
+      "price_jpy": 15000,
+      "url": "https://example.invalid/used/used-parts-001",
+      "brand": "Demo",
+      "condition": {"raw": "For Parts", "normalized": "FOR_PARTS"},
+      "defects": {
+        "movement_accuracy_issue": "critical",
+        "missing_parts": "major"
+      }
+    }
+  ]
+}

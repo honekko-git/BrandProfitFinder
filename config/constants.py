@@ -46,5 +46,6 @@ MARKETPLACE_YAHOO: Final[str] = "yahoo"
 MARKETPLACE_YAHOO_AUCTION: Final[str] = "yahoo_auction"
 MARKETPLACE_MERCARI: Final[str] = "mercari"
 MARKETPLACE_AMAZON_JP: Final[str] = "amazon_jp"
+MARKETPLACE_USED_DEMO: Final[str] = "used_demo"
 
 SHEET_DOMESTIC_LISTINGS: Final[str] = "Domestic Listings"

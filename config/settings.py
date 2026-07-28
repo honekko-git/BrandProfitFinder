@@ -112,3 +112,10 @@ YAHOO_AUCTION_TIMEOUT = max(1, int(os.getenv("YAHOO_AUCTION_TIMEOUT", "10")))
 YAHOO_AUCTION_MAX_RETRIES = max(0, int(os.getenv("YAHOO_AUCTION_MAX_RETRIES", "0")))
 YAHOO_AUCTION_HITS = max(1, min(30, int(os.getenv("YAHOO_AUCTION_HITS", "20"))))
 YAHOO_AUCTION_SORT = os.getenv("YAHOO_AUCTION_SORT", "end_time").strip()
+
+USED_LUXURY_DEMO_ENABLED = os.getenv("USED_LUXURY_DEMO_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)

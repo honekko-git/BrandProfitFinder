@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "listing_id": "used-auth-unknown-001",
+      "title": "Auth Unknown Wallet",
+      "price_jpy": 60000,
+      "url": "https://example.invalid/used/used-auth-unknown-001",
+      "brand": "GUCCI",
+      "condition": {"raw": "Very Good", "normalized": "VERY_GOOD"},
+      "authentication": {
+        "status": "UNKNOWN",
+        "seller_claimed_authentic": true
+      }
+    }
+  ]
+}

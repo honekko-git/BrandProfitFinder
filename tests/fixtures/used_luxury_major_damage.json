@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "listing_id": "used-damage-001",
+      "title": "Major Damage Bag",
+      "price_jpy": 35000,
+      "url": "https://example.invalid/used/used-damage-001",
+      "brand": "GUCCI",
+      "condition": {"raw": "Fair", "normalized": "FAIR"},
+      "defects": {
+        "cracks": "major",
+        "corner_wear": "critical",
+        "repair_history": "moderate"
+      }
+    }
+  ]
+}
