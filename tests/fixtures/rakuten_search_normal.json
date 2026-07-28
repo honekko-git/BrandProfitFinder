@@ -1,0 +1,38 @@
+{
+  "count": 1,
+  "page": 1,
+  "first": 1,
+  "last": 1,
+  "hits": 30,
+  "pageCount": 1,
+  "Items": [
+    {
+      "itemName": "GUCCI GG Marmont Wallet Black",
+      "itemCode": "sample-shop:123456",
+      "itemPrice": 128000,
+      "itemUrl": "https://item.rakuten.co.jp/sample-shop/123456/",
+      "affiliateUrl": "",
+      "shopName": "Sample Shop",
+      "shopCode": "sample-shop",
+      "imageFlag": 1,
+      "mediumImageUrls": [
+        {"imageUrl": "https://example.com/rakuten/image.jpg"}
+      ],
+      "smallImageUrls": [],
+      "availability": 1,
+      "taxFlag": 0,
+      "postageFlag": 0,
+      "creditCardFlag": 1,
+      "shopOfTheYearFlag": 0,
+      "reviewCount": 10,
+      "reviewAverage": 4.5,
+      "pointRate": 1,
+      "pointRateStartTime": null,
+      "pointRateEndTime": null,
+      "catchcopy": "Sample",
+      "itemCaption": "Sample description",
+      "genreId": "216131",
+      "tagIds": []
+    }
+  ]
+}

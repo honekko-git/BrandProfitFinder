@@ -78,7 +78,8 @@ def test_get_all_marketplaces_includes_amazon() -> None:
     assert "local" in names
     assert "yahoo" in names
     assert MARKETPLACE_AMAZON_JP in names
-    assert len(marketplaces) == 3
+    assert "rakuten" in names
+    assert len(marketplaces) == 4
 
 
 def test_profit_service_with_amazon_price() -> None:

@@ -7,6 +7,8 @@ from marketplace.amazon_settings import AmazonConfig
 from marketplace.base_marketplace import BaseMarketplace
 from marketplace.local_marketplace import LocalMarketplace
 from marketplace.marketplace_factory import create_marketplace, get_all_marketplaces
+from marketplace.rakuten_marketplace import RakutenMarketplace
+from marketplace.rakuten_settings import RakutenConfig
 from marketplace.yahoo_marketplace import YahooMarketplace
 from marketplace.yahoo_settings import YahooApiSettings
 
@@ -34,6 +36,21 @@ def _amazon_settings() -> AmazonConfig:
     )
 
 
+def _rakuten_settings() -> RakutenConfig:
+    return RakutenConfig(
+        application_id="dummy-app-id",
+        access_key="dummy-access-key",
+        affiliate_id="",
+        base_url="https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260701",
+        timeout_seconds=10,
+        max_retries=0,
+        hits=20,
+        sort="standard",
+        enabled=True,
+        demo_enabled=True,
+    )
+
+
 def test_create_local_marketplace() -> None:
     marketplace = create_marketplace("local")
     assert isinstance(marketplace, LocalMarketplace)
@@ -48,6 +65,11 @@ def test_create_yahoo_marketplace() -> None:
 def test_create_amazon_marketplace() -> None:
     marketplace = create_marketplace("amazon_jp", amazon_settings=_amazon_settings())
     assert isinstance(marketplace, AmazonMarketplace)
+
+
+def test_create_rakuten_marketplace() -> None:
+    marketplace = create_marketplace("rakuten", rakuten_settings=_rakuten_settings())
+    assert isinstance(marketplace, RakutenMarketplace)
 
 
 def test_case_insensitive() -> None:
@@ -68,7 +90,6 @@ def test_unsupported_marketplace_error() -> None:
 @pytest.mark.parametrize(
     "name,message",
     [
-        ("rakuten", "Rakuten marketplace is not yet implemented"),
         ("mercari", "Mercari marketplace is not yet implemented"),
     ],
 )
@@ -81,8 +102,10 @@ def test_get_all_marketplaces() -> None:
     marketplaces = get_all_marketplaces(
         yahoo_settings=_yahoo_settings(),
         amazon_settings=_amazon_settings(),
+        rakuten_settings=_rakuten_settings(),
     )
-    assert len(marketplaces) == 3
+    assert len(marketplaces) == 4
     assert isinstance(marketplaces[0], LocalMarketplace)
     assert isinstance(marketplaces[1], YahooMarketplace)
     assert isinstance(marketplaces[2], AmazonMarketplace)
+    assert isinstance(marketplaces[3], RakutenMarketplace)

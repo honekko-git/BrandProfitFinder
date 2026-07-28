@@ -1,0 +1,29 @@
+{
+  "count": 4,
+  "page": 1,
+  "pageCount": 1,
+  "Items": [
+    {
+      "itemName": "Partial Valid Item",
+      "itemCode": "partial-shop:001",
+      "itemPrice": 99000,
+      "itemUrl": "https://item.rakuten.co.jp/partial-shop/001/"
+    },
+    {
+      "itemName": "",
+      "itemCode": "partial-shop:002",
+      "itemPrice": 50000
+    },
+    {
+      "itemName": "No URL Item",
+      "itemCode": "",
+      "itemPrice": 45000
+    },
+    {
+      "itemName": "Zero Price",
+      "itemCode": "partial-shop:004",
+      "itemPrice": 0,
+      "itemUrl": "https://item.rakuten.co.jp/partial-shop/004/"
+    }
+  ]
+}

@@ -19,12 +19,16 @@ from config.settings import (
     DEFAULT_EXCHANGE_RATE,
     EXCEL_FILENAME,
     OUTPUT_DIR,
+    RAKUTEN_API_DEMO_ENABLED,
+    RAKUTEN_API_ENABLED,
     YAHOO_API_ENABLED,
 )
 from excel.exporter import ExcelExporter
 from marketplace.amazon_client import FakeAmazonClient
 from marketplace.amazon_settings import AmazonConfig
 from marketplace.marketplace_factory import create_marketplace
+from marketplace.rakuten_client import FakeRakutenClient
+from marketplace.rakuten_settings import RakutenConfig
 from marketplace.yahoo_settings import YahooApiSettings
 from models.marketplace_listing import MarketplaceListing
 from models.product import Product
@@ -207,11 +211,34 @@ def resolve_marketplace_name(argv: list[str] | None = None) -> str:
     for index, arg in enumerate(args):
         if arg == "--marketplace" and index + 1 < len(args):
             return args[index + 1].strip().lower()
+    if RAKUTEN_API_ENABLED and (RAKUTEN_API_DEMO_ENABLED or "--demo-rakuten" in args):
+        return "rakuten"
     if AMAZON_JP_ENABLED and (AMAZON_JP_DEMO_ENABLED or "--demo-amazon" in args):
         return "amazon_jp"
     if YAHOO_API_ENABLED:
         return "yahoo"
     return "local"
+
+
+def is_rakuten_demo_requested(argv: list[str] | None = None) -> bool:
+    """Return True when Rakuten demo mode is explicitly requested."""
+    args = argv if argv is not None else sys.argv[1:]
+    return RAKUTEN_API_DEMO_ENABLED or "--demo-rakuten" in args
+
+
+def build_rakuten_demo_client() -> FakeRakutenClient | None:
+    """
+    Build a fake Rakuten client from local fixture JSON.
+
+    Returns:
+        FakeRakutenClient when demo fixture exists, otherwise None.
+    """
+    fixture_path = FIXTURES_DIR / "rakuten_search_normal.json"
+    if not fixture_path.exists():
+        logger.warning("Rakuten demo fixture not found: %s", fixture_path)
+        return None
+    payload = json.loads(fixture_path.read_text(encoding="utf-8"))
+    return FakeRakutenClient(payload)
 
 
 def is_amazon_demo_requested(argv: list[str] | None = None) -> bool:
@@ -248,7 +275,19 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
     selected = (marketplace_name or resolve_marketplace_name()).strip().lower()
     yahoo_settings = YahooApiSettings.from_env()
     amazon_settings = AmazonConfig.from_env()
+    rakuten_settings = RakutenConfig.from_env()
     amazon_client = None
+    rakuten_client = None
+
+    if selected == "rakuten":
+        if is_rakuten_demo_requested():
+            rakuten_client = build_rakuten_demo_client()
+            if rakuten_client is None:
+                logger.warning("Rakuten demo client unavailable; falling back to local marketplace")
+                selected = "local"
+        else:
+            logger.warning("Rakuten marketplace is not configured; skipping Rakuten search.")
+            selected = "local"
 
     if selected in {"amazon_jp", "amazon"}:
         if is_amazon_demo_requested():
@@ -275,6 +314,8 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
         yahoo_settings=yahoo_settings,
         amazon_settings=amazon_settings,
         amazon_client=amazon_client,
+        rakuten_settings=rakuten_settings,
+        rakuten_client=rakuten_client,
     )
     calculator = ProfitCalculator(
         ProfitConfig(
@@ -339,10 +380,10 @@ def run(marketplace_name: str | None = None) -> Path:
 def main() -> None:
     """CLI entry point."""
     setup_logging()
-    logger.info("BrandProfitFinder Phase 3/4/5A started")
+    logger.info("BrandProfitFinder Phase 3/4/5A/6 started")
     with patch("utils.http.fetch_url"), patch("utils.http.HttpClient"):
         output_path = run()
-    logger.info("BrandProfitFinder Phase 3/4/5A finished: %s", output_path)
+    logger.info("BrandProfitFinder Phase 3/4/5A/6 finished: %s", output_path)
 
 
 if __name__ == "__main__":

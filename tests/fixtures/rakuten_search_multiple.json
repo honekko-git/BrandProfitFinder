@@ -1,0 +1,52 @@
+{
+  "count": 3,
+  "page": 1,
+  "first": 1,
+  "last": 3,
+  "hits": 30,
+  "pageCount": 2,
+  "Items": [
+    {
+      "itemName": "GUCCI GG Marmont Wallet Black",
+      "itemCode": "sample-shop:123456",
+      "itemPrice": 128000,
+      "itemUrl": "https://item.rakuten.co.jp/sample-shop/123456/",
+      "shopName": "Sample Shop",
+      "shopCode": "sample-shop",
+      "mediumImageUrls": [{"imageUrl": "https://example.com/rakuten/wallet.jpg"}],
+      "availability": 1,
+      "postageFlag": 0,
+      "reviewCount": 10,
+      "reviewAverage": 4.5,
+      "pointRate": 1
+    },
+    {
+      "itemName": "GUCCI Marmont Shoulder Bag",
+      "itemCode": "premium-shop:789012",
+      "itemPrice": 198000,
+      "itemUrl": "https://item.rakuten.co.jp/premium-shop/789012/",
+      "shopName": "Premium Shop",
+      "shopCode": "premium-shop",
+      "mediumImageUrls": [{"imageUrl": "https://example.com/rakuten/bag.jpg"}],
+      "availability": 1,
+      "postageFlag": 1,
+      "reviewCount": 5,
+      "reviewAverage": 4.2,
+      "pointRate": 2
+    },
+    {
+      "itemName": "Designer Bag Generic",
+      "itemCode": "outlet-shop:345678",
+      "itemPrice": 88000,
+      "itemUrl": "https://item.rakuten.co.jp/outlet-shop/345678/",
+      "shopName": "Outlet Shop",
+      "shopCode": "outlet-shop",
+      "availability": 1,
+      "postageFlag": 0,
+      "reviewCount": 0,
+      "reviewAverage": 0,
+      "pointRate": 0,
+      "itemCaption": "中古品"
+    }
+  ]
+}

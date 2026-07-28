@@ -1,0 +1,14 @@
+{
+  "count": 2,
+  "page": 1,
+  "pageCount": 1,
+  "Items": [
+    {
+      "itemName": "Bad Item",
+      "itemCode": "bad-shop:001",
+      "itemPrice": "not-a-price",
+      "itemUrl": "https://item.rakuten.co.jp/bad-shop/001/"
+    },
+    null
+  ]
+}
