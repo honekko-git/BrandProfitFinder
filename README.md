@@ -372,3 +372,27 @@ Or:
 ```
 python main.py --demo-stockx
 ```
+
+### Profit Intelligence Phase 16 notes
+
+- Phase 16 adds **Profit Intelligence v1**: a deterministic, explainable, rule-based scoring engine
+- This is **not** an LLM, machine learning model, or sales/profit guarantee
+- Component scores: profit, velocity, risk (0=lower observed risk, 100=higher), confidence (data completeness only)
+- Overall score combines available components with confidence moderation:
+  `moderated = 50 + (raw - 50) * (confidence / 100)`
+- Recommendations use cautious review labels only (never "Buy now" or "Guaranteed profit")
+- Unknown inputs remain unknown and are not treated as zero in scoring
+- Scoring runs after authoritative profit calculation and does not modify profit values
+- Enable with `--profit-intelligence` or alias `--ai-score`
+
+```
+python main.py --profit-intelligence
+python main.py --demo-stockx --profit-intelligence
+python main.py --marketplace farfetch --profit-intelligence
+```
+
+Excel export appends intelligence columns when scoring is enabled:
+
+- `overall_score`, `intelligence_profit_score`, `velocity_score`, `risk_score`, `confidence_score`
+- `intelligence_recommendation`, `recommendation_stars`, `score_reasons`, `score_warnings`
+- `missing_score_data`, `scoring_version` (`profit-intelligence-v1`)

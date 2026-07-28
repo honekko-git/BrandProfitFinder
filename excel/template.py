@@ -67,6 +67,27 @@ PRICE_RESULT_COLUMNS: Final[list[str]] = [
     "error_message",
 ]
 
+PROFIT_INTELLIGENCE_COLUMNS: Final[list[str]] = [
+    "overall_score",
+    "intelligence_profit_score",
+    "velocity_score",
+    "risk_score",
+    "confidence_score",
+    "intelligence_recommendation",
+    "recommendation_stars",
+    "score_reasons",
+    "score_warnings",
+    "missing_score_data",
+    "scoring_version",
+]
+
+
+def price_result_columns(results: list | None = None) -> list[str]:
+    """Return export columns, appending intelligence fields when present."""
+    if results and any(getattr(item, "profit_intelligence", None) for item in results):
+        return PRICE_RESULT_COLUMNS + PROFIT_INTELLIGENCE_COLUMNS
+    return list(PRICE_RESULT_COLUMNS)
+
 RANKING_COLUMNS: Final[list[str]] = ["rank", "label", "score"]
 
 NUMERIC_PRICE_RESULT_COLUMNS: Final[frozenset[str]] = frozenset(
@@ -88,6 +109,12 @@ NUMERIC_PRICE_RESULT_COLUMNS: Final[frozenset[str]] = frozenset(
         "profit_margin",
         "roi",
         "ranking_score",
+        "overall_score",
+        "intelligence_profit_score",
+        "velocity_score",
+        "risk_score",
+        "confidence_score",
+        "recommendation_stars",
     }
 )
 

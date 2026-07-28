@@ -301,3 +301,29 @@ Set values in `.env` (see `.env.example`):
 - Internal fixture JSON only; not claimed as official API format
 
 ---
+
+## Phase 16
+
+- [x] Profit Intelligence v1 deterministic scoring engine (`profit_intelligence/`)
+- [x] Component scorers: profit, velocity, risk, confidence
+- [x] Recommendation engine with cautious review labels and 1–5 stars
+- [x] ProfitIntelligenceService adapters from PriceResult and marketplace metadata
+- [x] Pipeline integration after profit calculation; optional intelligence ranking
+- [x] CLI: `--profit-intelligence` and alias `--ai-score`
+- [x] Excel intelligence columns appended when scoring enabled
+- [x] Scoring version constant: `profit-intelligence-v1`
+
+### Phase 16 scoring behavior
+
+- Not an LLM, ML model, or prediction guarantee
+- Confidence reflects data completeness, not predicted success probability
+- Risk score: 0 = lower observed risk, 100 = higher observed risk
+- Unavailable component scores export as blank, never as zero
+- Profit calculations, listings, and validation remain unchanged when scoring is disabled
+
+### Phase 16 test status
+
+- Comprehensive unit and integration tests under `tests/test_profit_intelligence_*.py`
+- No scraping, live communication, or profit-calculation changes introduced
+
+---

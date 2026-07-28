@@ -4,8 +4,12 @@ Price comparison and profit calculation result model.
 
 from dataclasses import dataclass, field
 from decimal import Decimal
+from typing import TYPE_CHECKING
 
 from models.product import Product
+
+if TYPE_CHECKING:
+    from profit_intelligence.models import ProfitIntelligenceResult
 
 CALCULATION_SUCCESS = "success"
 CALCULATION_INVALID_PRICE = "invalid_price"
@@ -50,6 +54,7 @@ class PriceResult:
     url: str = ""
     title: str = ""
     metadata: dict[str, object] = field(default_factory=dict)
+    profit_intelligence: "ProfitIntelligenceResult | None" = field(default=None, repr=False)
 
     @property
     def is_valid(self) -> bool:
@@ -64,7 +69,7 @@ class PriceResult:
             Dictionary of export fields.
         """
         product = self.product
-        return {
+        payload: dict[str, object] = {
             "store_name": self.source_store or (product.store_name if product else ""),
             "brand": product.brand if product else "",
             "name": product.name if product else self.title,
@@ -94,6 +99,24 @@ class PriceResult:
             "calculation_status": self.calculation_status,
             "error_message": self.error_message,
         }
+        intelligence = self.profit_intelligence
+        if intelligence is not None:
+            payload.update(
+                {
+                    "overall_score": intelligence.overall_score,
+                    "intelligence_profit_score": intelligence.profit_score,
+                    "velocity_score": intelligence.velocity_score,
+                    "risk_score": intelligence.risk_score,
+                    "confidence_score": intelligence.confidence_score,
+                    "intelligence_recommendation": intelligence.recommendation,
+                    "recommendation_stars": intelligence.recommendation_stars,
+                    "score_reasons": " | ".join(intelligence.reasons),
+                    "score_warnings": " | ".join(intelligence.warnings),
+                    "missing_score_data": " | ".join(intelligence.missing_fields),
+                    "scoring_version": intelligence.scoring_version,
+                }
+            )
+        return payload
 
 
 def _decimal_to_export(value: Decimal | None) -> float | None:

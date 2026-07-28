@@ -11,7 +11,12 @@ from openpyxl import load_workbook
 from config.constants import SHEET_DOMESTIC_LISTINGS, SHEET_PROFIT_RANKING, SHEET_ROI_RANKING
 from config.settings import EXCEL_FILENAME, OUTPUT_DIR
 from excel.formatter import apply_listing_formatting, apply_price_result_formatting, apply_sheet_layout
-from excel.template import MARKETPLACE_LISTING_COLUMNS, PRICE_RESULT_COLUMNS, PRODUCT_COLUMNS
+from excel.template import (
+    MARKETPLACE_LISTING_COLUMNS,
+    PRICE_RESULT_COLUMNS,
+    PRODUCT_COLUMNS,
+    price_result_columns,
+)
 from models.marketplace_listing import MarketplaceListing
 from models.price_result import PriceResult
 from models.product import Product
@@ -70,10 +75,11 @@ class ExcelExporter:
             Path to the generated file.
         """
         rows = [result.to_dict() for result in results]
-        dataframe = pd.DataFrame(rows, columns=PRICE_RESULT_COLUMNS)
+        result_columns = price_result_columns(results)
+        dataframe = pd.DataFrame(rows, columns=result_columns)
         output_path = self.output_path
         dataframe.to_excel(output_path, index=False, sheet_name=SHEET_PRICE_RESULTS)
-        self._format_price_result_sheet(output_path, len(results))
+        self._format_price_result_sheet(output_path, len(results), result_columns)
         logger.info("Exported %d price results to %s", len(results), output_path)
         return output_path
 
@@ -97,6 +103,7 @@ class ExcelExporter:
         product_rows = [product.to_dict() for product in products]
         listing_rows = [listing.to_dict() for listing in listings]
         result_rows = [result.to_dict() for result in results]
+        result_columns = price_result_columns(results)
         output_path = self.output_path
 
         with pd.ExcelWriter(output_path, engine="openpyxl") as writer:
@@ -110,7 +117,7 @@ class ExcelExporter:
                 index=False,
                 sheet_name=SHEET_DOMESTIC_LISTINGS,
             )
-            pd.DataFrame(result_rows, columns=PRICE_RESULT_COLUMNS).to_excel(
+            pd.DataFrame(result_rows, columns=result_columns).to_excel(
                 writer,
                 index=False,
                 sheet_name=SHEET_PRICE_RESULTS,
@@ -136,8 +143,8 @@ class ExcelExporter:
             apply_listing_formatting(sheet, MARKETPLACE_LISTING_COLUMNS, len(listings))
         if SHEET_PRICE_RESULTS in workbook.sheetnames:
             sheet = workbook[SHEET_PRICE_RESULTS]
-            apply_sheet_layout(sheet, len(PRICE_RESULT_COLUMNS))
-            apply_price_result_formatting(sheet, PRICE_RESULT_COLUMNS, len(results))
+            apply_sheet_layout(sheet, len(result_columns))
+            apply_price_result_formatting(sheet, result_columns, len(results))
         if SHEET_ROI_RANKING in workbook.sheetnames:
             apply_sheet_layout(workbook[SHEET_ROI_RANKING], 3)
         workbook.save(output_path)
@@ -168,6 +175,7 @@ class ExcelExporter:
         """
         product_rows = [product.to_dict() for product in products]
         result_rows = [result.to_dict() for result in results]
+        result_columns = price_result_columns(results)
         output_path = self.output_path
 
         with pd.ExcelWriter(output_path, engine="openpyxl") as writer:
@@ -176,7 +184,7 @@ class ExcelExporter:
                 index=False,
                 sheet_name=SHEET_PROFIT_RANKING,
             )
-            pd.DataFrame(result_rows, columns=PRICE_RESULT_COLUMNS).to_excel(
+            pd.DataFrame(result_rows, columns=result_columns).to_excel(
                 writer,
                 index=False,
                 sheet_name=SHEET_PRICE_RESULTS,
@@ -198,8 +206,8 @@ class ExcelExporter:
             apply_sheet_layout(workbook[SHEET_PROFIT_RANKING], len(PRODUCT_COLUMNS))
         if SHEET_PRICE_RESULTS in workbook.sheetnames:
             sheet = workbook[SHEET_PRICE_RESULTS]
-            apply_sheet_layout(sheet, len(PRICE_RESULT_COLUMNS))
-            apply_price_result_formatting(sheet, PRICE_RESULT_COLUMNS, len(results))
+            apply_sheet_layout(sheet, len(result_columns))
+            apply_price_result_formatting(sheet, result_columns, len(results))
         if SHEET_ROI_RANKING in workbook.sheetnames:
             apply_sheet_layout(workbook[SHEET_ROI_RANKING], 3)
         workbook.save(output_path)
@@ -218,9 +226,15 @@ class ExcelExporter:
         apply_sheet_layout(sheet, len(PRODUCT_COLUMNS))
         workbook.save(output_path)
 
-    def _format_price_result_sheet(self, output_path: Path, row_count: int) -> None:
+    def _format_price_result_sheet(
+        self,
+        output_path: Path,
+        row_count: int,
+        columns: list[str] | None = None,
+    ) -> None:
         workbook = load_workbook(output_path)
         sheet = workbook.active
-        apply_sheet_layout(sheet, len(PRICE_RESULT_COLUMNS))
-        apply_price_result_formatting(sheet, PRICE_RESULT_COLUMNS, row_count)
+        column_list = columns or list(PRICE_RESULT_COLUMNS)
+        apply_sheet_layout(sheet, len(column_list))
+        apply_price_result_formatting(sheet, column_list, row_count)
         workbook.save(output_path)

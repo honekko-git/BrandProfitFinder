@@ -1,10 +1,11 @@
-"""
+﻿"""
 BrandProfitFinder application entry point.
 
 Phase 3/4/5A: domestic marketplace candidates, profit calculation, and Excel export.
 Default execution uses local marketplace without external network access.
 """
 
+import argparse
 import json
 import logging
 import sys
@@ -79,6 +80,12 @@ from price_compare.price_comparator import PriceSelectionStrategy
 from price_compare.profit_calculator import ProfitCalculator
 from price_compare.profit_config import ProfitConfig
 from price_compare.ranking_engine import RankingEngine, RankingSortKey
+from models.marketplace_search_result import MarketplaceSearchResult
+from profit_intelligence.service import (
+    ProfitIntelligenceService,
+    log_intelligence_summary,
+    rank_by_intelligence_score,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -575,7 +582,63 @@ def _normalize_selected_marketplace(selected: str) -> str:
     return normalized
 
 
-def run_phase3(marketplace_name: str | None = None) -> Path:
+
+def build_cli_parser() -> argparse.ArgumentParser:
+    """Build CLI parser for documented options."""
+    parser = argparse.ArgumentParser(
+        description=(
+            "BrandProfitFinder: marketplace profit analysis and Excel export. "
+            "Profit Intelligence is deterministic, explainable, rule-based scoring "
+            "(not LLM, machine learning, or predictive AI)."
+        ),
+        add_help=True,
+    )
+    parser.add_argument(
+        "--profit-intelligence",
+        "--ai-score",
+        action="store_true",
+        dest="profit_intelligence",
+        help=(
+            "Enable Profit Intelligence v1: deterministic, explainable, rule-based "
+            "decision-support scoring after profit calculation (alias: --ai-score)."
+        ),
+    )
+    return parser
+
+
+def is_profit_intelligence_requested(argv: list[str] | None = None) -> bool:
+    """Return True when profit intelligence scoring is requested."""
+    args = argv if argv is not None else sys.argv[1:]
+    if "--help" in args or "-h" in args:
+        return False
+    parser = build_cli_parser()
+    namespace, _unknown = parser.parse_known_args(args)
+    return bool(namespace.profit_intelligence)
+
+
+def _rank_phase3_results(
+    results,
+    search_results: list[MarketplaceSearchResult],
+    calculator: ProfitCalculator,
+    profit_intelligence: bool,
+):
+    if profit_intelligence:
+        service = ProfitIntelligenceService()
+        ranked = rank_by_intelligence_score(service.score_results(results, search_results))
+        log_intelligence_summary(ranked)
+        return ranked
+    return RankingEngine(calculator.config).rank(
+        results,
+        sort_key=RankingSortKey.PROFIT,
+        descending=True,
+    )
+
+
+def run_phase3(
+    marketplace_name: str | None = None,
+    *,
+    profit_intelligence: bool | None = None,
+) -> Path:
     """
     Run the Phase 3/4 pipeline using local or Yahoo marketplace candidates.
 
@@ -585,6 +648,8 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
     Returns:
         Path to the generated Excel workbook.
     """
+    if profit_intelligence is None:
+        profit_intelligence = is_profit_intelligence_requested()
     selected = (marketplace_name or resolve_marketplace_name()).strip().lower()
     yahoo_settings = YahooApiSettings.from_env()
     amazon_settings = AmazonConfig.from_env()
@@ -779,10 +844,8 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
             all_listings = [listing for result in search_results for listing in result.listings]
             valid_count = sum(len(result.valid_listings) for result in search_results)
             results = calculate_profit_from_search_results(search_results, calculator)
-            ranked = RankingEngine(calculator.config).rank(
-                results,
-                sort_key=RankingSortKey.PROFIT,
-                descending=True,
+            ranked = _rank_phase3_results(
+                results, search_results, calculator, profit_intelligence
             )
             exporter = ExcelExporter(output_dir=OUTPUT_DIR, filename=EXCEL_FILENAME)
             output_path = exporter.export_phase3_workbook(products, all_listings, ranked)
@@ -815,10 +878,8 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
         all_listings = [listing for result in search_results for listing in result.listings]
         valid_count = sum(len(result.valid_listings) for result in search_results)
         results = calculate_profit_from_search_results(search_results, calculator)
-        ranked = RankingEngine(calculator.config).rank(
-            results,
-            sort_key=RankingSortKey.PROFIT,
-            descending=True,
+        ranked = _rank_phase3_results(
+            results, search_results, calculator, profit_intelligence
         )
         exporter = ExcelExporter(output_dir=OUTPUT_DIR, filename=EXCEL_FILENAME)
         output_path = exporter.export_phase3_workbook(products, all_listings, ranked)
@@ -851,10 +912,8 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
         all_listings = [listing for result in search_results for listing in result.listings]
         valid_count = sum(len(result.valid_listings) for result in search_results)
         results = calculate_profit_from_search_results(search_results, calculator)
-        ranked = RankingEngine(calculator.config).rank(
-            results,
-            sort_key=RankingSortKey.PROFIT,
-            descending=True,
+        ranked = _rank_phase3_results(
+            results, search_results, calculator, profit_intelligence
         )
         exporter = ExcelExporter(output_dir=OUTPUT_DIR, filename=EXCEL_FILENAME)
         output_path = exporter.export_phase3_workbook(products, all_listings, ranked)
@@ -887,10 +946,8 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
         all_listings = [listing for result in search_results for listing in result.listings]
         valid_count = sum(len(result.valid_listings) for result in search_results)
         results = calculate_profit_from_search_results(search_results, calculator)
-        ranked = RankingEngine(calculator.config).rank(
-            results,
-            sort_key=RankingSortKey.PROFIT,
-            descending=True,
+        ranked = _rank_phase3_results(
+            results, search_results, calculator, profit_intelligence
         )
         exporter = ExcelExporter(output_dir=OUTPUT_DIR, filename=EXCEL_FILENAME)
         output_path = exporter.export_phase3_workbook(products, all_listings, ranked)
@@ -923,10 +980,8 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
         all_listings = [listing for result in search_results for listing in result.listings]
         valid_count = sum(len(result.valid_listings) for result in search_results)
         results = calculate_profit_from_search_results(search_results, calculator)
-        ranked = RankingEngine(calculator.config).rank(
-            results,
-            sort_key=RankingSortKey.PROFIT,
-            descending=True,
+        ranked = _rank_phase3_results(
+            results, search_results, calculator, profit_intelligence
         )
         exporter = ExcelExporter(output_dir=OUTPUT_DIR, filename=EXCEL_FILENAME)
         output_path = exporter.export_phase3_workbook(products, all_listings, ranked)
@@ -959,10 +1014,8 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
         all_listings = [listing for result in search_results for listing in result.listings]
         valid_count = sum(len(result.valid_listings) for result in search_results)
         results = calculate_profit_from_search_results(search_results, calculator)
-        ranked = RankingEngine(calculator.config).rank(
-            results,
-            sort_key=RankingSortKey.PROFIT,
-            descending=True,
+        ranked = _rank_phase3_results(
+            results, search_results, calculator, profit_intelligence
         )
         exporter = ExcelExporter(output_dir=OUTPUT_DIR, filename=EXCEL_FILENAME)
         output_path = exporter.export_phase3_workbook(products, all_listings, ranked)
@@ -995,10 +1048,8 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
         all_listings = [listing for result in search_results for listing in result.listings]
         valid_count = sum(len(result.valid_listings) for result in search_results)
         results = calculate_profit_from_search_results(search_results, calculator)
-        ranked = RankingEngine(calculator.config).rank(
-            results,
-            sort_key=RankingSortKey.PROFIT,
-            descending=True,
+        ranked = _rank_phase3_results(
+            results, search_results, calculator, profit_intelligence
         )
         exporter = ExcelExporter(output_dir=OUTPUT_DIR, filename=EXCEL_FILENAME)
         output_path = exporter.export_phase3_workbook(products, all_listings, ranked)
@@ -1031,10 +1082,8 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
         all_listings = [listing for result in search_results for listing in result.listings]
         valid_count = sum(len(result.valid_listings) for result in search_results)
         results = calculate_profit_from_search_results(search_results, calculator)
-        ranked = RankingEngine(calculator.config).rank(
-            results,
-            sort_key=RankingSortKey.PROFIT,
-            descending=True,
+        ranked = _rank_phase3_results(
+            results, search_results, calculator, profit_intelligence
         )
         exporter = ExcelExporter(output_dir=OUTPUT_DIR, filename=EXCEL_FILENAME)
         output_path = exporter.export_phase3_workbook(products, all_listings, ranked)
@@ -1107,10 +1156,8 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
     valid_count = sum(len(result.valid_listings) for result in search_results)
 
     results = calculate_profit_from_search_results(search_results, calculator)
-    ranked = RankingEngine(calculator.config).rank(
-        results,
-        sort_key=RankingSortKey.PROFIT,
-        descending=True,
+    ranked = _rank_phase3_results(
+        results, search_results, calculator, profit_intelligence
     )
 
     exporter = ExcelExporter(output_dir=OUTPUT_DIR, filename=EXCEL_FILENAME)
@@ -1133,7 +1180,11 @@ def run_phase2() -> Path:
     return run_phase3()
 
 
-def run(marketplace_name: str | None = None) -> Path:
+def run(
+    marketplace_name: str | None = None,
+    *,
+    profit_intelligence: bool | None = None,
+) -> Path:
     """
     Run the application pipeline and export Excel.
 
@@ -1144,20 +1195,27 @@ def run(marketplace_name: str | None = None) -> Path:
         Path to the generated Excel file.
     """
     logger.info(
-        "Starting Phase 3 pipeline with %d sample products (marketplace=%s)",
+        "Starting Phase 3 pipeline with %d sample products (marketplace=%s, profit_intelligence=%s)",
         len(build_phase3_products()),
         marketplace_name or resolve_marketplace_name(),
+        profit_intelligence if profit_intelligence is not None else is_profit_intelligence_requested(),
     )
-    return run_phase3(marketplace_name=marketplace_name)
+    return run_phase3(
+        marketplace_name=marketplace_name,
+        profit_intelligence=profit_intelligence,
+    )
 
 
 def main() -> None:
     """CLI entry point."""
     setup_logging()
-    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14/15 started")
+    if "--help" in sys.argv or "-h" in sys.argv:
+        build_cli_parser().print_help()
+        return
+    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14/15/16 started")
     with patch("utils.http.fetch_url"), patch("utils.http.HttpClient"):
         output_path = run()
-    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14/15 finished: %s", output_path)
+    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14/15/16 finished: %s", output_path)
 
 
 if __name__ == "__main__":
