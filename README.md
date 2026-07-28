@@ -95,7 +95,7 @@ Phase 9 adds Vestiaire Collective integration foundation (fixture-based, no live
 
 Phase 10 adds Fashionphile integration foundation (fixture-based, no live API)
 
-Phase 12 adds Grailed integration foundation (fixture-based, no live API)
+Phase 13 adds Chrono24 integration foundation (fixture-based, no live API)
 
 ---
 
@@ -297,4 +297,26 @@ Or:
 
 ```
 python main.py --demo-grailed
+```
+
+### Chrono24 Phase 13 notes
+
+- Phase 13 is a **Chrono24 integration foundation** (not a live site connection)
+- Does **not** use official Chrono24 API format; internal standard fixture JSON only
+- Reuses Phase 8 used luxury models and Phase 9–12 integration patterns
+- Watch-specific metadata (reference number, movement, case diameter, etc.) kept in source fields
+- Reference number and model number are distinguished; negotiation/discount not auto-applied to profit
+- Seller claim, trusted seller, and platform authentication are not conflated
+- Demo only: `--demo-chrono24` with `FakeChrono24Client`
+- Without demo, `--marketplace chrono24` logs a clear error and falls back safely
+
+```
+CHRONO24_DEMO_ENABLED=true
+python main.py --marketplace chrono24 --demo-chrono24
+```
+
+Or:
+
+```
+python main.py --demo-chrono24
 ```

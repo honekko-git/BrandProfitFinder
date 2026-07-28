@@ -241,3 +241,23 @@ Set values in `.env` (see `.env.example`):
 - Internal fixture JSON only; not claimed as official API format
 
 ---
+
+## Phase 13
+
+- [x] Chrono24 integration foundation (no live communication)
+- [x] Chrono24ClientProtocol and FakeChrono24Client
+- [x] Chrono24ResponseParser (BrandProfitFinder internal standard JSON)
+- [x] Chrono24Marketplace with pagination, watch details, negotiation/seller filters
+- [x] Phase 8 UsedItemEnricher integration; watch metadata in source fields
+- [x] MarketplaceFactory aliases: chrono24, chrono_24, chrono-24, c24
+- [x] Matcher reference_number scoring and Chrono24 comparison warnings
+- [x] Demo: `python main.py --marketplace chrono24 --demo-chrono24`
+- [ ] Official Chrono24 API, partner data feed, or CSV import client
+
+### Phase 13 test status
+
+- Total tests: 903+ (including prior regression tests)
+- No external Chrono24 communication in tests or default `main.py`
+- Internal fixture JSON only; not claimed as official API format
+
+---

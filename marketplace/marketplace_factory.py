@@ -6,6 +6,7 @@ from config.constants import (
     MARKETPLACE_AMAZON_JP,
     MARKETPLACE_FASHIONPHILE,
     MARKETPLACE_GRAILED,
+    MARKETPLACE_CHRONO24,
     MARKETPLACE_THEREALREAL,
     MARKETPLACE_LOCAL,
     MARKETPLACE_MERCARI,
@@ -27,6 +28,9 @@ from marketplace.therealreal_settings import TheRealRealSettings
 from marketplace.grailed_client import GrailedClientProtocol
 from marketplace.grailed_marketplace import create_grailed_marketplace
 from marketplace.grailed_settings import GrailedSettings
+from marketplace.chrono24_client import Chrono24ClientProtocol
+from marketplace.chrono24_marketplace import create_chrono24_marketplace
+from marketplace.chrono24_settings import Chrono24Settings
 from marketplace.local_marketplace import LocalMarketplace
 from marketplace.rakuten_client import RakutenClientProtocol
 from marketplace.rakuten_marketplace import create_rakuten_marketplace
@@ -57,6 +61,9 @@ _THEREALREAL_ALIASES = frozenset(
 _GRAILED_ALIASES = frozenset(
     {"grailed", "grailed_market", "grailed-market", "gr"}
 )
+_CHRONO24_ALIASES = frozenset(
+    {"chrono24", "chrono_24", "chrono-24", "c24"}
+)
 
 
 def _normalize_marketplace_name(marketplace_name: str) -> str:
@@ -71,6 +78,8 @@ def _normalize_marketplace_name(marketplace_name: str) -> str:
         return MARKETPLACE_THEREALREAL
     if normalized in _GRAILED_ALIASES:
         return MARKETPLACE_GRAILED
+    if normalized in _CHRONO24_ALIASES:
+        return MARKETPLACE_CHRONO24
     return normalized
 
 
@@ -93,6 +102,8 @@ def create_marketplace(
     therealreal_client: TheRealRealClientProtocol | None = None,
     grailed_settings: GrailedSettings | None = None,
     grailed_client: GrailedClientProtocol | None = None,
+    chrono24_settings: Chrono24Settings | None = None,
+    chrono24_client: Chrono24ClientProtocol | None = None,
 ) -> BaseMarketplace:
     """
     Create a marketplace instance for the given name.
@@ -116,6 +127,8 @@ def create_marketplace(
         therealreal_client: Optional The RealReal client override (required for therealreal).
         grailed_settings: Optional Grailed settings override.
         grailed_client: Optional Grailed client override (required for grailed).
+        chrono24_settings: Optional Chrono24 settings override.
+        chrono24_client: Optional Chrono24 client override (required for chrono24).
 
     Returns:
         Configured marketplace instance.
@@ -169,6 +182,12 @@ def create_marketplace(
             settings=grailed_settings,
         )
 
+    if normalized == MARKETPLACE_CHRONO24.lower():
+        return create_chrono24_marketplace(
+            client=chrono24_client,
+            settings=chrono24_settings,
+        )
+
     not_implemented = {
         MARKETPLACE_MERCARI.lower(): "Mercari marketplace is not yet implemented",
     }
@@ -195,11 +214,13 @@ def get_all_marketplaces(
     therealreal_client: TheRealRealClientProtocol | None = None,
     grailed_settings: GrailedSettings | None = None,
     grailed_client: GrailedClientProtocol | None = None,
+    chrono24_settings: Chrono24Settings | None = None,
+    chrono24_client: Chrono24ClientProtocol | None = None,
 ) -> list[BaseMarketplace]:
     """
     Return marketplace instances for all implemented marketplaces.
 
-    Vestiaire, Fashionphile, The RealReal, and Grailed are omitted unless a client is injected.
+    Vestiaire, Fashionphile, The RealReal, Grailed, and Chrono24 are omitted unless a client is injected.
     """
     yahoo = yahoo_settings or YahooApiSettings.from_env()
     amazon = amazon_settings or AmazonConfig.from_env()
@@ -254,6 +275,14 @@ def get_all_marketplaces(
                 MARKETPLACE_GRAILED,
                 grailed_settings=grailed_settings,
                 grailed_client=grailed_client,
+            )
+        )
+    if chrono24_client is not None:
+        marketplaces.append(
+            create_marketplace(
+                MARKETPLACE_CHRONO24,
+                chrono24_settings=chrono24_settings,
+                chrono24_client=chrono24_client,
             )
         )
     return marketplaces

@@ -50,6 +50,7 @@ MARKETPLACE_VESTIAIRE: Final[str] = "vestiaire"
 MARKETPLACE_FASHIONPHILE: Final[str] = "fashionphile"
 MARKETPLACE_THEREALREAL: Final[str] = "therealreal"
 MARKETPLACE_GRAILED: Final[str] = "grailed"
+MARKETPLACE_CHRONO24: Final[str] = "chrono24"
 MARKETPLACE_USED_DEMO: Final[str] = "used_demo"
 
 SHEET_DOMESTIC_LISTINGS: Final[str] = "Domestic Listings"

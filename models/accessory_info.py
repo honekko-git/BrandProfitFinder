@@ -66,6 +66,11 @@ ACCESSORY_FIELD_NAMES: tuple[str, ...] = (
 # Alias map from fixture keys to canonical names
 ACCESSORY_ALIASES: dict[str, str] = {
     "box": "original_box",
+    "papers": "certificate",
+    "service_papers": "certificate",
+    "hang_tag": "tags",
+    "travel_case": "case",
+    "original_receipt": "receipt",
 }
 
 

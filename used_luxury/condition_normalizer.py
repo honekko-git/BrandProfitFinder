@@ -23,7 +23,7 @@ class ConditionNormalizationResult:
 # (pattern, condition, confidence, rule_name)
 _CONDITION_RULES: tuple[tuple[re.Pattern[str], UsedItemCondition, float, str], ...] = (
     (re.compile(r"^(brand\s*)?new$|^新品$"), UsedItemCondition.NEW, 1.0, "exact_new"),
-    (re.compile(r"^unused$|^never\s*used$|^never\s*worn$|^未使用$"), UsedItemCondition.UNUSED, 1.0, "exact_unused"),
+    (re.compile(r"^unused$|^never\s*used$|^never\s*worn$|^unworn$|^未使用$"), UsedItemCondition.UNUSED, 1.0, "exact_unused"),
     (re.compile(r"^like\s*new$|^新品同様$"), UsedItemCondition.LIKE_NEW, 0.95, "exact_like_new"),
     (re.compile(r"^mint$"), UsedItemCondition.LIKE_NEW, 0.9, "mint_like_new"),
     (re.compile(r"^excellent$|^美品$"), UsedItemCondition.EXCELLENT, 0.95, "exact_excellent"),
@@ -47,6 +47,9 @@ _CONDITION_RULES: tuple[tuple[re.Pattern[str], UsedItemCondition, float, str], .
     (re.compile(r"^new\s*with\s*tags$"), UsedItemCondition.LIKE_NEW, 0.7, "grailed_new_with_tags"),
     (re.compile(r"^new\s*without\s*tags$"), UsedItemCondition.LIKE_NEW, 0.65, "grailed_new_without_tags"),
     (re.compile(r"^distressed$"), UsedItemCondition.USED_GENERIC, 0.45, "grailed_distressed"),
+    (re.compile(r"^incomplete$"), UsedItemCondition.FOR_PARTS, 0.8, "chrono24_incomplete"),
+    (re.compile(r"^modified$"), UsedItemCondition.USED_GENERIC, 0.45, "chrono24_modified"),
+    (re.compile(r"^customized$"), UsedItemCondition.USED_GENERIC, 0.45, "chrono24_customized"),
 )
 
 
@@ -114,6 +117,12 @@ class ConditionNormalizer:
                     warnings.append("new without tags does not assert unused guarantee")
                 if rule == "grailed_distressed":
                     warnings.append("distressed may be design or damage; requires caution")
+                if rule == "chrono24_incomplete":
+                    warnings.append("incomplete may indicate missing parts")
+                if rule == "chrono24_modified":
+                    warnings.append("modified may indicate non-original parts or changes")
+                if rule == "chrono24_customized":
+                    warnings.append("customized may indicate non-original specification")
                 return ConditionNormalizationResult(
                     normalized_condition=condition,
                     raw_condition=raw_text,

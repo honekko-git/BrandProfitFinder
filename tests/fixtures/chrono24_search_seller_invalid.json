@@ -1,0 +1,116 @@
+{
+  "marketplace": "chrono24",
+  "query": "ROLEX Submariner 126610LN",
+  "page": 1,
+  "page_size": 20,
+  "total": 1,
+  "items": [
+    {
+      "listing_id": "chrono24-demo-001",
+      "title": "ROLEX Submariner Date 126610LN",
+      "description": "Pre-owned mechanical watch with light surface wear.",
+      "price": {
+        "amount": 1980000,
+        "currency": "JPY"
+      },
+      "original_price": {
+        "amount": 2050000,
+        "currency": "JPY",
+        "known": true
+      },
+      "shipping": {
+        "amount": null,
+        "currency": "JPY",
+        "known": false
+      },
+      "url": "https://example.invalid/chrono24/chrono24-demo-001",
+      "image_url": "https://example.invalid/images/chrono24-demo-001.jpg",
+      "brand": "ROLEX",
+      "model_number": "126610LN",
+      "reference_number": "126610LN",
+      "category": "watches",
+      "sub_category": "diver_watches",
+      "color": "black",
+      "size": "41mm",
+      "material": "stainless_steel",
+      "gender": "unisex",
+      "condition": {
+        "raw": "Very Good",
+        "description": "Light surface scratches and normal signs of wear"
+      },
+      "watch_details": {
+        "movement_type": "AUTOMATIC",
+        "caliber": "3235",
+        "case_material": "STAINLESS_STEEL",
+        "case_diameter_mm": 41.0,
+        "bezel_material": "CERAMIC",
+        "crystal": "SAPPHIRE",
+        "dial_color": "BLACK",
+        "bracelet_material": "STAINLESS_STEEL",
+        "bracelet_color": "SILVER",
+        "production_year": 2022,
+        "water_resistance_m": 300,
+        "power_reserve_hours": 70,
+        "functions": [
+          "DATE"
+        ]
+      },
+      "defects": {
+        "scratches": "minor",
+        "dents": "none",
+        "crystal_damage": "none",
+        "dial_damage": "none",
+        "bracelet_stretch": "unknown",
+        "water_damage": "unknown",
+        "repair_history": "unknown"
+      },
+      "accessories": {
+        "original_box": "included",
+        "warranty_card": "included",
+        "manual": "included",
+        "extra_links": "included",
+        "service_papers": "unknown",
+        "hang_tag": "unknown"
+      },
+      "authentication": {
+        "status": "PLATFORM_REVIEWED",
+        "provider": "Internal Platform Review",
+        "seller_claimed_authentic": true,
+        "platform_authenticated": null,
+        "third_party_authenticated": false
+      },
+      "seller": {
+        "type": "PROFESSIONAL_DEALER",
+        "rating": true,
+        "review_count": -2,
+        "verified": "yes",
+        "trusted_seller": "maybe",
+        "transactions": true
+      },
+      "return_policy": {
+        "accepted": true,
+        "period_days": 14
+      },
+      "inventory": {
+        "status": "IN_STOCK",
+        "quantity": 1
+      },
+      "negotiation": {
+        "enabled": true,
+        "minimum_offer": null,
+        "currency": "JPY"
+      },
+      "discount": {
+        "active": true,
+        "amount": 70000,
+        "rate": 0.0341,
+        "previous_price": 2050000
+      },
+      "sale_status": "ACTIVE",
+      "listed_at": "2026-07-20T10:00:00Z",
+      "metadata": {
+        "source_format": "brandprofitfinder_internal_fixture"
+      }
+    }
+  ]
+}
