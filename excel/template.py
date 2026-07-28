@@ -121,4 +121,5 @@ MARKETPLACE_LISTING_COLUMNS: Final[list[str]] = [
     "is_prime",
     "is_amazon_seller",
     "shipping_unknown",
+    "point_rate",
 ]

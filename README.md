@@ -99,6 +99,7 @@ BrandProfitFinder compares overseas purchase prices with Japanese **sales** mark
 |---|---|---|
 | Yahoo Shopping | Domestic sales price comparison | API v3 (optional live) |
 | Amazon.co.jp | Domestic sales price comparison | Phase 5A foundation (no live API) |
+| Rakuten Ichiba | Domestic sales price comparison | Phase 6 foundation (no live API by default) |
 
 Amazon is **not** an overseas sourcing store. Overseas sourcing stores are Cettire, Baltini, and Italist.
 
@@ -129,3 +130,26 @@ python main.py --marketplace amazon_jp --demo-amazon
 Demo mode uses local fixture JSON under `tests/fixtures/` and performs no network access.
 
 When Amazon is not configured, `main.py` logs a skip message and continues with the existing local/Yahoo pipeline.
+
+### Rakuten Ichiba Phase 6 notes
+
+- API: Rakuten Ichiba Item Search API (`2026-07-01`)
+- Requires `RAKUTEN_APPLICATION_ID` and `RAKUTEN_ACCESS_KEY` for live search
+- `RAKUTEN_AFFILIATE_ID` is optional
+- No external API calls in tests or default `main.py` execution
+- Demo mode: `AMAZON_JP_ENABLED=true` is separate; for Rakuten use:
+
+```
+RAKUTEN_API_ENABLED=true
+RAKUTEN_API_DEMO_ENABLED=true
+```
+
+Or:
+
+```
+python main.py --marketplace rakuten --demo-rakuten
+```
+
+- `postageFlag=0` → free shipping (`shipping_jpy=0`); otherwise shipping is unknown (`shipping_jpy=None`)
+- Rakuten points (`pointRate`) are stored but **not** auto-deducted from profit
+- Rakuten selling fees are **not** auto-calculated in this phase

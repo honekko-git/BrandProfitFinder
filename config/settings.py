@@ -70,3 +70,27 @@ AMAZON_JP_DEMO_ENABLED = os.getenv("AMAZON_JP_DEMO_ENABLED", "false").strip().lo
     "yes",
     "on",
 )
+
+RAKUTEN_APPLICATION_ID = os.getenv("RAKUTEN_APPLICATION_ID", "").strip()
+RAKUTEN_ACCESS_KEY = os.getenv("RAKUTEN_ACCESS_KEY", "").strip()
+RAKUTEN_AFFILIATE_ID = os.getenv("RAKUTEN_AFFILIATE_ID", "").strip()
+RAKUTEN_API_BASE_URL = os.getenv(
+    "RAKUTEN_API_BASE_URL",
+    "https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260701",
+).strip()
+RAKUTEN_API_TIMEOUT_SECONDS = max(1, int(os.getenv("RAKUTEN_API_TIMEOUT_SECONDS", "10")))
+RAKUTEN_API_MAX_RETRIES = max(0, int(os.getenv("RAKUTEN_API_MAX_RETRIES", "2")))
+RAKUTEN_API_HITS = max(1, min(30, int(os.getenv("RAKUTEN_API_HITS", "20"))))
+RAKUTEN_API_SORT = os.getenv("RAKUTEN_API_SORT", "standard").strip()
+RAKUTEN_API_ENABLED = os.getenv("RAKUTEN_API_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+RAKUTEN_API_DEMO_ENABLED = os.getenv("RAKUTEN_API_DEMO_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)

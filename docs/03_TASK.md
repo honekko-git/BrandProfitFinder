@@ -93,3 +93,26 @@ Set values in `.env` (see `.env.example`):
 - Demo mode uses `tests/fixtures/amazon_search_*.json`
 
 ---
+
+## Phase 6
+
+- [x] Rakuten Ichiba Item Search API (2026-07-01) settings
+- [x] RakutenApiClient with header-based accessKey auth
+- [x] FakeRakutenClient for tests and demo mode
+- [x] RakutenResponseParser (formatVersion=2)
+- [x] RakutenMarketplace with Validator/Matcher integration
+- [x] MarketplaceFactory `rakuten` registration
+- [x] Optional Rakuten demo mode in main.py
+- [x] Excel domestic listings `point_rate` column
+- [ ] Live Rakuten API verification in production environment
+- [ ] Rakuten selling fee calculation
+- [ ] Mercari marketplace API
+
+### Phase 6 test status
+
+- Total tests: 482 (including prior 398 regression tests)
+- External HTTP is fully mocked in tests
+- Default `python main.py` uses local marketplace only
+- Demo: `python main.py --marketplace rakuten --demo-rakuten`
+
+---

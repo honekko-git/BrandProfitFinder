@@ -38,6 +38,7 @@ class MarketplaceListing:
     is_prime: bool = False
     is_amazon_seller: bool = False
     shipping_unknown: bool = False
+    point_rate: Decimal | None = None
     source_metadata: dict[str, Any] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
@@ -91,4 +92,5 @@ class MarketplaceListing:
             "is_prime": self.is_prime,
             "is_amazon_seller": self.is_amazon_seller,
             "shipping_unknown": self.shipping_unknown,
+            "point_rate": float(self.point_rate) if self.point_rate is not None else None,
         }

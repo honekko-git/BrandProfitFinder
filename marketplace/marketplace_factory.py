@@ -14,6 +14,9 @@ from marketplace.amazon_marketplace import create_amazon_marketplace
 from marketplace.amazon_settings import AmazonConfig
 from marketplace.base_marketplace import BaseMarketplace
 from marketplace.local_marketplace import LocalMarketplace
+from marketplace.rakuten_client import RakutenClientProtocol
+from marketplace.rakuten_marketplace import create_rakuten_marketplace
+from marketplace.rakuten_settings import RakutenConfig
 from marketplace.yahoo_marketplace import create_yahoo_marketplace
 from marketplace.yahoo_settings import YahooApiSettings
 from models.marketplace_listing import MarketplaceListing
@@ -27,6 +30,8 @@ def create_marketplace(
     yahoo_settings: YahooApiSettings | None = None,
     amazon_settings: AmazonConfig | None = None,
     amazon_client: AmazonClientProtocol | None = None,
+    rakuten_settings: RakutenConfig | None = None,
+    rakuten_client: RakutenClientProtocol | None = None,
 ) -> BaseMarketplace:
     """
     Create a marketplace instance for the given name.
@@ -38,6 +43,8 @@ def create_marketplace(
         yahoo_settings: Optional Yahoo settings override.
         amazon_settings: Optional Amazon settings override.
         amazon_client: Optional Amazon client override.
+        rakuten_settings: Optional Rakuten settings override.
+        rakuten_client: Optional Rakuten client override.
 
     Returns:
         Configured marketplace instance.
@@ -58,8 +65,10 @@ def create_marketplace(
     if normalized in {MARKETPLACE_AMAZON_JP.lower(), "amazon"}:
         return create_amazon_marketplace(client=amazon_client, config=amazon_settings)
 
+    if normalized == MARKETPLACE_RAKUTEN.lower():
+        return create_rakuten_marketplace(client=rakuten_client, config=rakuten_settings)
+
     not_implemented = {
-        MARKETPLACE_RAKUTEN.lower(): "Rakuten marketplace is not yet implemented",
         MARKETPLACE_MERCARI.lower(): "Mercari marketplace is not yet implemented",
     }
     if normalized in not_implemented:
@@ -73,6 +82,8 @@ def get_all_marketplaces(
     yahoo_settings: YahooApiSettings | None = None,
     amazon_settings: AmazonConfig | None = None,
     amazon_client: AmazonClientProtocol | None = None,
+    rakuten_settings: RakutenConfig | None = None,
+    rakuten_client: RakutenClientProtocol | None = None,
 ) -> list[BaseMarketplace]:
     """
     Return marketplace instances for all implemented marketplaces.
@@ -82,12 +93,15 @@ def get_all_marketplaces(
         yahoo_settings: Optional Yahoo settings override.
         amazon_settings: Optional Amazon settings override.
         amazon_client: Optional Amazon client override.
+        rakuten_settings: Optional Rakuten settings override.
+        rakuten_client: Optional Rakuten client override.
 
     Returns:
         List of marketplace instances.
     """
     yahoo = yahoo_settings or YahooApiSettings.from_env()
     amazon = amazon_settings or AmazonConfig.from_env()
+    rakuten = rakuten_settings or RakutenConfig.from_env()
     marketplaces: list[BaseMarketplace] = [
         create_marketplace(MARKETPLACE_LOCAL, listings_by_product_key=listings_by_product_key),
         create_marketplace(MARKETPLACE_YAHOO, yahoo_settings=yahoo),
@@ -95,6 +109,11 @@ def get_all_marketplaces(
             MARKETPLACE_AMAZON_JP,
             amazon_settings=amazon,
             amazon_client=amazon_client,
+        ),
+        create_marketplace(
+            MARKETPLACE_RAKUTEN,
+            rakuten_settings=rakuten,
+            rakuten_client=rakuten_client,
         ),
     ]
     return marketplaces

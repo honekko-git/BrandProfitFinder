@@ -80,7 +80,8 @@ def test_get_all_marketplaces_includes_yahoo() -> None:
     assert "local" in names
     assert "yahoo" in names
     assert "amazon_jp" in names
-    assert len(marketplaces) == 3
+    assert "rakuten" in names
+    assert len(marketplaces) == 4
 
 
 def test_factory_import_without_api_key() -> None:

@@ -154,6 +154,7 @@ class ListingMatcher:
                     is_prime=listing.is_prime,
                     is_amazon_seller=listing.is_amazon_seller,
                     shipping_unknown=listing.shipping_unknown,
+                    point_rate=listing.point_rate,
                     source_metadata=dict(listing.source_metadata),
                 )
             )
