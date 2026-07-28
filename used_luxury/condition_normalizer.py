@@ -38,6 +38,9 @@ _CONDITION_RULES: tuple[tuple[re.Pattern[str], UsedItemCondition, float, str], .
     (re.compile(r"^shows\s*wear$"), UsedItemCondition.USED_GENERIC, 0.5, "shows_wear"),
     (re.compile(r"^heavily\s*worn$"), UsedItemCondition.POOR, 0.85, "heavily_worn"),
     (re.compile(r"^as\s*is$"), UsedItemCondition.FAIR, 0.7, "as_is"),
+    (re.compile(r"^pristine$"), UsedItemCondition.LIKE_NEW, 0.75, "trr_pristine"),
+    (re.compile(r"^moderate\s*wear$"), UsedItemCondition.USED_GENERIC, 0.5, "moderate_wear"),
+    (re.compile(r"^heavy\s*wear$"), UsedItemCondition.POOR, 0.85, "heavy_wear"),
     (re.compile(r"^used$"), UsedItemCondition.USED_GENERIC, 0.5, "ambiguous_used"),
 )
 
@@ -90,6 +93,12 @@ class ConditionNormalizer:
                     warnings.append("shows wear does not imply good condition grade")
                 if rule == "as_is":
                     warnings.append("as is condition requires buyer caution")
+                if rule == "trr_pristine":
+                    warnings.append("pristine does not assert unused condition")
+                if rule == "moderate_wear":
+                    warnings.append("moderate wear does not imply good condition grade")
+                if rule == "heavy_wear":
+                    warnings.append("heavy wear indicates significant wear")
                 return ConditionNormalizationResult(
                     normalized_condition=condition,
                     raw_condition=raw_text,

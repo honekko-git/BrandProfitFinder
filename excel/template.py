@@ -170,4 +170,6 @@ MARKETPLACE_LISTING_COLUMNS: Final[list[str]] = [
     "source_inventory_status",
     "source_inventory_quantity",
     "fashionphile_parse_warnings",
+    "source_final_sale",
+    "therealreal_parse_warnings",
 ]

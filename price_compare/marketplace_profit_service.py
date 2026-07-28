@@ -102,6 +102,7 @@ def _attach_used_item_metadata(result: PriceResult, listing) -> None:
         "discount_rate": meta.get("source_discount_rate"),
         "previous_price": meta.get("source_previous_price"),
         "discount_applied": False,
+        "final_sale": meta.get("source_final_sale"),
         "used_condition": details.condition.value if details else None,
         "condition_score": details.condition_score_value if details else None,
         "condition_confidence": details.condition_confidence if details else None,

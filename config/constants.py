@@ -48,6 +48,7 @@ MARKETPLACE_MERCARI: Final[str] = "mercari"
 MARKETPLACE_AMAZON_JP: Final[str] = "amazon_jp"
 MARKETPLACE_VESTIAIRE: Final[str] = "vestiaire"
 MARKETPLACE_FASHIONPHILE: Final[str] = "fashionphile"
+MARKETPLACE_THEREALREAL: Final[str] = "therealreal"
 MARKETPLACE_USED_DEMO: Final[str] = "used_demo"
 
 SHEET_DOMESTIC_LISTINGS: Final[str] = "Domestic Listings"

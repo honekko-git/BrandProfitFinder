@@ -1,0 +1,1 @@
+{"marketplace": "therealreal", "items": [{"listing_id": "trr-auth", "title": "Unknown Auth", "price": {"amount": 250000, "currency": "JPY"}, "url": "https://example.invalid/therealreal/trr-auth", "authentication": {"status": "UNKNOWN"}, "sale_status": "ACTIVE", "inventory": {"status": "IN_STOCK", "quantity": 1}}]}

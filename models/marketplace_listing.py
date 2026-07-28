@@ -204,4 +204,6 @@ class MarketplaceListing:
             "source_inventory_status": meta.get("source_inventory_status") or None,
             "source_inventory_quantity": meta.get("source_inventory_quantity"),
             "fashionphile_parse_warnings": meta.get("fashionphile_parse_warnings") or None,
+            "source_final_sale": meta.get("source_final_sale"),
+            "therealreal_parse_warnings": meta.get("therealreal_parse_warnings") or None,
         }

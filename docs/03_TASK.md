@@ -203,3 +203,22 @@ Set values in `.env` (see `.env.example`):
 - Internal fixture JSON only; not claimed as official API format
 
 ---
+
+## Phase 11
+
+- [x] The RealReal integration foundation (no live communication)
+- [x] TheRealRealClientProtocol and FakeTheRealRealClient
+- [x] TheRealRealResponseParser (BrandProfitFinder internal standard JSON)
+- [x] TheRealRealMarketplace with pagination, inventory/sale/final sale filters
+- [x] Phase 8 UsedItemEnricher integration; final_sale in source metadata
+- [x] MarketplaceFactory aliases: therealreal, the_real_real, the-real-real, realreal, trr
+- [x] Demo: `python main.py --marketplace therealreal --demo-therealreal`
+- [ ] Official The RealReal API, partner data feed, or CSV import client
+
+### Phase 11 test status
+
+- Total tests: 806+ (including prior regression tests)
+- No external The RealReal communication in tests or default `main.py`
+- Internal fixture JSON only; not claimed as official API format
+
+---

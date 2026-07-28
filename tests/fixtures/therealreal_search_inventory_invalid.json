@@ -1,0 +1,1 @@
+{"marketplace": "therealreal", "items": [{"listing_id": "trr-badinv", "title": "Bad Inventory", "price": {"amount": 300000, "currency": "JPY"}, "url": "https://example.invalid/therealreal/trr-badinv", "sale_status": "ACTIVE", "inventory": {"status": "IN_STOCK", "quantity": true}}]}

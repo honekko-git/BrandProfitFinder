@@ -5,6 +5,7 @@ Marketplace factory for creating domestic marketplace instances.
 from config.constants import (
     MARKETPLACE_AMAZON_JP,
     MARKETPLACE_FASHIONPHILE,
+    MARKETPLACE_THEREALREAL,
     MARKETPLACE_LOCAL,
     MARKETPLACE_MERCARI,
     MARKETPLACE_RAKUTEN,
@@ -19,6 +20,9 @@ from marketplace.base_marketplace import BaseMarketplace
 from marketplace.fashionphile_client import FashionphileClientProtocol
 from marketplace.fashionphile_marketplace import create_fashionphile_marketplace
 from marketplace.fashionphile_settings import FashionphileSettings
+from marketplace.therealreal_client import TheRealRealClientProtocol
+from marketplace.therealreal_marketplace import create_therealreal_marketplace
+from marketplace.therealreal_settings import TheRealRealSettings
 from marketplace.local_marketplace import LocalMarketplace
 from marketplace.rakuten_client import RakutenClientProtocol
 from marketplace.rakuten_marketplace import create_rakuten_marketplace
@@ -43,6 +47,9 @@ _VESTIAIRE_ALIASES = frozenset(
 _FASHIONPHILE_ALIASES = frozenset(
     {"fashionphile", "fashion_phile", "fashion-phile", "fp"}
 )
+_THEREALREAL_ALIASES = frozenset(
+    {"therealreal", "the_real_real", "the-real-real", "realreal", "trr"}
+)
 
 
 def _normalize_marketplace_name(marketplace_name: str) -> str:
@@ -53,6 +60,8 @@ def _normalize_marketplace_name(marketplace_name: str) -> str:
         return MARKETPLACE_VESTIAIRE
     if normalized in _FASHIONPHILE_ALIASES:
         return MARKETPLACE_FASHIONPHILE
+    if normalized in _THEREALREAL_ALIASES:
+        return MARKETPLACE_THEREALREAL
     return normalized
 
 
@@ -71,6 +80,8 @@ def create_marketplace(
     vestiaire_client: VestiaireClientProtocol | None = None,
     fashionphile_settings: FashionphileSettings | None = None,
     fashionphile_client: FashionphileClientProtocol | None = None,
+    therealreal_settings: TheRealRealSettings | None = None,
+    therealreal_client: TheRealRealClientProtocol | None = None,
 ) -> BaseMarketplace:
     """
     Create a marketplace instance for the given name.
@@ -90,6 +101,8 @@ def create_marketplace(
         vestiaire_client: Optional Vestiaire client override (required for vestiaire).
         fashionphile_settings: Optional Fashionphile settings override.
         fashionphile_client: Optional Fashionphile client override (required for fashionphile).
+        therealreal_settings: Optional The RealReal settings override.
+        therealreal_client: Optional The RealReal client override (required for therealreal).
 
     Returns:
         Configured marketplace instance.
@@ -131,6 +144,12 @@ def create_marketplace(
             settings=fashionphile_settings,
         )
 
+    if normalized == MARKETPLACE_THEREALREAL.lower():
+        return create_therealreal_marketplace(
+            client=therealreal_client,
+            settings=therealreal_settings,
+        )
+
     not_implemented = {
         MARKETPLACE_MERCARI.lower(): "Mercari marketplace is not yet implemented",
     }
@@ -153,11 +172,13 @@ def get_all_marketplaces(
     vestiaire_client: VestiaireClientProtocol | None = None,
     fashionphile_settings: FashionphileSettings | None = None,
     fashionphile_client: FashionphileClientProtocol | None = None,
+    therealreal_settings: TheRealRealSettings | None = None,
+    therealreal_client: TheRealRealClientProtocol | None = None,
 ) -> list[BaseMarketplace]:
     """
     Return marketplace instances for all implemented marketplaces.
 
-    Vestiaire and Fashionphile are omitted unless a client is injected (no fake client by default).
+    Vestiaire, Fashionphile, and The RealReal are omitted unless a client is injected.
     """
     yahoo = yahoo_settings or YahooApiSettings.from_env()
     amazon = amazon_settings or AmazonConfig.from_env()
@@ -196,6 +217,14 @@ def get_all_marketplaces(
                 MARKETPLACE_FASHIONPHILE,
                 fashionphile_settings=fashionphile_settings,
                 fashionphile_client=fashionphile_client,
+            )
+        )
+    if therealreal_client is not None:
+        marketplaces.append(
+            create_marketplace(
+                MARKETPLACE_THEREALREAL,
+                therealreal_settings=therealreal_settings,
+                therealreal_client=therealreal_client,
             )
         )
     return marketplaces
