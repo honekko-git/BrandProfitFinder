@@ -281,3 +281,23 @@ Set values in `.env` (see `.env.example`):
 - Internal fixture JSON only; not claimed as official API format
 
 ---
+
+## Phase 15
+
+- [x] StockX integration foundation (no live communication)
+- [x] StockXClientProtocol and FakeStockXClient
+- [x] StockXResponseParser (BrandProfitFinder internal standard JSON)
+- [x] StockXMarketplace with pagination, market data, size/condition filters
+- [x] lowest ask / highest bid / last sale separation; price source handling
+- [x] MarketplaceFactory aliases: stockx, stock_x, stock-x, sx
+- [x] Matcher size/size_system warnings; market stats excluded from identity
+- [x] Demo: `python main.py --demo-stockx`
+- [ ] Official StockX API, partner data feed, CSV import, or manual import client
+
+### Phase 15 test status
+
+- Total tests: 1038+ (including prior regression tests)
+- No external StockX communication in tests or default `main.py`
+- Internal fixture JSON only; not claimed as official API format
+
+---

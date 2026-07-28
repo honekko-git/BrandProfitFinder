@@ -1,0 +1,13 @@
+{
+  "marketplace": "stockx",
+  "query": "Nike Dunk Low Panda",
+  "page": 1,
+  "page_size": 20,
+  "total": 1,
+  "items": [
+    {
+      "listing_id": "stockx-missing-001",
+      "title": "Incomplete Sneaker"
+    }
+  ]
+}

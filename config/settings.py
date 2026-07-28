@@ -565,3 +565,114 @@ FARFETCH_REQUIRE_KNOWN_DUTIES = os.getenv(
     "yes",
     "on",
 )
+
+STOCKX_ENABLED = os.getenv("STOCKX_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+STOCKX_DEMO_ENABLED = os.getenv("STOCKX_DEMO_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+STOCKX_TIMEOUT_SECONDS = max(1, int(os.getenv("STOCKX_TIMEOUT_SECONDS", "10")))
+STOCKX_PAGE_SIZE = max(1, min(50, int(os.getenv("STOCKX_PAGE_SIZE", "20"))))
+STOCKX_MAX_PAGES = max(1, min(20, int(os.getenv("STOCKX_MAX_PAGES", "1"))))
+STOCKX_DEFAULT_CURRENCY = os.getenv("STOCKX_DEFAULT_CURRENCY", "JPY").strip().upper()
+STOCKX_DEMO_FIXTURE_PATH = os.getenv(
+    "STOCKX_DEMO_FIXTURE_PATH", "stockx_search_normal.json"
+)
+STOCKX_ALLOW_UNKNOWN_CURRENCY = os.getenv(
+    "STOCKX_ALLOW_UNKNOWN_CURRENCY", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+STOCKX_INCLUDE_UNAVAILABLE = os.getenv(
+    "STOCKX_INCLUDE_UNAVAILABLE", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+STOCKX_INCLUDE_SOLD = os.getenv("STOCKX_INCLUDE_SOLD", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+STOCKX_INCLUDE_INACTIVE = os.getenv(
+    "STOCKX_INCLUDE_INACTIVE", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+STOCKX_INCLUDE_NEW = os.getenv("STOCKX_INCLUDE_NEW", "true").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+STOCKX_INCLUDE_PREOWNED = os.getenv(
+    "STOCKX_INCLUDE_PREOWNED", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+STOCKX_INCLUDE_LOW_LIQUIDITY = os.getenv(
+    "STOCKX_INCLUDE_LOW_LIQUIDITY", "true"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+STOCKX_REQUIRE_KNOWN_LOWEST_ASK = os.getenv(
+    "STOCKX_REQUIRE_KNOWN_LOWEST_ASK", "true"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+STOCKX_REQUIRE_KNOWN_SHIPPING = os.getenv(
+    "STOCKX_REQUIRE_KNOWN_SHIPPING", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+STOCKX_REQUIRE_KNOWN_FEES = os.getenv(
+    "STOCKX_REQUIRE_KNOWN_FEES", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+STOCKX_MINIMUM_SALES_LAST_30_DAYS = max(
+    0, int(os.getenv("STOCKX_MINIMUM_SALES_LAST_30_DAYS", "0"))
+)
+STOCKX_MINIMUM_ASKS_COUNT = max(0, int(os.getenv("STOCKX_MINIMUM_ASKS_COUNT", "0")))
+STOCKX_MINIMUM_BIDS_COUNT = max(0, int(os.getenv("STOCKX_MINIMUM_BIDS_COUNT", "0")))
+_volatility_raw = os.getenv("STOCKX_MAXIMUM_VOLATILITY_RATE", "").strip()
+try:
+    STOCKX_MAXIMUM_VOLATILITY_RATE = float(_volatility_raw) if _volatility_raw else None
+    if STOCKX_MAXIMUM_VOLATILITY_RATE is not None and STOCKX_MAXIMUM_VOLATILITY_RATE < 0:
+        STOCKX_MAXIMUM_VOLATILITY_RATE = None
+except ValueError:
+    STOCKX_MAXIMUM_VOLATILITY_RATE = None
+STOCKX_PREFERRED_PRICE_SOURCE = os.getenv(
+    "STOCKX_PREFERRED_PRICE_SOURCE", "LOWEST_ASK"
+).strip().upper()

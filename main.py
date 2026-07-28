@@ -31,6 +31,7 @@ from config.settings import (
     GRAILED_DEMO_ENABLED,
     CHRONO24_DEMO_ENABLED,
     FARFETCH_DEMO_ENABLED,
+    STOCKX_DEMO_ENABLED,
 )
 from excel.exporter import ExcelExporter
 from marketplace.amazon_client import FakeAmazonClient
@@ -65,6 +66,10 @@ from marketplace.farfetch_client import FakeFarfetchClient
 from marketplace.farfetch_exceptions import FarfetchConfigurationError
 from marketplace.farfetch_marketplace import create_farfetch_marketplace
 from marketplace.farfetch_settings import FarfetchSettings
+from marketplace.stockx_client import FakeStockXClient
+from marketplace.stockx_exceptions import StockXConfigurationError
+from marketplace.stockx_marketplace import create_stockx_marketplace
+from marketplace.stockx_settings import StockXSettings
 from used_luxury.demo_marketplace import create_used_luxury_demo_marketplace
 from used_luxury.demo_provider import FakeUsedLuxuryProvider
 from models.marketplace_listing import MarketplaceListing
@@ -268,6 +273,8 @@ def resolve_marketplace_name(argv: list[str] | None = None) -> str:
         return "chrono24"
     if FARFETCH_DEMO_ENABLED or "--demo-farfetch" in args:
         return "farfetch"
+    if STOCKX_DEMO_ENABLED or "--demo-stockx" in args:
+        return "stockx"
     if AMAZON_JP_ENABLED and (AMAZON_JP_DEMO_ENABLED or "--demo-amazon" in args):
         return "amazon_jp"
     if YAHOO_API_ENABLED:
@@ -435,6 +442,31 @@ def build_farfetch_demo_client() -> FakeFarfetchClient | None:
     return FakeFarfetchClient(payload)
 
 
+def is_stockx_demo_requested(argv: list[str] | None = None) -> bool:
+    """Return True when StockX demo mode is explicitly requested."""
+    args = argv if argv is not None else sys.argv[1:]
+    return STOCKX_DEMO_ENABLED or "--demo-stockx" in args
+
+
+def build_stockx_demo_client() -> FakeStockXClient | None:
+    """Build a fake StockX client from local fixture JSON."""
+    settings = StockXSettings.from_env()
+    fixture_path = FIXTURES_DIR / settings.demo_fixture_path
+    if not fixture_path.exists():
+        logger.warning("StockX demo fixture not found: %s", fixture_path)
+        return None
+    payload = json.loads(fixture_path.read_text(encoding="utf-8"))
+    page_2 = FIXTURES_DIR / "stockx_search_page_2.json"
+    if page_2.exists():
+        return FakeStockXClient(
+            pages={
+                1: payload,
+                2: json.loads(page_2.read_text(encoding="utf-8")),
+            }
+        )
+    return FakeStockXClient(payload)
+
+
 def is_used_luxury_demo_requested(argv: list[str] | None = None) -> bool:
     """Return True when used luxury demo mode is explicitly requested."""
     args = argv if argv is not None else sys.argv[1:]
@@ -538,6 +570,8 @@ def _normalize_selected_marketplace(selected: str) -> str:
         return "chrono24"
     if normalized in {"farfetch", "far_fetch", "far-fetch", "ff"}:
         return "farfetch"
+    if normalized in {"stockx", "stock_x", "stock-x", "sx"}:
+        return "stockx"
     return normalized
 
 
@@ -562,6 +596,7 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
     grailed_settings = GrailedSettings.from_env()
     chrono24_settings = Chrono24Settings.from_env()
     farfetch_settings = FarfetchSettings.from_env()
+    stockx_settings = StockXSettings.from_env()
     amazon_client = None
     rakuten_client = None
     yahoo_auction_client = None
@@ -571,6 +606,7 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
     grailed_client = None
     chrono24_client = None
     farfetch_client = None
+    stockx_client = None
 
     selected = _normalize_selected_marketplace(selected)
 
@@ -695,6 +731,21 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
             logger.error(
                 "Farfetch live client is not implemented. "
                 "Use --demo-farfetch for fixture demo mode."
+            )
+            selected = "local"
+
+    if selected == "stockx":
+        if is_stockx_demo_requested():
+            stockx_client = build_stockx_demo_client()
+            if stockx_client is None:
+                logger.warning(
+                    "StockX demo client unavailable; falling back to local marketplace"
+                )
+                selected = "local"
+        else:
+            logger.error(
+                "StockX live client is not implemented. "
+                "Use --demo-stockx for fixture demo mode."
             )
             selected = "local"
 
@@ -961,6 +1012,42 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
         )
         return output_path
 
+    if selected == "stockx" and stockx_client is not None:
+        marketplace = create_stockx_marketplace(
+            client=stockx_client,
+            settings=stockx_settings,
+        )
+        calculator = ProfitCalculator(
+            ProfitConfig(
+                international_shipping_jpy=Decimal("2500"),
+                customs_duty_rate=Decimal("0.08"),
+                import_tax_rate=Decimal("0.10"),
+                domestic_shipping_jpy=Decimal("800"),
+                marketplace_fee_rate=Decimal("0.12"),
+                other_costs_jpy=Decimal("500"),
+            )
+        )
+        search_results = [marketplace.search(product) for product in products]
+        all_listings = [listing for result in search_results for listing in result.listings]
+        valid_count = sum(len(result.valid_listings) for result in search_results)
+        results = calculate_profit_from_search_results(search_results, calculator)
+        ranked = RankingEngine(calculator.config).rank(
+            results,
+            sort_key=RankingSortKey.PROFIT,
+            descending=True,
+        )
+        exporter = ExcelExporter(output_dir=OUTPUT_DIR, filename=EXCEL_FILENAME)
+        output_path = exporter.export_phase3_workbook(products, all_listings, ranked)
+        logger.info(
+            "StockX demo export completed: %s (products=%d, listings=%d, valid=%d, results=%d)",
+            output_path,
+            len(products),
+            len(all_listings),
+            valid_count,
+            len(ranked),
+        )
+        return output_path
+
     try:
         marketplace = create_marketplace(
             selected,
@@ -985,6 +1072,8 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
             chrono24_client=chrono24_client,
             farfetch_settings=farfetch_settings,
             farfetch_client=farfetch_client,
+            stockx_settings=stockx_settings,
+            stockx_client=stockx_client,
         )
     except (
         VestiaireConfigurationError,
@@ -993,6 +1082,7 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
         GrailedConfigurationError,
         Chrono24ConfigurationError,
         FarfetchConfigurationError,
+        StockXConfigurationError,
     ) as exc:
         logger.error("%s", exc)
         selected = "local"
@@ -1064,10 +1154,10 @@ def run(marketplace_name: str | None = None) -> Path:
 def main() -> None:
     """CLI entry point."""
     setup_logging()
-    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14 started")
+    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14/15 started")
     with patch("utils.http.fetch_url"), patch("utils.http.HttpClient"):
         output_path = run()
-    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14 finished: %s", output_path)
+    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14/15 finished: %s", output_path)
 
 
 if __name__ == "__main__":
