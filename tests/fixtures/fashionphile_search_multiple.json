@@ -1,0 +1,44 @@
+{
+  "marketplace": "fashionphile",
+  "page": 1,
+  "page_size": 20,
+  "total": 3,
+  "items": [
+    {
+      "listing_id": "fp-101",
+      "title": "GUCCI GG Marmont Small Shoulder Bag Black",
+      "price": {"amount": 980000, "currency": "JPY"},
+      "shipping": {"amount": 0, "currency": "JPY", "known": true},
+      "url": "https://example.invalid/fashionphile/fp-101",
+      "brand": "GUCCI",
+      "model_number": "GG-MARMONT",
+      "color": "black",
+      "condition": {"raw": "Excellent"},
+      "inventory": {"status": "IN_STOCK", "quantity": 1},
+      "sale_status": "ACTIVE"
+    },
+    {
+      "listing_id": "fp-102",
+      "title": "GUCCI Marmont Bag Brown",
+      "price": {"amount": 850000, "currency": "JPY"},
+      "shipping": {"known": false},
+      "url": "https://example.invalid/fashionphile/fp-102",
+      "brand": "GUCCI",
+      "model_number": "GG-MARMONT",
+      "color": "brown",
+      "condition": {"raw": "Good"},
+      "inventory": {"status": "IN_STOCK", "quantity": 2},
+      "sale_status": "ACTIVE"
+    },
+    {
+      "listing_id": "fp-103",
+      "title": "Other Brand Bag",
+      "price": {"amount": 450000, "currency": "JPY"},
+      "url": "https://example.invalid/fashionphile/fp-103",
+      "brand": "Other",
+      "condition": {"raw": "Fair"},
+      "inventory": {"status": "IN_STOCK", "quantity": 1},
+      "sale_status": "ACTIVE"
+    }
+  ]
+}

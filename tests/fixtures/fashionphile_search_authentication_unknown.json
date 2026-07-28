@@ -1,0 +1,14 @@
+{
+  "marketplace": "fashionphile",
+  "items": [
+    {
+      "listing_id": "fp-auth",
+      "title": "Unknown Auth Bag",
+      "price": {"amount": 250000, "currency": "JPY"},
+      "url": "https://example.invalid/fashionphile/fp-auth",
+      "authentication": {"status": "UNKNOWN"},
+      "sale_status": "ACTIVE",
+      "inventory": {"status": "IN_STOCK", "quantity": 1}
+    }
+  ]
+}

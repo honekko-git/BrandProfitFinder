@@ -1,0 +1,13 @@
+{
+  "marketplace": "fashionphile",
+  "items": [
+    {
+      "listing_id": "fp-reserved",
+      "title": "Reserved Bag",
+      "price": {"amount": 500000, "currency": "JPY"},
+      "url": "https://example.invalid/fashionphile/fp-reserved",
+      "sale_status": "RESERVED",
+      "inventory": {"status": "RESERVED", "quantity": 1}
+    }
+  ]
+}

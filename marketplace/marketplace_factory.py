@@ -4,6 +4,7 @@ Marketplace factory for creating domestic marketplace instances.
 
 from config.constants import (
     MARKETPLACE_AMAZON_JP,
+    MARKETPLACE_FASHIONPHILE,
     MARKETPLACE_LOCAL,
     MARKETPLACE_MERCARI,
     MARKETPLACE_RAKUTEN,
@@ -15,6 +16,9 @@ from marketplace.amazon_client import AmazonClientProtocol
 from marketplace.amazon_marketplace import create_amazon_marketplace
 from marketplace.amazon_settings import AmazonConfig
 from marketplace.base_marketplace import BaseMarketplace
+from marketplace.fashionphile_client import FashionphileClientProtocol
+from marketplace.fashionphile_marketplace import create_fashionphile_marketplace
+from marketplace.fashionphile_settings import FashionphileSettings
 from marketplace.local_marketplace import LocalMarketplace
 from marketplace.rakuten_client import RakutenClientProtocol
 from marketplace.rakuten_marketplace import create_rakuten_marketplace
@@ -36,6 +40,9 @@ _YAHOO_AUCTION_ALIASES = frozenset(
 _VESTIAIRE_ALIASES = frozenset(
     {"vestiaire", "vestiaire_collective", "vestiaire-collective", "vc"}
 )
+_FASHIONPHILE_ALIASES = frozenset(
+    {"fashionphile", "fashion_phile", "fashion-phile", "fp"}
+)
 
 
 def _normalize_marketplace_name(marketplace_name: str) -> str:
@@ -44,6 +51,8 @@ def _normalize_marketplace_name(marketplace_name: str) -> str:
         return MARKETPLACE_YAHOO_AUCTION
     if normalized in _VESTIAIRE_ALIASES:
         return MARKETPLACE_VESTIAIRE
+    if normalized in _FASHIONPHILE_ALIASES:
+        return MARKETPLACE_FASHIONPHILE
     return normalized
 
 
@@ -60,6 +69,8 @@ def create_marketplace(
     yahoo_auction_client: YahooAuctionClientProtocol | None = None,
     vestiaire_settings: VestiaireSettings | None = None,
     vestiaire_client: VestiaireClientProtocol | None = None,
+    fashionphile_settings: FashionphileSettings | None = None,
+    fashionphile_client: FashionphileClientProtocol | None = None,
 ) -> BaseMarketplace:
     """
     Create a marketplace instance for the given name.
@@ -77,6 +88,8 @@ def create_marketplace(
         yahoo_auction_client: Optional Yahoo Auction client override.
         vestiaire_settings: Optional Vestiaire settings override.
         vestiaire_client: Optional Vestiaire client override (required for vestiaire).
+        fashionphile_settings: Optional Fashionphile settings override.
+        fashionphile_client: Optional Fashionphile client override (required for fashionphile).
 
     Returns:
         Configured marketplace instance.
@@ -112,6 +125,12 @@ def create_marketplace(
             settings=vestiaire_settings,
         )
 
+    if normalized == MARKETPLACE_FASHIONPHILE.lower():
+        return create_fashionphile_marketplace(
+            client=fashionphile_client,
+            settings=fashionphile_settings,
+        )
+
     not_implemented = {
         MARKETPLACE_MERCARI.lower(): "Mercari marketplace is not yet implemented",
     }
@@ -132,11 +151,13 @@ def get_all_marketplaces(
     yahoo_auction_client: YahooAuctionClientProtocol | None = None,
     vestiaire_settings: VestiaireSettings | None = None,
     vestiaire_client: VestiaireClientProtocol | None = None,
+    fashionphile_settings: FashionphileSettings | None = None,
+    fashionphile_client: FashionphileClientProtocol | None = None,
 ) -> list[BaseMarketplace]:
     """
     Return marketplace instances for all implemented marketplaces.
 
-    Vestiaire is omitted unless a client is injected (no fake client by default).
+    Vestiaire and Fashionphile are omitted unless a client is injected (no fake client by default).
     """
     yahoo = yahoo_settings or YahooApiSettings.from_env()
     amazon = amazon_settings or AmazonConfig.from_env()
@@ -167,6 +188,14 @@ def get_all_marketplaces(
                 MARKETPLACE_VESTIAIRE,
                 vestiaire_settings=vestiaire_settings,
                 vestiaire_client=vestiaire_client,
+            )
+        )
+    if fashionphile_client is not None:
+        marketplaces.append(
+            create_marketplace(
+                MARKETPLACE_FASHIONPHILE,
+                fashionphile_settings=fashionphile_settings,
+                fashionphile_client=fashionphile_client,
             )
         )
     return marketplaces

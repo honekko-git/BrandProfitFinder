@@ -1,0 +1,14 @@
+{
+  "marketplace": "fashionphile",
+  "items": [
+    {
+      "listing_id": "fp-cond",
+      "title": "Unknown Condition Bag",
+      "price": {"amount": 200000, "currency": "JPY"},
+      "url": "https://example.invalid/fashionphile/fp-cond",
+      "condition": {"raw": "記載なし"},
+      "sale_status": "ACTIVE",
+      "inventory": {"status": "IN_STOCK", "quantity": 1}
+    }
+  ]
+}

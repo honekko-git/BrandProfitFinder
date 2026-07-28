@@ -1,0 +1,13 @@
+{
+  "marketplace": "fashionphile",
+  "items": [
+    {
+      "listing_id": "fp-badinv",
+      "title": "Invalid Inventory Bag",
+      "price": {"amount": 300000, "currency": "JPY"},
+      "url": "https://example.invalid/fashionphile/fp-badinv",
+      "sale_status": "ACTIVE",
+      "inventory": {"status": "IN_STOCK", "quantity": true}
+    }
+  ]
+}

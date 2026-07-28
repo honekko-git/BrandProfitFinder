@@ -1,0 +1,23 @@
+{
+  "marketplace": "fashionphile",
+  "items": [
+    {
+      "listing_id": "fp-disc",
+      "title": "Discounted Bag",
+      "price": {"amount": 900000, "currency": "JPY"},
+      "url": "https://example.invalid/fashionphile/fp-disc",
+      "discount": {"active": true, "amount": 100000, "rate": 0.1, "previous_price": 1000000},
+      "sale_status": "ACTIVE",
+      "inventory": {"status": "IN_STOCK", "quantity": 1}
+    },
+    {
+      "listing_id": "fp-nodisc",
+      "title": "Full Price Bag",
+      "price": {"amount": 800000, "currency": "JPY"},
+      "url": "https://example.invalid/fashionphile/fp-nodisc",
+      "discount": {"active": false},
+      "sale_status": "ACTIVE",
+      "inventory": {"status": "IN_STOCK", "quantity": 1}
+    }
+  ]
+}

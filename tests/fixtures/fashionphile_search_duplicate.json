@@ -1,0 +1,21 @@
+{
+  "marketplace": "fashionphile",
+  "items": [
+    {
+      "listing_id": "fp-dup",
+      "title": "Duplicate Item A",
+      "price": {"amount": 100000, "currency": "JPY"},
+      "url": "https://example.invalid/fashionphile/fp-dup",
+      "sale_status": "ACTIVE",
+      "inventory": {"status": "IN_STOCK", "quantity": 1}
+    },
+    {
+      "listing_id": "fp-dup",
+      "title": "Duplicate Item B",
+      "price": {"amount": 90000, "currency": "JPY"},
+      "url": "https://example.invalid/fashionphile/fp-dup-b",
+      "sale_status": "ACTIVE",
+      "inventory": {"status": "IN_STOCK", "quantity": 1}
+    }
+  ]
+}

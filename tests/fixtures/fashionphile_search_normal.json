@@ -1,0 +1,69 @@
+{
+  "marketplace": "fashionphile",
+  "query": "GUCCI Marmont",
+  "page": 1,
+  "page_size": 20,
+  "total": 1,
+  "items": [
+    {
+      "listing_id": "fashionphile-demo-001",
+      "title": "GUCCI GG Marmont Small Shoulder Bag Black",
+      "description": "Pre-owned handbag with light exterior wear.",
+      "price": {"amount": 980000, "currency": "JPY"},
+      "original_price": {"amount": 1050000, "currency": "JPY", "known": true},
+      "shipping": {"amount": null, "currency": "JPY", "known": false},
+      "url": "https://example.invalid/fashionphile/fashionphile-demo-001",
+      "image_url": "https://example.invalid/images/fashionphile-demo-001.jpg",
+      "brand": "GUCCI",
+      "model_number": "GG-MARMONT",
+      "category": "bags",
+      "sub_category": "shoulder_bags",
+      "color": "black",
+      "size": "small",
+      "material": "leather",
+      "gender": "women",
+      "condition": {
+        "raw": "Very Good",
+        "description": "Light corner wear and faint interior marks"
+      },
+      "defects": {
+        "corner_wear": "minor",
+        "scratches": "minor",
+        "stains": "minor",
+        "odor": "unknown",
+        "repair_history": "unknown"
+      },
+      "accessories": {
+        "dust_bag": "included",
+        "original_box": "not_included",
+        "authenticity_card": "included",
+        "strap": "included"
+      },
+      "authentication": {
+        "status": "PLATFORM_REVIEWED",
+        "provider": "Internal Review",
+        "seller_claimed_authentic": null,
+        "platform_authenticated": true,
+        "third_party_authenticated": false
+      },
+      "seller": {
+        "type": "PLATFORM",
+        "rating": null,
+        "review_count": null,
+        "verified": true,
+        "country": "US"
+      },
+      "return_policy": {"accepted": true, "period_days": 15},
+      "inventory": {"status": "IN_STOCK", "quantity": 1},
+      "discount": {
+        "active": true,
+        "amount": 70000,
+        "rate": 0.0667,
+        "previous_price": 1050000
+      },
+      "sale_status": "ACTIVE",
+      "listed_at": "2026-07-10T10:00:00Z",
+      "metadata": {"source_format": "brandprofitfinder_internal_fixture"}
+    }
+  ]
+}

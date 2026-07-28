@@ -1,0 +1,13 @@
+{
+  "marketplace": "fashionphile",
+  "items": [
+    {
+      "listing_id": "fp-unavail",
+      "title": "Unavailable Bag",
+      "price": {"amount": 600000, "currency": "JPY"},
+      "url": "https://example.invalid/fashionphile/fp-unavail",
+      "sale_status": "INACTIVE",
+      "inventory": {"status": "UNAVAILABLE", "quantity": 0}
+    }
+  ]
+}

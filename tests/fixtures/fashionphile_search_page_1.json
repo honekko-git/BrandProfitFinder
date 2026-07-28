@@ -1,0 +1,17 @@
+{
+  "marketplace": "fashionphile",
+  "page": 1,
+  "total": 2,
+  "items": [
+    {
+      "listing_id": "fp-page1-a",
+      "title": "Page One Bag A",
+      "price": {"amount": 700000, "currency": "JPY"},
+      "url": "https://example.invalid/fashionphile/fp-page1-a",
+      "brand": "GUCCI",
+      "model_number": "GG-MARMONT",
+      "sale_status": "ACTIVE",
+      "inventory": {"status": "IN_STOCK", "quantity": 1}
+    }
+  ]
+}

@@ -196,4 +196,12 @@ class MarketplaceListing:
             "source_country": meta.get("source_country") or None,
             "source_listed_at": meta.get("source_listed_at") or None,
             "vestiaire_parse_warnings": meta.get("vestiaire_parse_warnings") or None,
+            "source_original_price": meta.get("source_original_price"),
+            "source_discount_active": meta.get("source_discount_active"),
+            "source_discount_amount": meta.get("source_discount_amount"),
+            "source_discount_rate": meta.get("source_discount_rate"),
+            "source_previous_price": meta.get("source_previous_price"),
+            "source_inventory_status": meta.get("source_inventory_status") or None,
+            "source_inventory_quantity": meta.get("source_inventory_quantity"),
+            "fashionphile_parse_warnings": meta.get("fashionphile_parse_warnings") or None,
         }

@@ -1,0 +1,14 @@
+{
+  "marketplace": "fashionphile",
+  "items": [
+    {
+      "listing_id": "fp-baddisc",
+      "title": "Inconsistent Discount Bag",
+      "price": {"amount": 900000, "currency": "JPY"},
+      "url": "https://example.invalid/fashionphile/fp-baddisc",
+      "discount": {"active": true, "amount": 50000, "rate": 0.5, "previous_price": 950000},
+      "sale_status": "ACTIVE",
+      "inventory": {"status": "IN_STOCK", "quantity": 1}
+    }
+  ]
+}

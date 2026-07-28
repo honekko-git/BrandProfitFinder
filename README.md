@@ -93,6 +93,8 @@ Phase 8 adds used luxury brand common foundation (site-independent)
 
 Phase 9 adds Vestiaire Collective integration foundation (fixture-based, no live API)
 
+Phase 10 adds Fashionphile integration foundation (fixture-based, no live API)
+
 ---
 
 ## Domestic Marketplaces
@@ -228,4 +230,26 @@ python main.py --marketplace vestiaire --demo-vestiaire
 ```
 VESTIAIRE_DEMO_ENABLED=true
 python main.py --marketplace vestiaire --demo-vestiaire
+```
+
+### Fashionphile Phase 10 notes
+
+- Phase 10 is a **Fashionphile integration foundation** (not a live site connection)
+- Does **not** use official Fashionphile API format; internal standard fixture JSON only
+- Reuses Phase 8 used luxury models and Phase 9 integration patterns
+- Inventory status and item condition are kept separate
+- Discount and original price metadata are not auto-applied to profit (`discount_applied=false`)
+- Price adjustment suggestions are not auto-applied (`adjustment_applied=false`)
+- Demo only: `--demo-fashionphile` with `FakeFashionphileClient`
+- Without demo, `--marketplace fashionphile` logs a clear error and falls back safely
+
+```
+FASHIONPHILE_DEMO_ENABLED=true
+python main.py --marketplace fashionphile --demo-fashionphile
+```
+
+Or:
+
+```
+python main.py --demo-fashionphile
 ```

@@ -155,3 +155,61 @@ VESTIAIRE_INCLUDE_SOLD = os.getenv("VESTIAIRE_INCLUDE_SOLD", "false").strip().lo
     "yes",
     "on",
 )
+
+FASHIONPHILE_ENABLED = os.getenv("FASHIONPHILE_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+FASHIONPHILE_DEMO_ENABLED = os.getenv("FASHIONPHILE_DEMO_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+FASHIONPHILE_TIMEOUT_SECONDS = max(1, int(os.getenv("FASHIONPHILE_TIMEOUT_SECONDS", "10")))
+FASHIONPHILE_PAGE_SIZE = max(1, min(50, int(os.getenv("FASHIONPHILE_PAGE_SIZE", "20"))))
+FASHIONPHILE_MAX_PAGES = max(1, min(20, int(os.getenv("FASHIONPHILE_MAX_PAGES", "1"))))
+FASHIONPHILE_DEFAULT_CURRENCY = os.getenv("FASHIONPHILE_DEFAULT_CURRENCY", "JPY").strip().upper()
+FASHIONPHILE_DEMO_FIXTURE_PATH = os.getenv(
+    "FASHIONPHILE_DEMO_FIXTURE_PATH", "fashionphile_search_normal.json"
+).strip()
+FASHIONPHILE_ALLOW_UNKNOWN_CURRENCY = os.getenv(
+    "FASHIONPHILE_ALLOW_UNKNOWN_CURRENCY", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+FASHIONPHILE_INCLUDE_UNAVAILABLE = os.getenv(
+    "FASHIONPHILE_INCLUDE_UNAVAILABLE", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+FASHIONPHILE_INCLUDE_SOLD = os.getenv("FASHIONPHILE_INCLUDE_SOLD", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+FASHIONPHILE_INCLUDE_RESERVED = os.getenv(
+    "FASHIONPHILE_INCLUDE_RESERVED", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+FASHIONPHILE_INCLUDE_DISCOUNTED_ONLY = os.getenv(
+    "FASHIONPHILE_INCLUDE_DISCOUNTED_ONLY", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
