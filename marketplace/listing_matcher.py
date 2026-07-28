@@ -63,6 +63,8 @@ class ListingMatcher:
 
         if product_sku and listing_sku and product_sku == listing_sku:
             total += self.config.sku_score
+        elif product_sku and listing.listing_id and product_sku == _normalize_text(listing.listing_id):
+            total += self.config.sku_score
 
         if product_model and listing_model and product_model == listing_model:
             total += self.config.model_score
@@ -147,6 +149,12 @@ class ListingMatcher:
                     match_score=match_score,
                     is_valid=listing.is_valid,
                     validation_error=listing.validation_error,
+                    currency=listing.currency,
+                    points_jpy=listing.points_jpy,
+                    is_prime=listing.is_prime,
+                    is_amazon_seller=listing.is_amazon_seller,
+                    shipping_unknown=listing.shipping_unknown,
+                    source_metadata=dict(listing.source_metadata),
                 )
             )
 

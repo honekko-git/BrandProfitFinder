@@ -3,11 +3,15 @@ Marketplace factory for creating domestic marketplace instances.
 """
 
 from config.constants import (
+    MARKETPLACE_AMAZON_JP,
     MARKETPLACE_LOCAL,
     MARKETPLACE_MERCARI,
     MARKETPLACE_RAKUTEN,
     MARKETPLACE_YAHOO,
 )
+from marketplace.amazon_client import AmazonClientProtocol
+from marketplace.amazon_marketplace import create_amazon_marketplace
+from marketplace.amazon_settings import AmazonConfig
 from marketplace.base_marketplace import BaseMarketplace
 from marketplace.local_marketplace import LocalMarketplace
 from marketplace.yahoo_marketplace import create_yahoo_marketplace
@@ -21,6 +25,8 @@ def create_marketplace(
     listings_by_product_key: dict[str, list[MarketplaceListing]] | None = None,
     selection_strategy: PriceSelectionStrategy = PriceSelectionStrategy.HIGHEST,
     yahoo_settings: YahooApiSettings | None = None,
+    amazon_settings: AmazonConfig | None = None,
+    amazon_client: AmazonClientProtocol | None = None,
 ) -> BaseMarketplace:
     """
     Create a marketplace instance for the given name.
@@ -30,6 +36,8 @@ def create_marketplace(
         listings_by_product_key: Optional injected listings for local marketplace.
         selection_strategy: Price selection strategy.
         yahoo_settings: Optional Yahoo settings override.
+        amazon_settings: Optional Amazon settings override.
+        amazon_client: Optional Amazon client override.
 
     Returns:
         Configured marketplace instance.
@@ -47,6 +55,9 @@ def create_marketplace(
     if normalized == MARKETPLACE_YAHOO.lower():
         return create_yahoo_marketplace(settings=yahoo_settings)
 
+    if normalized in {MARKETPLACE_AMAZON_JP.lower(), "amazon"}:
+        return create_amazon_marketplace(client=amazon_client, config=amazon_settings)
+
     not_implemented = {
         MARKETPLACE_RAKUTEN.lower(): "Rakuten marketplace is not yet implemented",
         MARKETPLACE_MERCARI.lower(): "Mercari marketplace is not yet implemented",
@@ -60,6 +71,8 @@ def create_marketplace(
 def get_all_marketplaces(
     listings_by_product_key: dict[str, list[MarketplaceListing]] | None = None,
     yahoo_settings: YahooApiSettings | None = None,
+    amazon_settings: AmazonConfig | None = None,
+    amazon_client: AmazonClientProtocol | None = None,
 ) -> list[BaseMarketplace]:
     """
     Return marketplace instances for all implemented marketplaces.
@@ -67,13 +80,21 @@ def get_all_marketplaces(
     Args:
         listings_by_product_key: Optional injected listings for local marketplace.
         yahoo_settings: Optional Yahoo settings override.
+        amazon_settings: Optional Amazon settings override.
+        amazon_client: Optional Amazon client override.
 
     Returns:
         List of marketplace instances.
     """
-    settings = yahoo_settings or YahooApiSettings.from_env()
+    yahoo = yahoo_settings or YahooApiSettings.from_env()
+    amazon = amazon_settings or AmazonConfig.from_env()
     marketplaces: list[BaseMarketplace] = [
         create_marketplace(MARKETPLACE_LOCAL, listings_by_product_key=listings_by_product_key),
-        create_marketplace(MARKETPLACE_YAHOO, yahoo_settings=settings),
+        create_marketplace(MARKETPLACE_YAHOO, yahoo_settings=yahoo),
+        create_marketplace(
+            MARKETPLACE_AMAZON_JP,
+            amazon_settings=amazon,
+            amazon_client=amazon_client,
+        ),
     ]
     return marketplaces

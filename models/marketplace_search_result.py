@@ -5,6 +5,7 @@ Domestic marketplace search result model.
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from decimal import Decimal
+from typing import Any
 
 from models.marketplace_listing import MarketplaceListing
 from models.product import Product
@@ -35,6 +36,9 @@ class MarketplaceSearchResult:
     searched_at: datetime = field(default_factory=_utc_now)
     status: str = SEARCH_SUCCESS
     error_message: str = ""
+    total_results: int | None = None
+    next_page_token: str | None = None
+    metadata: dict[str, Any] = field(default_factory=dict)
 
     @property
     def has_valid_listings(self) -> bool:

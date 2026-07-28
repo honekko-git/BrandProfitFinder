@@ -1,10 +1,11 @@
 """
 BrandProfitFinder application entry point.
 
-Phase 3/4: domestic marketplace candidates, profit calculation, and Excel export.
+Phase 3/4/5A: domestic marketplace candidates, profit calculation, and Excel export.
 Default execution uses local marketplace without external network access.
 """
 
+import json
 import logging
 import sys
 from decimal import Decimal
@@ -13,12 +14,16 @@ from unittest.mock import patch
 
 from config.logging_config import setup_logging
 from config.settings import (
+    AMAZON_JP_DEMO_ENABLED,
+    AMAZON_JP_ENABLED,
     DEFAULT_EXCHANGE_RATE,
     EXCEL_FILENAME,
     OUTPUT_DIR,
     YAHOO_API_ENABLED,
 )
 from excel.exporter import ExcelExporter
+from marketplace.amazon_client import FakeAmazonClient
+from marketplace.amazon_settings import AmazonConfig
 from marketplace.marketplace_factory import create_marketplace
 from marketplace.yahoo_settings import YahooApiSettings
 from models.marketplace_listing import MarketplaceListing
@@ -30,6 +35,8 @@ from price_compare.profit_config import ProfitConfig
 from price_compare.ranking_engine import RankingEngine, RankingSortKey
 
 logger = logging.getLogger(__name__)
+
+FIXTURES_DIR = Path(__file__).resolve().parent / "tests" / "fixtures"
 
 
 def build_sample_products() -> list[Product]:
@@ -200,9 +207,32 @@ def resolve_marketplace_name(argv: list[str] | None = None) -> str:
     for index, arg in enumerate(args):
         if arg == "--marketplace" and index + 1 < len(args):
             return args[index + 1].strip().lower()
+    if AMAZON_JP_ENABLED and (AMAZON_JP_DEMO_ENABLED or "--demo-amazon" in args):
+        return "amazon_jp"
     if YAHOO_API_ENABLED:
         return "yahoo"
     return "local"
+
+
+def is_amazon_demo_requested(argv: list[str] | None = None) -> bool:
+    """Return True when Amazon demo mode is explicitly requested."""
+    args = argv if argv is not None else sys.argv[1:]
+    return AMAZON_JP_DEMO_ENABLED or "--demo-amazon" in args
+
+
+def build_amazon_demo_client() -> FakeAmazonClient | None:
+    """
+    Build a fake Amazon client from local fixture JSON.
+
+    Returns:
+        FakeAmazonClient when demo fixture exists, otherwise None.
+    """
+    fixture_path = FIXTURES_DIR / "amazon_search_normal.json"
+    if not fixture_path.exists():
+        logger.warning("Amazon demo fixture not found: %s", fixture_path)
+        return None
+    payload = json.loads(fixture_path.read_text(encoding="utf-8"))
+    return FakeAmazonClient(payload)
 
 
 def run_phase3(marketplace_name: str | None = None) -> Path:
@@ -217,6 +247,18 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
     """
     selected = (marketplace_name or resolve_marketplace_name()).strip().lower()
     yahoo_settings = YahooApiSettings.from_env()
+    amazon_settings = AmazonConfig.from_env()
+    amazon_client = None
+
+    if selected in {"amazon_jp", "amazon"}:
+        if is_amazon_demo_requested():
+            amazon_client = build_amazon_demo_client()
+            if amazon_client is None:
+                logger.warning("Amazon demo client unavailable; falling back to local marketplace")
+                selected = "local"
+        else:
+            logger.warning("Amazon marketplace is not configured; skipping Amazon search.")
+            selected = "local"
 
     if selected == "yahoo" and not yahoo_settings.can_execute:
         logger.warning(
@@ -231,6 +273,8 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
         listings_by_product_key=listings_map,
         selection_strategy=PriceSelectionStrategy.HIGHEST,
         yahoo_settings=yahoo_settings,
+        amazon_settings=amazon_settings,
+        amazon_client=amazon_client,
     )
     calculator = ProfitCalculator(
         ProfitConfig(
@@ -295,10 +339,10 @@ def run(marketplace_name: str | None = None) -> Path:
 def main() -> None:
     """CLI entry point."""
     setup_logging()
-    logger.info("BrandProfitFinder Phase 3/4 started")
+    logger.info("BrandProfitFinder Phase 3/4/5A started")
     with patch("utils.http.fetch_url"), patch("utils.http.HttpClient"):
         output_path = run()
-    logger.info("BrandProfitFinder Phase 3/4 finished: %s", output_path)
+    logger.info("BrandProfitFinder Phase 3/4/5A finished: %s", output_path)
 
 
 if __name__ == "__main__":

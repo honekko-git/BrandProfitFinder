@@ -1,0 +1,13 @@
+{
+  "items": [
+    {
+      "asin": "B0BAD0001",
+      "title": "Bad Item",
+      "price": {"amount": "not-a-price", "currency": "JPY"},
+      "detail_page_url": "https://www.amazon.co.jp/dp/B0BAD0001"
+    },
+    null,
+    "invalid-type"
+  ],
+  "total_results": 3
+}

@@ -44,5 +44,6 @@ MARKETPLACE_LOCAL: Final[str] = "local"
 MARKETPLACE_RAKUTEN: Final[str] = "rakuten"
 MARKETPLACE_YAHOO: Final[str] = "yahoo"
 MARKETPLACE_MERCARI: Final[str] = "mercari"
+MARKETPLACE_AMAZON_JP: Final[str] = "amazon_jp"
 
 SHEET_DOMESTIC_LISTINGS: Final[str] = "Domestic Listings"

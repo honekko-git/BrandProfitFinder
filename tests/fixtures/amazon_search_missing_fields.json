@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "asin": "B0PARTIAL1",
+      "title": "Partial Valid Item",
+      "brand": "GUCCI",
+      "price": {"amount": 99000, "currency": "JPY"},
+      "detail_page_url": "https://www.amazon.co.jp/dp/B0PARTIAL1"
+    },
+    {
+      "asin": "B0PARTIAL2",
+      "title": "",
+      "price": {"amount": 50000, "currency": "JPY"}
+    },
+    {
+      "title": "No ASIN Item",
+      "price": {"amount": 45000, "currency": "JPY"},
+      "detail_page_url": "https://www.amazon.co.jp/dp/no-asin"
+    },
+    {
+      "asin": "B0PARTIAL4",
+      "title": "Zero Price",
+      "price": {"amount": 0, "currency": "JPY"},
+      "detail_page_url": "https://www.amazon.co.jp/dp/B0PARTIAL4"
+    },
+    {
+      "asin": "B0PARTIAL5",
+      "title": "USD Price",
+      "price": {"amount": 100, "currency": "USD"},
+      "detail_page_url": "https://www.amazon.co.jp/dp/B0PARTIAL5"
+    }
+  ],
+  "total_results": 5
+}

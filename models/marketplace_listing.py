@@ -20,7 +20,7 @@ class MarketplaceListing:
     jan_code: str = ""
     condition: str = ""
     price_jpy: Decimal = Decimal("0")
-    shipping_jpy: Decimal = Decimal("0")
+    shipping_jpy: Decimal | None = None
     total_price_jpy: Decimal | None = None
     seller_name: str = ""
     seller_rating: Decimal | None = None
@@ -33,6 +33,12 @@ class MarketplaceListing:
     match_score: Decimal = Decimal("0")
     is_valid: bool = True
     validation_error: str = ""
+    currency: str = "JPY"
+    points_jpy: Decimal | None = None
+    is_prime: bool = False
+    is_amazon_seller: bool = False
+    shipping_unknown: bool = False
+    source_metadata: dict[str, Any] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
         self.marketplace_name = self.marketplace_name.strip()
@@ -44,10 +50,11 @@ class MarketplaceListing:
         Compute total price from item price and shipping.
 
         Returns:
-            Total price in JPY.
+            Total price in JPY. Unknown shipping adds no shipping amount.
         """
-        shipping = self.shipping_jpy if self.shipping_jpy is not None else Decimal("0")
-        return self.price_jpy + shipping
+        if self.shipping_jpy is None or self.shipping_unknown:
+            return self.price_jpy
+        return self.price_jpy + self.shipping_jpy
 
     def to_dict(self) -> dict[str, Any]:
         """
@@ -66,7 +73,7 @@ class MarketplaceListing:
             "jan_code": self.jan_code,
             "condition": self.condition,
             "price_jpy": float(self.price_jpy),
-            "shipping_jpy": float(self.shipping_jpy),
+            "shipping_jpy": float(self.shipping_jpy) if self.shipping_jpy is not None else None,
             "total_price_jpy": float(self.total_price_jpy or self.compute_total_price_jpy()),
             "seller_name": self.seller_name,
             "seller_rating": float(self.seller_rating) if self.seller_rating is not None else None,
@@ -79,4 +86,9 @@ class MarketplaceListing:
             "match_score": float(self.match_score),
             "is_valid": self.is_valid,
             "validation_error": self.validation_error,
+            "currency": self.currency,
+            "points_jpy": float(self.points_jpy) if self.points_jpy is not None else None,
+            "is_prime": self.is_prime,
+            "is_amazon_seller": self.is_amazon_seller,
+            "shipping_unknown": self.shipping_unknown,
         }

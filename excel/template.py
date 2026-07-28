@@ -116,4 +116,9 @@ MARKETPLACE_LISTING_COLUMNS: Final[list[str]] = [
     "match_score",
     "is_valid",
     "validation_error",
+    "currency",
+    "points_jpy",
+    "is_prime",
+    "is_amazon_seller",
+    "shipping_unknown",
 ]

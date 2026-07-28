@@ -1,0 +1,31 @@
+{
+  "items": [
+    {
+      "asin": "B0TEST1234",
+      "title": "GUCCI GG Marmont Wallet Black",
+      "brand": "GUCCI",
+      "model_number": "456126",
+      "jan_code": "1234567890123",
+      "detail_page_url": "https://www.amazon.co.jp/dp/B0TEST1234",
+      "image_url": "https://example.com/amazon/wallet.jpg",
+      "price": {
+        "amount": 128000,
+        "currency": "JPY"
+      },
+      "shipping": {
+        "amount": 0,
+        "is_free": true
+      },
+      "seller": {
+        "name": "Amazon.co.jp",
+        "is_amazon": true
+      },
+      "condition": "NEW",
+      "availability": "IN_STOCK",
+      "is_prime": true,
+      "points": 1280
+    }
+  ],
+  "total_results": 1,
+  "next_page_token": null
+}
