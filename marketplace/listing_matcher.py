@@ -11,6 +11,7 @@ from decimal import Decimal
 from config.constants import (
     MARKETPLACE_CHRONO24,
     MARKETPLACE_FARFETCH,
+    MARKETPLACE_STOCKX,
     MARKETPLACE_FASHIONPHILE,
     MARKETPLACE_GRAILED,
     MARKETPLACE_THEREALREAL,
@@ -99,6 +100,7 @@ class ListingMatcher:
                 MARKETPLACE_GRAILED,
                 MARKETPLACE_CHRONO24,
                 MARKETPLACE_FARFETCH,
+                MARKETPLACE_STOCKX,
             }
             and product_sku == _normalize_text(listing.listing_id)
         ):
@@ -177,6 +179,23 @@ class ListingMatcher:
             listing_material = _normalize_text(str(meta.get("source_material") or ""))
             if product_material and listing_material and product_material != listing_material:
                 warnings.append("material mismatch between product and listing")
+
+            product_gender = _normalize_text(_extract_gender(product.name))
+            listing_gender = _normalize_text(str(meta.get("source_gender") or ""))
+            if product_gender and listing_gender and product_gender != listing_gender:
+                warnings.append("gender mismatch between product and listing")
+
+        if listing.marketplace_name == MARKETPLACE_STOCKX:
+            meta = listing.source_metadata
+            listing_size = _normalize_text(str(meta.get("source_size") or ""))
+            product_size = _normalize_text(_extract_size_token(product.name))
+            if product_size and listing_size and product_size not in listing_size and listing_size not in product_size:
+                warnings.append("size mismatch between product and listing")
+
+            listing_size_system = _normalize_text(str(meta.get("source_size_system") or ""))
+            product_size_system = _normalize_text(_extract_size_system(product.name))
+            if product_size_system and listing_size_system and product_size_system != listing_size_system:
+                warnings.append("size system mismatch between product and listing")
 
             product_gender = _normalize_text(_extract_gender(product.name))
             listing_gender = _normalize_text(str(meta.get("source_gender") or ""))
@@ -350,4 +369,24 @@ def _extract_gender(text: str) -> str:
         return "men"
     if "unisex" in lowered:
         return "unisex"
+    return ""
+
+
+def _extract_size_token(text: str) -> str:
+    match = re.search(r"\b(?:us|uk|eu|jp|cm)\s*(\d{1,2}(?:\.\d)?)\b", text.lower())
+    if match:
+        return match.group(0).replace(" ", "")
+    match = re.search(r"\b(\d{1,2}(?:\.\d)?)\s*(?:us|uk|eu)\b", text.lower())
+    if match:
+        return match.group(0).replace(" ", "")
+    return ""
+
+
+def _extract_size_system(text: str) -> str:
+    lowered = text.lower()
+    for token in ("us_men", "us_women", "us men", "us women", "uk", "eu", "jp", "cm"):
+        if token.replace("_", " ") in lowered or token in lowered:
+            return token.replace(" ", "_").upper()
+    if "us" in lowered:
+        return "US"
     return ""

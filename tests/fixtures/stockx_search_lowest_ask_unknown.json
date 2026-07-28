@@ -1,0 +1,88 @@
+{
+  "marketplace": "stockx",
+  "query": "Nike Dunk Low Panda",
+  "page": 1,
+  "page_size": 20,
+  "total": 1,
+  "items": [
+    {
+      "listing_id": "stockx-ask-unknown",
+      "product_id": "stockx-product-demo-001",
+      "variant_id": "stockx-variant-demo-001",
+      "title": "NIKE Dunk Low Black White",
+      "description": "Internal fixture for marketplace foundation demo.",
+      "brand": "NIKE",
+      "model_number": "DD1391-100",
+      "style_code": "DD1391-100",
+      "sku": "INTERNAL-DEMO-SKU-001",
+      "jan": null,
+      "category": "sneakers",
+      "sub_category": "low_top",
+      "color": "black white",
+      "size": "US 9",
+      "size_system": "US_MEN",
+      "gender": "men",
+      "release_year": 2021,
+      "release_date": "2021-03-10",
+      "condition": {
+        "raw": "New",
+        "description": "New marketplace item"
+      },
+      "price": {
+        "amount": 24500,
+        "currency": "JPY",
+        "source": "LOWEST_ASK"
+      },
+      "shipping": {
+        "amount": null,
+        "currency": "JPY",
+        "known": false
+      },
+      "fees": {
+        "amount": null,
+        "currency": "JPY",
+        "known": false
+      },
+      "market": {
+        "lowest_ask": {
+          "amount": null,
+          "currency": "JPY",
+          "known": false
+        },
+        "highest_bid": {
+          "amount": 22800,
+          "currency": "JPY",
+          "known": true
+        },
+        "last_sale": {
+          "amount": 23800,
+          "currency": "JPY",
+          "known": true
+        },
+        "sales_last_72_hours": 6,
+        "sales_last_30_days": 42,
+        "asks_count": 18,
+        "bids_count": 14,
+        "price_premium_rate": 0.18,
+        "volatility_rate": 0.07
+      },
+      "inventory": {
+        "status": "AVAILABLE",
+        "quantity": null
+      },
+      "sale_status": "ACTIVE",
+      "authentication": {
+        "status": "PLATFORM_PROCESS",
+        "seller_claimed_authentic": null,
+        "platform_authenticated": null,
+        "third_party_authenticated": false
+      },
+      "url": "https://example.invalid/stockx/stockx-ask-unknown",
+      "image_url": "https://example.invalid/images/stockx-ask-unknown.jpg",
+      "listed_at": "2026-07-28T10:00:00Z",
+      "metadata": {
+        "source_format": "brandprofitfinder_internal_fixture"
+      }
+    }
+  ]
+}

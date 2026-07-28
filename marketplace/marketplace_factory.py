@@ -8,6 +8,7 @@ from config.constants import (
     MARKETPLACE_GRAILED,
     MARKETPLACE_CHRONO24,
     MARKETPLACE_FARFETCH,
+    MARKETPLACE_STOCKX,
     MARKETPLACE_THEREALREAL,
     MARKETPLACE_LOCAL,
     MARKETPLACE_MERCARI,
@@ -35,6 +36,9 @@ from marketplace.chrono24_settings import Chrono24Settings
 from marketplace.farfetch_client import FarfetchClientProtocol
 from marketplace.farfetch_marketplace import create_farfetch_marketplace
 from marketplace.farfetch_settings import FarfetchSettings
+from marketplace.stockx_client import StockXClientProtocol
+from marketplace.stockx_marketplace import create_stockx_marketplace
+from marketplace.stockx_settings import StockXSettings
 from marketplace.local_marketplace import LocalMarketplace
 from marketplace.rakuten_client import RakutenClientProtocol
 from marketplace.rakuten_marketplace import create_rakuten_marketplace
@@ -71,6 +75,9 @@ _CHRONO24_ALIASES = frozenset(
 _FARFETCH_ALIASES = frozenset(
     {"farfetch", "far_fetch", "far-fetch", "ff"}
 )
+_STOCKX_ALIASES = frozenset(
+    {"stockx", "stock_x", "stock-x", "sx"}
+)
 
 
 def _normalize_marketplace_name(marketplace_name: str) -> str:
@@ -89,6 +96,8 @@ def _normalize_marketplace_name(marketplace_name: str) -> str:
         return MARKETPLACE_CHRONO24
     if normalized in _FARFETCH_ALIASES:
         return MARKETPLACE_FARFETCH
+    if normalized in _STOCKX_ALIASES:
+        return MARKETPLACE_STOCKX
     return normalized
 
 
@@ -115,6 +124,8 @@ def create_marketplace(
     chrono24_client: Chrono24ClientProtocol | None = None,
     farfetch_settings: FarfetchSettings | None = None,
     farfetch_client: FarfetchClientProtocol | None = None,
+    stockx_settings: StockXSettings | None = None,
+    stockx_client: StockXClientProtocol | None = None,
 ) -> BaseMarketplace:
     """
     Create a marketplace instance for the given name.
@@ -142,6 +153,8 @@ def create_marketplace(
         chrono24_client: Optional Chrono24 client override (required for chrono24).
         farfetch_settings: Optional Farfetch settings override.
         farfetch_client: Optional Farfetch client override (required for farfetch).
+        stockx_settings: Optional StockX settings override.
+        stockx_client: Optional StockX client override (required for stockx).
 
     Returns:
         Configured marketplace instance.
@@ -207,6 +220,12 @@ def create_marketplace(
             settings=farfetch_settings,
         )
 
+    if normalized == MARKETPLACE_STOCKX.lower():
+        return create_stockx_marketplace(
+            client=stockx_client,
+            settings=stockx_settings,
+        )
+
     not_implemented = {
         MARKETPLACE_MERCARI.lower(): "Mercari marketplace is not yet implemented",
     }
@@ -237,11 +256,13 @@ def get_all_marketplaces(
     chrono24_client: Chrono24ClientProtocol | None = None,
     farfetch_settings: FarfetchSettings | None = None,
     farfetch_client: FarfetchClientProtocol | None = None,
+    stockx_settings: StockXSettings | None = None,
+    stockx_client: StockXClientProtocol | None = None,
 ) -> list[BaseMarketplace]:
     """
     Return marketplace instances for all implemented marketplaces.
 
-    Vestiaire, Fashionphile, The RealReal, Grailed, Chrono24, and Farfetch are omitted unless a client is injected.
+    Vestiaire, Fashionphile, The RealReal, Grailed, Chrono24, Farfetch, and StockX are omitted unless a client is injected.
     """
     yahoo = yahoo_settings or YahooApiSettings.from_env()
     amazon = amazon_settings or AmazonConfig.from_env()
@@ -312,6 +333,14 @@ def get_all_marketplaces(
                 MARKETPLACE_FARFETCH,
                 farfetch_settings=farfetch_settings,
                 farfetch_client=farfetch_client,
+            )
+        )
+    if stockx_client is not None:
+        marketplaces.append(
+            create_marketplace(
+                MARKETPLACE_STOCKX,
+                stockx_settings=stockx_settings,
+                stockx_client=stockx_client,
             )
         )
     return marketplaces

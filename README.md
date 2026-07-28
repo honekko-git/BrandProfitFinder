@@ -99,6 +99,8 @@ Phase 13 adds Chrono24 integration foundation (fixture-based, no live API)
 
 Phase 14 adds Farfetch integration foundation (fixture-based, no live API)
 
+Phase 15 adds StockX integration foundation (fixture-based, no live API)
+
 ---
 
 ## Domestic Marketplaces
@@ -345,4 +347,28 @@ Or:
 
 ```
 python main.py --demo-farfetch
+```
+
+### StockX Phase 15 notes
+
+- Phase 15 is a **StockX integration foundation** (not a live site connection)
+- Does **not** use official StockX API format; internal standard fixture JSON only
+- No scraping, browser automation, cookies, or CAPTCHA bypass
+- Reuses Phase 3–7 profit/compare and Phase 9–14 integration patterns
+- `product_id`, `variant_id`, `listing_id`, `size`, and `size_system` are kept distinct
+- `lowest ask`, `highest bid`, and `last sale` are separated; highest bid/last sale are not auto-applied to profit
+- Market statistics are metadata only; not used for product identity matching
+- Unknown shipping/fees are not treated as zero; platform process is not treated as authenticity guarantee
+- Demo only: `--demo-stockx` with `FakeStockXClient`
+- Without demo, `--marketplace stockx` logs a clear error and falls back safely
+
+```
+STOCKX_DEMO_ENABLED=true
+python main.py --marketplace stockx --demo-stockx
+```
+
+Or:
+
+```
+python main.py --demo-stockx
 ```
