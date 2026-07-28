@@ -27,6 +27,7 @@ class SellerType(str, Enum):
         aliases = {
             "PRIVATE": cls.PRIVATE_SELLER,
             "PROFESSIONAL": cls.PROFESSIONAL_SELLER,
+            "PROFESSIONAL_DEALER": cls.PROFESSIONAL_SELLER,
             "INDIVIDUAL": cls.PRIVATE_SELLER,
         }
         if text in aliases:

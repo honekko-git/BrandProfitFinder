@@ -353,3 +353,101 @@ GRAILED_REQUIRE_VERIFIED_SELLER = os.getenv(
     "yes",
     "on",
 )
+
+CHRONO24_ENABLED = os.getenv("CHRONO24_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+CHRONO24_DEMO_ENABLED = os.getenv("CHRONO24_DEMO_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+CHRONO24_TIMEOUT_SECONDS = max(1, int(os.getenv("CHRONO24_TIMEOUT_SECONDS", "10")))
+CHRONO24_PAGE_SIZE = max(1, min(50, int(os.getenv("CHRONO24_PAGE_SIZE", "20"))))
+CHRONO24_MAX_PAGES = max(1, min(20, int(os.getenv("CHRONO24_MAX_PAGES", "1"))))
+CHRONO24_DEFAULT_CURRENCY = os.getenv("CHRONO24_DEFAULT_CURRENCY", "JPY").strip().upper()
+CHRONO24_DEMO_FIXTURE_PATH = os.getenv(
+    "CHRONO24_DEMO_FIXTURE_PATH", "chrono24_search_normal.json"
+).strip()
+CHRONO24_ALLOW_UNKNOWN_CURRENCY = os.getenv(
+    "CHRONO24_ALLOW_UNKNOWN_CURRENCY", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+CHRONO24_INCLUDE_UNAVAILABLE = os.getenv(
+    "CHRONO24_INCLUDE_UNAVAILABLE", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+CHRONO24_INCLUDE_SOLD = os.getenv("CHRONO24_INCLUDE_SOLD", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+CHRONO24_INCLUDE_RESERVED = os.getenv(
+    "CHRONO24_INCLUDE_RESERVED", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+CHRONO24_INCLUDE_NEGOTIABLE_ONLY = os.getenv(
+    "CHRONO24_INCLUDE_NEGOTIABLE_ONLY", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+CHRONO24_INCLUDE_DISCOUNTED_ONLY = os.getenv(
+    "CHRONO24_INCLUDE_DISCOUNTED_ONLY", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+CHRONO24_REQUIRE_VERIFIED_SELLER = os.getenv(
+    "CHRONO24_REQUIRE_VERIFIED_SELLER", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+CHRONO24_REQUIRE_TRUSTED_SELLER = os.getenv(
+    "CHRONO24_REQUIRE_TRUSTED_SELLER", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+CHRONO24_INCLUDE_PRIVATE_SELLERS = os.getenv(
+    "CHRONO24_INCLUDE_PRIVATE_SELLERS", "true"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+CHRONO24_INCLUDE_PROFESSIONAL_DEALERS = os.getenv(
+    "CHRONO24_INCLUDE_PROFESSIONAL_DEALERS", "true"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)

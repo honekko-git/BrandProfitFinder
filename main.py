@@ -29,6 +29,7 @@ from config.settings import (
     FASHIONPHILE_DEMO_ENABLED,
     THEREALREAL_DEMO_ENABLED,
     GRAILED_DEMO_ENABLED,
+    CHRONO24_DEMO_ENABLED,
 )
 from excel.exporter import ExcelExporter
 from marketplace.amazon_client import FakeAmazonClient
@@ -55,6 +56,10 @@ from marketplace.grailed_client import FakeGrailedClient
 from marketplace.grailed_exceptions import GrailedConfigurationError
 from marketplace.grailed_marketplace import create_grailed_marketplace
 from marketplace.grailed_settings import GrailedSettings
+from marketplace.chrono24_client import FakeChrono24Client
+from marketplace.chrono24_exceptions import Chrono24ConfigurationError
+from marketplace.chrono24_marketplace import create_chrono24_marketplace
+from marketplace.chrono24_settings import Chrono24Settings
 from used_luxury.demo_marketplace import create_used_luxury_demo_marketplace
 from used_luxury.demo_provider import FakeUsedLuxuryProvider
 from models.marketplace_listing import MarketplaceListing
@@ -254,6 +259,8 @@ def resolve_marketplace_name(argv: list[str] | None = None) -> str:
         return "therealreal"
     if GRAILED_DEMO_ENABLED or "--demo-grailed" in args:
         return "grailed"
+    if CHRONO24_DEMO_ENABLED or "--demo-chrono24" in args:
+        return "chrono24"
     if AMAZON_JP_ENABLED and (AMAZON_JP_DEMO_ENABLED or "--demo-amazon" in args):
         return "amazon_jp"
     if YAHOO_API_ENABLED:
@@ -371,6 +378,31 @@ def build_grailed_demo_client() -> FakeGrailedClient | None:
     return FakeGrailedClient(payload)
 
 
+def is_chrono24_demo_requested(argv: list[str] | None = None) -> bool:
+    """Return True when Chrono24 demo mode is explicitly requested."""
+    args = argv if argv is not None else sys.argv[1:]
+    return CHRONO24_DEMO_ENABLED or "--demo-chrono24" in args
+
+
+def build_chrono24_demo_client() -> FakeChrono24Client | None:
+    """Build a fake Chrono24 client from local fixture JSON."""
+    settings = Chrono24Settings.from_env()
+    fixture_path = FIXTURES_DIR / settings.demo_fixture_path
+    if not fixture_path.exists():
+        logger.warning("Chrono24 demo fixture not found: %s", fixture_path)
+        return None
+    payload = json.loads(fixture_path.read_text(encoding="utf-8"))
+    page_2 = FIXTURES_DIR / "chrono24_search_page_2.json"
+    if page_2.exists():
+        return FakeChrono24Client(
+            pages={
+                1: payload,
+                2: json.loads(page_2.read_text(encoding="utf-8")),
+            }
+        )
+    return FakeChrono24Client(payload)
+
+
 def is_used_luxury_demo_requested(argv: list[str] | None = None) -> bool:
     """Return True when used luxury demo mode is explicitly requested."""
     args = argv if argv is not None else sys.argv[1:]
@@ -470,6 +502,8 @@ def _normalize_selected_marketplace(selected: str) -> str:
         return "therealreal"
     if normalized in {"grailed", "grailed_market", "grailed-market", "gr"}:
         return "grailed"
+    if normalized in {"chrono24", "chrono_24", "chrono-24", "c24"}:
+        return "chrono24"
     return normalized
 
 
@@ -492,6 +526,7 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
     fashionphile_settings = FashionphileSettings.from_env()
     therealreal_settings = TheRealRealSettings.from_env()
     grailed_settings = GrailedSettings.from_env()
+    chrono24_settings = Chrono24Settings.from_env()
     amazon_client = None
     rakuten_client = None
     yahoo_auction_client = None
@@ -499,6 +534,7 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
     fashionphile_client = None
     therealreal_client = None
     grailed_client = None
+    chrono24_client = None
 
     selected = _normalize_selected_marketplace(selected)
 
@@ -593,6 +629,21 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
             logger.error(
                 "Grailed live client is not implemented. "
                 "Use --demo-grailed for fixture demo mode."
+            )
+            selected = "local"
+
+    if selected == "chrono24":
+        if is_chrono24_demo_requested():
+            chrono24_client = build_chrono24_demo_client()
+            if chrono24_client is None:
+                logger.warning(
+                    "Chrono24 demo client unavailable; falling back to local marketplace"
+                )
+                selected = "local"
+        else:
+            logger.error(
+                "Chrono24 live client is not implemented. "
+                "Use --demo-chrono24 for fixture demo mode."
             )
             selected = "local"
 
@@ -787,6 +838,42 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
         )
         return output_path
 
+    if selected == "chrono24" and chrono24_client is not None:
+        marketplace = create_chrono24_marketplace(
+            client=chrono24_client,
+            settings=chrono24_settings,
+        )
+        calculator = ProfitCalculator(
+            ProfitConfig(
+                international_shipping_jpy=Decimal("2500"),
+                customs_duty_rate=Decimal("0.08"),
+                import_tax_rate=Decimal("0.10"),
+                domestic_shipping_jpy=Decimal("800"),
+                marketplace_fee_rate=Decimal("0.12"),
+                other_costs_jpy=Decimal("500"),
+            )
+        )
+        search_results = [marketplace.search(product) for product in products]
+        all_listings = [listing for result in search_results for listing in result.listings]
+        valid_count = sum(len(result.valid_listings) for result in search_results)
+        results = calculate_profit_from_search_results(search_results, calculator)
+        ranked = RankingEngine(calculator.config).rank(
+            results,
+            sort_key=RankingSortKey.PROFIT,
+            descending=True,
+        )
+        exporter = ExcelExporter(output_dir=OUTPUT_DIR, filename=EXCEL_FILENAME)
+        output_path = exporter.export_phase3_workbook(products, all_listings, ranked)
+        logger.info(
+            "Chrono24 demo export completed: %s (products=%d, listings=%d, valid=%d, results=%d)",
+            output_path,
+            len(products),
+            len(all_listings),
+            valid_count,
+            len(ranked),
+        )
+        return output_path
+
     try:
         marketplace = create_marketplace(
             selected,
@@ -807,12 +894,15 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
             therealreal_client=therealreal_client,
             grailed_settings=grailed_settings,
             grailed_client=grailed_client,
+            chrono24_settings=chrono24_settings,
+            chrono24_client=chrono24_client,
         )
     except (
         VestiaireConfigurationError,
         FashionphileConfigurationError,
         TheRealRealConfigurationError,
         GrailedConfigurationError,
+        Chrono24ConfigurationError,
     ) as exc:
         logger.error("%s", exc)
         selected = "local"
@@ -884,10 +974,10 @@ def run(marketplace_name: str | None = None) -> Path:
 def main() -> None:
     """CLI entry point."""
     setup_logging()
-    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12 started")
+    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13 started")
     with patch("utils.http.fetch_url"), patch("utils.http.HttpClient"):
         output_path = run()
-    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12 finished: %s", output_path)
+    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13 finished: %s", output_path)
 
 
 if __name__ == "__main__":

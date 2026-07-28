@@ -8,7 +8,15 @@ import unicodedata
 from dataclasses import dataclass
 from decimal import Decimal
 
-from config.constants import MARKETPLACE_FASHIONPHILE, MARKETPLACE_GRAILED, MARKETPLACE_THEREALREAL, MARKETPLACE_USED_DEMO, MARKETPLACE_VESTIAIRE, MARKETPLACE_YAHOO_AUCTION
+from config.constants import (
+    MARKETPLACE_CHRONO24,
+    MARKETPLACE_FASHIONPHILE,
+    MARKETPLACE_GRAILED,
+    MARKETPLACE_THEREALREAL,
+    MARKETPLACE_USED_DEMO,
+    MARKETPLACE_VESTIAIRE,
+    MARKETPLACE_YAHOO_AUCTION,
+)
 from models.marketplace_listing import MarketplaceListing
 from models.product import Product
 from marketplace.listing_validator import validate_listing
@@ -23,6 +31,7 @@ class MatchConfig:
     jan_score: Decimal = Decimal("40")
     sku_score: Decimal = Decimal("35")
     model_score: Decimal = Decimal("30")
+    reference_score: Decimal = Decimal("28")
     brand_score: Decimal = Decimal("15")
     title_word_score: Decimal = Decimal("20")
     match_threshold: Decimal = Decimal("30")
@@ -58,6 +67,9 @@ class ListingMatcher:
         listing_jan = _normalize_text(listing.jan_code)
         product_model = _normalize_text(product.model)
         listing_model = _normalize_text(listing.model_number)
+        listing_reference = _normalize_text(
+            str(listing.source_metadata.get("source_reference_number") or "")
+        )
 
         if listing_jan and (product_sku == listing_jan or product_model == listing_jan):
             total += self.config.jan_score
@@ -74,6 +86,7 @@ class ListingMatcher:
                 MARKETPLACE_FASHIONPHILE,
                 MARKETPLACE_THEREALREAL,
                 MARKETPLACE_GRAILED,
+                MARKETPLACE_CHRONO24,
             }
             and product_sku == _normalize_text(listing.listing_id)
         ):
@@ -81,6 +94,8 @@ class ListingMatcher:
 
         if product_model and listing_model and product_model == listing_model:
             total += self.config.model_score
+        elif product_model and listing_reference and product_model == listing_reference:
+            total += self.config.reference_score
 
         product_brand = _normalize_text(product.brand)
         listing_brand = _normalize_text(listing.brand)
@@ -124,6 +139,23 @@ class ListingMatcher:
         if product.model and listing.model_number:
             if _normalize_text(product.model) != _normalize_text(listing.model_number):
                 warnings.append("model number differs from listing")
+
+        if listing.marketplace_name == MARKETPLACE_CHRONO24:
+            meta = listing.source_metadata
+            product_diameter = _extract_case_diameter_mm(product.name)
+            listing_diameter = meta.get("source_case_diameter_mm")
+            if product_diameter and listing_diameter and product_diameter != listing_diameter:
+                warnings.append("case diameter mismatch between product and listing")
+
+            product_dial = _normalize_text(_extract_dial_color(product.name))
+            listing_dial = _normalize_text(str(meta.get("source_dial_color") or ""))
+            if product_dial and listing_dial and product_dial != listing_dial:
+                warnings.append("dial color mismatch between product and listing")
+
+            product_bracelet = _normalize_text(_extract_bracelet_material(product.name))
+            listing_bracelet = _normalize_text(str(meta.get("source_bracelet_material") or ""))
+            if product_bracelet and listing_bracelet and product_bracelet != listing_bracelet:
+                warnings.append("bracelet material mismatch between product and listing")
 
         if listing.used_item_details is not None:
             auth_status = listing.used_item_details.authentication.status.value
@@ -242,3 +274,36 @@ def _tokenize(text: str) -> list[str]:
     normalized = unicodedata.normalize("NFKC", text.lower())
     normalized = re.sub(r"[^\w\s]", " ", normalized)
     return [token for token in normalized.split() if token]
+
+
+def _extract_case_diameter_mm(text: str) -> float | None:
+    match = re.search(r"(\d{2}(?:\.\d+)?)\s*mm", text.lower())
+    if not match:
+        return None
+    try:
+        return float(match.group(1))
+    except ValueError:
+        return None
+
+
+def _extract_dial_color(text: str) -> str:
+    colors = {"black", "white", "blue", "green", "silver", "gold", "grey", "gray", "brown"}
+    tokens = set(_tokenize(text))
+    found = colors & tokens
+    return next(iter(found), "")
+
+
+def _extract_bracelet_material(text: str) -> str:
+    materials = {
+        "steel": "STAINLESS_STEEL",
+        "stainless": "STAINLESS_STEEL",
+        "leather": "LEATHER",
+        "rubber": "RUBBER",
+        "titanium": "TITANIUM",
+        "gold": "GOLD",
+    }
+    lowered = text.lower()
+    for key, value in materials.items():
+        if key in lowered:
+            return value
+    return ""
