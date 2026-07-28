@@ -49,6 +49,7 @@ class PriceResult:
     currency: str = "JPY"
     url: str = ""
     title: str = ""
+    metadata: dict[str, object] = field(default_factory=dict)
 
     @property
     def is_valid(self) -> bool:

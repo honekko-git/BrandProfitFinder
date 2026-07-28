@@ -8,7 +8,7 @@ import unicodedata
 from dataclasses import dataclass
 from decimal import Decimal
 
-from config.constants import MARKETPLACE_YAHOO_AUCTION
+from config.constants import MARKETPLACE_USED_DEMO, MARKETPLACE_YAHOO_AUCTION
 from models.marketplace_listing import MarketplaceListing
 from models.product import Product
 from marketplace.listing_validator import validate_listing
@@ -67,7 +67,7 @@ class ListingMatcher:
         elif (
             product_sku
             and listing.listing_id
-            and listing.marketplace_name != MARKETPLACE_YAHOO_AUCTION
+            and listing.marketplace_name not in {MARKETPLACE_YAHOO_AUCTION, MARKETPLACE_USED_DEMO}
             and product_sku == _normalize_text(listing.listing_id)
         ):
             total += self.config.sku_score
@@ -84,6 +84,46 @@ class ListingMatcher:
         total += title_score
 
         return min(total, Decimal("100"))
+
+    def get_comparison_warnings(self, product: Product, listing: MarketplaceListing) -> list[str]:
+        """
+        Return non-blocking warnings for attribute differences after identity match.
+
+        Condition, accessories, and authentication are not used for identity matching.
+
+        Args:
+            product: Overseas product.
+            listing: Domestic listing candidate.
+
+        Returns:
+            Warning messages for color, size, or model differences.
+        """
+        warnings: list[str] = []
+        product_name = _normalize_text(product.name)
+        title = _normalize_text(listing.title)
+
+        color_tokens = {"black", "white", "red", "blue", "brown", "pink", "gold", "silver", "beige", "green"}
+        product_colors = color_tokens & set(_tokenize(product.name))
+        title_colors = color_tokens & set(_tokenize(listing.title))
+        if product_colors and title_colors and product_colors != title_colors:
+            warnings.append("color mismatch between product and listing title")
+
+        size_pattern = re.compile(r"\b(\d{2}|xs|s|m|l|xl|xxl|one\s*size)\b", re.IGNORECASE)
+        product_sizes = set(size_pattern.findall(product.name.lower()))
+        title_sizes = set(size_pattern.findall(listing.title.lower()))
+        if product_sizes and title_sizes and product_sizes != title_sizes:
+            warnings.append("size mismatch between product and listing title")
+
+        if product.model and listing.model_number:
+            if _normalize_text(product.model) != _normalize_text(listing.model_number):
+                warnings.append("model number differs from listing")
+
+        if listing.used_item_details is not None:
+            auth_status = listing.used_item_details.authentication.status.value
+            if auth_status.endswith("CLAIM"):
+                warnings.append("authentication based on seller claim only")
+
+        return warnings
 
     def is_match(
         self,
@@ -162,6 +202,7 @@ class ListingMatcher:
                     shipping_unknown=listing.shipping_unknown,
                     point_rate=listing.point_rate,
                     source_metadata=dict(listing.source_metadata),
+                    used_item_details=listing.used_item_details,
                 )
             )
 

@@ -1,0 +1,51 @@
+{
+  "total_results": 1,
+  "page": 1,
+  "page_count": 1,
+  "items": [
+    {
+      "listing_id": "used-demo-001",
+      "marketplace_name": "used_demo",
+      "title": "GUCCI GG Marmont Small Shoulder Bag",
+      "price_jpy": 128000,
+      "shipping_jpy": null,
+      "currency": "JPY",
+      "url": "https://example.invalid/used/used-demo-001",
+      "image_url": "https://example.invalid/images/used-demo-001.jpg",
+      "brand": "GUCCI",
+      "model_number": "447632",
+      "condition": {
+        "raw": "Very Good",
+        "normalized": "VERY_GOOD",
+        "description": "Minor corner wear and small interior stain"
+      },
+      "defects": {
+        "corner_wear": "minor",
+        "stains": "minor",
+        "odor": "unknown",
+        "repair_history": "unknown"
+      },
+      "accessories": {
+        "dust_bag": "included",
+        "box": "not_included",
+        "authenticity_card": "unknown"
+      },
+      "authentication": {
+        "status": "PLATFORM_REVIEWED",
+        "provider": "Demo Platform",
+        "seller_claimed_authentic": true,
+        "platform_authenticated": true
+      },
+      "seller": {
+        "type": "PROFESSIONAL_SELLER",
+        "rating": 4.8,
+        "review_count": 120,
+        "verified": true
+      },
+      "return_policy": {
+        "accepted": true,
+        "period_days": 14
+      }
+    }
+  ]
+}

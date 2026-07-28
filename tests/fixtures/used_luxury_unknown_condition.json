@@ -1,0 +1,12 @@
+{
+  "items": [
+    {
+      "listing_id": "used-unknown-001",
+      "title": "Unknown Condition Bag",
+      "price_jpy": 50000,
+      "url": "https://example.invalid/used/used-unknown-001",
+      "brand": "GUCCI",
+      "condition": {"raw": "中古"}
+    }
+  ]
+}

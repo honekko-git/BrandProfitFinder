@@ -6,6 +6,8 @@ from dataclasses import dataclass, field
 from decimal import Decimal
 from typing import Any
 
+from models.used_item_details import UsedItemDetails
+
 
 @dataclass
 class MarketplaceListing:
@@ -40,6 +42,7 @@ class MarketplaceListing:
     shipping_unknown: bool = False
     point_rate: Decimal | None = None
     source_metadata: dict[str, Any] = field(default_factory=dict)
+    used_item_details: UsedItemDetails | None = None
 
     def __post_init__(self) -> None:
         self.marketplace_name = self.marketplace_name.strip()
@@ -94,6 +97,7 @@ class MarketplaceListing:
             "shipping_unknown": self.shipping_unknown,
             "point_rate": float(self.point_rate) if self.point_rate is not None else None,
             **self._auction_export_fields(),
+            **self._used_item_export_fields(),
         }
 
     def _auction_export_fields(self) -> dict[str, Any]:
@@ -128,4 +132,50 @@ class MarketplaceListing:
             "watch_count": _int("watch_count"),
             "start_time": meta.get("start_time") or None,
             "end_time": meta.get("end_time") or None,
+        }
+
+    def _used_item_export_fields(self) -> dict[str, Any]:
+        details = self.used_item_details
+        if details is None:
+            return {
+                "used_condition": None,
+                "used_condition_raw": None,
+                "condition_score": None,
+                "condition_confidence": None,
+                "data_completeness": None,
+                "accessory_completeness": None,
+                "authentication_status": None,
+                "authentication_provider": None,
+                "seller_type": None,
+                "return_accepted": None,
+                "return_period_days": None,
+                "risk_level": None,
+                "risk_flags": None,
+                "risk_reasons": None,
+                "suggested_adjustment_rate": None,
+                "suggested_adjusted_price_jpy": None,
+                "adjustment_applied": None,
+                "used_item_warnings": None,
+            }
+
+        adj = details.price_adjustment
+        return {
+            "used_condition": details.condition.value,
+            "used_condition_raw": details.condition_raw or None,
+            "condition_score": details.condition_score_value,
+            "condition_confidence": details.condition_confidence,
+            "data_completeness": details.data_completeness,
+            "accessory_completeness": details.accessory_completeness.value,
+            "authentication_status": details.authentication.status.value,
+            "authentication_provider": details.authentication.provider or None,
+            "seller_type": details.seller_details.seller_type.value,
+            "return_accepted": details.return_policy.return_accepted,
+            "return_period_days": details.return_policy.return_period_days,
+            "risk_level": details.risk_level,
+            "risk_flags": ", ".join(details.risk_flags) if details.risk_flags else None,
+            "risk_reasons": "; ".join(details.risk_reasons) if details.risk_reasons else None,
+            "suggested_adjustment_rate": adj.adjustment_rate if adj else None,
+            "suggested_adjusted_price_jpy": adj.adjusted_price_jpy if adj else None,
+            "adjustment_applied": adj.applied if adj else False,
+            "used_item_warnings": "; ".join(details.warnings) if details.warnings else None,
         }

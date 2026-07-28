@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "listing_id": "used-auth-concern-001",
+      "title": "Auth Concern Bag",
+      "price_jpy": 40000,
+      "url": "https://example.invalid/used/used-auth-concern-001",
+      "brand": "GUCCI",
+      "condition": {"raw": "Good", "normalized": "GOOD"},
+      "authentication": {
+        "status": "AUTHENTICITY_CONCERN",
+        "provider": "Demo Review",
+        "notes": "Inconsistent serial marking"
+      }
+    }
+  ]
+}

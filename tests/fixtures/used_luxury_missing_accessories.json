@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "listing_id": "used-acc-001",
+      "title": "Bag Item Only",
+      "price_jpy": 70000,
+      "url": "https://example.invalid/used/used-acc-001",
+      "brand": "GUCCI",
+      "condition": {"raw": "Good", "normalized": "GOOD"},
+      "accessories": {
+        "dust_bag": "not_included",
+        "original_box": "not_included"
+      }
+    }
+  ]
+}
