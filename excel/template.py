@@ -172,4 +172,10 @@ MARKETPLACE_LISTING_COLUMNS: Final[list[str]] = [
     "fashionphile_parse_warnings",
     "source_final_sale",
     "therealreal_parse_warnings",
+    "source_offer_enabled",
+    "source_minimum_offer",
+    "source_offer_currency",
+    "source_seller_transactions",
+    "source_seller_joined_year",
+    "grailed_parse_warnings",
 ]

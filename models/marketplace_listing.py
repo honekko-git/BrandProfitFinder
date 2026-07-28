@@ -206,4 +206,10 @@ class MarketplaceListing:
             "fashionphile_parse_warnings": meta.get("fashionphile_parse_warnings") or None,
             "source_final_sale": meta.get("source_final_sale"),
             "therealreal_parse_warnings": meta.get("therealreal_parse_warnings") or None,
+            "source_offer_enabled": meta.get("source_offer_enabled"),
+            "source_minimum_offer": meta.get("source_minimum_offer"),
+            "source_offer_currency": meta.get("source_offer_currency") or None,
+            "source_seller_transactions": meta.get("source_seller_transactions"),
+            "source_seller_joined_year": meta.get("source_seller_joined_year"),
+            "grailed_parse_warnings": meta.get("grailed_parse_warnings") or None,
         }

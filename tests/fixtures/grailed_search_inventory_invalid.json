@@ -1,0 +1,94 @@
+{
+  "marketplace": "grailed",
+  "query": "Rick Owens Ramones",
+  "page": 1,
+  "page_size": 20,
+  "total": 1,
+  "items": [
+    {
+      "listing_id": "grailed-demo-001",
+      "title": "RICK OWENS DRKSHDW Ramones High Sneakers",
+      "description": "Pre-owned sneakers with visible sole wear.",
+      "price": {
+        "amount": 98000,
+        "currency": "JPY"
+      },
+      "original_price": {
+        "amount": 118000,
+        "currency": "JPY",
+        "known": true
+      },
+      "shipping": {
+        "amount": null,
+        "currency": "JPY",
+        "known": false
+      },
+      "url": "https://example.invalid/grailed/grailed-demo-001",
+      "image_url": "https://example.invalid/images/grailed-demo-001.jpg",
+      "brand": "RICK OWENS",
+      "model_number": null,
+      "category": "footwear",
+      "sub_category": "sneakers",
+      "color": "black",
+      "size": "EU 42",
+      "material": "canvas",
+      "gender": "men",
+      "condition": {
+        "raw": "Gently Used",
+        "description": "Visible sole wear and light creasing"
+      },
+      "defects": {
+        "sole_wear": "moderate",
+        "creasing": "minor",
+        "stains": "none",
+        "odor": "unknown",
+        "repair_history": "unknown"
+      },
+      "accessories": {
+        "original_box": "not_included",
+        "dust_bag": "unknown",
+        "extra_laces": "included"
+      },
+      "authentication": {
+        "status": "PLATFORM_REVIEWED",
+        "provider": "Internal Platform Review",
+        "seller_claimed_authentic": true,
+        "platform_authenticated": null,
+        "third_party_authenticated": false
+      },
+      "seller": {
+        "type": "INDIVIDUAL",
+        "rating": 4.9,
+        "review_count": 87,
+        "verified": true,
+        "country": "US",
+        "transactions": 124,
+        "joined_year": 2019
+      },
+      "return_policy": {
+        "accepted": false,
+        "period_days": null
+      },
+      "inventory": {
+        "status": "IN_STOCK",
+        "quantity": true
+      },
+      "offer": {
+        "enabled": true,
+        "minimum_offer": 85000,
+        "currency": "JPY"
+      },
+      "discount": {
+        "active": true,
+        "amount": 20000,
+        "rate": 0.1695,
+        "previous_price": 118000
+      },
+      "sale_status": "ACTIVE",
+      "listed_at": "2026-07-18T12:00:00Z",
+      "metadata": {
+        "source_format": "brandprofitfinder_internal_fixture"
+      }
+    }
+  ]
+}
