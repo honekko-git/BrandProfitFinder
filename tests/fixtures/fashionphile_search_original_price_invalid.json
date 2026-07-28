@@ -1,0 +1,14 @@
+{
+  "marketplace": "fashionphile",
+  "items": [
+    {
+      "listing_id": "fp-badorig",
+      "title": "Invalid Original Price Bag",
+      "price": {"amount": 500000, "currency": "JPY"},
+      "original_price": {"amount": 400000, "currency": "JPY", "known": true},
+      "url": "https://example.invalid/fashionphile/fp-badorig",
+      "sale_status": "ACTIVE",
+      "inventory": {"status": "IN_STOCK", "quantity": 1}
+    }
+  ]
+}

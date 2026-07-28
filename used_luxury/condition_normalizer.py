@@ -34,6 +34,10 @@ _CONDITION_RULES: tuple[tuple[re.Pattern[str], UsedItemCondition, float, str], .
     (re.compile(r"^for\s*parts$|^ジャンク$"), UsedItemCondition.FOR_PARTS, 0.95, "exact_for_parts"),
     (re.compile(r"^pre[- ]?owned$|^second\s*hand$|^中古$"), UsedItemCondition.USED_GENERIC, 0.6, "generic_used"),
     (re.compile(r"^vintage$"), UsedItemCondition.USED_GENERIC, 0.4, "vestiaire_vintage"),
+    (re.compile(r"^giftable$"), UsedItemCondition.LIKE_NEW, 0.7, "fashionphile_giftable"),
+    (re.compile(r"^shows\s*wear$"), UsedItemCondition.USED_GENERIC, 0.5, "shows_wear"),
+    (re.compile(r"^heavily\s*worn$"), UsedItemCondition.POOR, 0.85, "heavily_worn"),
+    (re.compile(r"^as\s*is$"), UsedItemCondition.FAIR, 0.7, "as_is"),
     (re.compile(r"^used$"), UsedItemCondition.USED_GENERIC, 0.5, "ambiguous_used"),
 )
 
@@ -80,6 +84,12 @@ class ConditionNormalizer:
                     warnings.append("ambiguous used condition; not upgraded to ranked grade")
                 if rule == "vestiaire_vintage":
                     warnings.append("vintage indicates age; not upgraded to good condition")
+                if rule == "fashionphile_giftable":
+                    warnings.append("giftable may reflect packaging; not conflated with accessories")
+                if rule == "shows_wear":
+                    warnings.append("shows wear does not imply good condition grade")
+                if rule == "as_is":
+                    warnings.append("as is condition requires buyer caution")
                 return ConditionNormalizationResult(
                     normalized_condition=condition,
                     raw_condition=raw_text,

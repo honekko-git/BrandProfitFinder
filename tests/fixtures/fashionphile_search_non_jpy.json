@@ -1,0 +1,13 @@
+{
+  "marketplace": "fashionphile",
+  "items": [
+    {
+      "listing_id": "fp-usd",
+      "title": "USD Priced Bag",
+      "price": {"amount": 5000, "currency": "USD"},
+      "url": "https://example.invalid/fashionphile/fp-usd",
+      "sale_status": "ACTIVE",
+      "inventory": {"status": "IN_STOCK", "quantity": 1}
+    }
+  ]
+}

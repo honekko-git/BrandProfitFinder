@@ -1,0 +1,14 @@
+{
+  "marketplace": "fashionphile",
+  "items": [
+    {
+      "listing_id": "fp-parts",
+      "title": "For Parts Bag",
+      "price": {"amount": 50000, "currency": "JPY"},
+      "url": "https://example.invalid/fashionphile/fp-parts",
+      "condition": {"raw": "For Parts"},
+      "sale_status": "ACTIVE",
+      "inventory": {"status": "IN_STOCK", "quantity": 1}
+    }
+  ]
+}

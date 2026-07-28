@@ -1,0 +1,14 @@
+{
+  "marketplace": "fashionphile",
+  "items": [
+    {
+      "listing_id": "fp-ship",
+      "title": "Unknown Shipping Bag",
+      "price": {"amount": 300000, "currency": "JPY"},
+      "shipping": {"amount": null, "currency": "JPY", "known": false},
+      "url": "https://example.invalid/fashionphile/fp-ship",
+      "sale_status": "ACTIVE",
+      "inventory": {"status": "IN_STOCK", "quantity": 1}
+    }
+  ]
+}

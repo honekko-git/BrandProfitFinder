@@ -183,3 +183,23 @@ Set values in `.env` (see `.env.example`):
 - Internal fixture JSON only; not claimed as official API format
 
 ---
+
+## Phase 10
+
+- [x] Fashionphile integration foundation (no live communication)
+- [x] FashionphileClientProtocol and FakeFashionphileClient
+- [x] FashionphileResponseParser (BrandProfitFinder internal standard JSON)
+- [x] FashionphileMarketplace with pagination, inventory/sale status, discount filters
+- [x] Phase 8 UsedItemEnricher integration; inventory/discount in source metadata
+- [x] MarketplaceFactory aliases: fashionphile, fashion_phile, fashion-phile, fp
+- [x] Demo: `python main.py --marketplace fashionphile --demo-fashionphile`
+- [ ] Official Fashionphile API, partner data feed, or CSV import client
+- [ ] Currency conversion for non-JPY listings (explicit opt-in)
+
+### Phase 10 test status
+
+- Total tests: 741+ (including prior regression tests)
+- No external Fashionphile communication in tests or default `main.py`
+- Internal fixture JSON only; not claimed as official API format
+
+---

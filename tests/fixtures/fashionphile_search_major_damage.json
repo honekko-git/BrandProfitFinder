@@ -1,0 +1,15 @@
+{
+  "marketplace": "fashionphile",
+  "items": [
+    {
+      "listing_id": "fp-damage",
+      "title": "Heavily Worn Bag",
+      "price": {"amount": 150000, "currency": "JPY"},
+      "url": "https://example.invalid/fashionphile/fp-damage",
+      "condition": {"raw": "Heavily Worn", "description": "Major exterior wear"},
+      "defects": {"corner_wear": "major", "scratches": "major"},
+      "sale_status": "ACTIVE",
+      "inventory": {"status": "IN_STOCK", "quantity": 1}
+    }
+  ]
+}

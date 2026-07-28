@@ -1,0 +1,13 @@
+{
+  "marketplace": "fashionphile",
+  "items": [
+    {
+      "listing_id": "fp-sold",
+      "title": "Sold Bag",
+      "price": {"amount": 400000, "currency": "JPY"},
+      "url": "https://example.invalid/fashionphile/fp-sold",
+      "sale_status": "SOLD",
+      "inventory": {"status": "SOLD", "quantity": 0}
+    }
+  ]
+}

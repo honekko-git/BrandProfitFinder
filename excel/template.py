@@ -162,4 +162,12 @@ MARKETPLACE_LISTING_COLUMNS: Final[list[str]] = [
     "source_country",
     "source_listed_at",
     "vestiaire_parse_warnings",
+    "source_original_price",
+    "source_discount_active",
+    "source_discount_amount",
+    "source_discount_rate",
+    "source_previous_price",
+    "source_inventory_status",
+    "source_inventory_quantity",
+    "fashionphile_parse_warnings",
 ]
