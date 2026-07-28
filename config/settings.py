@@ -213,3 +213,69 @@ FASHIONPHILE_INCLUDE_DISCOUNTED_ONLY = os.getenv(
     "yes",
     "on",
 )
+
+THEREALREAL_ENABLED = os.getenv("THEREALREAL_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+THEREALREAL_DEMO_ENABLED = os.getenv("THEREALREAL_DEMO_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+THEREALREAL_TIMEOUT_SECONDS = max(1, int(os.getenv("THEREALREAL_TIMEOUT_SECONDS", "10")))
+THEREALREAL_PAGE_SIZE = max(1, min(50, int(os.getenv("THEREALREAL_PAGE_SIZE", "20"))))
+THEREALREAL_MAX_PAGES = max(1, min(20, int(os.getenv("THEREALREAL_MAX_PAGES", "1"))))
+THEREALREAL_DEFAULT_CURRENCY = os.getenv("THEREALREAL_DEFAULT_CURRENCY", "JPY").strip().upper()
+THEREALREAL_DEMO_FIXTURE_PATH = os.getenv(
+    "THEREALREAL_DEMO_FIXTURE_PATH", "therealreal_search_normal.json"
+).strip()
+THEREALREAL_ALLOW_UNKNOWN_CURRENCY = os.getenv(
+    "THEREALREAL_ALLOW_UNKNOWN_CURRENCY", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+THEREALREAL_INCLUDE_UNAVAILABLE = os.getenv(
+    "THEREALREAL_INCLUDE_UNAVAILABLE", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+THEREALREAL_INCLUDE_SOLD = os.getenv("THEREALREAL_INCLUDE_SOLD", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+THEREALREAL_INCLUDE_RESERVED = os.getenv(
+    "THEREALREAL_INCLUDE_RESERVED", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+THEREALREAL_INCLUDE_FINAL_SALE = os.getenv(
+    "THEREALREAL_INCLUDE_FINAL_SALE", "true"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+THEREALREAL_INCLUDE_DISCOUNTED_ONLY = os.getenv(
+    "THEREALREAL_INCLUDE_DISCOUNTED_ONLY", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)

@@ -95,6 +95,8 @@ Phase 9 adds Vestiaire Collective integration foundation (fixture-based, no live
 
 Phase 10 adds Fashionphile integration foundation (fixture-based, no live API)
 
+Phase 11 adds The RealReal integration foundation (fixture-based, no live API)
+
 ---
 
 ## Domestic Marketplaces
@@ -252,4 +254,25 @@ Or:
 
 ```
 python main.py --demo-fashionphile
+```
+
+### The RealReal Phase 11 notes
+
+- Phase 11 is a **The RealReal integration foundation** (not a live site connection)
+- Does **not** use official The RealReal API format; internal standard fixture JSON only
+- Reuses Phase 8 used luxury models and Phase 9/10 integration patterns
+- Inventory status, item condition, final sale, and sale status are kept separate
+- Discount metadata is not auto-applied to profit (`discount_applied=false`)
+- Demo only: `--demo-therealreal` with `FakeTheRealRealClient`
+- Without demo, `--marketplace therealreal` logs a clear error and falls back safely
+
+```
+THEREALREAL_DEMO_ENABLED=true
+python main.py --marketplace therealreal --demo-therealreal
+```
+
+Or:
+
+```
+python main.py --demo-therealreal
 ```

@@ -1,0 +1,14 @@
+{
+  "marketplace": "therealreal",
+  "items": [
+    {
+      "listing_id": "trr-finalsale",
+      "title": "Final Sale Bag",
+      "price": {"amount": 120000, "currency": "JPY"},
+      "url": "https://example.invalid/therealreal/trr-finalsale",
+      "return_policy": {"accepted": false, "period_days": 0, "final_sale": true},
+      "sale_status": "ACTIVE",
+      "inventory": {"status": "IN_STOCK", "quantity": 1}
+    }
+  ]
+}

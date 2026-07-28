@@ -1,0 +1,21 @@
+{
+  "marketplace": "therealreal",
+  "items": [
+    {
+      "listing_id": "trr-dup",
+      "title": "Duplicate A",
+      "price": {"amount": 100000, "currency": "JPY"},
+      "url": "https://example.invalid/therealreal/trr-dup",
+      "sale_status": "ACTIVE",
+      "inventory": {"status": "IN_STOCK", "quantity": 1}
+    },
+    {
+      "listing_id": "trr-dup",
+      "title": "Duplicate B",
+      "price": {"amount": 90000, "currency": "JPY"},
+      "url": "https://example.invalid/therealreal/trr-dup-b",
+      "sale_status": "ACTIVE",
+      "inventory": {"status": "IN_STOCK", "quantity": 1}
+    }
+  ]
+}

@@ -27,6 +27,7 @@ from config.settings import (
     USED_LUXURY_DEMO_ENABLED,
     VESTIAIRE_DEMO_ENABLED,
     FASHIONPHILE_DEMO_ENABLED,
+    THEREALREAL_DEMO_ENABLED,
 )
 from excel.exporter import ExcelExporter
 from marketplace.amazon_client import FakeAmazonClient
@@ -45,6 +46,10 @@ from marketplace.fashionphile_client import FakeFashionphileClient
 from marketplace.fashionphile_exceptions import FashionphileConfigurationError
 from marketplace.fashionphile_marketplace import create_fashionphile_marketplace
 from marketplace.fashionphile_settings import FashionphileSettings
+from marketplace.therealreal_client import FakeTheRealRealClient
+from marketplace.therealreal_exceptions import TheRealRealConfigurationError
+from marketplace.therealreal_marketplace import create_therealreal_marketplace
+from marketplace.therealreal_settings import TheRealRealSettings
 from used_luxury.demo_marketplace import create_used_luxury_demo_marketplace
 from used_luxury.demo_provider import FakeUsedLuxuryProvider
 from models.marketplace_listing import MarketplaceListing
@@ -240,6 +245,8 @@ def resolve_marketplace_name(argv: list[str] | None = None) -> str:
         return "vestiaire"
     if FASHIONPHILE_DEMO_ENABLED or "--demo-fashionphile" in args:
         return "fashionphile"
+    if THEREALREAL_DEMO_ENABLED or "--demo-therealreal" in args:
+        return "therealreal"
     if AMAZON_JP_ENABLED and (AMAZON_JP_DEMO_ENABLED or "--demo-amazon" in args):
         return "amazon_jp"
     if YAHOO_API_ENABLED:
@@ -305,6 +312,31 @@ def build_fashionphile_demo_client() -> FakeFashionphileClient | None:
             }
         )
     return FakeFashionphileClient(payload)
+
+
+def is_therealreal_demo_requested(argv: list[str] | None = None) -> bool:
+    """Return True when The RealReal demo mode is explicitly requested."""
+    args = argv if argv is not None else sys.argv[1:]
+    return THEREALREAL_DEMO_ENABLED or "--demo-therealreal" in args
+
+
+def build_therealreal_demo_client() -> FakeTheRealRealClient | None:
+    """Build a fake The RealReal client from local fixture JSON."""
+    settings = TheRealRealSettings.from_env()
+    fixture_path = FIXTURES_DIR / settings.demo_fixture_path
+    if not fixture_path.exists():
+        logger.warning("The RealReal demo fixture not found: %s", fixture_path)
+        return None
+    payload = json.loads(fixture_path.read_text(encoding="utf-8"))
+    page_2 = FIXTURES_DIR / "therealreal_search_page_2.json"
+    if page_2.exists():
+        return FakeTheRealRealClient(
+            pages={
+                1: payload,
+                2: json.loads(page_2.read_text(encoding="utf-8")),
+            }
+        )
+    return FakeTheRealRealClient(payload)
 
 
 def is_used_luxury_demo_requested(argv: list[str] | None = None) -> bool:
@@ -402,6 +434,8 @@ def _normalize_selected_marketplace(selected: str) -> str:
         return "vestiaire"
     if normalized in {"fashionphile", "fashion_phile", "fashion-phile", "fp"}:
         return "fashionphile"
+    if normalized in {"therealreal", "the_real_real", "the-real-real", "realreal", "trr"}:
+        return "therealreal"
     return normalized
 
 
@@ -422,11 +456,13 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
     yahoo_auction_settings = YahooAuctionConfig.from_env()
     vestiaire_settings = VestiaireSettings.from_env()
     fashionphile_settings = FashionphileSettings.from_env()
+    therealreal_settings = TheRealRealSettings.from_env()
     amazon_client = None
     rakuten_client = None
     yahoo_auction_client = None
     vestiaire_client = None
     fashionphile_client = None
+    therealreal_client = None
 
     selected = _normalize_selected_marketplace(selected)
 
@@ -491,6 +527,21 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
             logger.error(
                 "Fashionphile live client is not implemented. "
                 "Use --demo-fashionphile for fixture demo mode."
+            )
+            selected = "local"
+
+    if selected == "therealreal":
+        if is_therealreal_demo_requested():
+            therealreal_client = build_therealreal_demo_client()
+            if therealreal_client is None:
+                logger.warning(
+                    "The RealReal demo client unavailable; falling back to local marketplace"
+                )
+                selected = "local"
+        else:
+            logger.error(
+                "The RealReal live client is not implemented. "
+                "Use --demo-therealreal for fixture demo mode."
             )
             selected = "local"
 
@@ -613,6 +664,42 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
         )
         return output_path
 
+    if selected == "therealreal" and therealreal_client is not None:
+        marketplace = create_therealreal_marketplace(
+            client=therealreal_client,
+            settings=therealreal_settings,
+        )
+        calculator = ProfitCalculator(
+            ProfitConfig(
+                international_shipping_jpy=Decimal("2500"),
+                customs_duty_rate=Decimal("0.08"),
+                import_tax_rate=Decimal("0.10"),
+                domestic_shipping_jpy=Decimal("800"),
+                marketplace_fee_rate=Decimal("0.12"),
+                other_costs_jpy=Decimal("500"),
+            )
+        )
+        search_results = [marketplace.search(product) for product in products]
+        all_listings = [listing for result in search_results for listing in result.listings]
+        valid_count = sum(len(result.valid_listings) for result in search_results)
+        results = calculate_profit_from_search_results(search_results, calculator)
+        ranked = RankingEngine(calculator.config).rank(
+            results,
+            sort_key=RankingSortKey.PROFIT,
+            descending=True,
+        )
+        exporter = ExcelExporter(output_dir=OUTPUT_DIR, filename=EXCEL_FILENAME)
+        output_path = exporter.export_phase3_workbook(products, all_listings, ranked)
+        logger.info(
+            "The RealReal demo export completed: %s (products=%d, listings=%d, valid=%d, results=%d)",
+            output_path,
+            len(products),
+            len(all_listings),
+            valid_count,
+            len(ranked),
+        )
+        return output_path
+
     try:
         marketplace = create_marketplace(
             selected,
@@ -629,8 +716,10 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
             vestiaire_client=vestiaire_client,
             fashionphile_settings=fashionphile_settings,
             fashionphile_client=fashionphile_client,
+            therealreal_settings=therealreal_settings,
+            therealreal_client=therealreal_client,
         )
-    except (VestiaireConfigurationError, FashionphileConfigurationError) as exc:
+    except (VestiaireConfigurationError, FashionphileConfigurationError, TheRealRealConfigurationError) as exc:
         logger.error("%s", exc)
         selected = "local"
         marketplace = create_marketplace(
@@ -701,10 +790,10 @@ def run(marketplace_name: str | None = None) -> Path:
 def main() -> None:
     """CLI entry point."""
     setup_logging()
-    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10 started")
+    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11 started")
     with patch("utils.http.fetch_url"), patch("utils.http.HttpClient"):
         output_path = run()
-    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10 finished: %s", output_path)
+    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11 finished: %s", output_path)
 
 
 if __name__ == "__main__":

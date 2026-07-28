@@ -1,0 +1,44 @@
+{
+  "marketplace": "therealreal",
+  "page": 1,
+  "total": 3,
+  "items": [
+    {
+      "listing_id": "trr-101",
+      "title": "GUCCI GG Marmont Bag Black",
+      "price": {"amount": 980000, "currency": "JPY"},
+      "shipping": {"amount": 0, "currency": "JPY", "known": true},
+      "url": "https://example.invalid/therealreal/trr-101",
+      "brand": "GUCCI",
+      "model_number": "GG-MARMONT",
+      "color": "black",
+      "condition": {"raw": "Excellent"},
+      "inventory": {"status": "IN_STOCK", "quantity": 1},
+      "return_policy": {"accepted": true, "period_days": 14, "final_sale": false},
+      "sale_status": "ACTIVE"
+    },
+    {
+      "listing_id": "trr-102",
+      "title": "GUCCI Marmont Brown",
+      "price": {"amount": 850000, "currency": "JPY"},
+      "shipping": {"known": false},
+      "url": "https://example.invalid/therealreal/trr-102",
+      "brand": "GUCCI",
+      "model_number": "GG-MARMONT",
+      "condition": {"raw": "Good"},
+      "inventory": {"status": "IN_STOCK", "quantity": 1},
+      "return_policy": {"accepted": true, "period_days": 14},
+      "sale_status": "ACTIVE"
+    },
+    {
+      "listing_id": "trr-103",
+      "title": "Other Brand Bag",
+      "price": {"amount": 450000, "currency": "JPY"},
+      "url": "https://example.invalid/therealreal/trr-103",
+      "brand": "Other",
+      "condition": {"raw": "Fair"},
+      "inventory": {"status": "IN_STOCK", "quantity": 1},
+      "sale_status": "ACTIVE"
+    }
+  ]
+}

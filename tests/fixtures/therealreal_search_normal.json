@@ -1,0 +1,58 @@
+{
+  "marketplace": "therealreal",
+  "query": "LOUIS VUITTON Neverfull MM",
+  "page": 1,
+  "page_size": 20,
+  "total": 1,
+  "items": [
+    {
+      "listing_id": "therealreal-demo-001",
+      "title": "LOUIS VUITTON Monogram Neverfull MM",
+      "description": "Pre-owned tote with moderate leather patina.",
+      "price": {"amount": 168000, "currency": "JPY"},
+      "original_price": {"amount": 198000, "currency": "JPY", "known": true},
+      "shipping": {"amount": null, "currency": "JPY", "known": false},
+      "url": "https://example.invalid/therealreal/therealreal-demo-001",
+      "image_url": "https://example.invalid/images/therealreal-demo-001.jpg",
+      "brand": "LOUIS VUITTON",
+      "model_number": "M40995",
+      "category": "bags",
+      "sub_category": "tote_bags",
+      "color": "brown",
+      "size": "MM",
+      "material": "coated_canvas",
+      "gender": "women",
+      "condition": {
+        "raw": "Very Good",
+        "description": "Moderate patina, light corner wear and interior marks"
+      },
+      "defects": {
+        "corner_wear": "minor",
+        "scratches": "minor",
+        "stains": "minor",
+        "odor": "unknown",
+        "repair_history": "unknown"
+      },
+      "accessories": {
+        "dust_bag": "not_included",
+        "original_box": "not_included",
+        "authenticity_card": "unknown",
+        "pouch": "included"
+      },
+      "authentication": {
+        "status": "PLATFORM_REVIEWED",
+        "provider": "Internal Platform Review",
+        "seller_claimed_authentic": null,
+        "platform_authenticated": true,
+        "third_party_authenticated": false
+      },
+      "seller": {"type": "PLATFORM", "rating": null, "review_count": null, "verified": true, "country": "US"},
+      "return_policy": {"accepted": true, "period_days": 14, "final_sale": false},
+      "inventory": {"status": "IN_STOCK", "quantity": 1},
+      "discount": {"active": true, "amount": 30000, "rate": 0.1515, "previous_price": 198000},
+      "sale_status": "ACTIVE",
+      "listed_at": "2026-07-15T09:00:00Z",
+      "metadata": {"source_format": "brandprofitfinder_internal_fixture"}
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "marketplace": "therealreal",
+  "items": [
+    {
+      "listing_id": "trr-partial-1",
+      "title": "Partial Item",
+      "url": "https://example.invalid/therealreal/trr-partial-1",
+      "sale_status": "ACTIVE",
+      "inventory": {"status": "IN_STOCK", "quantity": 1}
+    },
+    {
+      "listing_id": "trr-partial-2",
+      "title": "Valid Partial",
+      "price": {"amount": 45000, "currency": "JPY"},
+      "url": "https://example.invalid/therealreal/trr-partial-2",
+      "sale_status": "ACTIVE",
+      "inventory": {"status": "IN_STOCK", "quantity": 1}
+    }
+  ]
+}

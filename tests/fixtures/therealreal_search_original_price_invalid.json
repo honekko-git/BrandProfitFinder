@@ -1,0 +1,1 @@
+{"marketplace": "therealreal", "items": [{"listing_id": "trr-badorig", "title": "Bad Original", "price": {"amount": 500000, "currency": "JPY"}, "original_price": {"amount": 400000, "currency": "JPY", "known": true}, "url": "https://example.invalid/therealreal/trr-badorig", "sale_status": "ACTIVE", "inventory": {"status": "IN_STOCK", "quantity": 1}}]}

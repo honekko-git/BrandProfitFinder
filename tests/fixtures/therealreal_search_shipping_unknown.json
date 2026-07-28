@@ -1,0 +1,1 @@
+{"marketplace": "therealreal", "items": [{"listing_id": "trr-ship", "title": "Unknown Shipping", "price": {"amount": 300000, "currency": "JPY"}, "shipping": {"amount": null, "currency": "JPY", "known": false}, "url": "https://example.invalid/therealreal/trr-ship", "sale_status": "ACTIVE", "inventory": {"status": "IN_STOCK", "quantity": 1}}]}
