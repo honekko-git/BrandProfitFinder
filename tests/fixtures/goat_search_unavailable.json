@@ -1,0 +1,34 @@
+{
+  "marketplace": "goat",
+  "query": "unavailable",
+  "page": 1,
+  "page_size": 20,
+  "total": 2,
+  "items": [
+    {
+      "listing_id": "goat-unavail-001",
+      "title": "Unavailable Synthetic Listing",
+      "price": {
+        "amount": 9000,
+        "currency": "JPY"
+      },
+      "sale_status": "UNAVAILABLE",
+      "inventory": {
+        "status": "UNAVAILABLE"
+      }
+    },
+    {
+      "listing_id": "goat-active-001",
+      "title": "Active Synthetic Listing",
+      "price": {
+        "amount": 9500,
+        "currency": "JPY"
+      },
+      "sale_status": "ACTIVE",
+      "inventory": {
+        "status": "AVAILABLE"
+      },
+      "url": "https://example.invalid/goat/goat-active-001"
+    }
+  ]
+}

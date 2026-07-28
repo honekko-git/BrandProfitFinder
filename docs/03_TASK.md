@@ -327,3 +327,29 @@ Set values in `.env` (see `.env.example`):
 - No scraping, live communication, or profit-calculation changes introduced
 
 ---
+
+## Phase 17
+
+- [x] GOAT marketplace foundation (no live communication)
+- [x] GoatClientProtocol and FakeGoatClient (synthetic internal fixtures only)
+- [x] GoatResponseParser (BrandProfitFinder internal standard JSON)
+- [x] GoatMarketplace with conservative condition/box normalization
+- [x] MarketplaceFactory aliases: goat, goat_marketplace, goat-marketplace
+- [x] Demo: `python main.py --demo-goat`
+- [x] Profit Intelligence optional integration via `--profit-intelligence`
+- [ ] Official GOAT API, partner data feed, CSV import, or manual import client
+
+### Phase 17 limitations
+
+- Internal fixture JSON only; not claimed as official GOAT API format
+- No scraping, browser automation, or network access
+- No automatic currency conversion for non-JPY fixture prices
+- Unknown shipping/fees/duties/tax remain unknown in profit calculation
+- Profit Intelligence remains advisory decision-support metadata only
+
+### Phase 17 test status
+
+- Comprehensive unit and integration tests under `tests/test_goat_*.py`
+- No external GOAT communication in tests or default `main.py`
+
+---

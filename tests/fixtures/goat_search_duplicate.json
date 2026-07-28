@@ -1,0 +1,35 @@
+{
+  "marketplace": "goat",
+  "query": "duplicate ids",
+  "page": 1,
+  "page_size": 20,
+  "total": 2,
+  "items": [
+    {
+      "listing_id": "goat-dup-001",
+      "title": "Duplicate Synthetic Listing A",
+      "price": {
+        "amount": 10000,
+        "currency": "JPY"
+      },
+      "sale_status": "ACTIVE",
+      "inventory": {
+        "status": "AVAILABLE"
+      },
+      "url": "https://example.invalid/goat/goat-dup-001"
+    },
+    {
+      "listing_id": "goat-dup-001",
+      "title": "Duplicate Synthetic Listing B",
+      "price": {
+        "amount": 10100,
+        "currency": "JPY"
+      },
+      "sale_status": "ACTIVE",
+      "inventory": {
+        "status": "AVAILABLE"
+      },
+      "url": "https://example.invalid/goat/goat-dup-001-b"
+    }
+  ]
+}

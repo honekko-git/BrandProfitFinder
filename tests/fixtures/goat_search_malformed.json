@@ -1,0 +1,6 @@
+{
+  "marketplace": "goat",
+  "query": "malformed",
+  "page": 1,
+  "items": "not-a-list"
+}

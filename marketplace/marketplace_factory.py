@@ -9,6 +9,7 @@ from config.constants import (
     MARKETPLACE_CHRONO24,
     MARKETPLACE_FARFETCH,
     MARKETPLACE_STOCKX,
+    MARKETPLACE_GOAT,
     MARKETPLACE_THEREALREAL,
     MARKETPLACE_LOCAL,
     MARKETPLACE_MERCARI,
@@ -39,6 +40,9 @@ from marketplace.farfetch_settings import FarfetchSettings
 from marketplace.stockx_client import StockXClientProtocol
 from marketplace.stockx_marketplace import create_stockx_marketplace
 from marketplace.stockx_settings import StockXSettings
+from marketplace.goat_client import GoatClientProtocol
+from marketplace.goat_marketplace import create_goat_marketplace
+from marketplace.goat_settings import GoatSettings
 from marketplace.local_marketplace import LocalMarketplace
 from marketplace.rakuten_client import RakutenClientProtocol
 from marketplace.rakuten_marketplace import create_rakuten_marketplace
@@ -78,6 +82,9 @@ _FARFETCH_ALIASES = frozenset(
 _STOCKX_ALIASES = frozenset(
     {"stockx", "stock_x", "stock-x", "sx"}
 )
+_GOAT_ALIASES = frozenset(
+    {"goat", "goat_marketplace", "goat-marketplace"}
+)
 
 
 def _normalize_marketplace_name(marketplace_name: str) -> str:
@@ -98,6 +105,8 @@ def _normalize_marketplace_name(marketplace_name: str) -> str:
         return MARKETPLACE_FARFETCH
     if normalized in _STOCKX_ALIASES:
         return MARKETPLACE_STOCKX
+    if normalized in _GOAT_ALIASES:
+        return MARKETPLACE_GOAT
     return normalized
 
 
@@ -126,6 +135,8 @@ def create_marketplace(
     farfetch_client: FarfetchClientProtocol | None = None,
     stockx_settings: StockXSettings | None = None,
     stockx_client: StockXClientProtocol | None = None,
+    goat_settings: GoatSettings | None = None,
+    goat_client: GoatClientProtocol | None = None,
 ) -> BaseMarketplace:
     """
     Create a marketplace instance for the given name.
@@ -155,6 +166,8 @@ def create_marketplace(
         farfetch_client: Optional Farfetch client override (required for farfetch).
         stockx_settings: Optional StockX settings override.
         stockx_client: Optional StockX client override (required for stockx).
+        goat_settings: Optional GOAT settings override.
+        goat_client: Optional GOAT client override (required for goat).
 
     Returns:
         Configured marketplace instance.
@@ -226,6 +239,12 @@ def create_marketplace(
             settings=stockx_settings,
         )
 
+    if normalized == MARKETPLACE_GOAT.lower():
+        return create_goat_marketplace(
+            client=goat_client,
+            settings=goat_settings,
+        )
+
     not_implemented = {
         MARKETPLACE_MERCARI.lower(): "Mercari marketplace is not yet implemented",
     }
@@ -258,11 +277,13 @@ def get_all_marketplaces(
     farfetch_client: FarfetchClientProtocol | None = None,
     stockx_settings: StockXSettings | None = None,
     stockx_client: StockXClientProtocol | None = None,
+    goat_settings: GoatSettings | None = None,
+    goat_client: GoatClientProtocol | None = None,
 ) -> list[BaseMarketplace]:
     """
     Return marketplace instances for all implemented marketplaces.
 
-    Vestiaire, Fashionphile, The RealReal, Grailed, Chrono24, Farfetch, and StockX are omitted unless a client is injected.
+    Vestiaire, Fashionphile, The RealReal, Grailed, Chrono24, Farfetch, StockX, and GOAT are omitted unless a client is injected.
     """
     yahoo = yahoo_settings or YahooApiSettings.from_env()
     amazon = amazon_settings or AmazonConfig.from_env()
@@ -341,6 +362,14 @@ def get_all_marketplaces(
                 MARKETPLACE_STOCKX,
                 stockx_settings=stockx_settings,
                 stockx_client=stockx_client,
+            )
+        )
+    if goat_client is not None:
+        marketplaces.append(
+            create_marketplace(
+                MARKETPLACE_GOAT,
+                goat_settings=goat_settings,
+                goat_client=goat_client,
             )
         )
     return marketplaces

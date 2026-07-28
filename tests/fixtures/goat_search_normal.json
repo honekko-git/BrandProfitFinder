@@ -1,0 +1,154 @@
+{
+  "marketplace": "goat",
+  "query": "synthetic demo catalog",
+  "page": 1,
+  "page_size": 20,
+  "total": 3,
+  "items": [
+    {
+      "listing_id": "goat-demo-001",
+      "product_id": "goat-product-demo-001",
+      "title": "GUCCI Synthetic Demo Tote Bag",
+      "description": "Internal synthetic fixture for GOAT marketplace foundation demo.",
+      "brand": "GUCCI",
+      "model": "Demo Tote",
+      "style_code": "G-DEMO-TOTE-001",
+      "sku": "INTERNAL-GOAT-SKU-001",
+      "category": "accessories",
+      "colorway": "beige black",
+      "size": "ONE SIZE",
+      "size_system": "GENERIC",
+      "release_year": 2024,
+      "condition": {
+        "raw": "New",
+        "description": "New marketplace item"
+      },
+      "box_condition": {
+        "raw": "good",
+        "description": "Original packaging included"
+      },
+      "price": {
+        "amount": 26500,
+        "currency": "JPY"
+      },
+      "shipping": {
+        "amount": null,
+        "currency": "JPY",
+        "known": false
+      },
+      "fees": {
+        "amount": null,
+        "currency": "JPY",
+        "known": false
+      },
+      "inventory": {
+        "status": "AVAILABLE",
+        "quantity": 1
+      },
+      "sale_status": "ACTIVE",
+      "seller_region": "US",
+      "url": "https://example.invalid/goat/goat-demo-001",
+      "image_url": "https://example.invalid/images/goat-demo-001.jpg",
+      "metadata": {
+        "source_format": "brandprofitfinder_internal_fixture",
+        "fixture_note": "Synthetic data; not an official GOAT API response"
+      }
+    },
+    {
+      "listing_id": "goat-demo-002",
+      "product_id": "goat-product-demo-002",
+      "title": "PRADA Synthetic Demo Loafers",
+      "description": "Internal synthetic fixture for GOAT marketplace foundation demo.",
+      "brand": "PRADA",
+      "model": "Demo Loafer",
+      "style_code": "P-DEMO-LOAFER-002",
+      "sku": "INTERNAL-GOAT-SKU-002",
+      "category": "footwear",
+      "colorway": "black",
+      "size": "US 9",
+      "size_system": "US_MEN",
+      "release_year": 2023,
+      "condition": {
+        "raw": "New",
+        "description": "New marketplace item"
+      },
+      "box_condition": {
+        "raw": "good",
+        "description": "Original box included"
+      },
+      "price": {
+        "amount": 19800,
+        "currency": "JPY"
+      },
+      "shipping": {
+        "amount": null,
+        "currency": "JPY",
+        "known": false
+      },
+      "fees": {
+        "amount": null,
+        "currency": "JPY",
+        "known": false
+      },
+      "inventory": {
+        "status": "AVAILABLE",
+        "quantity": 1
+      },
+      "sale_status": "ACTIVE",
+      "seller_region": "US",
+      "url": "https://example.invalid/goat/goat-demo-002",
+      "image_url": "https://example.invalid/images/goat-demo-002.jpg",
+      "metadata": {
+        "source_format": "brandprofitfinder_internal_fixture"
+      }
+    },
+    {
+      "listing_id": "goat-demo-003",
+      "product_id": "goat-product-demo-003",
+      "title": "DEMO BRAND Synthetic Loss Candidate",
+      "description": "Internal synthetic fixture with limited margin for demo.",
+      "brand": "DEMO BRAND",
+      "model": "Loss Candidate",
+      "style_code": "D-DEMO-LOSS-003",
+      "sku": "INTERNAL-GOAT-SKU-003",
+      "category": "accessories",
+      "colorway": "neutral",
+      "size": "ONE SIZE",
+      "size_system": "GENERIC",
+      "release_year": 2022,
+      "condition": {
+        "raw": "Used",
+        "description": "Observed wear in synthetic fixture metadata"
+      },
+      "box_condition": {
+        "raw": "missing",
+        "description": "Box not included"
+      },
+      "price": {
+        "amount": 15200,
+        "currency": "JPY"
+      },
+      "shipping": {
+        "amount": null,
+        "currency": "JPY",
+        "known": false
+      },
+      "fees": {
+        "amount": null,
+        "currency": "JPY",
+        "known": false
+      },
+      "inventory": {
+        "status": "AVAILABLE",
+        "quantity": 1
+      },
+      "sale_status": "ACTIVE",
+      "seller_region": "EU",
+      "url": "https://example.invalid/goat/goat-demo-003",
+      "image_url": "https://example.invalid/images/goat-demo-003.jpg",
+      "metadata": {
+        "source_format": "brandprofitfinder_internal_fixture"
+      }
+    }
+  ]
+}

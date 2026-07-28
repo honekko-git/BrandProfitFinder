@@ -676,3 +676,65 @@ except ValueError:
 STOCKX_PREFERRED_PRICE_SOURCE = os.getenv(
     "STOCKX_PREFERRED_PRICE_SOURCE", "LOWEST_ASK"
 ).strip().upper()
+
+GOAT_ENABLED = os.getenv("GOAT_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+GOAT_DEMO_ENABLED = os.getenv("GOAT_DEMO_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+GOAT_TIMEOUT_SECONDS = max(1, int(os.getenv("GOAT_TIMEOUT_SECONDS", "10")))
+GOAT_PAGE_SIZE = max(1, min(50, int(os.getenv("GOAT_PAGE_SIZE", "20"))))
+GOAT_MAX_PAGES = max(1, min(20, int(os.getenv("GOAT_MAX_PAGES", "1"))))
+GOAT_DEFAULT_CURRENCY = os.getenv("GOAT_DEFAULT_CURRENCY", "JPY").strip().upper()
+GOAT_DEMO_FIXTURE_PATH = os.getenv(
+    "GOAT_DEMO_FIXTURE_PATH", "goat_search_normal.json"
+)
+GOAT_ALLOW_UNKNOWN_CURRENCY = os.getenv(
+    "GOAT_ALLOW_UNKNOWN_CURRENCY", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+GOAT_INCLUDE_UNAVAILABLE = os.getenv(
+    "GOAT_INCLUDE_UNAVAILABLE", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+GOAT_INCLUDE_SOLD = os.getenv("GOAT_INCLUDE_SOLD", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+GOAT_INCLUDE_NEW = os.getenv("GOAT_INCLUDE_NEW", "true").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+GOAT_INCLUDE_USED = os.getenv("GOAT_INCLUDE_USED", "true").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+GOAT_REQUIRE_KNOWN_PRICE = os.getenv(
+    "GOAT_REQUIRE_KNOWN_PRICE", "true"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)

@@ -53,6 +53,7 @@ MARKETPLACE_GRAILED: Final[str] = "grailed"
 MARKETPLACE_CHRONO24: Final[str] = "chrono24"
 MARKETPLACE_FARFETCH: Final[str] = "farfetch"
 MARKETPLACE_STOCKX: Final[str] = "stockx"
+MARKETPLACE_GOAT: Final[str] = "goat"
 MARKETPLACE_USED_DEMO: Final[str] = "used_demo"
 
 SHEET_DOMESTIC_LISTINGS: Final[str] = "Domestic Listings"

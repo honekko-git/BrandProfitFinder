@@ -101,6 +101,8 @@ Phase 14 adds Farfetch integration foundation (fixture-based, no live API)
 
 Phase 15 adds StockX integration foundation (fixture-based, no live API)
 
+Phase 17 adds GOAT marketplace foundation (fixture-based, no live API)
+
 ---
 
 ## Domestic Marketplaces
@@ -373,6 +375,33 @@ Or:
 python main.py --demo-stockx
 ```
 
+### GOAT Phase 17 notes
+
+- Phase 17 is a **GOAT marketplace foundation** (not a live site connection)
+- Does **not** use an official GOAT API format; internal synthetic fixture JSON only
+- No scraping, browser automation, cookies, or unofficial API access
+- Reuses Phase 3–7 profit/compare and Phase 9–16 integration patterns
+- `listing_id`, `style_code`, `sku`, `size`, `size_system`, and `box_condition` are kept distinct
+- Unknown shipping, marketplace fees, duties, and tax remain unknown (not treated as zero)
+- Non-JPY currencies are preserved without automatic conversion
+- Condition normalization is conservative (`new`, `new_with_defects`, `used`, `unknown`)
+- Demo only: `--demo-goat` with `FakeGoatClient`
+- Without demo, `--marketplace goat` logs a clear error and falls back safely
+
+```
+GOAT_DEMO_ENABLED=true
+python main.py --marketplace goat --demo-goat
+```
+
+Or:
+
+```
+python main.py --demo-goat
+python main.py --demo-goat --profit-intelligence
+```
+
+The `--ai-score` flag remains a compatibility alias for `--profit-intelligence`.
+
 ### Profit Intelligence Phase 16 notes
 
 - Phase 16 adds **Profit Intelligence v1**: a deterministic, explainable, rule-based scoring engine
@@ -388,6 +417,7 @@ python main.py --demo-stockx
 ```
 python main.py --profit-intelligence
 python main.py --demo-stockx --profit-intelligence
+python main.py --demo-goat --profit-intelligence
 python main.py --marketplace farfetch --profit-intelligence
 ```
 

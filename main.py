@@ -33,6 +33,7 @@ from config.settings import (
     CHRONO24_DEMO_ENABLED,
     FARFETCH_DEMO_ENABLED,
     STOCKX_DEMO_ENABLED,
+    GOAT_DEMO_ENABLED,
 )
 from excel.exporter import ExcelExporter
 from marketplace.amazon_client import FakeAmazonClient
@@ -71,6 +72,10 @@ from marketplace.stockx_client import FakeStockXClient
 from marketplace.stockx_exceptions import StockXConfigurationError
 from marketplace.stockx_marketplace import create_stockx_marketplace
 from marketplace.stockx_settings import StockXSettings
+from marketplace.goat_client import FakeGoatClient
+from marketplace.goat_exceptions import GoatConfigurationError
+from marketplace.goat_marketplace import create_goat_marketplace
+from marketplace.goat_settings import GoatSettings
 from used_luxury.demo_marketplace import create_used_luxury_demo_marketplace
 from used_luxury.demo_provider import FakeUsedLuxuryProvider
 from models.marketplace_listing import MarketplaceListing
@@ -282,6 +287,8 @@ def resolve_marketplace_name(argv: list[str] | None = None) -> str:
         return "farfetch"
     if STOCKX_DEMO_ENABLED or "--demo-stockx" in args:
         return "stockx"
+    if GOAT_DEMO_ENABLED or "--demo-goat" in args:
+        return "goat"
     if AMAZON_JP_ENABLED and (AMAZON_JP_DEMO_ENABLED or "--demo-amazon" in args):
         return "amazon_jp"
     if YAHOO_API_ENABLED:
@@ -474,6 +481,23 @@ def build_stockx_demo_client() -> FakeStockXClient | None:
     return FakeStockXClient(payload)
 
 
+def is_goat_demo_requested(argv: list[str] | None = None) -> bool:
+    """Return True when GOAT demo mode is explicitly requested."""
+    args = argv if argv is not None else sys.argv[1:]
+    return GOAT_DEMO_ENABLED or "--demo-goat" in args
+
+
+def build_goat_demo_client() -> FakeGoatClient | None:
+    """Build a fake GOAT client from local synthetic fixture JSON."""
+    settings = GoatSettings.from_env()
+    fixture_path = FIXTURES_DIR / settings.demo_fixture_path
+    if not fixture_path.exists():
+        logger.warning("GOAT demo fixture not found: %s", fixture_path)
+        return None
+    payload = json.loads(fixture_path.read_text(encoding="utf-8"))
+    return FakeGoatClient(payload)
+
+
 def is_used_luxury_demo_requested(argv: list[str] | None = None) -> bool:
     """Return True when used luxury demo mode is explicitly requested."""
     args = argv if argv is not None else sys.argv[1:]
@@ -579,6 +603,8 @@ def _normalize_selected_marketplace(selected: str) -> str:
         return "farfetch"
     if normalized in {"stockx", "stock_x", "stock-x", "sx"}:
         return "stockx"
+    if normalized in {"goat", "goat_marketplace", "goat-marketplace"}:
+        return "goat"
     return normalized
 
 
@@ -592,6 +618,14 @@ def build_cli_parser() -> argparse.ArgumentParser:
             "(not LLM, machine learning, or predictive AI)."
         ),
         add_help=True,
+    )
+    parser.add_argument(
+        "--demo-goat",
+        action="store_true",
+        help=(
+            "Run GOAT marketplace demo with synthetic internal fixtures only "
+            "(no live GOAT access)."
+        ),
     )
     parser.add_argument(
         "--profit-intelligence",
@@ -662,6 +696,7 @@ def run_phase3(
     chrono24_settings = Chrono24Settings.from_env()
     farfetch_settings = FarfetchSettings.from_env()
     stockx_settings = StockXSettings.from_env()
+    goat_settings = GoatSettings.from_env()
     amazon_client = None
     rakuten_client = None
     yahoo_auction_client = None
@@ -672,6 +707,7 @@ def run_phase3(
     chrono24_client = None
     farfetch_client = None
     stockx_client = None
+    goat_client = None
 
     selected = _normalize_selected_marketplace(selected)
 
@@ -811,6 +847,21 @@ def run_phase3(
             logger.error(
                 "StockX live client is not implemented. "
                 "Use --demo-stockx for fixture demo mode."
+            )
+            selected = "local"
+
+    if selected == "goat":
+        if is_goat_demo_requested():
+            goat_client = build_goat_demo_client()
+            if goat_client is None:
+                logger.warning(
+                    "GOAT demo client unavailable; falling back to local marketplace"
+                )
+                selected = "local"
+        else:
+            logger.error(
+                "GOAT live client is not implemented. "
+                "Use --demo-goat for fixture demo mode."
             )
             selected = "local"
 
@@ -1097,6 +1148,40 @@ def run_phase3(
         )
         return output_path
 
+    if selected == "goat" and goat_client is not None:
+        marketplace = create_goat_marketplace(
+            client=goat_client,
+            settings=goat_settings,
+        )
+        calculator = ProfitCalculator(
+            ProfitConfig(
+                international_shipping_jpy=Decimal("2500"),
+                customs_duty_rate=Decimal("0.08"),
+                import_tax_rate=Decimal("0.10"),
+                domestic_shipping_jpy=Decimal("800"),
+                marketplace_fee_rate=Decimal("0.12"),
+                other_costs_jpy=Decimal("500"),
+            )
+        )
+        search_results = [marketplace.search(product) for product in products]
+        all_listings = [listing for result in search_results for listing in result.listings]
+        valid_count = sum(len(result.valid_listings) for result in search_results)
+        results = calculate_profit_from_search_results(search_results, calculator)
+        ranked = _rank_phase3_results(
+            results, search_results, calculator, profit_intelligence
+        )
+        exporter = ExcelExporter(output_dir=OUTPUT_DIR, filename=EXCEL_FILENAME)
+        output_path = exporter.export_phase3_workbook(products, all_listings, ranked)
+        logger.info(
+            "GOAT demo export completed: %s (products=%d, listings=%d, valid=%d, results=%d)",
+            output_path,
+            len(products),
+            len(all_listings),
+            valid_count,
+            len(ranked),
+        )
+        return output_path
+
     try:
         marketplace = create_marketplace(
             selected,
@@ -1123,6 +1208,8 @@ def run_phase3(
             farfetch_client=farfetch_client,
             stockx_settings=stockx_settings,
             stockx_client=stockx_client,
+            goat_settings=goat_settings,
+            goat_client=goat_client,
         )
     except (
         VestiaireConfigurationError,
@@ -1132,6 +1219,7 @@ def run_phase3(
         Chrono24ConfigurationError,
         FarfetchConfigurationError,
         StockXConfigurationError,
+        GoatConfigurationError,
     ) as exc:
         logger.error("%s", exc)
         selected = "local"
@@ -1212,10 +1300,10 @@ def main() -> None:
     if "--help" in sys.argv or "-h" in sys.argv:
         build_cli_parser().print_help()
         return
-    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14/15/16 started")
+    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14/15/16/17 started")
     with patch("utils.http.fetch_url"), patch("utils.http.HttpClient"):
         output_path = run()
-    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14/15/16 finished: %s", output_path)
+    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14/15/16/17 finished: %s", output_path)
 
 
 if __name__ == "__main__":

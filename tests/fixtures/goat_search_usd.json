@@ -1,0 +1,33 @@
+{
+  "marketplace": "goat",
+  "query": "usd listing",
+  "page": 1,
+  "page_size": 20,
+  "total": 1,
+  "items": [
+    {
+      "listing_id": "goat-usd-001",
+      "title": "USD Currency Synthetic Listing",
+      "brand": "DEMO",
+      "style_code": "USD-001",
+      "condition": {
+        "raw": "New"
+      },
+      "price": {
+        "amount": 180,
+        "currency": "USD"
+      },
+      "shipping": {
+        "known": false
+      },
+      "fees": {
+        "known": false
+      },
+      "sale_status": "ACTIVE",
+      "inventory": {
+        "status": "AVAILABLE"
+      },
+      "url": "https://example.invalid/goat/goat-usd-001"
+    }
+  ]
+}

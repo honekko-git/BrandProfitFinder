@@ -1,0 +1,49 @@
+{
+  "marketplace": "goat",
+  "query": "invalid items",
+  "page": 1,
+  "page_size": 20,
+  "total": 3,
+  "items": [
+    {
+      "listing_id": "goat-invalid-title",
+      "title": "",
+      "price": {
+        "amount": 10000,
+        "currency": "JPY"
+      },
+      "sale_status": "ACTIVE",
+      "inventory": {
+        "status": "AVAILABLE"
+      }
+    },
+    {
+      "listing_id": "goat-invalid-price",
+      "title": "Missing Price Synthetic Listing",
+      "price": {
+        "amount": null,
+        "currency": "JPY"
+      },
+      "sale_status": "ACTIVE",
+      "inventory": {
+        "status": "AVAILABLE"
+      }
+    },
+    {
+      "listing_id": "goat-valid-control",
+      "title": "Valid Control Synthetic Listing",
+      "price": {
+        "amount": 11000,
+        "currency": "JPY"
+      },
+      "condition": {
+        "raw": "New"
+      },
+      "sale_status": "ACTIVE",
+      "inventory": {
+        "status": "AVAILABLE"
+      },
+      "url": "https://example.invalid/goat/goat-valid-control"
+    }
+  ]
+}

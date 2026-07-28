@@ -90,10 +90,13 @@ def _attach_used_item_metadata(result: PriceResult, listing) -> None:
         "source_marketplace": meta.get("source_marketplace") or listing.marketplace_name,
         "source_listing_id": meta.get("source_listing_id") or listing.listing_id,
         "source_currency": meta.get("source_currency") or listing.currency,
-        "source_product_id": meta.get("source_product_id") or meta.get("source_stockx_product_id"),
+        "source_product_id": meta.get("source_product_id")
+        or meta.get("source_stockx_product_id"),
         "source_variant_id": meta.get("source_variant_id") or meta.get("source_stockx_variant_id"),
         "source_designer": meta.get("source_designer"),
-        "source_style_code": meta.get("source_style_code") or meta.get("source_stockx_style_code"),
+        "source_style_code": meta.get("source_style_code")
+        or meta.get("source_goat_style_code")
+        or meta.get("source_stockx_style_code"),
         "source_jan": meta.get("source_jan"),
         "shipping_known": meta.get("source_shipping_known")
         if "source_shipping_known" in meta
@@ -171,9 +174,11 @@ def _attach_used_item_metadata(result: PriceResult, listing) -> None:
         "adjustment_applied": False,
         "used_item_warnings": list(details.warnings) if details else [],
         "source_size": meta.get("source_size"),
-        "source_size_system": meta.get("source_size_system"),
-        "source_sku": meta.get("source_stockx_sku"),
-        "source_release_year": meta.get("source_stockx_release_year"),
+        "source_size_system": meta.get("source_goat_size_system")
+        or meta.get("source_size_system"),
+        "source_sku": meta.get("source_goat_sku") or meta.get("source_stockx_sku"),
+        "source_release_year": meta.get("source_goat_release_year")
+        or meta.get("source_stockx_release_year"),
         "source_release_date": meta.get("source_stockx_release_date"),
         "price_source": meta.get("source_stockx_price_source"),
         "lowest_ask": meta.get("source_stockx_lowest_ask"),
@@ -191,7 +196,9 @@ def _attach_used_item_metadata(result: PriceResult, listing) -> None:
         "bids_count": meta.get("source_stockx_bids_count"),
         "price_premium_rate": meta.get("source_stockx_premium_rate"),
         "volatility_rate": meta.get("source_stockx_volatility_rate"),
-        "fees_known": meta.get("source_stockx_fees_known"),
+        "fees_known": meta.get("source_goat_fees_known")
+        if meta.get("source_goat_fees_known") is not None
+        else meta.get("source_stockx_fees_known"),
         "fees_amount": meta.get("source_stockx_fees_amount"),
         "fees_currency": meta.get("source_stockx_fees_currency"),
         "market_price_applied": False,

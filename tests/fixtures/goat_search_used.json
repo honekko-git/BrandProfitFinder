@@ -1,0 +1,37 @@
+{
+  "marketplace": "goat",
+  "query": "used sneaker",
+  "page": 1,
+  "page_size": 20,
+  "total": 1,
+  "items": [
+    {
+      "listing_id": "goat-used-001",
+      "title": "NIKE Synthetic Used Sneaker",
+      "brand": "NIKE",
+      "style_code": "NK-USED-001",
+      "condition": {
+        "raw": "Used",
+        "description": "Light wear observed in synthetic fixture"
+      },
+      "box_condition": {
+        "raw": "good"
+      },
+      "price": {
+        "amount": 12000,
+        "currency": "JPY"
+      },
+      "shipping": {
+        "known": false
+      },
+      "fees": {
+        "known": false
+      },
+      "sale_status": "ACTIVE",
+      "inventory": {
+        "status": "AVAILABLE"
+      },
+      "url": "https://example.invalid/goat/goat-used-001"
+    }
+  ]
+}
