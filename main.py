@@ -30,6 +30,7 @@ from config.settings import (
     THEREALREAL_DEMO_ENABLED,
     GRAILED_DEMO_ENABLED,
     CHRONO24_DEMO_ENABLED,
+    FARFETCH_DEMO_ENABLED,
 )
 from excel.exporter import ExcelExporter
 from marketplace.amazon_client import FakeAmazonClient
@@ -60,6 +61,10 @@ from marketplace.chrono24_client import FakeChrono24Client
 from marketplace.chrono24_exceptions import Chrono24ConfigurationError
 from marketplace.chrono24_marketplace import create_chrono24_marketplace
 from marketplace.chrono24_settings import Chrono24Settings
+from marketplace.farfetch_client import FakeFarfetchClient
+from marketplace.farfetch_exceptions import FarfetchConfigurationError
+from marketplace.farfetch_marketplace import create_farfetch_marketplace
+from marketplace.farfetch_settings import FarfetchSettings
 from used_luxury.demo_marketplace import create_used_luxury_demo_marketplace
 from used_luxury.demo_provider import FakeUsedLuxuryProvider
 from models.marketplace_listing import MarketplaceListing
@@ -261,6 +266,8 @@ def resolve_marketplace_name(argv: list[str] | None = None) -> str:
         return "grailed"
     if CHRONO24_DEMO_ENABLED or "--demo-chrono24" in args:
         return "chrono24"
+    if FARFETCH_DEMO_ENABLED or "--demo-farfetch" in args:
+        return "farfetch"
     if AMAZON_JP_ENABLED and (AMAZON_JP_DEMO_ENABLED or "--demo-amazon" in args):
         return "amazon_jp"
     if YAHOO_API_ENABLED:
@@ -403,6 +410,31 @@ def build_chrono24_demo_client() -> FakeChrono24Client | None:
     return FakeChrono24Client(payload)
 
 
+def is_farfetch_demo_requested(argv: list[str] | None = None) -> bool:
+    """Return True when Farfetch demo mode is explicitly requested."""
+    args = argv if argv is not None else sys.argv[1:]
+    return FARFETCH_DEMO_ENABLED or "--demo-farfetch" in args
+
+
+def build_farfetch_demo_client() -> FakeFarfetchClient | None:
+    """Build a fake Farfetch client from local fixture JSON."""
+    settings = FarfetchSettings.from_env()
+    fixture_path = FIXTURES_DIR / settings.demo_fixture_path
+    if not fixture_path.exists():
+        logger.warning("Farfetch demo fixture not found: %s", fixture_path)
+        return None
+    payload = json.loads(fixture_path.read_text(encoding="utf-8"))
+    page_2 = FIXTURES_DIR / "farfetch_search_page_2.json"
+    if page_2.exists():
+        return FakeFarfetchClient(
+            pages={
+                1: payload,
+                2: json.loads(page_2.read_text(encoding="utf-8")),
+            }
+        )
+    return FakeFarfetchClient(payload)
+
+
 def is_used_luxury_demo_requested(argv: list[str] | None = None) -> bool:
     """Return True when used luxury demo mode is explicitly requested."""
     args = argv if argv is not None else sys.argv[1:]
@@ -504,6 +536,8 @@ def _normalize_selected_marketplace(selected: str) -> str:
         return "grailed"
     if normalized in {"chrono24", "chrono_24", "chrono-24", "c24"}:
         return "chrono24"
+    if normalized in {"farfetch", "far_fetch", "far-fetch", "ff"}:
+        return "farfetch"
     return normalized
 
 
@@ -527,6 +561,7 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
     therealreal_settings = TheRealRealSettings.from_env()
     grailed_settings = GrailedSettings.from_env()
     chrono24_settings = Chrono24Settings.from_env()
+    farfetch_settings = FarfetchSettings.from_env()
     amazon_client = None
     rakuten_client = None
     yahoo_auction_client = None
@@ -535,6 +570,7 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
     therealreal_client = None
     grailed_client = None
     chrono24_client = None
+    farfetch_client = None
 
     selected = _normalize_selected_marketplace(selected)
 
@@ -644,6 +680,21 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
             logger.error(
                 "Chrono24 live client is not implemented. "
                 "Use --demo-chrono24 for fixture demo mode."
+            )
+            selected = "local"
+
+    if selected == "farfetch":
+        if is_farfetch_demo_requested():
+            farfetch_client = build_farfetch_demo_client()
+            if farfetch_client is None:
+                logger.warning(
+                    "Farfetch demo client unavailable; falling back to local marketplace"
+                )
+                selected = "local"
+        else:
+            logger.error(
+                "Farfetch live client is not implemented. "
+                "Use --demo-farfetch for fixture demo mode."
             )
             selected = "local"
 
@@ -874,6 +925,42 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
         )
         return output_path
 
+    if selected == "farfetch" and farfetch_client is not None:
+        marketplace = create_farfetch_marketplace(
+            client=farfetch_client,
+            settings=farfetch_settings,
+        )
+        calculator = ProfitCalculator(
+            ProfitConfig(
+                international_shipping_jpy=Decimal("2500"),
+                customs_duty_rate=Decimal("0.08"),
+                import_tax_rate=Decimal("0.10"),
+                domestic_shipping_jpy=Decimal("800"),
+                marketplace_fee_rate=Decimal("0.12"),
+                other_costs_jpy=Decimal("500"),
+            )
+        )
+        search_results = [marketplace.search(product) for product in products]
+        all_listings = [listing for result in search_results for listing in result.listings]
+        valid_count = sum(len(result.valid_listings) for result in search_results)
+        results = calculate_profit_from_search_results(search_results, calculator)
+        ranked = RankingEngine(calculator.config).rank(
+            results,
+            sort_key=RankingSortKey.PROFIT,
+            descending=True,
+        )
+        exporter = ExcelExporter(output_dir=OUTPUT_DIR, filename=EXCEL_FILENAME)
+        output_path = exporter.export_phase3_workbook(products, all_listings, ranked)
+        logger.info(
+            "Farfetch demo export completed: %s (products=%d, listings=%d, valid=%d, results=%d)",
+            output_path,
+            len(products),
+            len(all_listings),
+            valid_count,
+            len(ranked),
+        )
+        return output_path
+
     try:
         marketplace = create_marketplace(
             selected,
@@ -896,6 +983,8 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
             grailed_client=grailed_client,
             chrono24_settings=chrono24_settings,
             chrono24_client=chrono24_client,
+            farfetch_settings=farfetch_settings,
+            farfetch_client=farfetch_client,
         )
     except (
         VestiaireConfigurationError,
@@ -903,6 +992,7 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
         TheRealRealConfigurationError,
         GrailedConfigurationError,
         Chrono24ConfigurationError,
+        FarfetchConfigurationError,
     ) as exc:
         logger.error("%s", exc)
         selected = "local"
@@ -974,10 +1064,10 @@ def run(marketplace_name: str | None = None) -> Path:
 def main() -> None:
     """CLI entry point."""
     setup_logging()
-    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13 started")
+    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14 started")
     with patch("utils.http.fetch_url"), patch("utils.http.HttpClient"):
         output_path = run()
-    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13 finished: %s", output_path)
+    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14 finished: %s", output_path)
 
 
 if __name__ == "__main__":

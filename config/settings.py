@@ -451,3 +451,117 @@ CHRONO24_INCLUDE_PROFESSIONAL_DEALERS = os.getenv(
     "yes",
     "on",
 )
+
+FARFETCH_ENABLED = os.getenv("FARFETCH_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+FARFETCH_DEMO_ENABLED = os.getenv("FARFETCH_DEMO_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+FARFETCH_TIMEOUT_SECONDS = max(1, int(os.getenv("FARFETCH_TIMEOUT_SECONDS", "10")))
+FARFETCH_PAGE_SIZE = max(1, min(50, int(os.getenv("FARFETCH_PAGE_SIZE", "20"))))
+FARFETCH_MAX_PAGES = max(1, min(20, int(os.getenv("FARFETCH_MAX_PAGES", "1"))))
+FARFETCH_DEFAULT_CURRENCY = os.getenv("FARFETCH_DEFAULT_CURRENCY", "JPY").strip().upper()
+FARFETCH_DEMO_FIXTURE_PATH = os.getenv(
+    "FARFETCH_DEMO_FIXTURE_PATH", "farfetch_search_normal.json"
+).strip()
+FARFETCH_ALLOW_UNKNOWN_CURRENCY = os.getenv(
+    "FARFETCH_ALLOW_UNKNOWN_CURRENCY", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+FARFETCH_INCLUDE_UNAVAILABLE = os.getenv(
+    "FARFETCH_INCLUDE_UNAVAILABLE", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+FARFETCH_INCLUDE_SOLD = os.getenv("FARFETCH_INCLUDE_SOLD", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+FARFETCH_INCLUDE_RESERVED = os.getenv(
+    "FARFETCH_INCLUDE_RESERVED", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+FARFETCH_INCLUDE_DISCOUNTED_ONLY = os.getenv(
+    "FARFETCH_INCLUDE_DISCOUNTED_ONLY", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+FARFETCH_INCLUDE_FULL_PRICE_ONLY = os.getenv(
+    "FARFETCH_INCLUDE_FULL_PRICE_ONLY", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+FARFETCH_INCLUDE_LOW_STOCK = os.getenv(
+    "FARFETCH_INCLUDE_LOW_STOCK", "true"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+FARFETCH_INCLUDE_FINAL_SALE = os.getenv(
+    "FARFETCH_INCLUDE_FINAL_SALE", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+FARFETCH_INCLUDE_PARTNER_BOUTIQUES = os.getenv(
+    "FARFETCH_INCLUDE_PARTNER_BOUTIQUES", "true"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+FARFETCH_INCLUDE_PLATFORM_INVENTORY = os.getenv(
+    "FARFETCH_INCLUDE_PLATFORM_INVENTORY", "true"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+FARFETCH_REQUIRE_KNOWN_SHIPPING = os.getenv(
+    "FARFETCH_REQUIRE_KNOWN_SHIPPING", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+FARFETCH_REQUIRE_KNOWN_DUTIES = os.getenv(
+    "FARFETCH_REQUIRE_KNOWN_DUTIES", "false"
+).strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)

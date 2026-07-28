@@ -1,0 +1,13 @@
+{
+  "marketplace": "farfetch",
+  "query": "Gucci GG Marmont Small Bag",
+  "page": 1,
+  "page_size": 20,
+  "total": 1,
+  "items": [
+    {
+      "listing_id": "farfetch-missing-001",
+      "title": "Incomplete Item"
+    }
+  ]
+}

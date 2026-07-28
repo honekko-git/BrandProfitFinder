@@ -1,0 +1,270 @@
+{
+  "marketplace": "farfetch",
+  "query": "Gucci GG Marmont Small Bag",
+  "page": 1,
+  "page_size": 20,
+  "total": 3,
+  "items": [
+    {
+      "listing_id": "farfetch-demo-001",
+      "product_id": "farfetch-product-demo-001",
+      "variant_id": "farfetch-variant-demo-001",
+      "title": "GUCCI GG Marmont Small Shoulder Bag",
+      "description": "New season shoulder bag in black leather.",
+      "price": {
+        "amount": 298000,
+        "currency": "JPY"
+      },
+      "original_price": {
+        "amount": 330000,
+        "currency": "JPY",
+        "known": true
+      },
+      "shipping": {
+        "amount": null,
+        "currency": "JPY",
+        "known": false
+      },
+      "duties": {
+        "included": null,
+        "amount": null,
+        "currency": "JPY",
+        "known": false
+      },
+      "url": "https://example.invalid/farfetch/farfetch-demo-001",
+      "image_url": "https://example.invalid/images/farfetch-demo-001.jpg",
+      "brand": "GUCCI",
+      "designer": "GUCCI",
+      "model_number": "447632",
+      "style_code": "447632-DTD1T-1000",
+      "jan": null,
+      "category": "bags",
+      "sub_category": "shoulder_bags",
+      "color": "black",
+      "size": "ONE SIZE",
+      "material": "leather",
+      "gender": "women",
+      "season": "2026",
+      "collection": "new_season",
+      "condition": {
+        "raw": "New",
+        "description": "New retail item"
+      },
+      "boutique": {
+        "type": "PARTNER_BOUTIQUE",
+        "name": null,
+        "country": "IT",
+        "verified": null
+      },
+      "inventory": {
+        "status": "IN_STOCK",
+        "quantity": 1,
+        "low_stock": false
+      },
+      "variants": [
+        {
+          "variant_id": "farfetch-variant-demo-001",
+          "size": "ONE SIZE",
+          "color": "black",
+          "sku": "INTERNAL-DEMO-SKU-001",
+          "available": true,
+          "quantity": 1,
+          "price": {
+            "amount": 298000,
+            "currency": "JPY"
+          }
+        }
+      ],
+      "discount": {
+        "active": true,
+        "amount": 32000,
+        "rate": 0.097,
+        "previous_price": 330000
+      },
+      "return_policy": {
+        "accepted": true,
+        "period_days": 14,
+        "final_sale": false
+      },
+      "sale_status": "ACTIVE",
+      "listed_at": "2026-07-25T10:00:00Z",
+      "metadata": {
+        "source_format": "brandprofitfinder_internal_fixture"
+      }
+    },
+    {
+      "listing_id": "farfetch-demo-002",
+      "product_id": "farfetch-product-demo-002",
+      "variant_id": "farfetch-variant-demo-002",
+      "title": "PRADA Re-Edition 2005 Nylon Bag",
+      "description": "New season shoulder bag in black leather.",
+      "price": {
+        "amount": 185000,
+        "currency": "JPY"
+      },
+      "original_price": {
+        "amount": null,
+        "currency": "JPY",
+        "known": false
+      },
+      "shipping": {
+        "amount": null,
+        "currency": "JPY",
+        "known": false
+      },
+      "duties": {
+        "included": null,
+        "amount": null,
+        "currency": "JPY",
+        "known": false
+      },
+      "url": "https://example.invalid/farfetch/farfetch-demo-002",
+      "image_url": "https://example.invalid/images/farfetch-demo-002.jpg",
+      "brand": "PRADA",
+      "designer": "PRADA",
+      "model_number": "1BH204",
+      "style_code": "1BH204-2CE9-F0002",
+      "jan": null,
+      "category": "bags",
+      "sub_category": "shoulder_bags",
+      "color": "black",
+      "size": "ONE SIZE",
+      "material": "leather",
+      "gender": "women",
+      "season": "2026",
+      "collection": "new_season",
+      "condition": {
+        "raw": "New",
+        "description": "New retail item"
+      },
+      "boutique": {
+        "type": "PLATFORM_INVENTORY",
+        "name": null,
+        "country": "IT",
+        "verified": null
+      },
+      "inventory": {
+        "status": "IN_STOCK",
+        "quantity": 1,
+        "low_stock": false
+      },
+      "variants": [
+        {
+          "variant_id": "farfetch-variant-demo-002",
+          "size": "ONE SIZE",
+          "color": "black",
+          "sku": "INTERNAL-DEMO-SKU-001",
+          "available": true,
+          "quantity": 1,
+          "price": {
+            "amount": 185000,
+            "currency": "JPY"
+          }
+        }
+      ],
+      "discount": {
+        "active": false,
+        "amount": 0,
+        "rate": 0.0,
+        "previous_price": null
+      },
+      "return_policy": {
+        "accepted": true,
+        "period_days": 14,
+        "final_sale": false
+      },
+      "sale_status": "ACTIVE",
+      "listed_at": "2026-07-25T10:00:00Z",
+      "metadata": {
+        "source_format": "brandprofitfinder_internal_fixture"
+      }
+    },
+    {
+      "listing_id": "farfetch-demo-003",
+      "product_id": "farfetch-product-demo-003",
+      "variant_id": "farfetch-variant-demo-003",
+      "title": "SAINT LAURENT Loulou Small Bag",
+      "description": "New season shoulder bag in black leather.",
+      "price": {
+        "amount": 245000,
+        "currency": "JPY"
+      },
+      "original_price": {
+        "amount": 260000,
+        "currency": "JPY",
+        "known": true
+      },
+      "shipping": {
+        "amount": null,
+        "currency": "JPY",
+        "known": false
+      },
+      "duties": {
+        "included": null,
+        "amount": null,
+        "currency": "JPY",
+        "known": false
+      },
+      "url": "https://example.invalid/farfetch/farfetch-demo-003",
+      "image_url": "https://example.invalid/images/farfetch-demo-003.jpg",
+      "brand": "SAINT LAURENT",
+      "designer": "SAINT LAURENT",
+      "model_number": "577475",
+      "style_code": "577475-1EL07-1000",
+      "jan": null,
+      "category": "bags",
+      "sub_category": "shoulder_bags",
+      "color": "black",
+      "size": "ONE SIZE",
+      "material": "leather",
+      "gender": "women",
+      "season": "2026",
+      "collection": "new_season",
+      "condition": {
+        "raw": "New",
+        "description": "New retail item"
+      },
+      "boutique": {
+        "type": "PARTNER_BOUTIQUE",
+        "name": null,
+        "country": "IT",
+        "verified": null
+      },
+      "inventory": {
+        "status": "IN_STOCK",
+        "quantity": 1,
+        "low_stock": false
+      },
+      "variants": [
+        {
+          "variant_id": "farfetch-variant-demo-003",
+          "size": "ONE SIZE",
+          "color": "black",
+          "sku": "INTERNAL-DEMO-SKU-001",
+          "available": true,
+          "quantity": 1,
+          "price": {
+            "amount": 245000,
+            "currency": "JPY"
+          }
+        }
+      ],
+      "discount": {
+        "active": true,
+        "amount": 15000,
+        "rate": 0.0577,
+        "previous_price": 260000
+      },
+      "return_policy": {
+        "accepted": true,
+        "period_days": 14,
+        "final_sale": false
+      },
+      "sale_status": "ACTIVE",
+      "listed_at": "2026-07-25T10:00:00Z",
+      "metadata": {
+        "source_format": "brandprofitfinder_internal_fixture"
+      }
+    }
+  ]
+}

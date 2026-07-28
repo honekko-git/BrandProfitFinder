@@ -10,6 +10,7 @@ from decimal import Decimal
 
 from config.constants import (
     MARKETPLACE_CHRONO24,
+    MARKETPLACE_FARFETCH,
     MARKETPLACE_FASHIONPHILE,
     MARKETPLACE_GRAILED,
     MARKETPLACE_THEREALREAL,
@@ -31,6 +32,7 @@ class MatchConfig:
     jan_score: Decimal = Decimal("40")
     sku_score: Decimal = Decimal("35")
     model_score: Decimal = Decimal("30")
+    style_score: Decimal = Decimal("27")
     reference_score: Decimal = Decimal("28")
     brand_score: Decimal = Decimal("15")
     title_word_score: Decimal = Decimal("20")
@@ -70,8 +72,17 @@ class ListingMatcher:
         listing_reference = _normalize_text(
             str(listing.source_metadata.get("source_reference_number") or "")
         )
+        listing_style = _normalize_text(str(listing.source_metadata.get("source_style_code") or ""))
+        listing_jan_meta = _normalize_text(str(listing.source_metadata.get("source_jan") or ""))
 
         if listing_jan and (product_sku == listing_jan or product_model == listing_jan):
+            total += self.config.jan_score
+        elif listing_jan_meta and (product_sku == listing_jan_meta or product_model == listing_jan_meta):
+            total += self.config.jan_score
+        elif listing.jan_code and (
+            product_sku == _normalize_text(listing.jan_code)
+            or product_model == _normalize_text(listing.jan_code)
+        ):
             total += self.config.jan_score
 
         if product_sku and listing_sku and product_sku == listing_sku:
@@ -87,6 +98,7 @@ class ListingMatcher:
                 MARKETPLACE_THEREALREAL,
                 MARKETPLACE_GRAILED,
                 MARKETPLACE_CHRONO24,
+                MARKETPLACE_FARFETCH,
             }
             and product_sku == _normalize_text(listing.listing_id)
         ):
@@ -94,6 +106,8 @@ class ListingMatcher:
 
         if product_model and listing_model and product_model == listing_model:
             total += self.config.model_score
+        elif product_model and listing_style and product_model == listing_style:
+            total += self.config.style_score
         elif product_model and listing_reference and product_model == listing_reference:
             total += self.config.reference_score
 
@@ -156,6 +170,18 @@ class ListingMatcher:
             listing_bracelet = _normalize_text(str(meta.get("source_bracelet_material") or ""))
             if product_bracelet and listing_bracelet and product_bracelet != listing_bracelet:
                 warnings.append("bracelet material mismatch between product and listing")
+
+        if listing.marketplace_name == MARKETPLACE_FARFETCH:
+            meta = listing.source_metadata
+            product_material = _normalize_text(_extract_material(product.name))
+            listing_material = _normalize_text(str(meta.get("source_material") or ""))
+            if product_material and listing_material and product_material != listing_material:
+                warnings.append("material mismatch between product and listing")
+
+            product_gender = _normalize_text(_extract_gender(product.name))
+            listing_gender = _normalize_text(str(meta.get("source_gender") or ""))
+            if product_gender and listing_gender and product_gender != listing_gender:
+                warnings.append("gender mismatch between product and listing")
 
         if listing.used_item_details is not None:
             auth_status = listing.used_item_details.authentication.status.value
@@ -306,4 +332,22 @@ def _extract_bracelet_material(text: str) -> str:
     for key, value in materials.items():
         if key in lowered:
             return value
+    return ""
+
+
+def _extract_material(text: str) -> str:
+    materials = {"leather", "canvas", "cotton", "wool", "silk", "nylon", "suede"}
+    tokens = set(_tokenize(text))
+    found = materials & tokens
+    return next(iter(found), "")
+
+
+def _extract_gender(text: str) -> str:
+    lowered = text.lower()
+    if "women" in lowered or "woman" in lowered:
+        return "women"
+    if "men" in lowered and "women" not in lowered:
+        return "men"
+    if "unisex" in lowered:
+        return "unisex"
     return ""

@@ -7,6 +7,7 @@ from config.constants import (
     MARKETPLACE_FASHIONPHILE,
     MARKETPLACE_GRAILED,
     MARKETPLACE_CHRONO24,
+    MARKETPLACE_FARFETCH,
     MARKETPLACE_THEREALREAL,
     MARKETPLACE_LOCAL,
     MARKETPLACE_MERCARI,
@@ -31,6 +32,9 @@ from marketplace.grailed_settings import GrailedSettings
 from marketplace.chrono24_client import Chrono24ClientProtocol
 from marketplace.chrono24_marketplace import create_chrono24_marketplace
 from marketplace.chrono24_settings import Chrono24Settings
+from marketplace.farfetch_client import FarfetchClientProtocol
+from marketplace.farfetch_marketplace import create_farfetch_marketplace
+from marketplace.farfetch_settings import FarfetchSettings
 from marketplace.local_marketplace import LocalMarketplace
 from marketplace.rakuten_client import RakutenClientProtocol
 from marketplace.rakuten_marketplace import create_rakuten_marketplace
@@ -64,6 +68,9 @@ _GRAILED_ALIASES = frozenset(
 _CHRONO24_ALIASES = frozenset(
     {"chrono24", "chrono_24", "chrono-24", "c24"}
 )
+_FARFETCH_ALIASES = frozenset(
+    {"farfetch", "far_fetch", "far-fetch", "ff"}
+)
 
 
 def _normalize_marketplace_name(marketplace_name: str) -> str:
@@ -80,6 +87,8 @@ def _normalize_marketplace_name(marketplace_name: str) -> str:
         return MARKETPLACE_GRAILED
     if normalized in _CHRONO24_ALIASES:
         return MARKETPLACE_CHRONO24
+    if normalized in _FARFETCH_ALIASES:
+        return MARKETPLACE_FARFETCH
     return normalized
 
 
@@ -104,6 +113,8 @@ def create_marketplace(
     grailed_client: GrailedClientProtocol | None = None,
     chrono24_settings: Chrono24Settings | None = None,
     chrono24_client: Chrono24ClientProtocol | None = None,
+    farfetch_settings: FarfetchSettings | None = None,
+    farfetch_client: FarfetchClientProtocol | None = None,
 ) -> BaseMarketplace:
     """
     Create a marketplace instance for the given name.
@@ -129,6 +140,8 @@ def create_marketplace(
         grailed_client: Optional Grailed client override (required for grailed).
         chrono24_settings: Optional Chrono24 settings override.
         chrono24_client: Optional Chrono24 client override (required for chrono24).
+        farfetch_settings: Optional Farfetch settings override.
+        farfetch_client: Optional Farfetch client override (required for farfetch).
 
     Returns:
         Configured marketplace instance.
@@ -188,6 +201,12 @@ def create_marketplace(
             settings=chrono24_settings,
         )
 
+    if normalized == MARKETPLACE_FARFETCH.lower():
+        return create_farfetch_marketplace(
+            client=farfetch_client,
+            settings=farfetch_settings,
+        )
+
     not_implemented = {
         MARKETPLACE_MERCARI.lower(): "Mercari marketplace is not yet implemented",
     }
@@ -216,11 +235,13 @@ def get_all_marketplaces(
     grailed_client: GrailedClientProtocol | None = None,
     chrono24_settings: Chrono24Settings | None = None,
     chrono24_client: Chrono24ClientProtocol | None = None,
+    farfetch_settings: FarfetchSettings | None = None,
+    farfetch_client: FarfetchClientProtocol | None = None,
 ) -> list[BaseMarketplace]:
     """
     Return marketplace instances for all implemented marketplaces.
 
-    Vestiaire, Fashionphile, The RealReal, Grailed, and Chrono24 are omitted unless a client is injected.
+    Vestiaire, Fashionphile, The RealReal, Grailed, Chrono24, and Farfetch are omitted unless a client is injected.
     """
     yahoo = yahoo_settings or YahooApiSettings.from_env()
     amazon = amazon_settings or AmazonConfig.from_env()
@@ -283,6 +304,14 @@ def get_all_marketplaces(
                 MARKETPLACE_CHRONO24,
                 chrono24_settings=chrono24_settings,
                 chrono24_client=chrono24_client,
+            )
+        )
+    if farfetch_client is not None:
+        marketplaces.append(
+            create_marketplace(
+                MARKETPLACE_FARFETCH,
+                farfetch_settings=farfetch_settings,
+                farfetch_client=farfetch_client,
             )
         )
     return marketplaces
