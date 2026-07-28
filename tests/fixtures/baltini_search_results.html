@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Baltini Search Results Fixture</title>
+  <script type="application/ld+json">
+  [
+    {
+      "@type": "Product",
+      "name": "Silk Scarf",
+      "brand": {"@type": "Brand", "name": "Hermès"},
+      "sku": "HER-001",
+      "image": "https://www.baltini.com/images/scarf.jpg",
+      "offers": {
+        "@type": "Offer",
+        "price": "320.00",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.baltini.com/products/silk-scarf"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "Leather Belt",
+      "brand": {"@type": "Brand", "name": "Gucci"},
+      "sku": "GUC-101",
+      "image": "/images/belt.jpg",
+      "offers": {
+        "@type": "Offer",
+        "price": "280.00",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/OutOfStock",
+        "url": "/products/leather-belt"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "Sale Jacket",
+      "brand": {"@type": "Brand", "name": "Moncler"},
+      "sku": "MON-200",
+      "image": "/images/jacket.jpg",
+      "offers": {
+        "@type": "Offer",
+        "price": "650.00",
+        "highPrice": "900.00",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "/products/sale-jacket"
+      }
+    }
+  ]
+  </script>
+</head>
+<body>
+  <main class="search-results">
+    <div class="product-item">
+      <a class="product-item__link" href="https://www.baltini.com/products/silk-scarf">
+        <img class="product-item__image" src="/images/scarf-thumb.jpg" alt="Silk Scarf">
+        <span class="product-item__vendor">Hermès Duplicate</span>
+        <h2 class="product-item__title">Silk Scarf Duplicate</h2>
+        <span class="price-item--sale">€320.00</span>
+      </a>
+    </div>
+
+    <div class="product-item">
+      <a class="product-item__link" href="/products/cashmere-sweater">
+        <img class="product-item__image" src="/images/sweater.jpg" data-src="/images/sweater.jpg" alt="Sweater">
+        <span class="product-item__vendor">Loro Piana</span>
+        <h2 class="product-item__title">Cashmere Sweater</h2>
+        <span class="price-item--regular">€1,450.00</span>
+        <span data-product-sku="LOR-300"></span>
+      </a>
+    </div>
+
+    <div class="product-item">
+      <a class="product-item__link" href="/products/sale-boots">
+        <img class="product-item__image" src="/images/boots.jpg" alt="Sale Boots">
+        <span class="product-item__vendor">Bottega Veneta</span>
+        <h2 class="product-item__title">Sale Boots</h2>
+        <span class="price-item--sale">€420.00</span>
+        <span class="price-item--regular">€560.00</span>
+        <span class="product-sku">BOT-400</span>
+      </a>
+    </div>
+
+    <div class="product-item">
+      <a class="product-item__link" href="/products/no-brand-item">
+        <h2 class="product-item__title">No Brand Item</h2>
+        <span class="price-item--regular">€150.00</span>
+        <span data-product-sku="NB-500"></span>
+      </a>
+    </div>
+
+    <div class="product-item">
+      <a class="product-item__link" href="/products/no-image-item">
+        <span class="product-item__vendor">Prada</span>
+        <h2 class="product-item__title">No Image Item</h2>
+        <span class="price-item--regular">€200.00</span>
+        <span data-product-sku="PRD-600"></span>
+      </a>
+    </div>
+
+    <div class="product-item">
+      <a class="product-item__link" href="/products/invalid-price-item">
+        <span class="product-item__vendor">Test Brand</span>
+        <h2 class="product-item__title">Invalid Price Item</h2>
+        <span class="price-item--regular">not-a-price</span>
+        <span data-product-sku="INV-700"></span>
+      </a>
+    </div>
+
+    <div class="product-item">
+      <a class="product-item__link" href="/products/inverted-sale">
+        <span class="product-item__vendor">Test Brand</span>
+        <h2 class="product-item__title">Inverted Sale Item</h2>
+        <span class="price-item--sale">€900.00</span>
+        <span class="price-item--regular">€600.00</span>
+        <span data-product-sku="INV-800"></span>
+      </a>
+    </div>
+
+    <div class="product-item">
+      <span class="product-item__vendor">Unknown</span>
+      <h2 class="product-item__title"></h2>
+      <span class="price-item--regular">€100.00</span>
+    </div>
+
+    <div class="product-item">
+      <a class="product-item__link" href="not-a-valid-url">
+        <span class="product-item__vendor">Broken URL Brand</span>
+        <h2 class="product-item__title">Broken URL Item</h2>
+        <span class="price-item--regular">€50.00</span>
+      </a>
+    </div>
+
+    <div class="product-item">
+      <a class="product-item__link" href="/products/sku-dup-a">
+        <span class="product-item__vendor">Dup Brand</span>
+        <h2 class="product-item__title">SKU Dup A</h2>
+        <span class="price-item--regular">€80.00</span>
+        <span data-product-sku="DUP-900"></span>
+      </a>
+    </div>
+
+    <div class="product-item">
+      <a class="product-item__link" href="/products/sku-dup-b">
+        <span class="product-item__vendor">Dup Brand</span>
+        <h2 class="product-item__title">SKU Dup B</h2>
+        <span class="price-item--regular">€85.00</span>
+        <span data-product-sku="DUP-900"></span>
+      </a>
+    </div>
+  </main>
+</body>
+</html>
