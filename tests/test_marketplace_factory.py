@@ -5,12 +5,29 @@ import pytest
 from marketplace.base_marketplace import BaseMarketplace
 from marketplace.local_marketplace import LocalMarketplace
 from marketplace.marketplace_factory import create_marketplace, get_all_marketplaces
+from marketplace.yahoo_marketplace import YahooMarketplace
+from marketplace.yahoo_settings import YahooApiSettings
+
+
+def _yahoo_settings() -> YahooApiSettings:
+    return YahooApiSettings(
+        client_id="dummy-test-client-id",
+        base_url="https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch",
+        timeout_seconds=10,
+        results=20,
+        enabled=True,
+    )
 
 
 def test_create_local_marketplace() -> None:
     marketplace = create_marketplace("local")
     assert isinstance(marketplace, LocalMarketplace)
     assert isinstance(marketplace, BaseMarketplace)
+
+
+def test_create_yahoo_marketplace() -> None:
+    marketplace = create_marketplace("yahoo", yahoo_settings=_yahoo_settings())
+    assert isinstance(marketplace, YahooMarketplace)
 
 
 def test_case_insensitive() -> None:
@@ -32,7 +49,6 @@ def test_unsupported_marketplace_error() -> None:
     "name,message",
     [
         ("rakuten", "Rakuten marketplace is not yet implemented"),
-        ("yahoo", "Yahoo marketplace is not yet implemented"),
         ("mercari", "Mercari marketplace is not yet implemented"),
     ],
 )
@@ -42,6 +58,7 @@ def test_not_implemented_marketplaces(name: str, message: str) -> None:
 
 
 def test_get_all_marketplaces() -> None:
-    marketplaces = get_all_marketplaces()
-    assert len(marketplaces) == 1
+    marketplaces = get_all_marketplaces(yahoo_settings=_yahoo_settings())
+    assert len(marketplaces) == 2
     assert isinstance(marketplaces[0], LocalMarketplace)
+    assert isinstance(marketplaces[1], YahooMarketplace)

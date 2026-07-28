@@ -37,3 +37,17 @@ EXCEL_FILENAME = os.getenv("EXCEL_FILENAME", "profit_ranking.xlsx")
 
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
 LOG_FILE = LOG_DIR / "brand_profit_finder.log"
+
+YAHOO_CLIENT_ID = os.getenv("YAHOO_CLIENT_ID", "").strip()
+YAHOO_API_BASE_URL = os.getenv(
+    "YAHOO_API_BASE_URL",
+    "https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch",
+).strip()
+YAHOO_API_TIMEOUT_SECONDS = max(1, int(os.getenv("YAHOO_API_TIMEOUT_SECONDS", "10")))
+YAHOO_API_RESULTS = max(1, min(100, int(os.getenv("YAHOO_API_RESULTS", "20"))))
+YAHOO_API_ENABLED = os.getenv("YAHOO_API_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)

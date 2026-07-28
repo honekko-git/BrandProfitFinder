@@ -43,7 +43,32 @@
 
 ## Phase 4
 
-- [ ] Support 30 stores
+- [x] Yahoo Shopping Product Search API (v3) settings
+- [x] YahooApiClient with mocked HTTP tests
+- [x] YahooResponseParser (hits to MarketplaceListing)
+- [x] YahooMarketplace (search, validator, matcher integration)
+- [x] MarketplaceFactory yahoo registration
+- [x] main.py optional Yahoo mode (`YAHOO_API_ENABLED` or `--marketplace yahoo`)
+- [x] Local JSON fixtures for Yahoo responses
+- [x] ProfitCalculator / PriceComparator / Excel integration tests
+- [ ] Rakuten marketplace API
+- [ ] Mercari marketplace API
+- [ ] Live Yahoo API verification in production environment
+
+### Phase 4 test status
+
+- Total tests: 313 (including prior 223 regression tests)
+- External HTTP is fully mocked in tests (`httpx.MockTransport`)
+- Default `python main.py` and pytest use local marketplace only
+- When `YAHOO_API_ENABLED=true` without Client ID, main.py falls back to local marketplace
+
+### Yahoo API setup
+
+Set values in `.env` (see `.env.example`):
+
+- `YAHOO_CLIENT_ID` — Yahoo application ID (required for live API)
+- `YAHOO_API_ENABLED=true` — enable Yahoo marketplace in main.py
+- Or run: `python main.py --marketplace yahoo`
 
 ---
 

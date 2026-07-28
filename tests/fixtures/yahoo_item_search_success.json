@@ -1,0 +1,88 @@
+{
+  "totalResultsAvailable": 3,
+  "request": {
+    "query": "gucci marmont bag"
+  },
+  "hits": [
+    {
+      "index": 1,
+      "name": "Gucci Marmont Leather Bag",
+      "code": "YH-001",
+      "janCode": "4901234567890",
+      "price": 98000,
+      "url": "https://store.shopping.yahoo.co.jp/example-store/gucci-bag-001.html",
+      "image": {
+        "medium": "https://example.com/yahoo/gucci-bag-001.jpg"
+      },
+      "condition": "new",
+      "inStock": true,
+      "brand": {
+        "name": "Gucci"
+      },
+      "seller": {
+        "name": "Example Store",
+        "review": {
+          "rate": 4.5,
+          "count": 120
+        }
+      },
+      "shipping": {
+        "code": 1,
+        "name": "送料別"
+      }
+    },
+    {
+      "index": 2,
+      "name": "Gucci Bag Premium Edition",
+      "code": "YH-002",
+      "janCode": "0123456789012",
+      "price": 102000,
+      "url": "https://store.shopping.yahoo.co.jp/example-store/gucci-bag-002.html",
+      "image": {
+        "medium": "https://example.com/yahoo/gucci-bag-002.jpg"
+      },
+      "condition": "new",
+      "inStock": true,
+      "brand": {
+        "name": "Gucci"
+      },
+      "seller": {
+        "name": "Premium Shop",
+        "review": {
+          "rate": 4.8,
+          "count": 80
+        }
+      },
+      "shipping": {
+        "code": 2,
+        "name": "送料無料"
+      }
+    },
+    {
+      "index": 3,
+      "name": "Designer Shoulder Bag",
+      "code": "YH-003",
+      "price": 88000,
+      "url": "https://store.shopping.yahoo.co.jp/example-store/designer-bag-003.html",
+      "image": {
+        "medium": "https://example.com/yahoo/designer-bag-003.jpg"
+      },
+      "condition": "new",
+      "inStock": false,
+      "brand": {
+        "name": "Gucci"
+      },
+      "seller": {
+        "name": "Outlet Shop",
+        "review": {
+          "rate": 4.2,
+          "count": 15
+        }
+      },
+      "shipping": {
+        "code": 2,
+        "name": "送料無料"
+      }
+    }
+  ]
+}
