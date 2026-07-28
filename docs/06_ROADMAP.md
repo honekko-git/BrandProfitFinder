@@ -14,13 +14,15 @@ Excel export
 
 ## Phase 2
 
-Japanese price comparison
+Japanese price comparison (local candidates)
 
 Profit calculation
 
 ROI
 
 Ranking
+
+Excel export for PriceResult
 
 ---
 

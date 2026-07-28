@@ -1,8 +1,11 @@
-"""Foundation tests for main entry point (no real network)."""
+"""Foundation and Phase 2 tests for main entry point (no real network)."""
 
 from pathlib import Path
+from unittest.mock import patch
 
-from main import build_sample_products, run
+import openpyxl
+
+from main import build_phase2_products, build_sample_products, run
 
 
 def test_build_sample_products_has_expected_values() -> None:
@@ -12,6 +15,12 @@ def test_build_sample_products_has_expected_values() -> None:
     assert all(product.profit != 0 or product.best_japanese_price() is None for product in products)
 
 
+def test_build_phase2_products_has_local_data() -> None:
+    products = build_phase2_products()
+    assert len(products) == 3
+    assert all(product.store_name for product in products)
+
+
 def test_run_exports_excel(tmp_path: Path, monkeypatch) -> None:
     monkeypatch.setattr("main.OUTPUT_DIR", tmp_path)
     monkeypatch.setattr("main.EXCEL_FILENAME", "foundation_run.xlsx")
@@ -19,3 +28,17 @@ def test_run_exports_excel(tmp_path: Path, monkeypatch) -> None:
     output_path = run()
     assert output_path.exists()
     assert output_path.name == "foundation_run.xlsx"
+
+
+def test_main_runs_without_network(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setattr("main.OUTPUT_DIR", tmp_path)
+    monkeypatch.setattr("main.EXCEL_FILENAME", "phase2_main.xlsx")
+
+    with patch("utils.http.fetch_url") as mock_fetch, patch("utils.http.HttpClient") as mock_client:
+        output_path = run()
+
+    assert output_path.exists()
+    mock_fetch.assert_not_called()
+    mock_client.assert_not_called()
+    workbook = openpyxl.load_workbook(output_path)
+    assert "Profit Analysis" in workbook.sheetnames

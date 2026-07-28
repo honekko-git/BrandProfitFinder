@@ -4,6 +4,7 @@ Ranking models for profit and brand aggregation.
 
 from dataclasses import dataclass, field
 
+from models.price_result import PriceResult
 from models.product import Product
 
 
@@ -15,6 +16,7 @@ class RankingEntry:
     label: str
     score: float
     product: Product | None = None
+    price_result: PriceResult | None = None
 
 
 @dataclass
@@ -61,6 +63,38 @@ class Ranking:
                 product=product,
             )
             for product in products
+        ]
+        ranking = cls(title=title, entries=entries)
+        ranking.sort_by_score(descending=True)
+        return ranking
+
+    @classmethod
+    def from_price_results(
+        cls,
+        title: str,
+        results: list[PriceResult],
+        score_attr: str = "ranking_score",
+    ) -> "Ranking":
+        """
+        Build a ranking from profit calculation results.
+
+        Args:
+            title: Ranking sheet title.
+            results: Calculated price results.
+            score_attr: PriceResult attribute used as score.
+
+        Returns:
+            Ranking instance sorted by score descending.
+        """
+        entries = [
+            RankingEntry(
+                rank=0,
+                label=result.product.name if result.product else result.title,
+                score=float(getattr(result, score_attr, 0) or 0),
+                product=result.product,
+                price_result=result,
+            )
+            for result in results
         ]
         ranking = cls(title=title, entries=entries)
         ranking.sort_by_score(descending=True)

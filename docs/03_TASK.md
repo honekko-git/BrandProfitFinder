@@ -18,10 +18,10 @@
 
 ## Phase 2
 
-- [ ] Compare Japanese prices
-- [ ] Calculate profit
-- [ ] Calculate ROI
-- [ ] Export ranking
+- [x] Compare Japanese prices
+- [x] Calculate profit
+- [x] Calculate ROI
+- [x] Export ranking
 
 ---
 
