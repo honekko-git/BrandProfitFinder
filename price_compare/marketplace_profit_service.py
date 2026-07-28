@@ -80,18 +80,29 @@ def _attach_used_item_metadata(result: PriceResult, listing) -> None:
         result: Calculated price result to enrich.
         listing: Selected marketplace listing, if any.
     """
-    if listing is None or listing.used_item_details is None:
+    if listing is None:
         return
 
     details = listing.used_item_details
-    adj = details.price_adjustment
+    meta = listing.source_metadata
+    adj = details.price_adjustment if details else None
     result.metadata = {
-        "condition_score": details.condition_score_value,
-        "condition_confidence": details.condition_confidence,
-        "data_completeness": details.data_completeness,
-        "risk_level": details.risk_level,
-        "risk_flags": details.risk_flags,
+        "source_marketplace": meta.get("source_marketplace") or listing.marketplace_name,
+        "source_listing_id": meta.get("source_listing_id") or listing.listing_id,
+        "source_currency": meta.get("source_currency") or listing.currency,
+        "shipping_known": meta.get("source_shipping_known")
+        if "source_shipping_known" in meta
+        else not listing.shipping_unknown,
+        "sale_status": meta.get("source_sale_status"),
+        "condition_score": details.condition_score_value if details else None,
+        "condition_confidence": details.condition_confidence if details else None,
+        "data_completeness": details.data_completeness if details else None,
+        "authentication_status": details.authentication.status.value if details else None,
+        "seller_type": details.seller_details.seller_type.value if details else None,
+        "return_accepted": details.return_policy.return_accepted if details else None,
+        "risk_level": details.risk_level if details else None,
+        "risk_flags": details.risk_flags if details else [],
         "suggested_adjusted_price_jpy": adj.adjusted_price_jpy if adj else None,
         "adjustment_applied": False,
-        "used_item_warnings": list(details.warnings),
+        "used_item_warnings": list(details.warnings) if details else [],
     }

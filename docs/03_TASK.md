@@ -163,3 +163,23 @@ Set values in `.env` (see `.env.example`):
 - Demo uses fixture JSON only; default run unchanged
 
 ---
+
+## Phase 9
+
+- [x] Vestiaire Collective integration foundation (no live communication)
+- [x] VestiaireClientProtocol and FakeVestiaireClient
+- [x] VestiaireResponseParser (BrandProfitFinder internal standard JSON)
+- [x] VestiaireMarketplace with pagination, duplicate exclusion, sale status filter
+- [x] Phase 8 UsedItemEnricher integration for condition, defects, auth, risk
+- [x] MarketplaceFactory aliases: vestiaire, vestiaire_collective, vestiaire-collective, vc
+- [x] Demo: `python main.py --marketplace vestiaire --demo-vestiaire`
+- [ ] Official Vestiaire API, partner data feed, or CSV import client
+- [ ] Currency conversion for non-JPY listings (explicit opt-in)
+
+### Phase 9 test status
+
+- Total tests: 681+ (including prior regression tests)
+- No external Vestiaire communication in tests or default `main.py`
+- Internal fixture JSON only; not claimed as official API format
+
+---

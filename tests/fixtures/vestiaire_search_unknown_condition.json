@@ -1,0 +1,12 @@
+{
+  "items": [
+    {
+      "listing_id": "vestiaire-unk-001",
+      "title": "Unknown Condition Bag",
+      "price": {"amount": 50000, "currency": "JPY"},
+      "url": "https://example.invalid/vestiaire/vestiaire-unk-001",
+      "condition": {"raw": "Vintage"},
+      "sale_status": "ACTIVE"
+    }
+  ]
+}

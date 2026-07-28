@@ -1,0 +1,13 @@
+{
+  "items": [
+    {
+      "listing_id": "vestiaire-damage-001",
+      "title": "Major Damage Bag",
+      "price": {"amount": 30000, "currency": "JPY"},
+      "url": "https://example.invalid/vestiaire/vestiaire-damage-001",
+      "condition": {"raw": "Fair condition"},
+      "defects": {"cracks": "major", "corner_wear": "critical"},
+      "sale_status": "ACTIVE"
+    }
+  ]
+}

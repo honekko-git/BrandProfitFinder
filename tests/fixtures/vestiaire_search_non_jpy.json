@@ -1,0 +1,12 @@
+{
+  "items": [
+    {
+      "listing_id": "vestiaire-usd-001",
+      "title": "USD Priced Bag",
+      "price": {"amount": 1200, "currency": "USD"},
+      "url": "https://example.invalid/vestiaire/vestiaire-usd-001",
+      "condition": {"raw": "Good"},
+      "sale_status": "ACTIVE"
+    }
+  ]
+}

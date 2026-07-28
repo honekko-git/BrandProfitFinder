@@ -1,0 +1,41 @@
+{
+  "marketplace": "vestiaire",
+  "page": 1,
+  "page_size": 20,
+  "total": 3,
+  "items": [
+    {
+      "listing_id": "vestiaire-101",
+      "title": "GUCCI GG Marmont Small Shoulder Bag Black",
+      "price": {"amount": 128000, "currency": "JPY"},
+      "shipping": {"amount": 0, "currency": "JPY", "known": true},
+      "url": "https://example.invalid/vestiaire/vestiaire-101",
+      "brand": "GUCCI",
+      "model_number": "447632",
+      "color": "black",
+      "condition": {"raw": "Excellent", "normalized": "EXCELLENT"},
+      "sale_status": "ACTIVE"
+    },
+    {
+      "listing_id": "vestiaire-102",
+      "title": "GUCCI Marmont Bag Brown",
+      "price": {"amount": 98000, "currency": "JPY"},
+      "shipping": {"known": false},
+      "url": "https://example.invalid/vestiaire/vestiaire-102",
+      "brand": "GUCCI",
+      "model_number": "447632",
+      "color": "brown",
+      "condition": {"raw": "Good condition"},
+      "sale_status": "ACTIVE"
+    },
+    {
+      "listing_id": "vestiaire-103",
+      "title": "Other Brand Bag",
+      "price": {"amount": 45000, "currency": "JPY"},
+      "url": "https://example.invalid/vestiaire/vestiaire-103",
+      "brand": "Other",
+      "condition": {"raw": "Fair condition"},
+      "sale_status": "ACTIVE"
+    }
+  ]
+}

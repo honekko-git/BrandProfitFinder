@@ -98,6 +98,7 @@ class MarketplaceListing:
             "point_rate": float(self.point_rate) if self.point_rate is not None else None,
             **self._auction_export_fields(),
             **self._used_item_export_fields(),
+            **self._source_export_fields(),
         }
 
     def _auction_export_fields(self) -> dict[str, Any]:
@@ -178,4 +179,21 @@ class MarketplaceListing:
             "suggested_adjusted_price_jpy": adj.adjusted_price_jpy if adj else None,
             "adjustment_applied": adj.applied if adj else False,
             "used_item_warnings": "; ".join(details.warnings) if details.warnings else None,
+        }
+
+    def _source_export_fields(self) -> dict[str, Any]:
+        meta = self.source_metadata
+        return {
+            "source_marketplace": meta.get("source_marketplace") or None,
+            "source_listing_id": meta.get("source_listing_id") or None,
+            "source_currency": meta.get("source_currency") or None,
+            "source_shipping_known": meta.get("source_shipping_known"),
+            "source_sale_status": meta.get("source_sale_status") or None,
+            "source_category": meta.get("source_category") or None,
+            "source_sub_category": meta.get("source_sub_category") or None,
+            "source_material": meta.get("source_material") or None,
+            "source_gender": meta.get("source_gender") or None,
+            "source_country": meta.get("source_country") or None,
+            "source_listed_at": meta.get("source_listed_at") or None,
+            "vestiaire_parse_warnings": meta.get("vestiaire_parse_warnings") or None,
         }

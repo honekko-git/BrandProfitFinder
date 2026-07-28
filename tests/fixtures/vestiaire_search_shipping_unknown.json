@@ -1,0 +1,13 @@
+{
+  "items": [
+    {
+      "listing_id": "vestiaire-ship-001",
+      "title": "Unknown Shipping Bag",
+      "price": {"amount": 80000, "currency": "JPY"},
+      "shipping": {"known": false},
+      "url": "https://example.invalid/vestiaire/vestiaire-ship-001",
+      "condition": {"raw": "Very Good"},
+      "sale_status": "ACTIVE"
+    }
+  ]
+}
