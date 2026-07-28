@@ -6,6 +6,7 @@ from config.constants import STORE_BALTINI, STORE_CETTIRE, STORE_ITALIST
 from scanner.base_scanner import BaseScanner
 from scanner.baltini import BaltiniScanner
 from scanner.cettire import CettireScanner
+from scanner.italist import ItalistScanner
 
 
 def create_scanner(store_name: str) -> BaseScanner:
@@ -25,12 +26,11 @@ def create_scanner(store_name: str) -> BaseScanner:
     registry: dict[str, type[BaseScanner]] = {
         STORE_CETTIRE.lower(): CettireScanner,
         STORE_BALTINI.lower(): BaltiniScanner,
+        STORE_ITALIST.lower(): ItalistScanner,
     }
 
     scanner_class = registry.get(normalized)
     if scanner_class is None:
-        if normalized == STORE_ITALIST.lower():
-            raise ValueError("Italist scanner is not yet implemented")
         raise ValueError(f"Unsupported store: {store_name}")
 
     return scanner_class()
@@ -43,4 +43,4 @@ def get_all_scanners() -> list[BaseScanner]:
     Returns:
         List of scanner instances.
     """
-    return [CettireScanner(), BaltiniScanner()]
+    return [CettireScanner(), BaltiniScanner(), ItalistScanner()]

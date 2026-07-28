@@ -12,7 +12,7 @@
 - [x] Create scanner interface
 - [x] Create Cettire scanner
 - [x] Create Baltini scanner
-- [ ] Create Italist scanner
+- [x] Create Italist scanner
 
 ---
 

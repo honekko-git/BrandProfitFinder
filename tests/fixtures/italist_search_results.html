@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Italist Search Results Fixture</title>
+  <script type="application/ld+json">
+  {
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "Product",
+          "name": "Designer Handbag",
+          "brand": {"@type": "Brand", "name": "Bottega Veneta"},
+          "sku": "ITA-001",
+          "image": "https://www.italist.com/images/handbag.jpg",
+          "offers": {
+            "@type": "Offer",
+            "price": "2100.00",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock",
+            "url": "https://www.italist.com/products/designer-handbag"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "Product",
+          "name": "Classic Pumps",
+          "brand": {"@type": "Brand", "name": "Jimmy Choo"},
+          "sku": "ITA-002",
+          "image": "/images/pumps.jpg",
+          "offers": {
+            "@type": "Offer",
+            "price": "490.00",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/OutOfStock",
+            "url": "/products/classic-pumps"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "Product",
+          "name": "PreOrder Coat",
+          "brand": {"@type": "Brand", "name": "Max Mara"},
+          "sku": "ITA-003",
+          "image": "/images/coat.jpg",
+          "offers": {
+            "@type": "Offer",
+            "price": "1200.00",
+            "highPrice": "1500.00",
+            "priceCurrency": "EUR",
+            "availability": "PreOrder",
+            "url": "/products/preorder-coat"
+          }
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <main class="search-results">
+    <div class="product-tile">
+      <a class="product-tile__link" href="https://www.italist.com/products/designer-handbag">
+        <img class="product-tile__image" src="/images/handbag-thumb.jpg" alt="Handbag">
+        <span class="product-tile__brand">Bottega Veneta Duplicate</span>
+        <h2 class="product-tile__title">Designer Handbag Duplicate</h2>
+        <span class="product-tile__price">€2,100.00</span>
+      </a>
+    </div>
+
+    <div class="product-tile">
+      <a class="product-tile__link" href="/products/linen-dress">
+        <img class="product-tile__image" src="/images/dress.jpg" data-src="/images/dress.jpg" alt="Dress">
+        <span class="product-tile__brand">Brunello Cucinelli</span>
+        <h2 class="product-tile__title">Linen Dress</h2>
+        <span class="product-tile__price">€890.00</span>
+        <span data-product-sku="ITA-100"></span>
+      </a>
+    </div>
+
+    <div class="product-tile">
+      <a class="product-tile__link" href="/products/sale-sneakers">
+        <img class="product-tile__image" src="/images/sneakers.jpg" alt="Sneakers">
+        <span class="product-tile__brand">Golden Goose</span>
+        <h2 class="product-tile__title">Sale Sneakers</h2>
+        <span class="product-tile__sale-price">€350.00</span>
+        <span class="product-tile__original-price">€420.00</span>
+        <span class="product-sku">ITA-200</span>
+      </a>
+    </div>
+
+    <div class="product-tile">
+      <a class="product-tile__link" href="/products/no-brand-item">
+        <h2 class="product-tile__title">No Brand Item</h2>
+        <span class="product-tile__price">€180.00</span>
+        <span data-product-sku="ITA-300"></span>
+      </a>
+    </div>
+
+    <div class="product-tile">
+      <a class="product-tile__link" href="/products/no-image-item">
+        <span class="product-tile__brand">Valentino</span>
+        <h2 class="product-tile__title">No Image Item</h2>
+        <span class="product-tile__price">€260.00</span>
+        <span data-product-sku="ITA-400"></span>
+      </a>
+    </div>
+
+    <div class="product-tile">
+      <a class="product-tile__link" href="/products/invalid-price-item">
+        <span class="product-tile__brand">Test Brand</span>
+        <h2 class="product-tile__title">Invalid Price Item</h2>
+        <span class="product-tile__price">not-a-price</span>
+        <span data-product-sku="ITA-500"></span>
+      </a>
+    </div>
+
+    <div class="product-tile">
+      <a class="product-tile__link" href="/products/inverted-sale">
+        <span class="product-tile__brand">Test Brand</span>
+        <h2 class="product-tile__title">Inverted Sale Item</h2>
+        <span class="product-tile__sale-price">€500.00</span>
+        <span class="product-tile__original-price">€350.00</span>
+        <span data-product-sku="ITA-600"></span>
+      </a>
+    </div>
+
+    <div class="product-tile">
+      <span class="product-tile__brand">Unknown</span>
+      <h2 class="product-tile__title"></h2>
+      <span class="product-tile__price">€100.00</span>
+    </div>
+
+    <div class="product-tile">
+      <a class="product-tile__link" href="not-a-valid-url">
+        <span class="product-tile__brand">Broken URL Brand</span>
+        <h2 class="product-tile__title">Broken URL Item</h2>
+        <span class="product-tile__price">€50.00</span>
+      </a>
+    </div>
+
+    <div class="product-tile">
+      <a class="product-tile__link" href="/products/sku-dup-a">
+        <span class="product-tile__brand">Dup Brand</span>
+        <h2 class="product-tile__title">SKU Dup A</h2>
+        <span class="product-tile__price">€70.00</span>
+        <span data-product-sku="ITA-900"></span>
+      </a>
+    </div>
+
+    <div class="product-tile">
+      <a class="product-tile__link" href="/products/sku-dup-b">
+        <span class="product-tile__brand">Dup Brand</span>
+        <h2 class="product-tile__title">SKU Dup B</h2>
+        <span class="product-tile__price">€75.00</span>
+        <span data-product-sku="ITA-900"></span>
+      </a>
+    </div>
+  </main>
+</body>
+</html>
