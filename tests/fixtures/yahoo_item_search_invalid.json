@@ -1,0 +1,7 @@
+{
+  "totalResultsAvailable": 1,
+  "request": {
+    "query": "invalid"
+  },
+  "hits": "invalid-type"
+}

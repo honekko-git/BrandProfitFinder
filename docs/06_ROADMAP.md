@@ -44,11 +44,25 @@ Domestic listings Excel export
 
 ## Phase 4
 
-10 supported overseas stores
+Yahoo Shopping Product Search API (v3) foundation
+
+- YahooApiClient / YahooResponseParser / YahooMarketplace
+- MarketplaceFactory `yahoo` support
+- Optional Yahoo execution in main.py (default remains local)
+- Mocked tests without external network access
+
+Next domestic marketplace candidates:
+
+- Rakuten Ichiba API
+- Mercari (future research)
+
+Note: Live Yahoo API verification with real credentials is a separate operational task.
 
 ---
 
 ## Phase 5
+
+10 supported overseas stores
 
 Automatic scheduling
 

@@ -1,0 +1,28 @@
+{
+  "totalResultsAvailable": 2,
+  "request": {
+    "query": "partial data"
+  },
+  "hits": [
+    {
+      "index": 1,
+      "name": "Valid Partial Item",
+      "code": "YH-P1",
+      "price": 50000,
+      "url": "https://store.shopping.yahoo.co.jp/example-store/valid-partial.html",
+      "brand": {
+        "name": "Gucci"
+      },
+      "seller": {
+        "name": "Partial Store"
+      }
+    },
+    {
+      "index": 2,
+      "name": "",
+      "code": "YH-P2",
+      "price": 0,
+      "url": "not-a-valid-url"
+    }
+  ]
+}

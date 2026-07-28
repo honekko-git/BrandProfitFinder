@@ -1,24 +1,30 @@
 """
 BrandProfitFinder application entry point.
 
-Phase 3: domestic marketplace candidates, profit calculation, and Excel export.
-No external site access is performed.
+Phase 3/4: domestic marketplace candidates, profit calculation, and Excel export.
+Default execution uses local marketplace without external network access.
 """
 
 import logging
+import sys
 from decimal import Decimal
 from pathlib import Path
 from unittest.mock import patch
 
 from config.logging_config import setup_logging
-from config.settings import DEFAULT_EXCHANGE_RATE, EXCEL_FILENAME, OUTPUT_DIR
+from config.settings import (
+    DEFAULT_EXCHANGE_RATE,
+    EXCEL_FILENAME,
+    OUTPUT_DIR,
+    YAHOO_API_ENABLED,
+)
 from excel.exporter import ExcelExporter
-from marketplace.local_marketplace import LocalMarketplace
 from marketplace.marketplace_factory import create_marketplace
+from marketplace.yahoo_settings import YahooApiSettings
 from models.marketplace_listing import MarketplaceListing
 from models.product import Product
 from price_compare.marketplace_profit_service import calculate_profit_from_search_results
-from price_compare.price_comparator import PriceComparator, PriceSelectionStrategy
+from price_compare.price_comparator import PriceSelectionStrategy
 from price_compare.profit_calculator import ProfitCalculator
 from price_compare.profit_config import ProfitConfig
 from price_compare.ranking_engine import RankingEngine, RankingSortKey
@@ -180,19 +186,51 @@ def build_phase3_listings() -> dict[str, list[MarketplaceListing]]:
     }
 
 
-def run_phase3() -> Path:
+def resolve_marketplace_name(argv: list[str] | None = None) -> str:
     """
-    Run the Phase 3 pipeline using local marketplace candidates.
+    Resolve marketplace name from CLI args or environment.
+
+    Args:
+        argv: Optional argument list override for testing.
+
+    Returns:
+        Marketplace identifier (defaults to local).
+    """
+    args = argv if argv is not None else sys.argv[1:]
+    for index, arg in enumerate(args):
+        if arg == "--marketplace" and index + 1 < len(args):
+            return args[index + 1].strip().lower()
+    if YAHOO_API_ENABLED:
+        return "yahoo"
+    return "local"
+
+
+def run_phase3(marketplace_name: str | None = None) -> Path:
+    """
+    Run the Phase 3/4 pipeline using local or Yahoo marketplace candidates.
+
+    Args:
+        marketplace_name: Optional marketplace override.
 
     Returns:
         Path to the generated Excel workbook.
     """
+    selected = (marketplace_name or resolve_marketplace_name()).strip().lower()
+    yahoo_settings = YahooApiSettings.from_env()
+
+    if selected == "yahoo" and not yahoo_settings.can_execute:
+        logger.warning(
+            "Yahoo API is enabled but Client ID is missing; falling back to local marketplace"
+        )
+        selected = "local"
+
     products = build_phase3_products()
-    listings_map = build_phase3_listings()
+    listings_map = build_phase3_listings() if selected == "local" else None
     marketplace = create_marketplace(
-        "local",
+        selected,
         listings_by_product_key=listings_map,
         selection_strategy=PriceSelectionStrategy.HIGHEST,
+        yahoo_settings=yahoo_settings,
     )
     calculator = ProfitCalculator(
         ProfitConfig(
@@ -220,8 +258,9 @@ def run_phase3() -> Path:
     output_path = exporter.export_phase3_workbook(products, all_listings, ranked)
 
     logger.info(
-        "Phase 3 export completed: %s (products=%d, listings=%d, valid=%d, results=%d)",
+        "Phase 3 export completed: %s (marketplace=%s, products=%d, listings=%d, valid=%d, results=%d)",
         output_path,
+        selected,
         len(products),
         len(all_listings),
         valid_count,
@@ -235,24 +274,31 @@ def run_phase2() -> Path:
     return run_phase3()
 
 
-def run() -> Path:
+def run(marketplace_name: str | None = None) -> Path:
     """
     Run the application pipeline and export Excel.
+
+    Args:
+        marketplace_name: Optional marketplace override.
 
     Returns:
         Path to the generated Excel file.
     """
-    logger.info("Starting Phase 3 pipeline with %d sample products", len(build_phase3_products()))
-    return run_phase3()
+    logger.info(
+        "Starting Phase 3 pipeline with %d sample products (marketplace=%s)",
+        len(build_phase3_products()),
+        marketplace_name or resolve_marketplace_name(),
+    )
+    return run_phase3(marketplace_name=marketplace_name)
 
 
 def main() -> None:
     """CLI entry point."""
     setup_logging()
-    logger.info("BrandProfitFinder Phase 3 started")
+    logger.info("BrandProfitFinder Phase 3/4 started")
     with patch("utils.http.fetch_url"), patch("utils.http.HttpClient"):
         output_path = run()
-    logger.info("BrandProfitFinder Phase 3 finished: %s", output_path)
+    logger.info("BrandProfitFinder Phase 3/4 finished: %s", output_path)
 
 
 if __name__ == "__main__":
