@@ -91,4 +91,29 @@ NUMERIC_PRICE_RESULT_COLUMNS: Final[frozenset[str]] = frozenset(
     }
 )
 
-URL_COLUMNS: Final[frozenset[str]] = frozenset({"url", "image_url"})
+URL_COLUMNS: Final[frozenset[str]] = frozenset({"url", "image_url", "listing_url"})
+
+MARKETPLACE_LISTING_COLUMNS: Final[list[str]] = [
+    "marketplace_name",
+    "listing_id",
+    "title",
+    "brand",
+    "model_number",
+    "sku",
+    "jan_code",
+    "condition",
+    "price_jpy",
+    "shipping_jpy",
+    "total_price_jpy",
+    "seller_name",
+    "seller_rating",
+    "listing_url",
+    "image_url",
+    "availability",
+    "sold_count",
+    "source_query",
+    "matched_product_id",
+    "match_score",
+    "is_valid",
+    "validation_error",
+]

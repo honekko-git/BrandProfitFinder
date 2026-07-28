@@ -27,7 +27,17 @@
 
 ## Phase 3
 
-- [ ] Support 10 stores
+- [x] MarketplaceListing model
+- [x] MarketplaceSearchResult model
+- [x] BaseMarketplace interface
+- [x] LocalMarketplace implementation
+- [x] MarketplaceFactory
+- [x] ListingValidator
+- [x] ListingMatcher
+- [x] PriceComparator integration
+- [x] ProfitCalculator integration
+- [x] Domestic listings Excel export
+- [ ] Support 10 overseas stores
 
 ---
 

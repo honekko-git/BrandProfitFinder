@@ -21,6 +21,13 @@ def test_build_phase2_products_has_local_data() -> None:
     assert all(product.store_name for product in products)
 
 
+def test_build_phase3_products_has_local_data() -> None:
+    from main import build_phase3_products
+
+    products = build_phase3_products()
+    assert len(products) == 3
+
+
 def test_run_exports_excel(tmp_path: Path, monkeypatch) -> None:
     monkeypatch.setattr("main.OUTPUT_DIR", tmp_path)
     monkeypatch.setattr("main.EXCEL_FILENAME", "foundation_run.xlsx")
@@ -42,3 +49,16 @@ def test_main_runs_without_network(tmp_path: Path, monkeypatch) -> None:
     mock_client.assert_not_called()
     workbook = openpyxl.load_workbook(output_path)
     assert "Profit Analysis" in workbook.sheetnames
+    assert "Domestic Listings" in workbook.sheetnames
+
+
+def test_main_runnable_twice(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setattr("main.OUTPUT_DIR", tmp_path)
+    monkeypatch.setattr("main.EXCEL_FILENAME", "phase3_twice.xlsx")
+
+    with patch("utils.http.fetch_url"), patch("utils.http.HttpClient"):
+        first = run()
+        second = run()
+
+    assert first.exists()
+    assert second.exists()

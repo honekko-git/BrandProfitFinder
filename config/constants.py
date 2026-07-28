@@ -38,3 +38,11 @@ SHEET_ROI_RANKING: Final[str] = "ROI Ranking"
 
 # Default scan limit
 DEFAULT_SCAN_LIMIT: Final[int] = 50
+
+# Domestic marketplace identifiers
+MARKETPLACE_LOCAL: Final[str] = "local"
+MARKETPLACE_RAKUTEN: Final[str] = "rakuten"
+MARKETPLACE_YAHOO: Final[str] = "yahoo"
+MARKETPLACE_MERCARI: Final[str] = "mercari"
+
+SHEET_DOMESTIC_LISTINGS: Final[str] = "Domestic Listings"

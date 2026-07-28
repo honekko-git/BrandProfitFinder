@@ -86,3 +86,31 @@ def apply_price_result_formatting(
             if isinstance(cell.value, str) and cell.value.startswith(("http://", "https://")):
                 cell.hyperlink = cell.value
                 cell.font = HYPERLINK_FONT
+
+
+def apply_listing_formatting(
+    sheet: Worksheet,
+    headers: list[str],
+    row_count: int,
+) -> None:
+    """
+    Apply URL hyperlinks to domestic listing sheets.
+
+    Args:
+        sheet: Target worksheet.
+        headers: Header names in column order.
+        row_count: Number of data rows excluding header.
+    """
+    header_index = {name: index + 1 for index, name in enumerate(headers)}
+    url_cols = [
+        header_index[name]
+        for name in ("listing_url", "image_url")
+        if name in header_index
+    ]
+
+    for row in range(2, row_count + 2):
+        for col in url_cols:
+            cell = sheet.cell(row=row, column=col)
+            if isinstance(cell.value, str) and cell.value.startswith(("http://", "https://")):
+                cell.hyperlink = cell.value
+                cell.font = HYPERLINK_FONT
