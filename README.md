@@ -430,6 +430,21 @@ python main.py --comparison-demo --profit-intelligence
 Excel export appends a **Marketplace Comparison** sheet when comparison results are included.
 Existing sheets remain unchanged.
 
+### Product Identity Phase 19 notes
+
+- Phase 19 adds a **deterministic product identity foundation** for cross-marketplace comparison
+- Evaluates whether listings plausibly represent the same product; **not authenticity determination**
+- Decisions: `MATCH`, `REVIEW`, `NO_MATCH`, `INSUFFICIENT_DATA`
+- Confidence tiers (`HIGH`, `MEDIUM`, `LOW`, `UNKNOWN`) describe evidence strength, not probability
+- Hard structured conflicts override positive title similarity
+- Unknown/missing identifiers are not treated as mismatches
+- Identity columns are appended to the Marketplace Comparison Excel sheet
+- Demo: `--identity-demo` (alias: `--demo-identity`) using synthetic internal fixtures only
+
+```
+python main.py --identity-demo
+```
+
 ### Profit Intelligence Phase 16 notes
 
 - Phase 16 adds **Profit Intelligence v1**: a deterministic, explainable, rule-based scoring engine

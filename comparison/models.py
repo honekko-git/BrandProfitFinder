@@ -10,6 +10,7 @@ from models.marketplace_listing import MarketplaceListing
 from models.marketplace_search_result import MarketplaceSearchResult
 from models.price_result import CALCULATION_SUCCESS, PriceResult
 from models.product import Product
+from product_identity.models import ProductIdentityResult
 
 
 @dataclass
@@ -27,6 +28,19 @@ class MarketplaceCandidate:
     order_index: int = 0
     identity_matched: bool = True
     identity_listing: MarketplaceListing | None = None
+    identity_result: ProductIdentityResult | None = None
+
+    @property
+    def identity_decision(self) -> str | None:
+        """Return identity decision text when evaluated."""
+        return self.identity_result.decision.value if self.identity_result else None
+
+    @property
+    def identity_review_required(self) -> bool | None:
+        """Return review requirement when identity was evaluated."""
+        if self.identity_result is None:
+            return None
+        return self.identity_result.review_required
 
     @property
     def is_comparable(self) -> bool:

@@ -1,0 +1,66 @@
+{
+  "source_format": "brandprofitfinder_internal_fixture",
+  "fixture_note": "Synthetic Phase 19 product identity demo data; not an official API response",
+  "pairs": [
+    {
+      "id": "A_matching_jan",
+      "product": {"brand": "DemoBrand", "model": "MODEL-A", "sku": "4006381333931", "name": "DemoBrand Model A Bag"},
+      "listing": {"marketplace_name": "demo", "listing_id": "L-A", "title": "DemoBrand  Model-A  Bag", "brand": "DemoBrand", "model_number": "MODEL-A", "jan_code": "4006381333931", "currency": "JPY", "price_jpy": 10000},
+      "expected_decision": "MATCH"
+    },
+    {
+      "id": "B_conflicting_jan",
+      "product": {"brand": "DemoBrand", "model": "MODEL-B", "sku": "4006381333931", "name": "DemoBrand Model B"},
+      "listing": {"marketplace_name": "demo", "listing_id": "L-B", "title": "DemoBrand Model B", "brand": "DemoBrand", "model_number": "MODEL-B", "jan_code": "9780201379624", "currency": "JPY", "price_jpy": 10000},
+      "expected_decision": "NO_MATCH"
+    },
+    {
+      "id": "C_matching_model",
+      "product": {"brand": "DemoBrand", "model": "MODEL-C", "sku": "SKU-C", "name": "DemoBrand Model C"},
+      "listing": {"marketplace_name": "demo", "listing_id": "L-C", "title": "DemoBrand Model C", "brand": "DemoBrand", "model_number": "MODEL-C", "currency": "JPY", "price_jpy": 10000, "source_metadata": {"source_style_code": "MODEL-C"}},
+      "expected_decision": "MATCH"
+    },
+    {
+      "id": "D_brand_conflict",
+      "product": {"brand": "BrandOne", "model": "SHARED", "sku": "SKU-D", "name": "BrandOne Shared"},
+      "listing": {"marketplace_name": "demo", "listing_id": "L-D", "title": "BrandTwo Shared", "brand": "BrandTwo", "model_number": "SHARED", "currency": "JPY", "price_jpy": 10000},
+      "expected_decision": "NO_MATCH"
+    },
+    {
+      "id": "E_variant_conflict",
+      "product": {"brand": "ShoeCo", "model": "RUN-1", "sku": "SKU-E", "name": "ShoeCo Runner", "category": "footwear"},
+      "listing": {"marketplace_name": "demo", "listing_id": "L-E", "title": "ShoeCo Runner", "brand": "ShoeCo", "model_number": "RUN-1", "currency": "JPY", "price_jpy": 10000, "source_metadata": {"source_size": "10", "source_size_system": "US"}},
+      "expected_decision": "REVIEW"
+    },
+    {
+      "id": "F_title_only",
+      "product": {"brand": "", "model": "", "sku": "", "name": "Generic Blue Widget"},
+      "listing": {"marketplace_name": "demo", "listing_id": "L-F", "title": "Generic Blue Widget Special", "brand": "", "model_number": "", "currency": "JPY", "price_jpy": 10000},
+      "expected_decision": "REVIEW"
+    },
+    {
+      "id": "G_insufficient",
+      "product": {"brand": "", "model": "", "sku": "", "name": ""},
+      "listing": {"marketplace_name": "demo", "listing_id": "L-G", "title": "", "brand": "", "model_number": "", "currency": "JPY", "price_jpy": 10000},
+      "expected_decision": "INSUFFICIENT_DATA"
+    },
+    {
+      "id": "H_malformed_jan",
+      "product": {"brand": "DemoBrand", "model": "MODEL-H", "sku": "BADJAN", "name": "DemoBrand Model H"},
+      "listing": {"marketplace_name": "demo", "listing_id": "L-H", "title": "DemoBrand Model H", "brand": "DemoBrand", "model_number": "MODEL-H", "jan_code": "123", "currency": "JPY", "price_jpy": 10000},
+      "expected_decision": "MATCH"
+    },
+    {
+      "id": "I_local_sku",
+      "product": {"brand": "DemoBrand", "model": "MODEL-I", "sku": "LOCAL-1", "name": "DemoBrand Model I"},
+      "listing": {"marketplace_name": "demo", "listing_id": "L-I", "title": "DemoBrand Model I", "brand": "DemoBrand", "model_number": "MODEL-I", "sku": "LOCAL-2", "currency": "JPY", "price_jpy": 10000},
+      "expected_decision": "MATCH"
+    },
+    {
+      "id": "J_condition_diff",
+      "product": {"brand": "DemoBrand", "model": "MODEL-J", "sku": "SKU-J", "name": "DemoBrand Model J"},
+      "listing": {"marketplace_name": "demo", "listing_id": "L-J", "title": "DemoBrand Model J", "brand": "DemoBrand", "model_number": "MODEL-J", "condition": "Used", "currency": "JPY", "price_jpy": 10000},
+      "expected_decision": "MATCH"
+    }
+  ]
+}

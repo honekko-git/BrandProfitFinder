@@ -297,4 +297,12 @@ MARKETPLACE_COMPARISON_COLUMNS: Final[list[str]] = [
     "validation_summary",
     "comparison_reliability",
     "recommendation",
+    "selected_review_identity_decision",
+    "selected_review_identity_confidence",
+    "selected_review_identity_score",
+    "selected_review_identity_review_required",
+    "selected_review_identity_matched_fields",
+    "selected_review_identity_conflicting_fields",
+    "selected_review_identity_missing_fields",
+    "selected_review_identity_reasons",
 ]

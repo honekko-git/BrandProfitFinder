@@ -104,16 +104,17 @@ class ComparisonEngine:
         for candidate in candidates:
             copy_candidate = self._copy_candidate(candidate)
             listing = copy_candidate.identity_listing or copy_candidate.search_result.selected_listing
-            is_match, score, match_warnings = self._identity_matcher.evaluate(
+            eligible, score, match_warnings, identity_result = self._identity_matcher.evaluate_with_identity(
                 product,
                 listing,
                 min_score=self.config.min_match_score,
             )
             copy_candidate.match_score = score
             copy_candidate.match_warnings = list(match_warnings)
+            copy_candidate.identity_result = identity_result
             copy_candidate.listing_currency = _candidate_currency(copy_candidate, listing)
 
-            if self.config.require_identity_match and listing is not None and not is_match:
+            if self.config.require_identity_match and listing is not None and not eligible:
                 copy_candidate.identity_matched = False
                 copy_candidate.match_warnings.append(
                     "excluded from comparison due to weak identity match"
@@ -145,6 +146,7 @@ class ComparisonEngine:
             order_index=candidate.order_index,
             identity_matched=candidate.identity_matched,
             identity_listing=candidate.identity_listing,
+            identity_result=candidate.identity_result,
         )
 
     def _collect_run_warnings(self, candidates: list[MarketplaceCandidate]) -> list[str]:

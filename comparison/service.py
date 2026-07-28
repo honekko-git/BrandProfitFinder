@@ -139,6 +139,13 @@ class CrossMarketplaceComparisonService:
                 self._identity_matcher,
                 self.config.min_match_score,
             )
+            identity_result = None
+            if listing is not None:
+                _eligible, _score, _warnings, identity_result = self._identity_matcher.evaluate_with_identity(
+                    product,
+                    listing,
+                    min_score=self.config.min_match_score,
+                )
             price_result = _build_price_result(
                 product,
                 listing,
@@ -170,6 +177,7 @@ class CrossMarketplaceComparisonService:
                     listing_currency=currency,
                     source_price_amount=source_amount,
                     jpy_comparable=jpy_comparable,
+                    identity_result=identity_result,
                 )
             )
 
@@ -247,12 +255,14 @@ def _select_identity_listing(
     best_listing: MarketplaceListing | None = None
     best_score: Decimal | None = None
     for listing in candidates:
-        is_match, score, _warnings = identity_matcher.evaluate(
+        eligible, score, _warnings, identity_result = identity_matcher.evaluate_with_identity(
             product,
             listing,
             min_score=min_score,
         )
-        if not is_match or score is None:
+        if identity_result is not None and identity_result.decision.value == "NO_MATCH":
+            continue
+        if not eligible or score is None:
             continue
         if best_score is None or score > best_score:
             best_listing = listing

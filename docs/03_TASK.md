@@ -374,7 +374,31 @@ Set values in `.env` (see `.env.example`):
 - `best_marketplace` remains a compatibility alias for `selected_review_marketplace`
 - P3-003 used StockX listing may be excluded when preowned filtering is disabled
 - Sequential CLI validation required when reopening `output/profit_ranking.xlsx`
-- Future marketplaces require only marketplace adapter + comparison config entry
+
+---
+
+## Phase 19
+
+- [x] Product identity foundation (`product_identity/`)
+- [x] Deterministic identity decisions: MATCH, REVIEW, NO_MATCH, INSUFFICIENT_DATA
+- [x] Explainable evidence model with hard conflict precedence
+- [x] Structured identifier extraction and normalization
+- [x] Category-aware variant policy (footwear, apparel, watch, etc.)
+- [x] Integration with Phase 18 comparison pipeline via adapter
+- [x] Identity columns appended to Marketplace Comparison Excel sheet
+- [x] CLI demo: `python main.py --identity-demo` (alias: `--demo-identity`)
+
+### Phase 19 limitations
+
+- Identity evaluation is not authenticity or counterfeit determination
+- Title similarity remains weak evidence only
+- No network access, scraping, or unofficial APIs
+- Marketplace-local SKU differences are not hard conflicts
+
+### Phase 19 test status
+
+- Comprehensive tests under `tests/test_product_identity_*.py`
+- Phase 18 comparison regression preserved
 
 ### Phase 18 test status
 

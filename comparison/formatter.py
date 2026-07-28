@@ -7,6 +7,18 @@ from __future__ import annotations
 from decimal import Decimal
 
 from comparison.models import ProductComparisonResult
+from product_identity.formatter import identity_result_to_export_fields
+
+SELECTED_REVIEW_IDENTITY_EXPORT_FIELDS: tuple[str, ...] = (
+    "selected_review_identity_decision",
+    "selected_review_identity_confidence",
+    "selected_review_identity_score",
+    "selected_review_identity_review_required",
+    "selected_review_identity_matched_fields",
+    "selected_review_identity_conflicting_fields",
+    "selected_review_identity_missing_fields",
+    "selected_review_identity_reasons",
+)
 
 # Stable export field order. Must stay aligned with excel.template.MARKETPLACE_COMPARISON_COLUMNS.
 COMPARISON_EXPORT_FIELDS: tuple[str, ...] = (
@@ -33,6 +45,7 @@ COMPARISON_EXPORT_FIELDS: tuple[str, ...] = (
     "validation_summary",
     "comparison_reliability",
     "recommendation",
+    *SELECTED_REVIEW_IDENTITY_EXPORT_FIELDS,
 )
 
 
@@ -49,7 +62,8 @@ def _bool_to_export(value: bool | None) -> bool | None:
 def comparison_result_to_dict(result: ProductComparisonResult) -> dict[str, object]:
     """Serialize one product comparison row for Excel export."""
     product = result.product
-    return {
+    selected_identity = _selected_candidate_identity(result)
+    row = {
         "product_name": product.name if product else "",
         "product_brand": product.brand if product else "",
         "product_sku": product.sku if product else "",
@@ -74,3 +88,14 @@ def comparison_result_to_dict(result: ProductComparisonResult) -> dict[str, obje
         "comparison_reliability": result.comparison_reliability,
         "recommendation": result.recommendation,
     }
+    row.update(identity_result_to_export_fields(selected_identity))
+    return row
+
+
+def _selected_candidate_identity(result: ProductComparisonResult):
+    if not result.selected_review_marketplace:
+        return None
+    for candidate in result.candidates:
+        if candidate.marketplace_name == result.selected_review_marketplace:
+            return candidate.identity_result
+    return None

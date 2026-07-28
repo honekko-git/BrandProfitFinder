@@ -42,6 +42,7 @@ from comparison.demo_providers import (
     comparison_demo_expected_marketplaces,
 )
 from comparison.service import CrossMarketplaceComparisonService
+from product_identity.demo import run_identity_demo
 from excel.exporter import ExcelExporter
 from marketplace.amazon_client import FakeAmazonClient
 from marketplace.amazon_settings import AmazonConfig
@@ -641,6 +642,16 @@ def build_cli_parser() -> argparse.ArgumentParser:
         add_help=True,
     )
     parser.add_argument(
+        "--identity-demo",
+        "--demo-identity",
+        action="store_true",
+        dest="identity_demo",
+        help=(
+            "Run product identity demo using synthetic internal fixtures only "
+            "(deterministic rule-based evaluation; not authenticity determination)."
+        ),
+    )
+    parser.add_argument(
         "--comparison-demo",
         "--demo-comparison",
         action="store_true",
@@ -679,6 +690,16 @@ def is_profit_intelligence_requested(argv: list[str] | None = None) -> bool:
     parser = build_cli_parser()
     namespace, _unknown = parser.parse_known_args(args)
     return bool(namespace.profit_intelligence)
+
+
+def is_identity_demo_requested(argv: list[str] | None = None) -> bool:
+    """Return True when product identity demo is requested."""
+    args = argv if argv is not None else sys.argv[1:]
+    if "--help" in args or "-h" in args:
+        return False
+    parser = build_cli_parser()
+    namespace, _unknown = parser.parse_known_args(args)
+    return bool(namespace.identity_demo)
 
 
 def is_comparison_demo_requested(argv: list[str] | None = None) -> bool:
@@ -1387,13 +1408,17 @@ def main() -> None:
     if "--help" in sys.argv or "-h" in sys.argv:
         build_cli_parser().print_help()
         return
-    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14/15/16/17/18 started")
+    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14/15/16/17/18/19 started")
     with patch("utils.http.fetch_url"), patch("utils.http.HttpClient"):
+        if is_identity_demo_requested():
+            run_identity_demo()
+            logger.info("BrandProfitFinder identity demo finished (synthetic fixtures only)")
+            return
         if is_comparison_demo_requested():
             output_path = run_comparison_demo()
         else:
             output_path = run()
-    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14/15/16/17/18 finished: %s", output_path)
+    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9/10/11/12/13/14/15/16/17/18/19 finished: %s", output_path)
 
 
 if __name__ == "__main__":
