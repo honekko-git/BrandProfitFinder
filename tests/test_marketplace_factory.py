@@ -9,6 +9,8 @@ from marketplace.local_marketplace import LocalMarketplace
 from marketplace.marketplace_factory import create_marketplace, get_all_marketplaces
 from marketplace.rakuten_marketplace import RakutenMarketplace
 from marketplace.rakuten_settings import RakutenConfig
+from marketplace.yahoo_auction_marketplace import YahooAuctionMarketplace
+from marketplace.yahoo_auction_settings import YahooAuctionConfig
 from marketplace.yahoo_marketplace import YahooMarketplace
 from marketplace.yahoo_settings import YahooApiSettings
 
@@ -67,9 +69,29 @@ def test_create_amazon_marketplace() -> None:
     assert isinstance(marketplace, AmazonMarketplace)
 
 
+def _yahoo_auction_settings() -> YahooAuctionConfig:
+    return YahooAuctionConfig(
+        enabled=True,
+        demo_enabled=True,
+        data_source="",
+        timeout_seconds=10,
+        max_retries=0,
+        hits=20,
+        sort="end_time",
+    )
+
+
 def test_create_rakuten_marketplace() -> None:
     marketplace = create_marketplace("rakuten", rakuten_settings=_rakuten_settings())
     assert isinstance(marketplace, RakutenMarketplace)
+
+
+def test_create_yahoo_auction_marketplace() -> None:
+    marketplace = create_marketplace(
+        "yahoo_auction",
+        yahoo_auction_settings=_yahoo_auction_settings(),
+    )
+    assert isinstance(marketplace, YahooAuctionMarketplace)
 
 
 def test_case_insensitive() -> None:
@@ -103,9 +125,11 @@ def test_get_all_marketplaces() -> None:
         yahoo_settings=_yahoo_settings(),
         amazon_settings=_amazon_settings(),
         rakuten_settings=_rakuten_settings(),
+        yahoo_auction_settings=_yahoo_auction_settings(),
     )
-    assert len(marketplaces) == 4
+    assert len(marketplaces) == 5
     assert isinstance(marketplaces[0], LocalMarketplace)
     assert isinstance(marketplaces[1], YahooMarketplace)
     assert isinstance(marketplaces[2], AmazonMarketplace)
     assert isinstance(marketplaces[3], RakutenMarketplace)
+    assert isinstance(marketplaces[4], YahooAuctionMarketplace)

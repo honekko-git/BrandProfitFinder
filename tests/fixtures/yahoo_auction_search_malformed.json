@@ -1,0 +1,16 @@
+{
+  "total_results": 2,
+  "page": 1,
+  "page_count": 1,
+  "items": [
+    null,
+    "not-an-object",
+    {
+      "auction_id": "test-auction-bad",
+      "title": "",
+      "current_price": -100,
+      "listing_status": "active",
+      "url": "https://example.invalid/auction/test-auction-bad"
+    }
+  ]
+}

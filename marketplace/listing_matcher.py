@@ -8,6 +8,7 @@ import unicodedata
 from dataclasses import dataclass
 from decimal import Decimal
 
+from config.constants import MARKETPLACE_YAHOO_AUCTION
 from models.marketplace_listing import MarketplaceListing
 from models.product import Product
 from marketplace.listing_validator import validate_listing
@@ -63,7 +64,12 @@ class ListingMatcher:
 
         if product_sku and listing_sku and product_sku == listing_sku:
             total += self.config.sku_score
-        elif product_sku and listing.listing_id and product_sku == _normalize_text(listing.listing_id):
+        elif (
+            product_sku
+            and listing.listing_id
+            and listing.marketplace_name != MARKETPLACE_YAHOO_AUCTION
+            and product_sku == _normalize_text(listing.listing_id)
+        ):
             total += self.config.sku_score
 
         if product_model and listing_model and product_model == listing_model:

@@ -93,4 +93,39 @@ class MarketplaceListing:
             "is_amazon_seller": self.is_amazon_seller,
             "shipping_unknown": self.shipping_unknown,
             "point_rate": float(self.point_rate) if self.point_rate is not None else None,
+            **self._auction_export_fields(),
+        }
+
+    def _auction_export_fields(self) -> dict[str, Any]:
+        meta = self.source_metadata
+
+        def _float(key: str) -> float | None:
+            value = meta.get(key)
+            if value is None:
+                return None
+            try:
+                return float(value)
+            except (TypeError, ValueError):
+                return None
+
+        def _int(key: str) -> int | None:
+            value = meta.get(key)
+            if value is None:
+                return None
+            try:
+                return int(value)
+            except (TypeError, ValueError):
+                return None
+
+        return {
+            "current_price_jpy": _float("current_price_jpy"),
+            "buy_now_price_jpy": _float("buy_now_price_jpy"),
+            "winning_price_jpy": _float("winning_price_jpy"),
+            "price_source": meta.get("price_source") or None,
+            "listing_status": meta.get("listing_status") or None,
+            "auction_type": meta.get("auction_type") or None,
+            "bid_count": _int("bid_count"),
+            "watch_count": _int("watch_count"),
+            "start_time": meta.get("start_time") or None,
+            "end_time": meta.get("end_time") or None,
         }

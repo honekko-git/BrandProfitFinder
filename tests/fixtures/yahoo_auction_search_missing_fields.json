@@ -1,0 +1,26 @@
+{
+  "total_results": 3,
+  "page": 1,
+  "page_count": 1,
+  "items": [
+    {
+      "auction_id": "test-auction-partial-1",
+      "title": "Partial Item No Price",
+      "listing_status": "active",
+      "url": "https://example.invalid/auction/test-auction-partial-1"
+    },
+    {
+      "auction_id": "test-auction-partial-2",
+      "current_price": 0,
+      "listing_status": "active",
+      "url": "https://example.invalid/auction/test-auction-partial-2"
+    },
+    {
+      "auction_id": "test-auction-partial-3",
+      "title": "Valid Partial",
+      "current_price": "45,000",
+      "listing_status": "active",
+      "url": "https://example.invalid/auction/test-auction-partial-3"
+    }
+  ]
+}

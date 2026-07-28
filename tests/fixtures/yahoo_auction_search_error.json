@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "SEARCH_UNAVAILABLE",
+    "message": "Simulated search failure for tests"
+  }
+}

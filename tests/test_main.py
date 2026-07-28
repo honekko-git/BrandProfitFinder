@@ -5,7 +5,15 @@ from unittest.mock import patch
 
 import openpyxl
 
-from main import build_phase2_products, build_sample_products, resolve_marketplace_name, run
+from main import (
+    build_phase2_products,
+    build_sample_products,
+    build_yahoo_auction_demo_client,
+    is_yahoo_auction_demo_requested,
+    resolve_marketplace_name,
+    run,
+    run_phase3,
+)
 
 
 def test_build_sample_products_has_expected_values() -> None:
@@ -92,3 +100,48 @@ def test_main_runnable_twice(tmp_path: Path, monkeypatch) -> None:
 
     assert first.exists()
     assert second.exists()
+
+
+def test_yahoo_auction_demo_success(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setattr("main.OUTPUT_DIR", tmp_path)
+    monkeypatch.setattr("main.EXCEL_FILENAME", "yahoo_auction_demo.xlsx")
+    monkeypatch.setattr("main.YAHOO_API_ENABLED", False)
+    monkeypatch.setattr("main.YAHOO_AUCTION_DEMO_ENABLED", True)
+
+    with patch("utils.http.fetch_url"), patch("utils.http.HttpClient"):
+        output_path = run_phase3(marketplace_name="yahoo_auction")
+
+    assert output_path.exists()
+    client = build_yahoo_auction_demo_client()
+    assert client is not None
+
+
+def test_yahoo_auction_no_data_source_does_not_crash(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setattr("main.OUTPUT_DIR", tmp_path)
+    monkeypatch.setattr("main.EXCEL_FILENAME", "yahoo_auction_skip.xlsx")
+    monkeypatch.setattr("main.YAHOO_API_ENABLED", False)
+    monkeypatch.setattr("main.YAHOO_AUCTION_ENABLED", True)
+    monkeypatch.setattr("main.YAHOO_AUCTION_DEMO_ENABLED", False)
+
+    with patch("utils.http.fetch_url"), patch("utils.http.HttpClient"):
+        output_path = run_phase3(marketplace_name="yahoo_auction")
+
+    assert output_path.exists()
+
+
+def test_yahoo_auction_demo_cli_flag() -> None:
+    assert is_yahoo_auction_demo_requested(["--demo-yahoo-auction"]) is True
+    assert resolve_marketplace_name(["--marketplace", "yahoo_auction", "--demo-yahoo-auction"]) == "yahoo_auction"
+
+
+def test_yahoo_auction_fixture_not_used_in_default_run(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setattr("main.OUTPUT_DIR", tmp_path)
+    monkeypatch.setattr("main.EXCEL_FILENAME", "default_local.xlsx")
+    monkeypatch.setattr("main.YAHOO_API_ENABLED", False)
+    monkeypatch.setattr("main.YAHOO_AUCTION_ENABLED", False)
+
+    with patch("utils.http.fetch_url"), patch("utils.http.HttpClient"):
+        output_path = run()
+
+    assert output_path.exists()
+    assert resolve_marketplace_name([]) == "local"

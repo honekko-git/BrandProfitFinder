@@ -85,9 +85,9 @@ Incremental Development
 
 ## Status
 
-Phase 5A
+Phase 7
 
-Amazon.co.jp domestic marketplace foundation (API-agnostic, fixture-based)
+Yahoo!オークション domestic marketplace foundation (API-agnostic, fixture-based)
 
 ---
 
@@ -100,6 +100,7 @@ BrandProfitFinder compares overseas purchase prices with Japanese **sales** mark
 | Yahoo Shopping | Domestic sales price comparison | API v3 (optional live) |
 | Amazon.co.jp | Domestic sales price comparison | Phase 5A foundation (no live API) |
 | Rakuten Ichiba | Domestic sales price comparison | Phase 6 foundation (no live API by default) |
+| Yahoo!オークション | Domestic sales price comparison | Phase 7 foundation (no live API) |
 
 Amazon is **not** an overseas sourcing store. Overseas sourcing stores are Cettire, Baltini, and Italist.
 
@@ -153,3 +154,32 @@ python main.py --marketplace rakuten --demo-rakuten
 - `postageFlag=0` → free shipping (`shipping_jpy=0`); otherwise shipping is unknown (`shipping_jpy=None`)
 - Rakuten points (`pointRate`) are stored but **not** auto-deducted from profit
 - Rakuten selling fees are **not** auto-calculated in this phase
+
+### Yahoo!オークション Phase 7 notes
+
+- Yahoo!オークション is a **domestic sales price comparison** target (not an overseas sourcing store)
+- This phase is an **API-agnostic foundation** — it does **not** connect to an official public search API
+- No unofficial scraping, browser automation, HTML parsing, or login cookies
+- Demo mode uses local fixture JSON under `tests/fixtures/` (BrandProfitFinder internal standard JSON)
+- `current_price` on active auctions is **provisional** and not a confirmed sold price
+- `winning_price` is used for sold listings when available
+- `free_shipping=true` → `shipping_jpy=0`; explicit shipping amount → that value; otherwise shipping is unknown (`shipping_jpy=None`, not treated as free)
+- Yahoo Auction selling fees, bid increments, coupons, and PayPay points are **not** auto-calculated
+- Future live data sources can replace `YahooAuctionClientProtocol` without changing Marketplace/Parser layers
+
+### Yahoo!オークション demo mode (optional)
+
+Set in `.env` (see `.env.example`):
+
+```
+YAHOO_AUCTION_ENABLED=true
+YAHOO_AUCTION_DEMO_ENABLED=true
+```
+
+Or run:
+
+```
+python main.py --marketplace yahoo_auction --demo-yahoo-auction
+```
+
+When enabled without a live data source (`YAHOO_AUCTION_DATA_SOURCE`), `main.py` logs a skip message and continues without network access.

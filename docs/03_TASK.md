@@ -116,3 +116,27 @@ Set values in `.env` (see `.env.example`):
 - Demo: `python main.py --marketplace rakuten --demo-rakuten`
 
 ---
+
+## Phase 7
+
+- [x] Yahoo!オークション domestic marketplace foundation (API-agnostic)
+- [x] YahooAuctionClientProtocol and FakeYahooAuctionClient
+- [x] YahooAuctionResponseParser (internal standard JSON)
+- [x] YahooAuctionMarketplace with Validator/Matcher integration
+- [x] MarketplaceFactory `yahoo_auction` registration (aliases: `yahoo-auction`, `yahooauction`, `auctions`)
+- [x] Optional Yahoo Auction demo mode in main.py
+- [x] Excel domestic listings auction columns (`current_price_jpy`, `buy_now_price_jpy`, `winning_price_jpy`, etc.)
+- [ ] Official API or licensed data provider connection
+- [ ] Yahoo Auction selling fee calculation
+- [ ] Detailed used-item condition grading
+
+### Phase 7 test status
+
+- Total tests: 482+ (including prior regression tests)
+- No external Yahoo Auction API calls in tests or default `main.py`
+- No scraping or browser automation
+- Demo: `python main.py --marketplace yahoo_auction --demo-yahoo-auction`
+- `current_price` is provisional; `winning_price` is used for sold listings
+- Unknown shipping is not treated as free shipping
+
+---
