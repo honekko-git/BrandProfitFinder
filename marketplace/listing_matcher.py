@@ -8,7 +8,7 @@ import unicodedata
 from dataclasses import dataclass
 from decimal import Decimal
 
-from config.constants import MARKETPLACE_USED_DEMO, MARKETPLACE_YAHOO_AUCTION
+from config.constants import MARKETPLACE_USED_DEMO, MARKETPLACE_VESTIAIRE, MARKETPLACE_YAHOO_AUCTION
 from models.marketplace_listing import MarketplaceListing
 from models.product import Product
 from marketplace.listing_validator import validate_listing
@@ -67,7 +67,11 @@ class ListingMatcher:
         elif (
             product_sku
             and listing.listing_id
-            and listing.marketplace_name not in {MARKETPLACE_YAHOO_AUCTION, MARKETPLACE_USED_DEMO}
+            and listing.marketplace_name not in {
+                MARKETPLACE_YAHOO_AUCTION,
+                MARKETPLACE_USED_DEMO,
+                MARKETPLACE_VESTIAIRE,
+            }
             and product_sku == _normalize_text(listing.listing_id)
         ):
             total += self.config.sku_score

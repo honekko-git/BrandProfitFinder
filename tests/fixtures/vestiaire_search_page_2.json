@@ -1,0 +1,18 @@
+{
+  "marketplace": "vestiaire",
+  "page": 2,
+  "page_size": 20,
+  "total": 2,
+  "items": [
+    {
+      "listing_id": "vestiaire-page2-001",
+      "title": "GUCCI Bag Page 2",
+      "price": {"amount": 95000, "currency": "JPY"},
+      "url": "https://example.invalid/vestiaire/vestiaire-page2-001",
+      "brand": "GUCCI",
+      "model_number": "447632",
+      "condition": {"raw": "Good condition"},
+      "sale_status": "ACTIVE"
+    }
+  ]
+}

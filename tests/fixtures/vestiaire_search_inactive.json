@@ -1,0 +1,12 @@
+{
+  "items": [
+    {
+      "listing_id": "vestiaire-inactive-001",
+      "title": "Inactive Bag",
+      "price": {"amount": 60000, "currency": "JPY"},
+      "url": "https://example.invalid/vestiaire/vestiaire-inactive-001",
+      "condition": {"raw": "Good"},
+      "sale_status": "INACTIVE"
+    }
+  ]
+}

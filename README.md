@@ -91,6 +91,8 @@ Yahoo!オークション domestic marketplace foundation (API-agnostic, fixture-
 
 Phase 8 adds used luxury brand common foundation (site-independent)
 
+Phase 9 adds Vestiaire Collective integration foundation (fixture-based, no live API)
+
 ---
 
 ## Domestic Marketplaces
@@ -208,5 +210,22 @@ USED_LUXURY_DEMO_ENABLED=true
 Or:
 
 ```
-python main.py --marketplace used_demo --demo-used-luxury
+python main.py --marketplace vestiaire --demo-vestiaire
+```
+
+### Vestiaire Collective Phase 9 notes
+
+- Phase 9 is a **Vestiaire Collective integration foundation** (not a live site connection)
+- Does **not** use official Vestiaire API format; internal standard fixture JSON only
+- No scraping, browser automation, cookies, or unofficial access
+- Reuses Phase 8 used luxury common models via `UsedItemEnricher`
+- Seller claims are not treated as third-party authentication
+- Risk evaluation warns but does not declare items counterfeit
+- Price adjustment suggestions are not auto-applied to profit (`adjustment_applied=false`)
+- Demo only: `--demo-vestiaire` with `FakeVestiaireClient`
+- Without demo, `--marketplace vestiaire` logs a clear error and falls back safely
+
+```
+VESTIAIRE_DEMO_ENABLED=true
+python main.py --marketplace vestiaire --demo-vestiaire
 ```

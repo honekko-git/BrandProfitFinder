@@ -23,7 +23,7 @@ class ConditionNormalizationResult:
 # (pattern, condition, confidence, rule_name)
 _CONDITION_RULES: tuple[tuple[re.Pattern[str], UsedItemCondition, float, str], ...] = (
     (re.compile(r"^(brand\s*)?new$|^新品$"), UsedItemCondition.NEW, 1.0, "exact_new"),
-    (re.compile(r"^unused$|^never\s*used$|^未使用$"), UsedItemCondition.UNUSED, 1.0, "exact_unused"),
+    (re.compile(r"^unused$|^never\s*used$|^never\s*worn$|^未使用$"), UsedItemCondition.UNUSED, 1.0, "exact_unused"),
     (re.compile(r"^like\s*new$|^新品同様$"), UsedItemCondition.LIKE_NEW, 0.95, "exact_like_new"),
     (re.compile(r"^mint$"), UsedItemCondition.LIKE_NEW, 0.9, "mint_like_new"),
     (re.compile(r"^excellent$|^美品$"), UsedItemCondition.EXCELLENT, 0.95, "exact_excellent"),
@@ -33,6 +33,7 @@ _CONDITION_RULES: tuple[tuple[re.Pattern[str], UsedItemCondition, float, str], .
     (re.compile(r"^poor$|^damaged$|^全体的に状態が悪い$"), UsedItemCondition.POOR, 0.9, "exact_poor"),
     (re.compile(r"^for\s*parts$|^ジャンク$"), UsedItemCondition.FOR_PARTS, 0.95, "exact_for_parts"),
     (re.compile(r"^pre[- ]?owned$|^second\s*hand$|^中古$"), UsedItemCondition.USED_GENERIC, 0.6, "generic_used"),
+    (re.compile(r"^vintage$"), UsedItemCondition.USED_GENERIC, 0.4, "vestiaire_vintage"),
     (re.compile(r"^used$"), UsedItemCondition.USED_GENERIC, 0.5, "ambiguous_used"),
 )
 
@@ -77,6 +78,8 @@ class ConditionNormalizer:
                 warnings: list[str] = []
                 if condition == UsedItemCondition.USED_GENERIC:
                     warnings.append("ambiguous used condition; not upgraded to ranked grade")
+                if rule == "vestiaire_vintage":
+                    warnings.append("vintage indicates age; not upgraded to good condition")
                 return ConditionNormalizationResult(
                     normalized_condition=condition,
                     raw_condition=raw_text,

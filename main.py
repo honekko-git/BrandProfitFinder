@@ -25,6 +25,7 @@ from config.settings import (
     YAHOO_AUCTION_DEMO_ENABLED,
     YAHOO_AUCTION_ENABLED,
     USED_LUXURY_DEMO_ENABLED,
+    VESTIAIRE_DEMO_ENABLED,
 )
 from excel.exporter import ExcelExporter
 from marketplace.amazon_client import FakeAmazonClient
@@ -35,6 +36,10 @@ from marketplace.rakuten_settings import RakutenConfig
 from marketplace.yahoo_auction_client import FakeYahooAuctionClient
 from marketplace.yahoo_auction_settings import YahooAuctionConfig
 from marketplace.yahoo_settings import YahooApiSettings
+from marketplace.vestiaire_client import FakeVestiaireClient
+from marketplace.vestiaire_exceptions import VestiaireConfigurationError
+from marketplace.vestiaire_marketplace import create_vestiaire_marketplace
+from marketplace.vestiaire_settings import VestiaireSettings
 from used_luxury.demo_marketplace import create_used_luxury_demo_marketplace
 from used_luxury.demo_provider import FakeUsedLuxuryProvider
 from models.marketplace_listing import MarketplaceListing
@@ -226,11 +231,43 @@ def resolve_marketplace_name(argv: list[str] | None = None) -> str:
         return "yahoo_auction"
     if USED_LUXURY_DEMO_ENABLED or "--demo-used-luxury" in args:
         return "used_demo"
+    if VESTIAIRE_DEMO_ENABLED or "--demo-vestiaire" in args:
+        return "vestiaire"
     if AMAZON_JP_ENABLED and (AMAZON_JP_DEMO_ENABLED or "--demo-amazon" in args):
         return "amazon_jp"
     if YAHOO_API_ENABLED:
         return "yahoo"
     return "local"
+
+
+def is_vestiaire_demo_requested(argv: list[str] | None = None) -> bool:
+    """Return True when Vestiaire demo mode is explicitly requested."""
+    args = argv if argv is not None else sys.argv[1:]
+    return VESTIAIRE_DEMO_ENABLED or "--demo-vestiaire" in args
+
+
+def build_vestiaire_demo_client() -> FakeVestiaireClient | None:
+    """
+    Build a fake Vestiaire client from local fixture JSON.
+
+    Returns:
+        FakeVestiaireClient when demo fixture exists, otherwise None.
+    """
+    settings = VestiaireSettings.from_env()
+    fixture_path = FIXTURES_DIR / settings.demo_fixture_path
+    if not fixture_path.exists():
+        logger.warning("Vestiaire demo fixture not found: %s", fixture_path)
+        return None
+    payload = json.loads(fixture_path.read_text(encoding="utf-8"))
+    page_2 = FIXTURES_DIR / "vestiaire_search_page_2.json"
+    if page_2.exists():
+        return FakeVestiaireClient(
+            pages={
+                1: payload,
+                2: json.loads(page_2.read_text(encoding="utf-8")),
+            }
+        )
+    return FakeVestiaireClient(payload)
 
 
 def is_used_luxury_demo_requested(argv: list[str] | None = None) -> bool:
@@ -324,6 +361,8 @@ def _normalize_selected_marketplace(selected: str) -> str:
         return "yahoo_auction"
     if normalized in {"used_demo", "used-luxury", "usedluxury"}:
         return "used_demo"
+    if normalized in {"vestiaire", "vestiaire_collective", "vestiaire-collective", "vc"}:
+        return "vestiaire"
     return normalized
 
 
@@ -342,9 +381,11 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
     amazon_settings = AmazonConfig.from_env()
     rakuten_settings = RakutenConfig.from_env()
     yahoo_auction_settings = YahooAuctionConfig.from_env()
+    vestiaire_settings = VestiaireSettings.from_env()
     amazon_client = None
     rakuten_client = None
     yahoo_auction_client = None
+    vestiaire_client = None
 
     selected = _normalize_selected_marketplace(selected)
 
@@ -382,6 +423,19 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
     if selected == "used_demo":
         if not is_used_luxury_demo_requested():
             logger.warning("Used luxury demo is not enabled; falling back to local marketplace")
+            selected = "local"
+
+    if selected == "vestiaire":
+        if is_vestiaire_demo_requested():
+            vestiaire_client = build_vestiaire_demo_client()
+            if vestiaire_client is None:
+                logger.warning("Vestiaire demo client unavailable; falling back to local marketplace")
+                selected = "local"
+        else:
+            logger.error(
+                "Vestiaire Collective live client is not implemented. "
+                "Use --demo-vestiaire for fixture demo mode."
+            )
             selected = "local"
 
     if selected == "yahoo" and not yahoo_settings.can_execute:
@@ -431,18 +485,65 @@ def run_phase3(marketplace_name: str | None = None) -> Path:
             )
             return output_path
 
-    marketplace = create_marketplace(
-        selected,
-        listings_by_product_key=listings_map,
-        selection_strategy=PriceSelectionStrategy.HIGHEST,
-        yahoo_settings=yahoo_settings,
-        amazon_settings=amazon_settings,
-        amazon_client=amazon_client,
-        rakuten_settings=rakuten_settings,
-        rakuten_client=rakuten_client,
-        yahoo_auction_settings=yahoo_auction_settings,
-        yahoo_auction_client=yahoo_auction_client,
-    )
+    if selected == "vestiaire" and vestiaire_client is not None:
+        marketplace = create_vestiaire_marketplace(
+            client=vestiaire_client,
+            settings=vestiaire_settings,
+        )
+        calculator = ProfitCalculator(
+            ProfitConfig(
+                international_shipping_jpy=Decimal("2500"),
+                customs_duty_rate=Decimal("0.08"),
+                import_tax_rate=Decimal("0.10"),
+                domestic_shipping_jpy=Decimal("800"),
+                marketplace_fee_rate=Decimal("0.12"),
+                other_costs_jpy=Decimal("500"),
+            )
+        )
+        search_results = [marketplace.search(product) for product in products]
+        all_listings = [listing for result in search_results for listing in result.listings]
+        valid_count = sum(len(result.valid_listings) for result in search_results)
+        results = calculate_profit_from_search_results(search_results, calculator)
+        ranked = RankingEngine(calculator.config).rank(
+            results,
+            sort_key=RankingSortKey.PROFIT,
+            descending=True,
+        )
+        exporter = ExcelExporter(output_dir=OUTPUT_DIR, filename=EXCEL_FILENAME)
+        output_path = exporter.export_phase3_workbook(products, all_listings, ranked)
+        logger.info(
+            "Vestiaire demo export completed: %s (products=%d, listings=%d, valid=%d, results=%d)",
+            output_path,
+            len(products),
+            len(all_listings),
+            valid_count,
+            len(ranked),
+        )
+        return output_path
+
+    try:
+        marketplace = create_marketplace(
+            selected,
+            listings_by_product_key=listings_map,
+            selection_strategy=PriceSelectionStrategy.HIGHEST,
+            yahoo_settings=yahoo_settings,
+            amazon_settings=amazon_settings,
+            amazon_client=amazon_client,
+            rakuten_settings=rakuten_settings,
+            rakuten_client=rakuten_client,
+            yahoo_auction_settings=yahoo_auction_settings,
+            yahoo_auction_client=yahoo_auction_client,
+            vestiaire_settings=vestiaire_settings,
+            vestiaire_client=vestiaire_client,
+        )
+    except VestiaireConfigurationError as exc:
+        logger.error("%s", exc)
+        selected = "local"
+        marketplace = create_marketplace(
+            "local",
+            listings_by_product_key=listings_map,
+            selection_strategy=PriceSelectionStrategy.HIGHEST,
+        )
     calculator = ProfitCalculator(
         ProfitConfig(
             international_shipping_jpy=Decimal("2500"),
@@ -506,10 +607,10 @@ def run(marketplace_name: str | None = None) -> Path:
 def main() -> None:
     """CLI entry point."""
     setup_logging()
-    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8 started")
+    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9 started")
     with patch("utils.http.fetch_url"), patch("utils.http.HttpClient"):
         output_path = run()
-    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8 finished: %s", output_path)
+    logger.info("BrandProfitFinder Phase 3/4/5A/6/7/8/9 finished: %s", output_path)
 
 
 if __name__ == "__main__":

@@ -119,3 +119,39 @@ USED_LUXURY_DEMO_ENABLED = os.getenv("USED_LUXURY_DEMO_ENABLED", "false").strip(
     "yes",
     "on",
 )
+
+VESTIAIRE_ENABLED = os.getenv("VESTIAIRE_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+VESTIAIRE_DEMO_ENABLED = os.getenv("VESTIAIRE_DEMO_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+VESTIAIRE_TIMEOUT_SECONDS = max(1, int(os.getenv("VESTIAIRE_TIMEOUT_SECONDS", "10")))
+VESTIAIRE_PAGE_SIZE = max(1, min(50, int(os.getenv("VESTIAIRE_PAGE_SIZE", "20"))))
+VESTIAIRE_MAX_PAGES = max(1, min(20, int(os.getenv("VESTIAIRE_MAX_PAGES", "1"))))
+VESTIAIRE_DEFAULT_CURRENCY = os.getenv("VESTIAIRE_DEFAULT_CURRENCY", "JPY").strip().upper()
+VESTIAIRE_DEMO_FIXTURE_PATH = os.getenv("VESTIAIRE_DEMO_FIXTURE_PATH", "vestiaire_search_normal.json").strip()
+VESTIAIRE_ALLOW_UNKNOWN_CURRENCY = os.getenv("VESTIAIRE_ALLOW_UNKNOWN_CURRENCY", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+VESTIAIRE_INCLUDE_INACTIVE = os.getenv("VESTIAIRE_INCLUDE_INACTIVE", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+VESTIAIRE_INCLUDE_SOLD = os.getenv("VESTIAIRE_INCLUDE_SOLD", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)

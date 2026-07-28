@@ -7,6 +7,7 @@ from config.constants import (
     MARKETPLACE_LOCAL,
     MARKETPLACE_MERCARI,
     MARKETPLACE_RAKUTEN,
+    MARKETPLACE_VESTIAIRE,
     MARKETPLACE_YAHOO,
     MARKETPLACE_YAHOO_AUCTION,
 )
@@ -18,6 +19,9 @@ from marketplace.local_marketplace import LocalMarketplace
 from marketplace.rakuten_client import RakutenClientProtocol
 from marketplace.rakuten_marketplace import create_rakuten_marketplace
 from marketplace.rakuten_settings import RakutenConfig
+from marketplace.vestiaire_client import VestiaireClientProtocol
+from marketplace.vestiaire_marketplace import create_vestiaire_marketplace
+from marketplace.vestiaire_settings import VestiaireSettings
 from marketplace.yahoo_auction_client import YahooAuctionClientProtocol
 from marketplace.yahoo_auction_marketplace import create_yahoo_auction_marketplace
 from marketplace.yahoo_auction_settings import YahooAuctionConfig
@@ -29,12 +33,17 @@ from price_compare.price_comparator import PriceSelectionStrategy
 _YAHOO_AUCTION_ALIASES = frozenset(
     {"yahoo_auction", "yahoo-auction", "yahooauction", "auctions"}
 )
+_VESTIAIRE_ALIASES = frozenset(
+    {"vestiaire", "vestiaire_collective", "vestiaire-collective", "vc"}
+)
 
 
 def _normalize_marketplace_name(marketplace_name: str) -> str:
     normalized = marketplace_name.strip().lower()
     if normalized in _YAHOO_AUCTION_ALIASES:
         return MARKETPLACE_YAHOO_AUCTION
+    if normalized in _VESTIAIRE_ALIASES:
+        return MARKETPLACE_VESTIAIRE
     return normalized
 
 
@@ -49,6 +58,8 @@ def create_marketplace(
     rakuten_client: RakutenClientProtocol | None = None,
     yahoo_auction_settings: YahooAuctionConfig | None = None,
     yahoo_auction_client: YahooAuctionClientProtocol | None = None,
+    vestiaire_settings: VestiaireSettings | None = None,
+    vestiaire_client: VestiaireClientProtocol | None = None,
 ) -> BaseMarketplace:
     """
     Create a marketplace instance for the given name.
@@ -64,6 +75,8 @@ def create_marketplace(
         rakuten_client: Optional Rakuten client override.
         yahoo_auction_settings: Optional Yahoo Auction settings override.
         yahoo_auction_client: Optional Yahoo Auction client override.
+        vestiaire_settings: Optional Vestiaire settings override.
+        vestiaire_client: Optional Vestiaire client override (required for vestiaire).
 
     Returns:
         Configured marketplace instance.
@@ -93,6 +106,12 @@ def create_marketplace(
             config=yahoo_auction_settings,
         )
 
+    if normalized == MARKETPLACE_VESTIAIRE.lower():
+        return create_vestiaire_marketplace(
+            client=vestiaire_client,
+            settings=vestiaire_settings,
+        )
+
     not_implemented = {
         MARKETPLACE_MERCARI.lower(): "Mercari marketplace is not yet implemented",
     }
@@ -111,22 +130,13 @@ def get_all_marketplaces(
     rakuten_client: RakutenClientProtocol | None = None,
     yahoo_auction_settings: YahooAuctionConfig | None = None,
     yahoo_auction_client: YahooAuctionClientProtocol | None = None,
+    vestiaire_settings: VestiaireSettings | None = None,
+    vestiaire_client: VestiaireClientProtocol | None = None,
 ) -> list[BaseMarketplace]:
     """
     Return marketplace instances for all implemented marketplaces.
 
-    Args:
-        listings_by_product_key: Optional injected listings for local marketplace.
-        yahoo_settings: Optional Yahoo settings override.
-        amazon_settings: Optional Amazon settings override.
-        amazon_client: Optional Amazon client override.
-        rakuten_settings: Optional Rakuten settings override.
-        rakuten_client: Optional Rakuten client override.
-        yahoo_auction_settings: Optional Yahoo Auction settings override.
-        yahoo_auction_client: Optional Yahoo Auction client override.
-
-    Returns:
-        List of marketplace instances.
+    Vestiaire is omitted unless a client is injected (no fake client by default).
     """
     yahoo = yahoo_settings or YahooApiSettings.from_env()
     amazon = amazon_settings or AmazonConfig.from_env()
@@ -151,4 +161,12 @@ def get_all_marketplaces(
             yahoo_auction_client=yahoo_auction_client,
         ),
     ]
+    if vestiaire_client is not None:
+        marketplaces.append(
+            create_marketplace(
+                MARKETPLACE_VESTIAIRE,
+                vestiaire_settings=vestiaire_settings,
+                vestiaire_client=vestiaire_client,
+            )
+        )
     return marketplaces
