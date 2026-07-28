@@ -28,13 +28,23 @@ Excel export for PriceResult
 
 ## Phase 3
 
-10 supported stores
+Domestic marketplace listing models
+
+Common marketplace search interface
+
+Local marketplace candidates
+
+Listing validation and matching
+
+PriceComparator and ProfitCalculator integration
+
+Domestic listings Excel export
 
 ---
 
 ## Phase 4
 
-30 supported stores
+10 supported overseas stores
 
 ---
 

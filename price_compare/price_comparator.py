@@ -6,6 +6,10 @@ import logging
 import statistics
 from decimal import Decimal
 from enum import Enum
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from models.marketplace_listing import MarketplaceListing
 
 logger = logging.getLogger(__name__)
 
@@ -89,6 +93,62 @@ class PriceComparator:
                 return market, selected_price
 
         return valid_items[0][0], selected_price
+
+    def prices_from_listings(
+        self,
+        listings: list["MarketplaceListing"],
+    ) -> list[Decimal]:
+        """
+        Extract valid total prices from marketplace listings.
+
+        Args:
+            listings: Marketplace listing candidates.
+
+        Returns:
+            Valid positive total prices preserving order.
+        """
+        prices = [
+            listing.total_price_jpy or listing.compute_total_price_jpy()
+            for listing in listings
+            if listing.is_valid
+        ]
+        return self.filter_valid_prices(prices)
+
+    def select_from_listings(
+        self,
+        listings: list["MarketplaceListing"],
+        strategy: PriceSelectionStrategy = PriceSelectionStrategy.FIRST_VALID,
+    ) -> tuple["MarketplaceListing", Decimal] | None:
+        """
+        Select a listing and price using an existing selection strategy.
+
+        Args:
+            listings: Valid marketplace listings.
+            strategy: Price selection strategy.
+
+        Returns:
+            Tuple of (listing, total_price_jpy) or None.
+        """
+        valid_listings = [listing for listing in listings if listing.is_valid]
+        if not valid_listings:
+            return None
+
+        selected_price = self.select_price(
+            [
+                listing.total_price_jpy or listing.compute_total_price_jpy()
+                for listing in valid_listings
+            ],
+            strategy=strategy,
+        )
+        if selected_price is None:
+            return None
+
+        for listing in valid_listings:
+            total = listing.total_price_jpy or listing.compute_total_price_jpy()
+            if total == selected_price:
+                return listing, selected_price
+
+        return valid_listings[0], selected_price
 
     def filter_valid_prices(
         self,

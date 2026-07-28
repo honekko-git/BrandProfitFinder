@@ -8,10 +8,11 @@ from pathlib import Path
 import pandas as pd
 from openpyxl import load_workbook
 
-from config.constants import SHEET_PROFIT_RANKING, SHEET_ROI_RANKING
+from config.constants import SHEET_DOMESTIC_LISTINGS, SHEET_PROFIT_RANKING, SHEET_ROI_RANKING
 from config.settings import EXCEL_FILENAME, OUTPUT_DIR
-from excel.formatter import apply_price_result_formatting, apply_sheet_layout
-from excel.template import PRICE_RESULT_COLUMNS, PRODUCT_COLUMNS
+from excel.formatter import apply_listing_formatting, apply_price_result_formatting, apply_sheet_layout
+from excel.template import MARKETPLACE_LISTING_COLUMNS, PRICE_RESULT_COLUMNS, PRODUCT_COLUMNS
+from models.marketplace_listing import MarketplaceListing
 from models.price_result import PriceResult
 from models.product import Product
 
@@ -74,6 +75,80 @@ class ExcelExporter:
         dataframe.to_excel(output_path, index=False, sheet_name=SHEET_PRICE_RESULTS)
         self._format_price_result_sheet(output_path, len(results))
         logger.info("Exported %d price results to %s", len(results), output_path)
+        return output_path
+
+    def export_phase3_workbook(
+        self,
+        products: list[Product],
+        listings: list[MarketplaceListing],
+        results: list[PriceResult],
+    ) -> Path:
+        """
+        Export products, domestic listings, and profit results.
+
+        Args:
+            products: Product list for backward-compatible export.
+            listings: Domestic marketplace listing candidates.
+            results: Profit calculation results.
+
+        Returns:
+            Path to the generated workbook.
+        """
+        product_rows = [product.to_dict() for product in products]
+        listing_rows = [listing.to_dict() for listing in listings]
+        result_rows = [result.to_dict() for result in results]
+        output_path = self.output_path
+
+        with pd.ExcelWriter(output_path, engine="openpyxl") as writer:
+            pd.DataFrame(product_rows, columns=PRODUCT_COLUMNS).to_excel(
+                writer,
+                index=False,
+                sheet_name=SHEET_PROFIT_RANKING,
+            )
+            pd.DataFrame(listing_rows, columns=MARKETPLACE_LISTING_COLUMNS).to_excel(
+                writer,
+                index=False,
+                sheet_name=SHEET_DOMESTIC_LISTINGS,
+            )
+            pd.DataFrame(result_rows, columns=PRICE_RESULT_COLUMNS).to_excel(
+                writer,
+                index=False,
+                sheet_name=SHEET_PRICE_RESULTS,
+            )
+            pd.DataFrame(
+                [
+                    {
+                        "rank": index,
+                        "label": result.product.name if result.product else "",
+                        "score": float(result.ranking_score),
+                    }
+                    for index, result in enumerate(results, start=1)
+                ],
+                columns=["rank", "label", "score"],
+            ).to_excel(writer, index=False, sheet_name=SHEET_ROI_RANKING)
+
+        workbook = load_workbook(output_path)
+        if SHEET_PROFIT_RANKING in workbook.sheetnames:
+            apply_sheet_layout(workbook[SHEET_PROFIT_RANKING], len(PRODUCT_COLUMNS))
+        if SHEET_DOMESTIC_LISTINGS in workbook.sheetnames:
+            sheet = workbook[SHEET_DOMESTIC_LISTINGS]
+            apply_sheet_layout(sheet, len(MARKETPLACE_LISTING_COLUMNS))
+            apply_listing_formatting(sheet, MARKETPLACE_LISTING_COLUMNS, len(listings))
+        if SHEET_PRICE_RESULTS in workbook.sheetnames:
+            sheet = workbook[SHEET_PRICE_RESULTS]
+            apply_sheet_layout(sheet, len(PRICE_RESULT_COLUMNS))
+            apply_price_result_formatting(sheet, PRICE_RESULT_COLUMNS, len(results))
+        if SHEET_ROI_RANKING in workbook.sheetnames:
+            apply_sheet_layout(workbook[SHEET_ROI_RANKING], 3)
+        workbook.save(output_path)
+
+        logger.info(
+            "Exported Phase 3 workbook with %d products, %d listings, %d results to %s",
+            len(products),
+            len(listings),
+            len(results),
+            output_path,
+        )
         return output_path
 
     def export_phase2_workbook(
