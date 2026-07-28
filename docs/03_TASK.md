@@ -261,3 +261,23 @@ Set values in `.env` (see `.env.example`):
 - Internal fixture JSON only; not claimed as official API format
 
 ---
+
+## Phase 14
+
+- [x] Farfetch integration foundation (no live communication)
+- [x] FarfetchClientProtocol and FakeFarfetchClient
+- [x] FarfetchResponseParser (BrandProfitFinder internal standard JSON)
+- [x] FarfetchMarketplace with pagination, boutique/inventory/discount/duties filters
+- [x] product_id / variant_id / style_code metadata; retail-focused condition handling
+- [x] MarketplaceFactory aliases: farfetch, far_fetch, far-fetch, ff
+- [x] Matcher style_code scoring; Farfetch comparison warnings
+- [x] Demo: `python main.py --demo-farfetch`
+- [ ] Official Farfetch API, partner data feed, CSV import, or manual import client
+
+### Phase 14 test status
+
+- Total tests: 990+ (including prior regression tests)
+- No external Farfetch communication in tests or default `main.py`
+- Internal fixture JSON only; not claimed as official API format
+
+---

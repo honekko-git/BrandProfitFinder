@@ -97,6 +97,8 @@ Phase 10 adds Fashionphile integration foundation (fixture-based, no live API)
 
 Phase 13 adds Chrono24 integration foundation (fixture-based, no live API)
 
+Phase 14 adds Farfetch integration foundation (fixture-based, no live API)
+
 ---
 
 ## Domestic Marketplaces
@@ -319,4 +321,28 @@ Or:
 
 ```
 python main.py --demo-chrono24
+```
+
+### Farfetch Phase 14 notes
+
+- Phase 14 is a **Farfetch integration foundation** (not a live site connection)
+- Does **not** use official Farfetch API format; internal standard fixture JSON only
+- No scraping, browser automation, cookies, or CAPTCHA bypass
+- Reuses Phase 3–7 profit/compare and Phase 9–13 integration patterns
+- `product_id`, `variant_id`, and `listing_id` are kept distinct; `style_code` and SKU are not conflated with JAN/model
+- Unknown shipping/duties are not treated as zero; discounts/duties/variant prices are not auto-applied to profit
+- Boutique metadata is informational only (not authenticity guarantee)
+- `New Season` is season info, not a condition guarantee; Final Sale return rules handled safely
+- Demo only: `--demo-farfetch` with `FakeFarfetchClient`
+- Without demo, `--marketplace farfetch` logs a clear error and falls back safely
+
+```
+FARFETCH_DEMO_ENABLED=true
+python main.py --marketplace farfetch --demo-farfetch
+```
+
+Or:
+
+```
+python main.py --demo-farfetch
 ```
