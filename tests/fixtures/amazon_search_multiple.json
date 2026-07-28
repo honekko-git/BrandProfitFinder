@@ -1,0 +1,47 @@
+{
+  "items": [
+    {
+      "asin": "B0TEST2001",
+      "title": "GUCCI GG Marmont Wallet Black",
+      "brand": "GUCCI",
+      "model_number": "456126",
+      "jan_code": "1234567890123",
+      "detail_page_url": "https://www.amazon.co.jp/dp/B0TEST2001",
+      "image_url": "https://example.com/amazon/wallet-1.jpg",
+      "price": {"amount": 128000, "currency": "JPY"},
+      "shipping": {"amount": 0, "is_free": true},
+      "seller": {"name": "Amazon.co.jp", "is_amazon": true},
+      "condition": "NEW",
+      "availability": "IN_STOCK",
+      "is_prime": true,
+      "points": 1280
+    },
+    {
+      "asin": "B0TEST2002",
+      "title": "GUCCI Marmont Shoulder Bag",
+      "brand": "GUCCI",
+      "model_number": "GG-MARMONT",
+      "detail_page_url": "https://www.amazon.co.jp/dp/B0TEST2002",
+      "price": {"amount": 198000, "currency": "JPY"},
+      "shipping": {"amount": 500},
+      "seller": {"name": "Premium Seller", "is_amazon": false},
+      "condition": "NEW",
+      "availability": "IN_STOCK",
+      "is_prime": false,
+      "points": 0
+    },
+    {
+      "asin": "B0TEST2003",
+      "title": "Designer Bag Generic",
+      "brand": "Other",
+      "detail_page_url": "https://www.amazon.co.jp/dp/B0TEST2003",
+      "price": {"amount": 88000, "currency": "JPY"},
+      "shipping": {"amount": 0, "is_free": true},
+      "seller": {"name": "Outlet Shop"},
+      "condition": "USED",
+      "availability": "IN_STOCK"
+    }
+  ],
+  "total_results": 3,
+  "next_page_token": "page-2-token"
+}

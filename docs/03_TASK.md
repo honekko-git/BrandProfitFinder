@@ -72,6 +72,24 @@ Set values in `.env` (see `.env.example`):
 
 ---
 
-## Phase 5
+## Phase 5A
 
-- [ ] GUI
+- [x] Amazon.co.jp domestic marketplace foundation (API-agnostic)
+- [x] AmazonClientProtocol and FakeAmazonClient
+- [x] AmazonResponseParser (internal standard JSON)
+- [x] AmazonMarketplace with Validator/Matcher integration
+- [x] MarketplaceFactory `amazon_jp` registration
+- [x] Amazon price normalizer (JPY)
+- [x] Excel domestic listings columns extended
+- [x] Optional Amazon demo mode in main.py
+- [ ] Live Amazon API connection (Creators API / SP-API)
+- [ ] Amazon selling fee calculation
+- [ ] Used-item common foundation
+
+### Phase 5A test status
+
+- Total tests: 398 (including prior 313 regression tests)
+- No external Amazon API calls in tests or default main.py
+- Demo mode uses `tests/fixtures/amazon_search_*.json`
+
+---

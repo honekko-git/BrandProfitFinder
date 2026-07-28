@@ -51,3 +51,22 @@ YAHOO_API_ENABLED = os.getenv("YAHOO_API_ENABLED", "false").strip().lower() in (
     "yes",
     "on",
 )
+
+AMAZON_JP_MARKETPLACE_ID = os.getenv("AMAZON_JP_MARKETPLACE_ID", "A1VC38T7YXB528").strip()
+AMAZON_JP_DEFAULT_CURRENCY = os.getenv("AMAZON_JP_DEFAULT_CURRENCY", "JPY").strip().upper()
+AMAZON_JP_DEFAULT_LANGUAGE = os.getenv("AMAZON_JP_DEFAULT_LANGUAGE", "ja_JP").strip()
+AMAZON_JP_MAX_RESULTS = max(1, min(100, int(os.getenv("AMAZON_JP_MAX_RESULTS", "20"))))
+AMAZON_JP_TIMEOUT_SECONDS = max(1, int(os.getenv("AMAZON_JP_TIMEOUT_SECONDS", "10")))
+AMAZON_JP_RETRY_COUNT = max(0, int(os.getenv("AMAZON_JP_RETRY_COUNT", "0")))
+AMAZON_JP_ENABLED = os.getenv("AMAZON_JP_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
+AMAZON_JP_DEMO_ENABLED = os.getenv("AMAZON_JP_DEMO_ENABLED", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)

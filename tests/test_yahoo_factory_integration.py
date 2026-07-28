@@ -71,7 +71,7 @@ def test_local_still_works() -> None:
 
 def test_unsupported_marketplace() -> None:
     with pytest.raises(ValueError, match="Unsupported marketplace"):
-        create_marketplace("amazon")
+        create_marketplace("ebay")
 
 
 def test_get_all_marketplaces_includes_yahoo() -> None:
@@ -79,7 +79,8 @@ def test_get_all_marketplaces_includes_yahoo() -> None:
     names = [item.marketplace_name for item in marketplaces]
     assert "local" in names
     assert "yahoo" in names
-    assert len(marketplaces) == 2
+    assert "amazon_jp" in names
+    assert len(marketplaces) == 3
 
 
 def test_factory_import_without_api_key() -> None:
