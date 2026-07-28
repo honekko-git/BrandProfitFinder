@@ -1,0 +1,33 @@
+{
+  "total_results": 1,
+  "page": 1,
+  "page_count": 1,
+  "items": [
+    {
+      "auction_id": "test-auction-001",
+      "title": "GUCCI GG Marmont Wallet Black",
+      "current_price": 98000,
+      "buy_now_price": 108000,
+      "winning_price": null,
+      "shipping_price": null,
+      "currency": "JPY",
+      "url": "https://example.invalid/auction/test-auction-001",
+      "image_url": "https://example.invalid/images/test-auction-001.jpg",
+      "seller_name": "Test Seller",
+      "seller_id": "test-seller",
+      "brand": "GUCCI",
+      "model_number": "428726",
+      "jan_code": "1234567890123",
+      "condition": "used",
+      "listing_status": "active",
+      "auction_type": "auction_with_buy_now",
+      "start_time": "2026-07-01T10:00:00+09:00",
+      "end_time": "2026-07-08T22:00:00+09:00",
+      "bid_count": 5,
+      "watch_count": 12,
+      "tax_included": true,
+      "free_shipping": false,
+      "source_metadata": {}
+    }
+  ]
+}

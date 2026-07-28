@@ -72,7 +72,7 @@ def test_get_all_marketplaces_includes_rakuten() -> None:
     marketplaces = get_all_marketplaces(rakuten_settings=_rakuten_config())
     names = [item.marketplace_name for item in marketplaces]
     assert MARKETPLACE_RAKUTEN in names
-    assert len(marketplaces) == 4
+    assert len(marketplaces) == 5
 
 
 def test_profit_with_rakuten_price() -> None:

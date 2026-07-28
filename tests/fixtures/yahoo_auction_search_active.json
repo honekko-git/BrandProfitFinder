@@ -1,0 +1,39 @@
+{
+  "total_results": 2,
+  "page": 1,
+  "page_count": 1,
+  "items": [
+    {
+      "auction_id": "test-auction-active-001",
+      "title": "Active Current Price Only",
+      "current_price": 88000,
+      "buy_now_price": null,
+      "winning_price": null,
+      "shipping_price": null,
+      "currency": "JPY",
+      "url": "https://example.invalid/auction/test-auction-active-001",
+      "brand": "GUCCI",
+      "model_number": "428726",
+      "condition": "used",
+      "listing_status": "active",
+      "auction_type": "auction",
+      "free_shipping": false
+    },
+    {
+      "auction_id": "test-auction-active-002",
+      "title": "Active Buy Now Preferred",
+      "current_price": 70000,
+      "buy_now_price": 82000,
+      "winning_price": null,
+      "shipping_price": 0,
+      "currency": "JPY",
+      "url": "https://example.invalid/auction/test-auction-active-002",
+      "brand": "GUCCI",
+      "model_number": "428726",
+      "condition": "new",
+      "listing_status": "active",
+      "auction_type": "buy_now",
+      "free_shipping": true
+    }
+  ]
+}

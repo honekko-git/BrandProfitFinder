@@ -1,0 +1,30 @@
+{
+  "total_results": 2,
+  "page": 1,
+  "page_count": 1,
+  "items": [
+    {
+      "auction_id": "test-auction-sold-001",
+      "title": "GUCCI Sold Wallet",
+      "current_price": 90000,
+      "buy_now_price": 100000,
+      "winning_price": 95000,
+      "shipping_price": 500,
+      "currency": "JPY",
+      "url": "https://example.invalid/auction/test-auction-sold-001",
+      "brand": "GUCCI",
+      "model_number": "428726",
+      "condition": "used",
+      "listing_status": "sold",
+      "auction_type": "auction_with_buy_now",
+      "free_shipping": false
+    },
+    {
+      "auction_id": "test-auction-sold-002",
+      "title": "Sold Without Winning Price",
+      "current_price": 50000,
+      "listing_status": "sold",
+      "url": "https://example.invalid/auction/test-auction-sold-002"
+    }
+  ]
+}

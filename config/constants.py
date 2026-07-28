@@ -43,6 +43,7 @@ DEFAULT_SCAN_LIMIT: Final[int] = 50
 MARKETPLACE_LOCAL: Final[str] = "local"
 MARKETPLACE_RAKUTEN: Final[str] = "rakuten"
 MARKETPLACE_YAHOO: Final[str] = "yahoo"
+MARKETPLACE_YAHOO_AUCTION: Final[str] = "yahoo_auction"
 MARKETPLACE_MERCARI: Final[str] = "mercari"
 MARKETPLACE_AMAZON_JP: Final[str] = "amazon_jp"
 

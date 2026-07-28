@@ -6,7 +6,7 @@ import logging
 from decimal import Decimal
 from urllib.parse import urlparse
 
-from config.constants import MARKETPLACE_AMAZON_JP, MARKETPLACE_RAKUTEN
+from config.constants import MARKETPLACE_AMAZON_JP, MARKETPLACE_RAKUTEN, MARKETPLACE_YAHOO_AUCTION
 from models.marketplace_listing import MarketplaceListing
 
 logger = logging.getLogger(__name__)
@@ -33,9 +33,14 @@ def validate_listing(listing: MarketplaceListing) -> tuple[bool, str]:
     if listing.price_jpy <= 0:
         return False, "price_jpy must be greater than zero"
 
-    if listing.marketplace_name in {MARKETPLACE_AMAZON_JP, MARKETPLACE_RAKUTEN}:
+    if listing.marketplace_name in {MARKETPLACE_AMAZON_JP, MARKETPLACE_RAKUTEN, MARKETPLACE_YAHOO_AUCTION}:
         if not listing.listing_url.strip() and not listing.listing_id.strip():
-            label = "ASIN" if listing.marketplace_name == MARKETPLACE_AMAZON_JP else "itemCode"
+            labels = {
+                MARKETPLACE_AMAZON_JP: "ASIN",
+                MARKETPLACE_RAKUTEN: "itemCode",
+                MARKETPLACE_YAHOO_AUCTION: "auction_id",
+            }
+            label = labels.get(listing.marketplace_name, "identifier")
             return False, f"missing listing URL or {label}"
 
     total = listing.total_price_jpy or listing.compute_total_price_jpy()
