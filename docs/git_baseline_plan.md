@@ -397,4 +397,33 @@ Proceed with the 5-commit plan in order. Run `git diff --cached --stat` after ea
 
 ---
 
-*Planning artifact — V2-12A-2 / validation V2-12A-3. No application logic modified.*
+## Remote Push Verification
+
+**Phase:** V2-12A-5 — executed 2026-07-30
+
+| Item | Value |
+|------|-------|
+| Push date | 2026-07-30 |
+| Remote | `origin` → `https://github.com/honekko-git/BrandProfitFinder.git` |
+| Remote branch | `origin/develop/v2` |
+| HEAD commit | `dd2fafb` — Add runtime and git baseline documentation |
+| Push range | `aa2cd77..dd2fafb` (5 commits) |
+| Test status (pre-push) | **1948 passed**, 33 warnings |
+
+### Post-push verification
+
+```
+git status  → Your branch is up to date with 'origin/develop/v2'
+git log --oneline --decorate -5:
+  dd2fafb (HEAD -> develop/v2, origin/develop/v2) Add runtime and git baseline documentation
+  71b13e0 Add production CLI and showcase output
+  69cbb7e Add discovery intelligence and opportunity scoring
+  7856205 Add supplier and marketplace integrations
+  13a91ca Add core discovery pipeline foundation
+```
+
+Local and remote tracking refs aligned. Working tree clean at push time.
+
+---
+
+*Planning artifact — V2-12A-2 / validation V2-12A-3 / push V2-12A-5. No application logic modified.*
