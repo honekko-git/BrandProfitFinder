@@ -1405,6 +1405,10 @@ def run(
 def main() -> None:
     """CLI entry point."""
     setup_logging()
+    if len(sys.argv) > 1 and sys.argv[1] == "discovery":
+        from profit_discovery.cli.discovery_command import run_discovery_cli
+
+        raise SystemExit(run_discovery_cli(sys.argv[2:]))
     if "--help" in sys.argv or "-h" in sys.argv:
         build_cli_parser().print_help()
         return
