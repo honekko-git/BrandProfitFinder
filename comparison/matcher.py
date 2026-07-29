@@ -4,38 +4,15 @@ Deterministic product identity helpers for cross-marketplace comparison.
 
 from __future__ import annotations
 
-import re
-import unicodedata
 from decimal import Decimal
 
+from comparison.util import stable_unique
 from product_identity.adapter import ProductIdentityService
 from product_identity.enums import IdentityDecision
 from product_identity.models import ProductIdentityResult
+from product_identity.policy import decision_allows_comparison_result
 from models.marketplace_listing import MarketplaceListing
 from models.product import Product
-
-
-def normalize_identity_text(value: str) -> str:
-    """Normalize text for deterministic identity comparisons."""
-    normalized = unicodedata.normalize("NFKC", value.strip().lower())
-    return re.sub(r"\s+", " ", normalized)
-
-
-def product_identity_key(product: Product) -> str:
-    """
-    Build a stable identity key for grouping comparison candidates.
-
-    Prefers SKU, then model, then brand+name. Reserved for future grouping use.
-    """
-    sku = normalize_identity_text(product.sku)
-    if sku:
-        return f"sku:{sku}"
-    model = normalize_identity_text(product.model)
-    if model:
-        return f"model:{model}"
-    brand = normalize_identity_text(product.brand)
-    name = normalize_identity_text(product.name)
-    return f"name:{brand}:{name}"
 
 
 class ComparisonIdentityMatcher:
@@ -65,7 +42,7 @@ class ComparisonIdentityMatcher:
         is_match = score >= min_score
         if not is_match:
             warnings = [*warnings, f"identity match score below threshold ({score} < {min_score})"]
-        return is_match, score, _stable_unique(warnings)
+        return is_match, score, stable_unique(warnings)
 
     def evaluate_with_identity(
         self,
@@ -95,7 +72,7 @@ class ComparisonIdentityMatcher:
         if identity_result.review_required:
             warnings.append(f"identity review required: {identity_result.decision.value}")
 
-        eligible = _decision_allows_comparison(identity_result, score, min_score)
+        eligible = decision_allows_comparison_result(identity_result, score, min_score)
         if not eligible and identity_result.decision == IdentityDecision.REVIEW:
             warnings.append(f"identity match score below threshold ({score} < {min_score})")
         elif not eligible and identity_result.decision in {
@@ -106,26 +83,41 @@ class ComparisonIdentityMatcher:
         elif not eligible:
             warnings.append(f"identity match score below threshold ({score} < {min_score})")
 
-        return eligible, score, _stable_unique(warnings), identity_result
+        return eligible, score, stable_unique(warnings), identity_result
 
+    def resolve_for_candidate(
+        self,
+        product: Product,
+        candidate_listing: MarketplaceListing | None,
+        *,
+        identity_listing: MarketplaceListing | None,
+        identity_result: ProductIdentityResult | None,
+        match_score: Decimal | None,
+        match_warnings: list[str],
+        min_score: Decimal,
+    ) -> tuple[bool, Decimal | None, list[str], ProductIdentityResult | None]:
+        """
+        Reuse a prior identity evaluation when the listing has not changed.
 
-def _decision_allows_comparison(
-    result: ProductIdentityResult,
-    score: Decimal,
-    min_score: Decimal,
-) -> bool:
-    """Return True when a listing may participate in comparison selection."""
-    if result.decision == IdentityDecision.NO_MATCH:
-        return False
-    return score >= min_score
+        Falls back to ``evaluate_with_identity`` when cached identity data is absent
+        or the listing reference differs from the evaluated identity listing.
+        """
+        if (
+            identity_result is not None
+            and candidate_listing is not None
+            and identity_listing is candidate_listing
+        ):
+            score = match_score
+            if score is None:
+                score = Decimal(str(identity_result.identity_score or 0)).quantize(Decimal("0.01"))
+            warnings = list(match_warnings)
+            if not warnings:
+                warnings = list(identity_result.warnings)
+            eligible = decision_allows_comparison_result(identity_result, score, min_score)
+            return eligible, score, stable_unique(warnings), identity_result
 
-
-def _stable_unique(values: list[str]) -> list[str]:
-    seen: set[str] = set()
-    ordered: list[str] = []
-    for value in values:
-        if value in seen:
-            continue
-        seen.add(value)
-        ordered.append(value)
-    return ordered
+        return self.evaluate_with_identity(
+            product,
+            candidate_listing,
+            min_score=min_score,
+        )

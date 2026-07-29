@@ -8,6 +8,8 @@ from enum import Enum
 
 from models.price_result import CALCULATION_SUCCESS, PriceResult
 from price_compare.profit_config import ProfitConfig
+from ranking_foundation.policy import RankingPolicy
+from ranking_foundation.scorer import RankingScoreCalculator
 
 
 class RankingSortKey(str, Enum):
@@ -24,14 +26,23 @@ class RankingSortKey(str, Enum):
 class RankingEngine:
     """Sort and score PriceResult collections."""
 
-    def __init__(self, config: ProfitConfig | None = None) -> None:
+    def __init__(
+        self,
+        config: ProfitConfig | None = None,
+        policy: RankingPolicy | None = None,
+        score_calculator: RankingScoreCalculator | None = None,
+    ) -> None:
         """
         Initialize ranking engine.
 
         Args:
             config: Optional score weight configuration.
+            policy: Optional explicit ranking policy override.
+            score_calculator: Optional score calculator override.
         """
         self.config = config or ProfitConfig()
+        self.policy = policy or RankingPolicy.from_profit_config(self.config)
+        self._score_calculator = score_calculator or RankingScoreCalculator(self.policy)
 
     def rank(
         self,
@@ -84,25 +95,12 @@ class RankingEngine:
         Returns:
             Same list with scores updated.
         """
-        valid_results = [
-            result for result in results if result.calculation_status == CALCULATION_SUCCESS
-        ]
-        if not valid_results:
-            return results
-
-        max_profit = max((result.profit_jpy for result in valid_results), default=Decimal("0"))
-        for result in results:
+        scores = self._score_calculator.score_results(results)
+        for result, score in zip(results, scores, strict=True):
             if result.calculation_status != CALCULATION_SUCCESS:
                 result.ranking_score = Decimal("0")
-                continue
-            normalized_profit = Decimal("0")
-            if max_profit > 0:
-                normalized_profit = (result.profit_jpy / max_profit) * Decimal("100")
-            result.ranking_score = (
-                result.profit_margin * self.config.ranking_score_profit_margin_weight
-                + result.roi * self.config.ranking_score_roi_weight
-                + normalized_profit * self.config.ranking_score_profit_jpy_weight
-            ).quantize(Decimal("0.01"))
+            else:
+                result.ranking_score = score
         return results
 
     @staticmethod

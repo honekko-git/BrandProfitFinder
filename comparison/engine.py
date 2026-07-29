@@ -71,7 +71,7 @@ class ComparisonEngine:
 
         result = ProductComparisonResult(
             product=product,
-            candidates=filtered,
+            candidates=ranked,
             selected_review_marketplace=selected.marketplace_name if selected else None,
             selected_review_profit_jpy=selected.comparable_profit_jpy if selected else None,
             selected_review_margin=selected.comparable_profit_margin if selected else None,
@@ -104,9 +104,13 @@ class ComparisonEngine:
         for candidate in candidates:
             copy_candidate = self._copy_candidate(candidate)
             listing = copy_candidate.identity_listing or copy_candidate.search_result.selected_listing
-            eligible, score, match_warnings, identity_result = self._identity_matcher.evaluate_with_identity(
+            eligible, score, match_warnings, identity_result = self._identity_matcher.resolve_for_candidate(
                 product,
                 listing,
+                identity_listing=copy_candidate.identity_listing,
+                identity_result=copy_candidate.identity_result,
+                match_score=copy_candidate.match_score,
+                match_warnings=copy_candidate.match_warnings,
                 min_score=self.config.min_match_score,
             )
             copy_candidate.match_score = score

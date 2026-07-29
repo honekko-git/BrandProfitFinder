@@ -17,14 +17,19 @@ from comparison.currency_safety import (
 )
 from comparison.engine import ComparisonEngine
 from comparison.matcher import ComparisonIdentityMatcher
+from comparison.metadata.enricher import MetadataEnricher
 from comparison.models import ComparisonRunResult, MarketplaceCandidate, ProductComparisonResult
 from comparison.ranking import rank_comparison_results
 from comparison.util import stable_unique
+from marketplace.adapter import MarketplaceAdapter
 from marketplace.base_marketplace import BaseMarketplace
+from marketplace_search.models import SearchRequest
+from marketplace_search.service import MarketplaceSearchService
 from models.marketplace_listing import MarketplaceListing
 from models.marketplace_search_result import MarketplaceSearchResult
 from models.price_result import CALCULATION_UNKNOWN_CURRENCY, PriceResult
 from models.product import Product
+from product_identity.models import ProductIdentityResult
 from price_compare.marketplace_profit_service import (
     _attach_used_item_metadata,
     calculate_profit_from_search_result,
@@ -46,6 +51,8 @@ class CrossMarketplaceComparisonService:
         self.config = config or ComparisonConfig()
         self.engine = engine or ComparisonEngine(config=self.config)
         self._identity_matcher = ComparisonIdentityMatcher()
+        self._search_service = MarketplaceSearchService()
+        self._metadata_enricher = MetadataEnricher()
 
     def compare_products(
         self,
@@ -86,6 +93,8 @@ class CrossMarketplaceComparisonService:
 
         if profit_intelligence:
             self._apply_profit_intelligence_to_pending(pending)
+
+        pending = self._enrich_pending_candidates(pending)
 
         product_comparisons: list[ProductComparisonResult] = []
         run_warnings: list[str] = []
@@ -132,20 +141,18 @@ class CrossMarketplaceComparisonService:
     ) -> list[MarketplaceCandidate]:
         candidates: list[MarketplaceCandidate] = []
         for order_index, marketplace in enumerate(marketplaces):
-            search_result = marketplace.search(product)
-            listing = _select_identity_listing(
+            search_result = self._execute_marketplace_search(marketplace, product)
+            listing, identity_eval = _select_identity_listing(
                 product,
                 search_result,
                 self._identity_matcher,
                 self.config.min_match_score,
             )
             identity_result = None
-            if listing is not None:
-                _eligible, _score, _warnings, identity_result = self._identity_matcher.evaluate_with_identity(
-                    product,
-                    listing,
-                    min_score=self.config.min_match_score,
-                )
+            match_score = None
+            match_warnings: list[str] = []
+            if identity_eval is not None:
+                _eligible, match_score, match_warnings, identity_result = identity_eval
             price_result = _build_price_result(
                 product,
                 listing,
@@ -178,6 +185,8 @@ class CrossMarketplaceComparisonService:
                     source_price_amount=source_amount,
                     jpy_comparable=jpy_comparable,
                     identity_result=identity_result,
+                    match_score=match_score,
+                    match_warnings=list(match_warnings),
                 )
             )
 
@@ -187,6 +196,17 @@ class CrossMarketplaceComparisonService:
             metadata["source_count"] = comparable_sources
             candidate.price_result.metadata = metadata
         return candidates
+
+    def _execute_marketplace_search(
+        self,
+        marketplace: BaseMarketplace,
+        product: Product,
+    ) -> MarketplaceSearchResult:
+        """Execute marketplace search, routing adapters through the search service."""
+        if isinstance(marketplace, MarketplaceAdapter):
+            request = SearchRequest.from_product(product, marketplace.marketplace_name)
+            return self._search_service.search(marketplace, request).to_marketplace_search_result()
+        return marketplace.search(product)
 
     def _apply_profit_intelligence_to_pending(
         self,
@@ -199,6 +219,16 @@ class CrossMarketplaceComparisonService:
             scored = service.score_results(price_results, related_search)
             for candidate, scored_result in zip(candidates, scored, strict=True):
                 candidate.price_result = scored_result
+
+    def _enrich_pending_candidates(
+        self,
+        pending: list[tuple[Product, list[MarketplaceCandidate]]],
+    ) -> list[tuple[Product, list[MarketplaceCandidate]]]:
+        """Apply metadata enrichment after search, identity, and import-cost stages."""
+        enriched_pending: list[tuple[Product, list[MarketplaceCandidate]]] = []
+        for product, candidates in pending:
+            enriched_pending.append((product, self._metadata_enricher.enrich_candidates(candidates)))
+        return enriched_pending
 
 
 def _build_price_result(
@@ -244,7 +274,7 @@ def _select_identity_listing(
     search_result: MarketplaceSearchResult,
     identity_matcher: ComparisonIdentityMatcher,
     min_score: Decimal,
-) -> MarketplaceListing | None:
+) -> tuple[MarketplaceListing | None, tuple[bool, Decimal | None, list[str], ProductIdentityResult | None] | None]:
     """Pick the highest-scoring listing that passes identity matching."""
     candidates = list(search_result.valid_listings)
     if search_result.selected_listing is not None:
@@ -254,12 +284,14 @@ def _select_identity_listing(
 
     best_listing: MarketplaceListing | None = None
     best_score: Decimal | None = None
+    best_eval: tuple[bool, Decimal | None, list[str], ProductIdentityResult | None] | None = None
     for listing in candidates:
-        eligible, score, _warnings, identity_result = identity_matcher.evaluate_with_identity(
+        identity_eval = identity_matcher.evaluate_with_identity(
             product,
             listing,
             min_score=min_score,
         )
+        eligible, score, _warnings, identity_result = identity_eval
         if identity_result is not None and identity_result.decision.value == "NO_MATCH":
             continue
         if not eligible or score is None:
@@ -267,4 +299,5 @@ def _select_identity_listing(
         if best_score is None or score > best_score:
             best_listing = listing
             best_score = score
-    return best_listing
+            best_eval = identity_eval
+    return best_listing, best_eval

@@ -7,7 +7,7 @@ import re
 import unicodedata
 
 from config.constants import MARKETPLACE_STOCKX
-from marketplace.base_marketplace import BaseMarketplace
+from marketplace.adapter import MarketplaceAdapter
 from marketplace.stockx_client import StockXClientProtocol
 from marketplace.stockx_exceptions import (
     StockXClientError,
@@ -35,7 +35,7 @@ logger = logging.getLogger(__name__)
 _JAN_PATTERN = re.compile(r"^\d{8,13}$")
 
 
-class StockXMarketplace(BaseMarketplace):
+class StockXMarketplace(MarketplaceAdapter):
     """StockX marketplace (fixture/API-agnostic foundation)."""
 
     def __init__(
@@ -56,6 +56,10 @@ class StockXMarketplace(BaseMarketplace):
     @property
     def marketplace_name(self) -> str:
         return MARKETPLACE_STOCKX
+
+    @property
+    def uses_fixture_data(self) -> bool:
+        return self._client is None
 
     def search(self, product: Product, query: str | None = None) -> MarketplaceSearchResult:
         """Search StockX for listing candidates."""

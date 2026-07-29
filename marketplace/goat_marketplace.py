@@ -8,7 +8,7 @@ import unicodedata
 from typing import Any
 
 from config.constants import MARKETPLACE_GOAT
-from marketplace.base_marketplace import BaseMarketplace
+from marketplace.adapter import MarketplaceAdapter
 from marketplace.goat_client import GoatClientProtocol
 from marketplace.goat_exceptions import (
     GoatClientError,
@@ -36,7 +36,7 @@ logger = logging.getLogger(__name__)
 _JAN_PATTERN = re.compile(r"^\d{8,13}$")
 
 
-class GoatMarketplace(BaseMarketplace):
+class GoatMarketplace(MarketplaceAdapter):
     """GOAT marketplace (fixture/API-agnostic foundation)."""
 
     def __init__(
@@ -57,6 +57,10 @@ class GoatMarketplace(BaseMarketplace):
     @property
     def marketplace_name(self) -> str:
         return MARKETPLACE_GOAT
+
+    @property
+    def uses_fixture_data(self) -> bool:
+        return self._client is None
 
     def search(self, product: Product, query: str | None = None) -> MarketplaceSearchResult:
         """Search GOAT for listing candidates."""

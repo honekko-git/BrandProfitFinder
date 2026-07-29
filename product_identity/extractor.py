@@ -13,6 +13,7 @@ from product_identity.enums import (
 from product_identity.identifiers import build_identifier
 from product_identity.models import NormalizedIdentifier, ProductIdentityProfile
 from product_identity.normalization import normalize_brand, normalize_code, normalize_color, normalize_text
+from product_identity.util import stable_unique
 
 
 def extract_from_product(product: Product) -> ProductIdentityProfile:
@@ -69,7 +70,7 @@ def extract_from_product(product: Product) -> ProductIdentityProfile:
         jan=_first_valid_normalized(identifiers, IdentifierType.JAN),
         model_number=model_number,
         structured_identifiers=tuple(identifiers),
-        source_fields=tuple(_stable_unique(source_fields)),
+        source_fields=tuple(stable_unique(source_fields)),
         warnings=tuple(warnings),
     )
 
@@ -196,8 +197,8 @@ def extract_from_listing(listing: MarketplaceListing) -> ProductIdentityProfile:
         variant=normalize_text(meta.get("source_variant")),
         condition=normalize_text(listing.condition),
         structured_identifiers=tuple(identifiers),
-        source_fields=tuple(_stable_unique(source_fields)),
-        warnings=tuple(_stable_unique(warnings)),
+        source_fields=tuple(stable_unique(source_fields)),
+        warnings=tuple(stable_unique(warnings)),
     )
 
 
@@ -251,14 +252,3 @@ def _extract_color_from_title(title: str) -> str | None:
     tokens = set(normalize_text(title).split()) if normalize_text(title) else set()
     found = sorted(colors & tokens)
     return found[0] if found else None
-
-
-def _stable_unique(values: list[str]) -> list[str]:
-    seen: set[str] = set()
-    ordered: list[str] = []
-    for value in values:
-        if value in seen:
-            continue
-        seen.add(value)
-        ordered.append(value)
-    return ordered

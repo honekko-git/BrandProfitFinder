@@ -261,7 +261,7 @@ def test_missing_brand_not_conflict() -> None:
     left = ProductIdentityProfile(brand="DemoBrand", model_number="M1")
     right = ProductIdentityProfile(brand=None, model_number="M1")
     result = ProductIdentityEvaluator().evaluate(left, right, compatibility_score=40.0)
-    assert result.decision == IdentityDecision.MATCH
+    assert result.decision == IdentityDecision.REVIEW
     assert "brand" not in result.conflicting_fields
 
 
@@ -442,7 +442,7 @@ def test_select_identity_listing_skips_no_match_only() -> None:
         listings=[good, bad],
         selected_listing=good,
     )
-    selected = _select_identity_listing(
+    selected, identity_eval = _select_identity_listing(
         product,
         search,
         ComparisonIdentityMatcher(),
@@ -450,3 +450,4 @@ def test_select_identity_listing_skips_no_match_only() -> None:
     )
     assert selected is not None
     assert selected.listing_id == "good"
+    assert identity_eval is not None
