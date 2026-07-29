@@ -1,54 +1,44 @@
-"""Unit tests for marketplace.yahoo_auction_client."""
+"""Tests for Yahoo Auction fixture client."""
 
-import json
-from pathlib import Path
+from __future__ import annotations
 
-import pytest
-
-from marketplace.yahoo_auction_client import FakeYahooAuctionClient
-
-FIXTURES = Path(__file__).parent / "fixtures"
+from marketplace.yahoo_auction.base import YahooAuctionClientProtocol
+from marketplace.yahoo_auction.client import FakeYahooAuctionClient
 
 
-def test_fake_client_returns_fixture() -> None:
-    payload = json.loads((FIXTURES / "yahoo_auction_search_normal.json").read_text(encoding="utf-8"))
-    client = FakeYahooAuctionClient(payload)
-    result = client.search_items(query="gucci wallet")
-    assert result["total_results"] == 1
-    assert len(result["items"]) == 1
+def test_fake_yahoo_auction_client_loads_fixtures() -> None:
+    client = FakeYahooAuctionClient()
+
+    listings = client.search_sold_items("chanel wallet", max_results=10)
+
+    assert len(listings) == 5
+    assert all(listing.price_jpy > 0 for listing in listings)
 
 
-def test_fake_client_records_query() -> None:
-    client = FakeYahooAuctionClient({"items": []})
-    client.search_items(query="gucci bag")
-    assert client.last_query == "gucci bag"
+def test_fake_yahoo_auction_client_filters_by_brand() -> None:
+    client = FakeYahooAuctionClient()
+
+    gucci_results = client.search_sold_items("Gucci")
+    lv_results = client.search_sold_items("Louis Vuitton")
+
+    assert len(gucci_results) == 3
+    assert gucci_results[0].brand == "Gucci"
+    assert len(lv_results) == 3
+    assert lv_results[0].brand == "Louis Vuitton"
 
 
-def test_fake_client_records_page() -> None:
-    client = FakeYahooAuctionClient({"items": []})
-    client.search_items(query="bag", page=3)
-    assert client.last_page == 3
+def test_fake_yahoo_auction_client_supports_pagination() -> None:
+    client = FakeYahooAuctionClient()
+
+    first_page = client.search_sold_items("chanel", page=1, max_results=2)
+    second_page = client.search_sold_items("chanel", page=2, max_results=2)
+
+    assert len(first_page) == 2
+    assert len(second_page) == 2
+    assert first_page[0].listing_id != second_page[0].listing_id
 
 
-def test_fake_client_records_hits() -> None:
-    client = FakeYahooAuctionClient({"items": []})
-    client.search_items(query="bag", hits=10)
-    assert client.last_hits == 10
+def test_fake_yahoo_auction_client_matches_protocol() -> None:
+    client = FakeYahooAuctionClient()
 
-
-def test_fake_client_records_sort() -> None:
-    client = FakeYahooAuctionClient({"items": []})
-    client.search_items(query="bag", sort="end_time")
-    assert client.last_sort == "end_time"
-
-
-def test_fake_client_injected_exception() -> None:
-    client = FakeYahooAuctionClient(error=RuntimeError("injected failure"))
-    with pytest.raises(RuntimeError, match="injected failure"):
-        client.search_items(query="bag")
-
-
-def test_fake_client_no_network() -> None:
-    client = FakeYahooAuctionClient({"items": [], "total_results": 0})
-    result = client.search_items(query="test")
-    assert result == {"items": [], "total_results": 0}
+    assert isinstance(client, YahooAuctionClientProtocol)

@@ -1,72 +1,40 @@
-"""Tests for Fashionphile fake client."""
+"""Tests for Fashionphile supplier client."""
 
-import json
-from copy import deepcopy
-from pathlib import Path
+from __future__ import annotations
 
-import pytest
-
-from marketplace.fashionphile_client import FakeFashionphileClient
-
-FIXTURES = Path(__file__).parent / "fixtures"
+from supplier.fashionphile.client import FashionphileClient
+from supplier.models import SupplierType
 
 
-def test_fixture_return() -> None:
-    payload = json.loads((FIXTURES / "fashionphile_search_normal.json").read_text(encoding="utf-8"))
-    client = FakeFashionphileClient(payload)
-    result = client.search_items("gucci")
-    assert result["total"] == 1
+def test_fashionphile_client_search_products_returns_used_supplier_products() -> None:
+    client = FashionphileClient()
+
+    results = client.search_products("gucci", max_results=5)
+
+    assert len(results) == 1
+    assert results[0].supplier_name == "fashionphile"
+    assert results[0].brand == "Gucci"
+    assert results[0].condition == SupplierType.USED.value
 
 
-def test_records_query_page_filters() -> None:
-    client = FakeFashionphileClient({"items": [], "total": 0})
-    client.search_items("bag", page=2, page_size=10, filters={"brand": "GUCCI"})
-    assert client.last_query == "bag"
-    assert client.last_page == 2
-    assert client.last_page_size == 10
-    assert client.last_filters == {"brand": "GUCCI"}
+def test_fashionphile_client_search_products_supports_brand_queries() -> None:
+    client = FashionphileClient()
+
+    chanel_results = client.search_products("Chanel")
+    hermes_results = client.search_products("Hermes")
+
+    assert len(chanel_results) == 2
+    assert chanel_results[0].brand == "Chanel"
+    assert len(hermes_results) == 1
+    assert hermes_results[0].brand == "Hermes"
 
 
-def test_call_count() -> None:
-    client = FakeFashionphileClient({"items": [], "total": 0})
-    client.search_items("a")
-    client.search_items("b")
-    assert client.call_count == 2
+def test_fashionphile_client_search_products_paginates_results() -> None:
+    client = FashionphileClient()
 
+    first_page = client.search_products("", page=1, max_results=2)
+    second_page = client.search_products("", page=2, max_results=2)
 
-def test_injected_exception() -> None:
-    client = FakeFashionphileClient(error=RuntimeError("fail"))
-    with pytest.raises(RuntimeError):
-        client.search_items("x")
-
-
-def test_multi_page() -> None:
-    p1 = json.loads((FIXTURES / "fashionphile_search_page_1.json").read_text(encoding="utf-8"))
-    p2 = json.loads((FIXTURES / "fashionphile_search_page_2.json").read_text(encoding="utf-8"))
-    client = FakeFashionphileClient(pages={1: p1, 2: p2})
-    assert client.search_items("gucci", page=1)["page"] == 1
-    assert client.search_items("gucci", page=2)["page"] == 2
-
-
-def test_defensive_copy_on_return() -> None:
-    payload = {"items": [], "total": 0, "page": 1}
-    client = FakeFashionphileClient(payload)
-    result = client.search_items("x")
-    result["total"] = 99
-    assert client.search_items("x")["total"] == 0
-
-
-def test_defensive_copy_on_filters() -> None:
-    client = FakeFashionphileClient({"items": [], "total": 0})
-    filters = {"brand": "GUCCI"}
-    client.search_items("x", filters=filters)
-    filters["brand"] = "CHANGED"
-    assert client.last_filters == {"brand": "GUCCI"}
-
-
-def test_set_payload_copies() -> None:
-    payload = {"items": [], "total": 1}
-    client = FakeFashionphileClient()
-    client.set_payload(payload)
-    payload["total"] = 99
-    assert client.search_items("x")["total"] == 1
+    assert len(first_page) == 2
+    assert len(second_page) == 2
+    assert first_page[0].external_id != second_page[0].external_id
