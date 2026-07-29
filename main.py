@@ -825,7 +825,7 @@ def run_phase3(
             if rakuten_client is None:
                 logger.warning("Rakuten demo client unavailable; falling back to local marketplace")
                 selected = "local"
-        else:
+        elif not rakuten_settings.can_execute:
             logger.warning("Rakuten marketplace is not configured; skipping Rakuten search.")
             selected = "local"
 
@@ -835,7 +835,7 @@ def run_phase3(
             if amazon_client is None:
                 logger.warning("Amazon demo client unavailable; falling back to local marketplace")
                 selected = "local"
-        else:
+        elif not amazon_settings.enabled or not amazon_settings.is_configured:
             logger.warning("Amazon marketplace is not configured; skipping Amazon search.")
             selected = "local"
 
