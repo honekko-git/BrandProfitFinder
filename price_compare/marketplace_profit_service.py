@@ -5,10 +5,14 @@ Bridge domestic marketplace search results to profit calculation.
 import logging
 from decimal import Decimal
 
+from market_intelligence.extractor import extract_market_signals
 from models.marketplace_search_result import MarketplaceSearchResult
 from models.price_result import PriceResult
 from models.product import Product
 from price_compare.profit_calculator import ProfitCalculator
+from product_identity.enums import IdentifierType
+from product_identity.extractor import extract_from_listing
+from product_identity.models import ProductIdentityProfile
 
 logger = logging.getLogger(__name__)
 
@@ -51,7 +55,7 @@ def calculate_profit_from_search_result(
         return calculator.calculate(product, None, domestic_market)
 
     result = calculator.calculate(product, domestic_price, domestic_market)
-    _attach_used_item_metadata(result, selected_listing)
+    _attach_discovery_metadata(result, selected_listing)
     return result
 
 
@@ -72,6 +76,104 @@ def calculate_profit_from_search_results(
     return [calculate_profit_from_search_result(result, calculator) for result in search_results]
 
 
+def _attach_discovery_metadata(result: PriceResult, listing) -> None:
+    """
+    Attach listing-derived metadata without changing profit calculation.
+
+    Args:
+        result: Calculated price result to enrich.
+        listing: Selected marketplace listing, if any.
+    """
+    if listing is None:
+        return
+
+    _attach_used_item_metadata(result, listing)
+    _attach_identity_metadata(result, listing)
+    _attach_market_signal_metadata(result, listing)
+
+
+def _attach_identity_metadata(result: PriceResult, listing) -> None:
+    """Attach product identity fields extracted from the selected listing."""
+    try:
+        profile = extract_from_listing(listing)
+    except Exception:
+        logger.warning(
+            "Product identity extraction failed for listing %r",
+            getattr(listing, "listing_id", ""),
+            exc_info=True,
+        )
+        return
+
+    identity_fields = _identity_metadata_from_profile(profile, listing)
+    result.metadata.update(identity_fields)
+
+
+def _attach_market_signal_metadata(result: PriceResult, listing) -> None:
+    """Attach marketplace-independent market signal placeholders."""
+    signals = extract_market_signals(listing)
+    result.metadata.update(signals.to_metadata())
+
+
+def _identity_metadata_from_profile(
+    profile: ProductIdentityProfile,
+    listing,
+) -> dict[str, object]:
+    """Build identity metadata contract fields from an extracted profile."""
+    sku = listing.sku or _first_identifier_value(profile, IdentifierType.SKU) or ""
+    model_number = (
+        profile.model_number
+        or profile.model_name
+        or listing.model_number
+        or ""
+    )
+    return {
+        "identity_confidence_score": _identity_confidence_score(profile, listing),
+        "brand": profile.brand or listing.brand or "",
+        "model_number": model_number,
+        "jan_code": profile.jan or listing.jan_code or "",
+        "sku": sku,
+    }
+
+
+def _identity_confidence_score(profile: ProductIdentityProfile, listing) -> float:
+    """
+    Estimate identity completeness on a 0.0-1.0 scale from extracted identifiers.
+
+    Deterministic and marketplace-independent; does not evaluate authenticity.
+    """
+    score = 0.0
+    if profile.brand:
+        score += 0.2
+    if profile.model_number or profile.style_code or profile.model_name:
+        score += 0.25
+    if profile.jan:
+        score += 0.25
+
+    valid_identifiers = [
+        item
+        for item in profile.structured_identifiers
+        if item.is_valid and item.normalized_value
+    ]
+    if valid_identifiers:
+        score += min(0.25, len(valid_identifiers) * 0.08)
+
+    match_score = getattr(listing, "match_score", None)
+    if match_score is not None:
+        match_value = float(match_score)
+        if match_value > 1:
+            match_value = match_value / 100.0
+        score = max(score, min(match_value, 0.95))
+
+    return round(min(score, 0.95), 2)
+
+
+def _first_identifier_value(profile: ProductIdentityProfile, identifier_type: IdentifierType) -> str | None:
+    for item in profile.structured_identifiers:
+        if item.identifier_type == identifier_type and item.is_valid and item.normalized_value:
+            return item.normalized_value
+    return None
+
+
 def _attach_used_item_metadata(result: PriceResult, listing) -> None:
     """
     Attach used item auxiliary metadata without changing profit calculation.
@@ -86,7 +188,7 @@ def _attach_used_item_metadata(result: PriceResult, listing) -> None:
     details = listing.used_item_details
     meta = listing.source_metadata
     adj = details.price_adjustment if details else None
-    result.metadata = {
+    metadata = {
         "source_marketplace": meta.get("source_marketplace") or listing.marketplace_name,
         "source_listing_id": meta.get("source_listing_id") or listing.listing_id,
         "source_currency": meta.get("source_currency") or listing.currency,
@@ -206,3 +308,4 @@ def _attach_used_item_metadata(result: PriceResult, listing) -> None:
         "last_sale_applied": False,
         "fees_applied": False,
     }
+    result.metadata = metadata
