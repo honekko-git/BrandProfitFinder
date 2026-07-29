@@ -1,0 +1,95 @@
+{
+  "SearchResult": {
+    "TotalResultCount": 3,
+    "ItemPage": 1,
+    "Items": [
+      {
+        "ASIN": "B0TEST1234",
+        "DetailPageURL": "https://www.amazon.co.jp/dp/B0TEST1234",
+        "Images": {
+          "Primary": {
+            "Medium": {
+              "URL": "https://example.com/amazon/wallet.jpg"
+            }
+          }
+        },
+        "ItemInfo": {
+          "Title": {
+            "DisplayValue": "GUCCI GG Marmont Wallet Black"
+          },
+          "ByLineInfo": {
+            "Brand": {
+              "DisplayValue": "GUCCI"
+            }
+          },
+          "ManufactureInfo": {
+            "Model": {
+              "DisplayValue": "456126"
+            }
+          },
+          "ExternalIds": {
+            "EANs": {
+              "DisplayValues": ["1234567890123"]
+            }
+          }
+        },
+        "Offers": {
+          "Listings": [
+            {
+              "Price": {
+                "Amount": 128000,
+                "Currency": "JPY"
+              },
+              "DeliveryInfo": {
+                "IsPrimeEligible": true
+              },
+              "MerchantInfo": {
+                "Name": "Amazon.co.jp",
+                "IsAmazonFulfilled": true
+              },
+              "Condition": {
+                "Value": "New"
+              },
+              "Availability": {
+                "Type": "IN_STOCK"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "ASIN": "B0TEST2002",
+        "DetailPageURL": "https://www.amazon.co.jp/dp/B0TEST2002",
+        "ItemInfo": {
+          "Title": {
+            "DisplayValue": "GUCCI Marmont Shoulder Bag"
+          },
+          "ByLineInfo": {
+            "Brand": {
+              "DisplayValue": "GUCCI"
+            }
+          }
+        },
+        "Offers": {
+          "Listings": [
+            {
+              "Price": {
+                "Amount": 198000,
+                "Currency": "JPY"
+              },
+              "MerchantInfo": {
+                "Name": "Premium Seller"
+              },
+              "Condition": {
+                "Value": "New"
+              },
+              "Availability": {
+                "Type": "IN_STOCK"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -77,6 +77,17 @@ AMAZON_JP_DEMO_ENABLED = os.getenv("AMAZON_JP_DEMO_ENABLED", "false").strip().lo
     "yes",
     "on",
 )
+AMAZON_ACCESS_KEY = os.getenv("AMAZON_ACCESS_KEY", "").strip()
+AMAZON_SECRET_KEY = os.getenv("AMAZON_SECRET_KEY", "").strip()
+AMAZON_PARTNER_TAG = os.getenv("AMAZON_PARTNER_TAG", "").strip()
+AMAZON_REGION = os.getenv("AMAZON_REGION", "us-west-2").strip()
+AMAZON_API_HOST = os.getenv("AMAZON_API_HOST", "webservices.amazon.co.jp").strip()
+AMAZON_USE_TRANSPORT = os.getenv("AMAZON_USE_TRANSPORT", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
 
 RAKUTEN_APPLICATION_ID = os.getenv("RAKUTEN_APPLICATION_ID", "").strip()
 RAKUTEN_ACCESS_KEY = os.getenv("RAKUTEN_ACCESS_KEY", "").strip()
