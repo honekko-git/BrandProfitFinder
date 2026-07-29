@@ -1,0 +1,55 @@
+{
+  "product_keyword": "chanel wallet",
+  "listings": [
+    {
+      "listing_id": "ya-chanel-001",
+      "title": "Chanel Classic Wallet Black Caviar",
+      "brand": "Chanel",
+      "price_jpy": 155000,
+      "sold_date": "2026-07-01",
+      "bid_count": 18,
+      "condition": "used",
+      "url": "https://example.invalid/yahoo-auction/ya-chanel-001"
+    },
+    {
+      "listing_id": "ya-chanel-002",
+      "title": "Chanel CC Wallet Medium",
+      "brand": "Chanel",
+      "price_jpy": 160000,
+      "sold_date": "2026-07-05",
+      "bid_count": 22,
+      "condition": "used",
+      "url": "https://example.invalid/yahoo-auction/ya-chanel-002"
+    },
+    {
+      "listing_id": "ya-chanel-003",
+      "title": "Chanel Long Wallet Quilted",
+      "brand": "Chanel",
+      "price_jpy": 165000,
+      "sold_date": "2026-07-08",
+      "bid_count": 15,
+      "condition": "used",
+      "url": "https://example.invalid/yahoo-auction/ya-chanel-003"
+    },
+    {
+      "listing_id": "ya-chanel-004",
+      "title": "Chanel Wallet Lambskin",
+      "brand": "Chanel",
+      "price_jpy": 158000,
+      "sold_date": "2026-07-10",
+      "bid_count": 11,
+      "condition": "used",
+      "url": "https://example.invalid/yahoo-auction/ya-chanel-004"
+    },
+    {
+      "listing_id": "ya-chanel-005",
+      "title": "Chanel Compact Wallet",
+      "brand": "Chanel",
+      "price_jpy": 162000,
+      "sold_date": "2026-07-12",
+      "bid_count": 9,
+      "condition": "used",
+      "url": "https://example.invalid/yahoo-auction/ya-chanel-005"
+    }
+  ]
+}

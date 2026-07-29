@@ -1,0 +1,35 @@
+{
+  "product_keyword": "gucci wallet",
+  "listings": [
+    {
+      "listing_id": "ya-gucci-001",
+      "title": "Gucci GG Marmont Wallet Black",
+      "brand": "Gucci",
+      "price_jpy": 42000,
+      "sold_date": "2026-07-03",
+      "bid_count": 12,
+      "condition": "used",
+      "url": "https://example.invalid/yahoo-auction/ya-gucci-001"
+    },
+    {
+      "listing_id": "ya-gucci-002",
+      "title": "Gucci Horsebit Wallet",
+      "brand": "Gucci",
+      "price_jpy": 45000,
+      "sold_date": "2026-07-07",
+      "bid_count": 8,
+      "condition": "used",
+      "url": "https://example.invalid/yahoo-auction/ya-gucci-002"
+    },
+    {
+      "listing_id": "ya-gucci-003",
+      "title": "Gucci Bi-fold Wallet",
+      "brand": "Gucci",
+      "price_jpy": 48000,
+      "sold_date": "2026-07-11",
+      "bid_count": 10,
+      "condition": "used",
+      "url": "https://example.invalid/yahoo-auction/ya-gucci-003"
+    }
+  ]
+}

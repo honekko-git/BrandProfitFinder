@@ -1,0 +1,35 @@
+{
+  "product_keyword": "louis vuitton bag",
+  "listings": [
+    {
+      "listing_id": "ya-lv-001",
+      "title": "Louis Vuitton Neverfull MM Damier",
+      "brand": "Louis Vuitton",
+      "price_jpy": 98000,
+      "sold_date": "2026-07-02",
+      "bid_count": 14,
+      "condition": "used",
+      "url": "https://example.invalid/yahoo-auction/ya-lv-001"
+    },
+    {
+      "listing_id": "ya-lv-002",
+      "title": "Louis Vuitton Speedy 30 Monogram",
+      "brand": "Louis Vuitton",
+      "price_jpy": 102000,
+      "sold_date": "2026-07-06",
+      "bid_count": 20,
+      "condition": "used",
+      "url": "https://example.invalid/yahoo-auction/ya-lv-002"
+    },
+    {
+      "listing_id": "ya-lv-003",
+      "title": "Louis Vuitton Alma BB",
+      "brand": "Louis Vuitton",
+      "price_jpy": 110000,
+      "sold_date": "2026-07-09",
+      "bid_count": 17,
+      "condition": "used",
+      "url": "https://example.invalid/yahoo-auction/ya-lv-003"
+    }
+  ]
+}
