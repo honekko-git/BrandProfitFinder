@@ -94,6 +94,12 @@ RAKUTEN_API_DEMO_ENABLED = os.getenv("RAKUTEN_API_DEMO_ENABLED", "false").strip(
     "yes",
     "on",
 )
+RAKUTEN_USE_TRANSPORT = os.getenv("RAKUTEN_USE_TRANSPORT", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
 
 YAHOO_AUCTION_ENABLED = os.getenv("YAHOO_AUCTION_ENABLED", "false").strip().lower() in (
     "1",

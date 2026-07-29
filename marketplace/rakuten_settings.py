@@ -21,6 +21,7 @@ class RakutenConfig:
     sort: str
     enabled: bool
     demo_enabled: bool
+    use_transport: bool = False
 
     @classmethod
     def from_env(cls) -> "RakutenConfig":
@@ -41,6 +42,7 @@ class RakutenConfig:
             sort=settings.RAKUTEN_API_SORT,
             enabled=settings.RAKUTEN_API_ENABLED,
             demo_enabled=settings.RAKUTEN_API_DEMO_ENABLED,
+            use_transport=settings.RAKUTEN_USE_TRANSPORT,
         )
 
     @property

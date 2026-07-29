@@ -19,6 +19,7 @@ from marketplace.rakuten_exceptions import (
     RakutenServiceUnavailableError,
 )
 from marketplace.rakuten_settings import RakutenConfig
+from marketplace.rakuten_transport_mapper import map_transport_exception
 
 logger = logging.getLogger(__name__)
 
@@ -181,13 +182,17 @@ class RakutenApiClient:
         headers = {"Authorization": f"Bearer {self.settings.access_key}"}
 
         logger.info(
-            "Rakuten item search started (hits=%s, page=%s, sort=%s)",
+            "Rakuten item search started (hits=%s, page=%s, sort=%s, transport=%s)",
             params["hits"],
             params["page"],
             params["sort"],
+            self.settings.use_transport,
         )
 
         try:
+            if self.settings.use_transport:
+                transport_response = self._perform_transport_request(params, headers)
+                return self._parse_transport_response(transport_response)
             response = self._perform_request(params, headers)
         except httpx.TimeoutException as exc:
             logger.error("Rakuten API request timed out")
@@ -240,6 +245,53 @@ class RakutenApiClient:
             raise last_error
         raise RakutenApiError("Rakuten API request failed")
 
+    def _perform_transport_request(
+        self,
+        params: dict[str, str | int],
+        headers: dict[str, str],
+    ) -> "TransportResponse":
+        """Execute one Rakuten search request through the shared HttpTransport."""
+        from config.transport import TransportSettings
+        from utils.transport import HttpTransport, TransportRequestMetadata
+        from utils.transport.models import TransportResponse
+
+        base_settings = TransportSettings.from_env()
+        transport_settings = TransportSettings(
+            timeout_seconds=float(self.settings.timeout_seconds),
+            max_retries=self.settings.max_retries,
+            backoff_base_seconds=base_settings.backoff_base_seconds,
+            backoff_max_seconds=base_settings.backoff_max_seconds,
+        )
+        transport = HttpTransport(
+            marketplace_name="rakuten",
+            settings=transport_settings,
+            client=self._client,
+        )
+        metadata = TransportRequestMetadata(
+            marketplace_name="rakuten",
+            operation="search_items",
+        )
+        try:
+            return transport.get(
+                self.settings.base_url,
+                params=params,
+                headers=headers,
+                metadata=metadata,
+            )
+        except Exception as exc:
+            mapped = map_transport_exception(exc)
+            if isinstance(mapped, RakutenNotFoundError):
+                logger.info("Rakuten API returned no results (HTTP 404)")
+            elif isinstance(mapped, RakutenRateLimitError):
+                logger.warning("Rakuten API rate limit exceeded (HTTP 429)")
+            elif isinstance(mapped, RakutenClientError):
+                logger.warning("Rakuten API parameter error (HTTP 400)")
+            elif isinstance(mapped, RakutenServiceUnavailableError):
+                logger.warning("Rakuten API service unavailable (HTTP 503)")
+            elif isinstance(mapped, RakutenServerError):
+                logger.error("%s", mapped)
+            raise mapped from exc
+
     def _validate_status(self, response: httpx.Response) -> httpx.Response:
         status = response.status_code
         if status == 404:
@@ -263,6 +315,27 @@ class RakutenApiClient:
 
     @staticmethod
     def _parse_response(response: httpx.Response) -> dict[str, Any]:
+        content_type = response.headers.get("content-type", "")
+        if "json" not in content_type.lower():
+            logger.warning("Rakuten API returned non-JSON content-type: %s", content_type)
+
+        try:
+            payload = response.json()
+        except json.JSONDecodeError as exc:
+            logger.error("Rakuten API JSON decode failed")
+            raise RakutenResponseError("Rakuten API returned invalid JSON") from exc
+
+        if not isinstance(payload, dict):
+            raise RakutenResponseError("Rakuten API response must be a JSON object")
+
+        items = payload.get("Items") or payload.get("items") or []
+        item_count = len(items) if isinstance(items, list) else 0
+        logger.info("Rakuten item search completed (items=%d)", item_count)
+        return payload
+
+    @staticmethod
+    def _parse_transport_response(response) -> dict[str, Any]:
+        """Parse a TransportResponse from the shared HTTP transport layer."""
         content_type = response.headers.get("content-type", "")
         if "json" not in content_type.lower():
             logger.warning("Rakuten API returned non-JSON content-type: %s", content_type)
