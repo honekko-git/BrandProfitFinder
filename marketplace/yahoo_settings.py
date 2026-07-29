@@ -17,6 +17,8 @@ class YahooApiSettings:
     timeout_seconds: int
     results: int
     enabled: bool
+    use_transport: bool = False
+    max_retries: int = 0
 
     @classmethod
     def from_env(cls) -> "YahooApiSettings":
@@ -32,6 +34,8 @@ class YahooApiSettings:
             timeout_seconds=settings.YAHOO_API_TIMEOUT_SECONDS,
             results=settings.YAHOO_API_RESULTS,
             enabled=settings.YAHOO_API_ENABLED,
+            use_transport=settings.YAHOO_USE_TRANSPORT,
+            max_retries=settings.YAHOO_API_MAX_RETRIES,
         )
 
     @property

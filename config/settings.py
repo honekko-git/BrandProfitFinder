@@ -51,6 +51,13 @@ YAHOO_API_ENABLED = os.getenv("YAHOO_API_ENABLED", "false").strip().lower() in (
     "yes",
     "on",
 )
+YAHOO_API_MAX_RETRIES = max(0, int(os.getenv("YAHOO_API_MAX_RETRIES", "0")))
+YAHOO_USE_TRANSPORT = os.getenv("YAHOO_USE_TRANSPORT", "false").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
 
 AMAZON_JP_MARKETPLACE_ID = os.getenv("AMAZON_JP_MARKETPLACE_ID", "A1VC38T7YXB528").strip()
 AMAZON_JP_DEFAULT_CURRENCY = os.getenv("AMAZON_JP_DEFAULT_CURRENCY", "JPY").strip().upper()

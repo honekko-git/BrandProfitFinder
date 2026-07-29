@@ -18,6 +18,7 @@ from marketplace.yahoo_exceptions import (
     YahooServerError,
 )
 from marketplace.yahoo_settings import YahooApiSettings
+from marketplace.yahoo_transport_mapper import map_transport_exception
 
 logger = logging.getLogger(__name__)
 
@@ -102,13 +103,17 @@ class YahooApiClient:
             params["in_stock"] = str(in_stock).lower()
 
         logger.info(
-            "Yahoo item search started (method=%s, results=%s, start=%s)",
+            "Yahoo item search started (method=%s, results=%s, start=%s, transport=%s)",
             "jan_code" if normalized_jan and not normalized_query else "query",
             params["results"],
             params["start"],
+            self.settings.use_transport,
         )
 
         try:
+            if self.settings.use_transport:
+                transport_response = self._perform_transport_request(params)
+                return self._parse_transport_response(transport_response)
             response = self._perform_request(params)
         except httpx.TimeoutException as exc:
             logger.error("Yahoo API request timed out")
@@ -129,6 +134,47 @@ class YahooApiClient:
         self._validate_status(response)
         return response
 
+    def _perform_transport_request(
+        self,
+        params: dict[str, str | int | bool],
+    ) -> "TransportResponse":
+        """Execute one Yahoo search request through the shared HttpTransport."""
+        from config.transport import TransportSettings
+        from utils.transport import HttpTransport, TransportRequestMetadata
+        from utils.transport.models import TransportResponse
+
+        base_settings = TransportSettings.from_env()
+        transport_settings = TransportSettings(
+            timeout_seconds=float(self.settings.timeout_seconds),
+            max_retries=self.settings.max_retries,
+            backoff_base_seconds=base_settings.backoff_base_seconds,
+            backoff_max_seconds=base_settings.backoff_max_seconds,
+        )
+        transport = HttpTransport(
+            marketplace_name="yahoo",
+            settings=transport_settings,
+            client=self._client,
+        )
+        metadata = TransportRequestMetadata(
+            marketplace_name="yahoo",
+            operation="search_items",
+        )
+        try:
+            return transport.get(
+                self.settings.base_url,
+                params=params,
+                metadata=metadata,
+            )
+        except Exception as exc:
+            mapped = map_transport_exception(exc)
+            if isinstance(mapped, YahooRateLimitError):
+                logger.warning("Yahoo API rate limit exceeded (HTTP 429)")
+            elif isinstance(mapped, YahooClientError):
+                logger.warning("%s", mapped)
+            elif isinstance(mapped, YahooServerError):
+                logger.error("%s", mapped)
+            raise mapped from exc
+
     def _validate_status(self, response: httpx.Response) -> None:
         status = response.status_code
         if status == 429:
@@ -145,6 +191,27 @@ class YahooApiClient:
 
     @staticmethod
     def _parse_response(response: httpx.Response) -> dict[str, object]:
+        content_type = response.headers.get("content-type", "")
+        if "json" not in content_type.lower():
+            logger.warning("Yahoo API returned non-JSON content-type: %s", content_type)
+
+        try:
+            payload = response.json()
+        except json.JSONDecodeError as exc:
+            logger.error("Yahoo API JSON decode failed")
+            raise YahooResponseError("Yahoo API returned invalid JSON") from exc
+
+        if not isinstance(payload, dict):
+            raise YahooResponseError("Yahoo API response must be a JSON object")
+
+        hits = payload.get("hits", [])
+        hit_count = len(hits) if isinstance(hits, list) else 0
+        logger.info("Yahoo item search completed (hits=%d)", hit_count)
+        return payload
+
+    @staticmethod
+    def _parse_transport_response(response) -> dict[str, object]:
+        """Parse a TransportResponse from the shared HTTP transport layer."""
         content_type = response.headers.get("content-type", "")
         if "json" not in content_type.lower():
             logger.warning("Yahoo API returned non-JSON content-type: %s", content_type)
