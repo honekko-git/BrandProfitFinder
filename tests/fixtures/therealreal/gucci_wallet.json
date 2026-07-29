@@ -1,0 +1,26 @@
+{
+  "supplier": "therealreal",
+  "products": [
+    {
+      "external_id": "trr-gucci-wallet-001",
+      "title": "Gucci GG Marmont Wallet Black",
+      "brand": "Gucci",
+      "category": "wallets",
+      "condition": "Very Good",
+      "purchase_price": 420.0,
+      "currency": "USD",
+      "url": "https://example.invalid/therealreal/trr-gucci-wallet-001",
+      "image_urls": [
+        "https://example.invalid/images/therealreal/trr-gucci-wallet-001.jpg"
+      ],
+      "model_number": "GG-MARMONT-WALLET",
+      "condition_notes": "Light exterior wear with included dust bag.",
+      "authentication_notes": "Authenticated by The RealReal.",
+      "availability": "in_stock",
+      "metadata": {
+        "color": "black",
+        "material": "leather"
+      }
+    }
+  ]
+}

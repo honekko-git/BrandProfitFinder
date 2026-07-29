@@ -1,0 +1,22 @@
+{
+  "supplier": "vestiaire",
+  "products": [
+    {
+      "external_id": "vc-hermes-bag-001",
+      "title": "Hermes Evelyne III PM Gold",
+      "brand": "Hermes",
+      "category": "bags",
+      "condition": "Good",
+      "purchase_price": 3200.0,
+      "currency": "USD",
+      "url": "https://example.invalid/vestiaire/vc-hermes-bag-001",
+      "model_number": "EVELYNE-III-PM",
+      "condition_notes": "Visible corner wear with clean interior.",
+      "availability": "in_stock",
+      "metadata": {
+        "color": "gold",
+        "material": "clemence leather"
+      }
+    }
+  ]
+}

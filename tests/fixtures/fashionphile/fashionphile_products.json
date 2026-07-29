@@ -1,0 +1,130 @@
+{
+  "supplier": "fashionphile",
+  "products": [
+    {
+      "external_id": "fp-chanel-001",
+      "title": "Chanel Classic Flap Medium Black Caviar",
+      "brand": "Chanel",
+      "category": "bags",
+      "condition": "Excellent",
+      "price": 5200.0,
+      "currency": "USD",
+      "url": "https://example.invalid/fashionphile/fp-chanel-001",
+      "image_urls": [
+        "https://example.invalid/images/fashionphile/fp-chanel-001.jpg"
+      ],
+      "model_number": "A01112",
+      "condition_notes": "Light corner wear and faint interior marks.",
+      "authentication": {
+        "status": "authenticated",
+        "provider": "Fashionphile",
+        "platform_authenticated": true
+      },
+      "availability": "in_stock",
+      "metadata": {
+        "color": "black",
+        "material": "caviar leather"
+      }
+    },
+    {
+      "external_id": "fp-chanel-wallet-001",
+      "title": "Chanel Classic Wallet Black Caviar",
+      "brand": "Chanel",
+      "category": "wallets",
+      "condition": "Very Good",
+      "price": 700.0,
+      "currency": "USD",
+      "url": "https://example.invalid/fashionphile/fp-chanel-wallet-001",
+      "image_urls": [
+        "https://example.invalid/images/fashionphile/fp-chanel-wallet-001.jpg"
+      ],
+      "model_number": "CH-WALLET",
+      "condition_notes": "Minor interior wear with authentication card included.",
+      "authentication": {
+        "status": "authenticated",
+        "provider": "Fashionphile",
+        "platform_authenticated": true
+      },
+      "availability": "in_stock",
+      "metadata": {
+        "color": "black",
+        "material": "caviar leather"
+      }
+    },
+    {
+      "external_id": "fp-lv-001",
+      "title": "Louis Vuitton Neverfull MM Damier Ebene",
+      "brand": "Louis Vuitton",
+      "category": "bags",
+      "condition": "Very Good",
+      "price": 1450.0,
+      "currency": "USD",
+      "url": "https://example.invalid/fashionphile/fp-lv-001",
+      "image_urls": [
+        "https://example.invalid/images/fashionphile/fp-lv-001.jpg"
+      ],
+      "model_number": "M40156",
+      "condition_notes": "Minor handle darkening and interior pen mark.",
+      "authentication": {
+        "status": "authenticated",
+        "provider": "Fashionphile",
+        "platform_authenticated": true
+      },
+      "availability": "in_stock",
+      "metadata": {
+        "color": "brown",
+        "material": "damier canvas"
+      }
+    },
+    {
+      "external_id": "fp-gucci-001",
+      "title": "Gucci GG Marmont Small Shoulder Bag Black",
+      "brand": "Gucci",
+      "category": "bags",
+      "condition": "Very Good",
+      "price": 980.0,
+      "currency": "USD",
+      "url": "https://example.invalid/fashionphile/fp-gucci-001",
+      "image_urls": [
+        "https://example.invalid/images/fashionphile/fp-gucci-001.jpg"
+      ],
+      "model_number": "GG-MARMONT",
+      "condition_notes": "Light exterior wear with included dust bag.",
+      "authentication": {
+        "status": "authenticated",
+        "provider": "Fashionphile",
+        "platform_authenticated": true
+      },
+      "availability": "in_stock",
+      "metadata": {
+        "color": "black",
+        "material": "leather"
+      }
+    },
+    {
+      "external_id": "fp-hermes-001",
+      "title": "Hermes Evelyne III PM Gold",
+      "brand": "Hermes",
+      "category": "bags",
+      "condition": "Good",
+      "price": 3200.0,
+      "currency": "USD",
+      "url": "https://example.invalid/fashionphile/fp-hermes-001",
+      "image_urls": [
+        "https://example.invalid/images/fashionphile/fp-hermes-001.jpg"
+      ],
+      "model_number": "EVELYNE-III-PM",
+      "condition_notes": "Visible corner wear with clean interior.",
+      "authentication": {
+        "status": "authenticated",
+        "provider": "Fashionphile",
+        "platform_authenticated": true
+      },
+      "availability": "in_stock",
+      "metadata": {
+        "color": "gold",
+        "material": "clemence leather"
+      }
+    }
+  ]
+}

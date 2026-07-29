@@ -1,0 +1,26 @@
+{
+  "supplier": "therealreal",
+  "products": [
+    {
+      "external_id": "trr-lv-bag-001",
+      "title": "Louis Vuitton Neverfull MM Damier Ebene",
+      "brand": "Louis Vuitton",
+      "category": "bags",
+      "condition": "Very Good",
+      "purchase_price": 1450.0,
+      "currency": "USD",
+      "url": "https://example.invalid/therealreal/trr-lv-bag-001",
+      "image_urls": [
+        "https://example.invalid/images/therealreal/trr-lv-bag-001.jpg"
+      ],
+      "model_number": "M40156",
+      "condition_notes": "Minor handle darkening and interior pen mark.",
+      "authentication_notes": "Authenticated by The RealReal.",
+      "availability": "in_stock",
+      "metadata": {
+        "color": "brown",
+        "material": "damier canvas"
+      }
+    }
+  ]
+}

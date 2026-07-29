@@ -5,6 +5,7 @@ from __future__ import annotations
 from collections.abc import Callable
 
 from supplier.base import SupplierClient
+from supplier.config import SupplierRuntimeConfig
 
 SupplierFactory = Callable[[], SupplierClient]
 
@@ -39,14 +40,31 @@ def create_supplier_client(name: str) -> SupplierClient | None:
     return factory()
 
 
+def resolve_supplier_client(
+    name: str,
+    *,
+    config: SupplierRuntimeConfig | None = None,
+    injected_client: SupplierClient | None = None,
+) -> SupplierClient | None:
+    """Resolve a supplier client using fixture/live runtime selection."""
+    from supplier.adapters.source_resolver import SupplierResolver
+
+    resolver = SupplierResolver(config=config or SupplierRuntimeConfig.default())
+    return resolver.resolve(name, injected_client=injected_client).client
+
+
 def _normalize_supplier_name(name: str) -> str:
     return name.strip().lower()
 
 
 def _register_default_suppliers() -> None:
     from supplier.fashionphile.client import FashionphileClient
+    from supplier.therealreal.client import TheRealRealClient
+    from supplier.vestiaire.client import VestiaireClient
 
     register_supplier("fashionphile", FashionphileClient)
+    register_supplier("therealreal", TheRealRealClient)
+    register_supplier("vestiaire", VestiaireClient)
 
 
 _register_default_suppliers()

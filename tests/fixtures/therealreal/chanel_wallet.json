@@ -1,0 +1,26 @@
+{
+  "supplier": "therealreal",
+  "products": [
+    {
+      "external_id": "trr-chanel-wallet-001",
+      "title": "Chanel Classic Wallet Black Caviar",
+      "brand": "Chanel",
+      "category": "wallets",
+      "condition": "Very Good",
+      "purchase_price": 700.0,
+      "currency": "USD",
+      "url": "https://example.invalid/therealreal/trr-chanel-wallet-001",
+      "image_urls": [
+        "https://example.invalid/images/therealreal/trr-chanel-wallet-001.jpg"
+      ],
+      "model_number": "TRR-CH-WALLET",
+      "condition_notes": "Minor interior wear with authentication card included.",
+      "authentication_notes": "Authenticated by The RealReal in-house experts.",
+      "availability": "in_stock",
+      "metadata": {
+        "color": "black",
+        "material": "caviar leather"
+      }
+    }
+  ]
+}
