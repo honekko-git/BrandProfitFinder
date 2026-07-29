@@ -44,6 +44,11 @@ from marketplace.goat_client import GoatClientProtocol
 from marketplace.goat_marketplace import create_goat_marketplace
 from marketplace.goat_settings import GoatSettings
 from marketplace.local_marketplace import LocalMarketplace
+from marketplace.marketplace_client_factory import (
+    resolve_amazon_client,
+    resolve_rakuten_client,
+    resolve_yahoo_client,
+)
 from marketplace.rakuten_client import RakutenClientProtocol
 from marketplace.rakuten_marketplace import create_rakuten_marketplace
 from marketplace.rakuten_settings import RakutenConfig
@@ -55,6 +60,7 @@ from marketplace.yahoo_auction_marketplace import create_yahoo_auction_marketpla
 from marketplace.yahoo_auction_settings import YahooAuctionConfig
 from marketplace.yahoo_marketplace import create_yahoo_marketplace
 from marketplace.yahoo_settings import YahooApiSettings
+from marketplace.yahoo_api_client import YahooApiClient
 from models.marketplace_listing import MarketplaceListing
 from price_compare.price_comparator import PriceSelectionStrategy
 
@@ -115,6 +121,7 @@ def create_marketplace(
     listings_by_product_key: dict[str, list[MarketplaceListing]] | None = None,
     selection_strategy: PriceSelectionStrategy = PriceSelectionStrategy.HIGHEST,
     yahoo_settings: YahooApiSettings | None = None,
+    yahoo_client: YahooApiClient | None = None,
     amazon_settings: AmazonConfig | None = None,
     amazon_client: AmazonClientProtocol | None = None,
     rakuten_settings: RakutenConfig | None = None,
@@ -146,6 +153,7 @@ def create_marketplace(
         listings_by_product_key: Optional injected listings for local marketplace.
         selection_strategy: Price selection strategy.
         yahoo_settings: Optional Yahoo settings override.
+        yahoo_client: Optional Yahoo client override.
         amazon_settings: Optional Amazon settings override.
         amazon_client: Optional Amazon client override.
         rakuten_settings: Optional Rakuten settings override.
@@ -183,13 +191,19 @@ def create_marketplace(
         )
 
     if normalized == MARKETPLACE_YAHOO.lower():
-        return create_yahoo_marketplace(settings=yahoo_settings)
+        yahoo = yahoo_settings or YahooApiSettings.from_env()
+        client = resolve_yahoo_client(yahoo_client, yahoo)
+        return create_yahoo_marketplace(settings=yahoo, client=client)
 
     if normalized in {MARKETPLACE_AMAZON_JP.lower(), "amazon"}:
-        return create_amazon_marketplace(client=amazon_client, config=amazon_settings)
+        amazon = amazon_settings or AmazonConfig.from_env()
+        client = resolve_amazon_client(amazon_client, amazon)
+        return create_amazon_marketplace(client=client, config=amazon)
 
     if normalized == MARKETPLACE_RAKUTEN.lower():
-        return create_rakuten_marketplace(client=rakuten_client, config=rakuten_settings)
+        rakuten = rakuten_settings or RakutenConfig.from_env()
+        client = resolve_rakuten_client(rakuten_client, rakuten)
+        return create_rakuten_marketplace(client=client, config=rakuten)
 
     if normalized == MARKETPLACE_YAHOO_AUCTION.lower():
         return create_yahoo_auction_marketplace(
@@ -257,6 +271,7 @@ def create_marketplace(
 def get_all_marketplaces(
     listings_by_product_key: dict[str, list[MarketplaceListing]] | None = None,
     yahoo_settings: YahooApiSettings | None = None,
+    yahoo_client: YahooApiClient | None = None,
     amazon_settings: AmazonConfig | None = None,
     amazon_client: AmazonClientProtocol | None = None,
     rakuten_settings: RakutenConfig | None = None,
@@ -291,7 +306,11 @@ def get_all_marketplaces(
     yahoo_auction = yahoo_auction_settings or YahooAuctionConfig.from_env()
     marketplaces: list[BaseMarketplace] = [
         create_marketplace(MARKETPLACE_LOCAL, listings_by_product_key=listings_by_product_key),
-        create_marketplace(MARKETPLACE_YAHOO, yahoo_settings=yahoo),
+        create_marketplace(
+            MARKETPLACE_YAHOO,
+            yahoo_settings=yahoo,
+            yahoo_client=yahoo_client,
+        ),
         create_marketplace(
             MARKETPLACE_AMAZON_JP,
             amazon_settings=amazon,
