@@ -105,3 +105,14 @@ class ProductIdentityResult:
     def identity_confidence(self) -> IdentityConfidence:
         """Compatibility alias."""
         return self.confidence
+
+
+@dataclass(frozen=True, slots=True)
+class ProductIdentity:
+    """Resolved product identity for duplicate candidate grouping."""
+
+    brand: str
+    normalized_name: str
+    product_type: str
+    model_number: str | None
+    identity_key: str
