@@ -1,0 +1,334 @@
+{
+  "families": [
+    {
+      "id": "Classic Flap",
+      "brand_keys": ["CHANEL"],
+      "primary_ja": "マトラッセ",
+      "aliases": [
+        "classic flap",
+        "classic double flap",
+        "double flap",
+        "classic medium flap",
+        "medium classic flap",
+        "クラシックフラップ",
+        "クラシック フラップ",
+        "クラシックマトラッセ",
+        "クラシック マトラッセ",
+        "ココマトラッセ",
+        "ココ マトラッセ",
+        "ココマーク マトラッセ",
+        "ココマークマトラッセ",
+        "フルフラップ",
+        "フル フラップ",
+        "ダブルフラップ",
+        "ダブル フラップ",
+        "クラシックダブルフラップ",
+        "クラシック ダブルフラップ",
+        "マトラッセバッグ",
+        "マトラッセ バッグ",
+        "マトラッセショルダー",
+        "マトラッセ ショルダー",
+        "二重蓋",
+        "ｗフラップ",
+        "wフラップ",
+        "Ｗフラップ"
+      ],
+      "weak_aliases": ["matelasse", "matelassé", "matelasse flap", "マトラッセ"],
+      "query_variants_ja": [
+        "マトラッセ ダブルフラップ",
+        "マトラッセ エナメル",
+        "クラシックフラップ",
+        "ココマトラッセ",
+        "マトラッセ パテント",
+        "ココマーク マトラッセ",
+        "クラシック マトラッセ",
+        "フルフラップ",
+        "マトラッセ ショルダー",
+        "マトラッセ 25cm"
+      ],
+      "query_variants_en": ["Classic Flap", "Classic Double Flap"]
+    },
+    {
+      "id": "Boy",
+      "brand_keys": ["CHANEL"],
+      "primary_ja": "ボーイ",
+      "aliases": ["boy chanel", "boy bag", "ボーイ", "boy "],
+      "query_variants_ja": ["ボーイ", "ボーイバッグ"],
+      "query_variants_en": ["Boy", "Boy Bag"]
+    },
+    {
+      "id": "Gabrielle",
+      "brand_keys": ["CHANEL"],
+      "primary_ja": "ガブリエル",
+      "aliases": ["gabrielle", "ガブリエル"],
+      "query_variants_ja": ["ガブリエル"],
+      "query_variants_en": ["Gabrielle"]
+    },
+    {
+      "id": "Chanel 19",
+      "brand_keys": ["CHANEL"],
+      "primary_ja": "シャネル19",
+      "aliases": ["chanel 19", "シャネル19", "シャネル 19", "chanel19"],
+      "query_variants_ja": ["シャネル19", "19バッグ"],
+      "query_variants_en": ["Chanel 19"]
+    },
+    {
+      "id": "Coco Handle",
+      "brand_keys": ["CHANEL"],
+      "primary_ja": "ココハンドル",
+      "aliases": ["coco handle", "ココハンドル", "ココ ハンドル"],
+      "query_variants_ja": ["ココハンドル"],
+      "query_variants_en": ["Coco Handle"]
+    },
+    {
+      "id": "Triple Coco",
+      "brand_keys": ["CHANEL"],
+      "primary_ja": "トリプルココ",
+      "aliases": ["triple coco", "トリプルココ", "トリプル ココ"],
+      "query_variants_ja": ["トリプルココ"],
+      "query_variants_en": ["Triple Coco"]
+    },
+    {
+      "id": "Coco Sailor",
+      "brand_keys": ["CHANEL"],
+      "primary_ja": "ココセーラー",
+      "aliases": ["coco sailor", "ココセーラー", "ココ セーラー"],
+      "query_variants_ja": ["ココセーラー"],
+      "query_variants_en": ["Coco Sailor"]
+    },
+    {
+      "id": "Wallet On Chain",
+      "brand_keys": ["CHANEL"],
+      "primary_ja": "チェーンウォレット",
+      "aliases": ["wallet on chain", "woc", "チェーンウォレット", "チェーン ウォレット"],
+      "query_variants_ja": ["チェーンウォレット", "WOC"],
+      "query_variants_en": ["Wallet On Chain", "WOC"]
+    },
+    {
+      "id": "Vanity",
+      "brand_keys": ["CHANEL"],
+      "primary_ja": "バニティ",
+      "aliases": ["vanity", "バニティ"],
+      "query_variants_ja": ["バニティ"],
+      "query_variants_en": ["Vanity"]
+    },
+    {
+      "id": "Tote",
+      "brand_keys": [],
+      "primary_ja": "トート",
+      "aliases": ["shopping tote", "トートバッグ", "tote bag", "トート バッグ"],
+      "weak_aliases": ["tote", "トート"],
+      "query_variants_ja": ["トートバッグ"],
+      "query_variants_en": ["Tote"]
+    },
+    {
+      "id": "Speedy",
+      "brand_keys": ["LOUIS VUITTON", "LV"],
+      "primary_ja": "スピーディ",
+      "aliases": [
+        "speedy",
+        "speedy bandouliere",
+        "speedy bandoulière",
+        "スピーディ",
+        "スピーディー",
+        "スピーディバンドリエール",
+        "スピーディ バンドリエール"
+      ],
+      "query_variants_ja": ["スピーディ", "スピーディ バンドリエール", "スピーディー"],
+      "query_variants_en": ["Speedy", "Speedy Bandouliere"],
+      "size_aliases": {
+        "Mini": ["nano", "ナノ", "speedy nano"],
+        "Small": ["20", "speedy 20", "スピーディ20", "スピーディ 20"],
+        "Medium": ["25", "speedy 25", "スピーディ25", "スピーディ 25", " 25 "],
+        "Large": ["30", "speedy 30", "スピーディ30", "スピーディ 30", "35", "speedy 35"]
+      }
+    },
+    {
+      "id": "Neverfull",
+      "brand_keys": ["LOUIS VUITTON", "LV"],
+      "primary_ja": "ネヴァーフル",
+      "aliases": ["neverfull", "ネヴァーフル", "ネバーフル", "ネヴァフル"],
+      "query_variants_ja": ["ネヴァーフル", "ネバーフル"],
+      "query_variants_en": ["Neverfull"],
+      "size_aliases": {
+        "Small": ["pm", "ネヴァーフル pm", "neverfull pm"],
+        "Medium": ["mm", "ネヴァーフル mm", "neverfull mm"],
+        "Large": ["gm", "ネヴァーフル gm", "neverfull gm"]
+      }
+    },
+    {
+      "id": "Alma",
+      "brand_keys": ["LOUIS VUITTON", "LV"],
+      "primary_ja": "アルマ",
+      "aliases": ["alma bb", "alma pm", "alma", "アルマ", "アルマbb", "アルマ bb"],
+      "query_variants_ja": ["アルマ", "アルマBB", "アルマ BB"],
+      "query_variants_en": ["Alma", "Alma BB"]
+    },
+    {
+      "id": "Keepall",
+      "brand_keys": ["LOUIS VUITTON", "LV"],
+      "primary_ja": "キーポル",
+      "aliases": ["keepall", "キーポル", "キーポール"],
+      "query_variants_ja": ["キーポル"],
+      "query_variants_en": ["Keepall"]
+    },
+    {
+      "id": "Kelly",
+      "brand_keys": ["HERMES", "HERMÈS"],
+      "primary_ja": "ケリー",
+      "aliases": ["kelly bag", "kelly", "ケリー", "ケリーバッグ", "ケリー バッグ"],
+      "query_variants_ja": ["ケリー", "ケリーバッグ"],
+      "query_variants_en": ["Kelly", "Kelly Bag"],
+      "size_aliases": {
+        "Mini": ["mini kelly", "ケリーミニ", "kelly 20"],
+        "Small": ["kelly 25", "ケリー25", "ケリー 25"],
+        "Medium": ["kelly 28", "ケリー28", "kelly 32", "ケリー32"],
+        "Large": ["kelly 35", "ケリー35", "kelly 40", "ケリー40"]
+      }
+    },
+    {
+      "id": "Birkin",
+      "brand_keys": ["HERMES", "HERMÈS"],
+      "primary_ja": "バーキン",
+      "aliases": ["birkin", "バーキン", "バーキンバッグ"],
+      "query_variants_ja": ["バーキン", "バーキンバッグ"],
+      "query_variants_en": ["Birkin"],
+      "size_aliases": {
+        "Small": ["birkin 25", "バーキン25", "バーキン 25"],
+        "Medium": ["birkin 30", "バーキン30", "バーキン 30"],
+        "Large": ["birkin 35", "バーキン35", "birkin 40", "バーキン40"]
+      }
+    },
+    {
+      "id": "Picotin",
+      "brand_keys": ["HERMES", "HERMÈS"],
+      "primary_ja": "ピコタン",
+      "aliases": ["picotin", "ピコタン", "ピコタンロック"],
+      "query_variants_ja": ["ピコタン", "ピコタンロック"],
+      "query_variants_en": ["Picotin"]
+    },
+    {
+      "id": "Dionysus",
+      "brand_keys": ["GUCCI"],
+      "primary_ja": "ディオニュソス",
+      "aliases": [
+        "dionysus",
+        "ディオニュソス",
+        "ディオニソス",
+        "ディオニュソスバッグ",
+        "ディオニソスバッグ",
+        "401231",
+        "476432",
+        "448075",
+        "400249",
+        "421970",
+        "400235"
+      ],
+      "query_variants_ja": [
+        "ディオニュソス",
+        "ディオニソス",
+        "ディオニュソス ショルダー",
+        "ディオニュソス タイガーヘッド"
+      ],
+      "query_variants_en": ["Dionysus", "Dionysus Bag"]
+    },
+    {
+      "id": "Marmont",
+      "brand_keys": ["GUCCI"],
+      "primary_ja": "マーモント",
+      "aliases": ["marmont", "gg marmont", "マーモント", "ggマーモント", "ＧＧマーモント"],
+      "query_variants_ja": ["マーモント", "GGマーモント"],
+      "query_variants_en": ["Marmont", "GG Marmont"]
+    },
+    {
+      "id": "Jackie",
+      "brand_keys": ["GUCCI"],
+      "primary_ja": "ジャッキー",
+      "aliases": ["jackie 1961", "jackie", "ジャッキー", "ジャッキー1961"],
+      "query_variants_ja": ["ジャッキー", "ジャッキー1961"],
+      "query_variants_en": ["Jackie", "Jackie 1961"]
+    },
+    {
+      "id": "Ophidia",
+      "brand_keys": ["GUCCI"],
+      "primary_ja": "オフィディア",
+      "aliases": ["ophidia", "オフィディア"],
+      "query_variants_ja": ["オフィディア"],
+      "query_variants_en": ["Ophidia"]
+    },
+    {
+      "id": "Bamboo",
+      "brand_keys": ["GUCCI"],
+      "primary_ja": "バンブー",
+      "aliases": ["bamboo bag", "gucci bamboo", "グッチバンブー", "グッチ バンブーバッグ"],
+      "query_variants_ja": ["バンブーバッグ"],
+      "query_variants_en": ["Bamboo Bag"]
+    },
+    {
+      "id": "Re-Edition",
+      "brand_keys": ["PRADA"],
+      "primary_ja": "リエディション",
+      "aliases": [
+        "re-edition",
+        "re edition",
+        "reedition",
+        "re-edition nylon",
+        "re-nylon re-edition",
+        "re nylon re-edition",
+        "re-edition 2000",
+        "re-edition 2005",
+        "re edition 2000",
+        "re edition 2005",
+        "リエディション",
+        "リ・エディション",
+        "リナイロン リエディション",
+        "リ・ナイロン リエディション",
+        "プラダ リエディション",
+        "リエディション2000",
+        "リエディション2005",
+        "リエディション 2000",
+        "リエディション 2005",
+        "1bh204"
+      ],
+      "query_variants_ja": [
+        "リエディション",
+        "リエディション ナイロン",
+        "リエディション 2005",
+        "リナイロン リエディション"
+      ],
+      "query_variants_en": ["Re-Edition", "Re-Edition Nylon", "Re-Edition 2005"]
+    },
+    {
+      "id": "Galleria",
+      "brand_keys": ["PRADA"],
+      "primary_ja": "ガレリア",
+      "aliases": ["galleria", "ガレリア", "galleria tote", "double zip tote"],
+      "query_variants_ja": ["ガレリア", "ガレリア トート", "ガレリア スモール"],
+      "query_variants_en": ["Galleria", "Galleria Tote", "Galleria Small"]
+    },
+    {
+      "id": "Cahier",
+      "brand_keys": ["PRADA"],
+      "primary_ja": "カイエ",
+      "aliases": ["cahier", "cahier pochette", "カイエ", "カイエポシェット"],
+      "query_variants_ja": ["カイエ", "カイエ ポシェット"],
+      "query_variants_en": ["Cahier", "Cahier Pochette"]
+    },
+    {
+      "id": "Symbole",
+      "brand_keys": ["PRADA"],
+      "primary_ja": "シンボル",
+      "aliases": ["symbole", "symbole sunglasses", "シンボル"],
+      "query_variants_ja": ["シンボル サングラス"],
+      "query_variants_en": ["Symbole Sunglasses"]
+    },
+    {
+      "id": "Cleo",
+      "brand_keys": ["PRADA"],
+      "primary_ja": "クレオ",
+      "aliases": ["cleo", "クレオ"],
+      "query_variants_ja": ["クレオ"],
+      "query_variants_en": ["Cleo"]
+    }
+  ]
+}

@@ -39,7 +39,7 @@ def test_demand_cli_production_displays_demand_ranking_fields() -> None:
     rendered = output.getvalue()
     top = result.ranked_demand_opportunities[0]
 
-    assert "Demand Opportunity Ranking" in rendered
+    assert "需要込み候補順位" in rendered
     assert top.demand_profile is not None
     assert top.demand_profile.query in rendered
     assert top.candidate.supplier_product.supplier_name in rendered

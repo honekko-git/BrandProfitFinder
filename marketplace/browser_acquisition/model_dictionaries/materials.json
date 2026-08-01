@@ -1,0 +1,16 @@
+{
+  "materials_ja": {
+    "Patent": "パテント",
+    "Caviar": "キャビアスキン",
+    "Lambskin": "ラムスキン",
+    "Leather": "レザー",
+    "Canvas": "キャンバス",
+    "Epi": "エピ",
+    "Damier": "ダミエ",
+    "Monogram": "モノグラム",
+    "Calfskin": "カーフスキン"
+  },
+  "query_aliases_ja": {
+    "Patent": ["パテント", "エナメル", "パテントレザー"]
+  }
+}

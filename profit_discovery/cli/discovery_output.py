@@ -7,10 +7,14 @@ from decimal import Decimal
 from pathlib import Path
 from typing import IO, Any, TextIO
 
+from marketplace.domestic_market.execution import MarketExecutionResult
+from profit_discovery.config.used_luxury import UsedLuxuryModeConfig
 from profit_discovery.discovery_runner.models import DiscoveryCandidateResult, DiscoveryCandidateStatus
 from profit_discovery.models import BuyDecision
 from profit_discovery.multi_brand.models import BrandDiscoveryResult, MultiBrandDiscoveryResult
+from profit_discovery.arbitrage.models import ArbitrageOpportunity
 from profit_discovery.opportunity.models import DemandIntegratedOpportunityResult, OpportunityResult
+from profit_discovery.profit_ranking.models import UsedLuxuryProfitRankedResult
 from profit_discovery.showcase.formatter import ShowcaseFormatter
 
 
@@ -33,6 +37,8 @@ def build_display_summary(
     result: MultiBrandDiscoveryResult,
     *,
     brands: list[str] | tuple[str, ...],
+    market_execution: MarketExecutionResult | None = None,
+    used_luxury_config: UsedLuxuryModeConfig | None = None,
 ) -> DiscoveryDisplaySummary:
     """Build display summary from a multi-brand discovery result."""
     buy_count = 0
@@ -49,6 +55,25 @@ def build_display_summary(
         elif candidate.buy_decision.decision is BuyDecision.PASS:
             pass_count += 1
 
+    execution = market_execution or MarketExecutionResult(
+        requested_mode="FIXTURE",
+        actual_source="Fixture",
+        fallback_used=False,
+        client_name="YahooAuctionDomesticMarketClient",
+    )
+    metadata = {
+        "requested_market_mode": execution.requested_mode,
+        "actual_market_source": execution.actual_source,
+        "fallback_used": execution.fallback_used,
+    }
+    if used_luxury_config is not None and used_luxury_config.enabled:
+        metadata.update(
+            {
+                "business_mode": "USED LUXURY",
+                "market_coverage": " / ".join(used_luxury_config.market_display_names()),
+                "used_luxury_markets": used_luxury_config.market_display_names(),
+            }
+        )
     return DiscoveryDisplaySummary(
         brands=tuple(brands),
         products=result.total_candidates,
@@ -58,29 +83,51 @@ def build_display_summary(
         supplier_failures=_format_supplier_failures(result.results),
         market_failures=_format_market_failures(result.ranked_candidates),
         empty_brands=_format_empty_brands(result.results),
+        metadata=metadata,
     )
 
 
 def format_discovery_summary(summary: DiscoveryDisplaySummary) -> str:
     """Format the discovery summary block."""
-    lines = [
-        "Discovery Summary",
-        "",
-        "Brands:",
-        *summary.brands,
-        "",
-        f"Products:",
-        f"{summary.products}",
-        "",
-        f"BUY:",
-        f"{summary.buy_count}",
-        "",
-        f"HOLD:",
-        f"{summary.hold_count}",
-        "",
-        f"PASS:",
-        f"{summary.pass_count}",
-    ]
+    lines = ["検索概要", ""]
+    if summary.metadata.get("business_mode"):
+        lines.extend(
+            [
+                "モード:",
+                str(summary.metadata.get("business_mode")),
+                "",
+                "市場:",
+                *summary.metadata.get("used_luxury_markets", ()),
+                "",
+            ]
+        )
+    lines.extend(
+        [
+            "要求市場モード:",
+            str(summary.metadata.get("requested_market_mode", "FIXTURE")),
+            "",
+            "実際の市場ソース:",
+            str(summary.metadata.get("actual_market_source", "Fixture")),
+            "",
+            "フォールバック:",
+            _format_fallback_label(summary.metadata.get("fallback_used")),
+            "",
+            "ブランド:",
+            *summary.brands,
+            "",
+            f"商品数:",
+            f"{summary.products}",
+            "",
+            f"BUY:",
+            f"{summary.buy_count}",
+            "",
+            f"HOLD:",
+            f"{summary.hold_count}",
+            "",
+            f"PASS:",
+            f"{summary.pass_count}",
+        ]
+    )
     issue_lines = _format_issue_lines(summary)
     if issue_lines:
         lines.extend(["", *issue_lines])
@@ -101,20 +148,20 @@ def format_top_buy_candidates(
     ][:limit]
 
     if not buy_candidates:
-        return "TOP BUY Candidates\n\n(none)"
+        return "BUY候補上位\n\n（なし）"
 
-    lines = ["TOP BUY Candidates", ""]
+    lines = ["BUY候補上位", ""]
     for index, candidate in enumerate(buy_candidates, start=1):
         profit = _format_jpy(candidate.profit_result.profit_jpy if candidate.profit_result else None)
         roi = _format_percent(candidate.profit_result.roi if candidate.profit_result else None)
         lines.extend(
             [
                 f"{index}.",
-                f"Product: {candidate.supplier_product.title}",
-                f"Supplier: {candidate.supplier_product.supplier_name}",
-                f"Profit: {profit}",
+                f"商品名: {candidate.supplier_product.title}",
+                f"仕入先: {candidate.supplier_product.supplier_name}",
+                f"利益: {profit}",
                 f"ROI: {roi}",
-                f"Decision: {candidate.buy_decision.decision.value if candidate.buy_decision else 'N/A'}",
+                f"判定: {candidate.buy_decision.decision.value if candidate.buy_decision else 'N/A'}",
                 "",
             ]
         )
@@ -128,7 +175,7 @@ def format_export_message(export_path: Path | str) -> str:
         display_path = path.relative_to(Path.cwd()).as_posix()
     except ValueError:
         display_path = path.as_posix()
-    return "\n".join(["Excel exported:", "", display_path])
+    return "\n".join(["Excelをエクスポートしました:", "", display_path])
 
 
 def format_opportunity_ranking(
@@ -139,9 +186,9 @@ def format_opportunity_ranking(
     """Format ranked opportunity results for manual purchase review."""
     ranked = list(opportunities)[:limit]
     if not ranked:
-        return "Opportunity Ranking\n\n(none)"
+        return "候補順位\n\n（なし）"
 
-    lines = ["Opportunity Ranking", ""]
+    lines = ["候補順位", ""]
     for item in ranked:
         candidate = item.candidate
         profit = _format_jpy(candidate.profit_result.profit_jpy if candidate.profit_result else None)
@@ -150,22 +197,22 @@ def format_opportunity_ranking(
         lines.extend(
             [
                 f"{item.recommendation_rank}.",
-                f"Product:",
+                f"商品名:",
                 candidate.supplier_product.title,
                 "",
-                f"Supplier:",
+                f"仕入先:",
                 candidate.supplier_product.supplier_name,
                 "",
-                f"Score:",
+                f"スコア:",
                 f"{item.score.total_score:.1f}",
                 "",
-                f"Profit:",
+                f"利益:",
                 profit,
                 "",
                 f"ROI:",
                 roi,
                 "",
-                f"Decision:",
+                f"判定:",
                 decision,
                 "",
             ]
@@ -181,9 +228,9 @@ def format_demand_opportunity_ranking(
     """Format ranked demand-integrated opportunity results for manual purchase review."""
     ranked = list(opportunities)[:limit]
     if not ranked:
-        return "Demand Opportunity Ranking\n\n(none)"
+        return "需要込み候補順位\n\n（なし）"
 
-    lines = ["Demand Opportunity Ranking", ""]
+    lines = ["需要込み候補順位", ""]
     for item in ranked:
         candidate = item.candidate
         profit = _format_jpy(candidate.profit_result.profit_jpy if candidate.profit_result else None)
@@ -197,26 +244,135 @@ def format_demand_opportunity_ranking(
         lines.extend(
             [
                 f"{item.recommendation_rank}.",
-                f"Product:",
+                f"商品名:",
                 product_name,
                 "",
-                f"Supplier:",
+                f"仕入先:",
                 candidate.supplier_product.supplier_name,
                 "",
-                f"Profit:",
+                f"利益:",
                 profit,
                 "",
-                f"Demand:",
+                f"需要:",
                 f"{int(round(item.score.demand_score))}",
                 "",
-                f"Score:",
+                f"スコア:",
                 f"{item.score.total_score:.1f}",
                 "",
                 f"ROI:",
                 roi,
                 "",
-                f"Decision:",
+                f"判定:",
                 decision,
+                "",
+            ]
+        )
+    return "\n".join(lines).rstrip()
+
+
+def format_used_luxury_profit_ranking(
+    ranking: tuple[UsedLuxuryProfitRankedResult, ...] | list[UsedLuxuryProfitRankedResult],
+    *,
+    limit: int = 5,
+) -> str:
+    """Format used luxury profit ranking for CLI display."""
+    ranked = list(ranking)[:limit]
+    if not ranked:
+        return "中古高級品 利益順位\n\n（なし）"
+
+    lines = ["中古高級品 利益順位", ""]
+    for item in ranked:
+        candidate = item.candidate
+        product = candidate.supplier_product
+        product_name = (
+            item.demand_profile.query
+            if item.demand_profile is not None
+            else product.title
+        )
+        profit = _format_jpy(candidate.profit_result.profit_jpy if candidate.profit_result else None)
+        decision = candidate.buy_decision.decision.value if candidate.buy_decision else "N/A"
+        lines.extend(
+            [
+                f"{item.score.recommendation_rank}.",
+                "商品名:",
+                product_name,
+                "",
+                "ブランド:",
+                product.brand,
+                "",
+                "カテゴリ:",
+                product.category,
+                "",
+                "仕入先:",
+                product.supplier_name,
+                "",
+                "利益:",
+                profit,
+                "",
+                "需要:",
+                f"{int(round(item.score.demand_score))}",
+                "",
+                "回転:",
+                f"{item.score.turnover_score:.1f}",
+                "",
+                "スコア:",
+                f"{item.score.total_score:.1f}",
+                "",
+                "判定:",
+                decision,
+                "",
+            ]
+        )
+    return "\n".join(lines).rstrip()
+
+
+def format_used_luxury_arbitrage_ranking(
+    ranking: tuple[ArbitrageOpportunity, ...] | list[ArbitrageOpportunity],
+    *,
+    limit: int = 5,
+) -> str:
+    """Format used luxury arbitrage ranking for CLI display."""
+    ranked = list(ranking)[:limit]
+    if not ranked:
+        return "中古高級品 裁定順位\n\n（なし）"
+
+    lines = ["中古高級品 裁定順位", ""]
+    for item in ranked:
+        lines.extend(
+            [
+                f"{item.recommendation_rank}.",
+                "商品名:",
+                item.product,
+                "",
+                "仕入先:",
+                item.purchase_source,
+                "",
+                "仕入価格:",
+                _format_jpy(item.purchase_price),
+                "",
+                "販売市場:",
+                item.selling_market,
+                "",
+                "販売価格:",
+                _format_jpy(item.selling_price),
+                "",
+                "推定利益:",
+                _format_jpy(item.estimated_profit),
+                "",
+                "利益率:",
+                _format_percent(item.profit_margin),
+                "",
+                "需要:",
+                f"{int(round(item.demand_score))}",
+                "",
+                "回転:",
+                f"{item.turnover_score:.1f}",
+                "",
+                "スコア:",
+                f"{item.arbitrage_score:.1f}",
+                "",
+                "判定:",
+                item.decision,
                 "",
             ]
         )
@@ -229,10 +385,22 @@ def render_showcase(
     *,
     limit: int = 5,
     formatter: ShowcaseFormatter | None = None,
+    market_execution: MarketExecutionResult | None = None,
+    used_luxury_config: UsedLuxuryModeConfig | None = None,
+    profit_ranking: list[UsedLuxuryProfitRankedResult] | tuple[UsedLuxuryProfitRankedResult, ...] | None = None,
+    arbitrage_ranking: list[ArbitrageOpportunity] | tuple[ArbitrageOpportunity, ...] | None = None,
 ) -> str:
     """Render the showcase dashboard view for ranked demand opportunities."""
     active_formatter = formatter or ShowcaseFormatter()
-    return active_formatter.format_showcase(result, opportunities, limit=limit)
+    return active_formatter.format_showcase(
+        result,
+        opportunities,
+        limit=limit,
+        market_execution=market_execution,
+        used_luxury_config=used_luxury_config,
+        profit_ranking=profit_ranking,
+        arbitrage_ranking=arbitrage_ranking,
+    )
 
 
 def render_discovery_run(
@@ -242,10 +410,19 @@ def render_discovery_run(
     export_path: Path | None = None,
     ranked_opportunities: list[OpportunityResult] | None = None,
     ranked_demand_opportunities: list[DemandIntegratedOpportunityResult] | None = None,
+    used_luxury_profit_ranking: list[UsedLuxuryProfitRankedResult] | None = None,
+    used_luxury_arbitrage_ranking: list[ArbitrageOpportunity] | None = None,
+    market_execution: MarketExecutionResult | None = None,
+    used_luxury_config: UsedLuxuryModeConfig | None = None,
     output: TextIO | None = None,
 ) -> str:
     """Render the full discovery CLI output and optionally write it to a stream."""
-    summary = build_display_summary(result, brands=brands)
+    summary = build_display_summary(
+        result,
+        brands=brands,
+        market_execution=market_execution,
+        used_luxury_config=used_luxury_config,
+    )
     sections = [
         format_discovery_summary(summary),
         "",
@@ -253,7 +430,27 @@ def render_discovery_run(
     ]
     if ranked_demand_opportunities is not None:
         sections.extend(["", format_demand_opportunity_ranking(ranked_demand_opportunities)])
-        sections.extend(["", render_showcase(result, ranked_demand_opportunities)])
+        if used_luxury_profit_ranking is not None:
+            sections.extend(
+                ["", format_used_luxury_profit_ranking(used_luxury_profit_ranking)]
+            )
+        if used_luxury_arbitrage_ranking is not None:
+            sections.extend(
+                ["", format_used_luxury_arbitrage_ranking(used_luxury_arbitrage_ranking)]
+            )
+        sections.extend(
+            [
+                "",
+                render_showcase(
+                    result,
+                    ranked_demand_opportunities,
+                    market_execution=market_execution,
+                    used_luxury_config=used_luxury_config,
+                    profit_ranking=used_luxury_profit_ranking,
+                    arbitrage_ranking=used_luxury_arbitrage_ranking,
+                ),
+            ]
+        )
     elif ranked_opportunities is not None:
         sections.extend(["", format_opportunity_ranking(ranked_opportunities)])
     if export_path is not None:
@@ -266,24 +463,30 @@ def render_discovery_run(
     return rendered
 
 
+def _format_fallback_label(value: object) -> str:
+    if value is True:
+        return "はい"
+    return "いいえ"
+
+
 def _format_issue_lines(summary: DiscoveryDisplaySummary) -> list[str]:
     lines: list[str] = []
     if summary.supplier_failures or summary.market_failures or summary.empty_brands:
-        lines.append("Issues")
+        lines.append("注意事項")
         lines.append("")
 
     if summary.supplier_failures:
-        lines.append("Supplier failures:")
+        lines.append("仕入先の失敗:")
         lines.extend(f"- {message}" for message in summary.supplier_failures)
         lines.append("")
 
     if summary.market_failures:
-        lines.append("Market failures:")
+        lines.append("市場の失敗:")
         lines.extend(f"- {message}" for message in summary.market_failures)
         lines.append("")
 
     if summary.empty_brands:
-        lines.append("Empty results:")
+        lines.append("結果なし:")
         lines.extend(f"- {message}" for message in summary.empty_brands)
 
     return lines

@@ -66,10 +66,10 @@ def test_render_discovery_run_summarizes_supplier_failure() -> None:
 
     rendered = render_discovery_run(result, brands=["Chanel", "Gucci"])
 
-    assert "Issues" in rendered
-    assert "Supplier failures:" in rendered
+    assert "注意事項" in rendered
+    assert "仕入先の失敗:" in rendered
     assert "Gucci: brand search failed" in rendered
-    assert "Products:" in rendered
+    assert "商品数:" in rendered
 
 
 def test_render_discovery_run_summarizes_market_failure() -> None:
@@ -105,7 +105,7 @@ def test_render_discovery_run_summarizes_market_failure() -> None:
 
     rendered = render_discovery_run(result, brands=["UnknownBrand"])
 
-    assert "Market failures:" in rendered
+    assert "市場の失敗:" in rendered
     assert "UnknownBrand / Unknown Luxury Item" in rendered
     assert "no_domestic_market_price" in rendered
 
@@ -122,8 +122,8 @@ def test_run_discovery_command_continues_after_supplier_failure() -> None:
     assert result.failed_brands == ("Gucci",)
     assert result.total_candidates >= 1
     rendered = output.getvalue()
-    assert "Supplier failures:" in rendered
-    assert "Discovery Summary" in rendered
+    assert "仕入先の失敗:" in rendered
+    assert "検索概要" in rendered
 
 
 def test_run_discovery_cli_returns_zero_when_one_brand_fails() -> None:

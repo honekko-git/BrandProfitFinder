@@ -84,11 +84,11 @@ def test_format_discovery_summary_includes_brands_and_counts() -> None:
     summary = build_display_summary(result, brands=["CHANEL", "Louis Vuitton", "Hermes"])
     rendered = format_discovery_summary(summary)
 
-    assert "Discovery Summary" in rendered
+    assert "検索概要" in rendered
     assert "CHANEL" in rendered
     assert "Louis Vuitton" in rendered
     assert "Hermes" in rendered
-    assert "Products:\n3" in rendered
+    assert "商品数:\n3" in rendered
     assert "BUY:\n1" in rendered
     assert "HOLD:\n1" in rendered
     assert "PASS:\n1" in rendered
@@ -101,12 +101,12 @@ def test_format_top_buy_candidates_lists_product_supplier_profit_and_roi() -> No
         ],
     )
 
-    assert "TOP BUY Candidates" in rendered
-    assert "Product: Chanel Classic Wallet" in rendered
-    assert "Supplier: fashionphile" in rendered
-    assert "Profit: 30,000 JPY" in rendered
+    assert "BUY候補上位" in rendered
+    assert "商品名: Chanel Classic Wallet" in rendered
+    assert "仕入先: fashionphile" in rendered
+    assert "利益: 30,000 JPY" in rendered
     assert "ROI: 40.0%" in rendered
-    assert "Decision: BUY" in rendered
+    assert "判定: BUY" in rendered
 
 
 def test_render_discovery_run_shows_empty_case_message() -> None:
@@ -132,10 +132,10 @@ def test_render_discovery_run_shows_empty_case_message() -> None:
 
     rendered = render_discovery_run(result, brands=["Hermes"])
 
-    assert "Products:\n0" in rendered
-    assert "TOP BUY Candidates" in rendered
-    assert "(none)" in rendered
-    assert "Empty results:" in rendered
+    assert "商品数:\n0" in rendered
+    assert "BUY候補上位" in rendered
+    assert "（なし）" in rendered
+    assert "結果なし:" in rendered
     assert "Hermes: 0 products found" in rendered
 
 
@@ -163,10 +163,10 @@ def test_run_discovery_command_prints_export_message(tmp_path: Path) -> None:
         )
 
     rendered = output.getvalue()
-    assert "Excel exported:" in rendered
+    assert "Excelをエクスポートしました:" in rendered
     assert "discovery_report.xlsx" in rendered
 
 
 def test_format_export_message_uses_display_path() -> None:
     message = format_export_message(Path("output/discovery_report.xlsx"))
-    assert message == "Excel exported:\n\noutput/discovery_report.xlsx"
+    assert message == "Excelをエクスポートしました:\n\noutput/discovery_report.xlsx"

@@ -1,0 +1,251 @@
+{# Reusable sourcing decision presentation components.
+   Designed as an extensible workspace: add Notes / Watchlist / Status
+   sections later without redesigning the page shell. #}
+
+{% macro summary_card(label, value, tone="") -%}
+<article class="sourcing-summary-card{% if tone %} sourcing-summary-card-{{ tone }}{% endif %}">
+    <h3>{{ label }}</h3>
+    <p>{{ value }}</p>
+</article>
+{%- endmacro %}
+
+{% macro decision_summary(overall, purchase, selling, profit, roi) -%}
+<section class="sourcing-summary-grid sourcing-decision-summary" aria-label="判断サマリー">
+    {{ summary_card("総合評価", overall) }}
+    {{ summary_card("仕入価格", purchase) }}
+    {{ summary_card("販売予想価格", selling, "sell") }}
+    {{ summary_card("純利益", profit, "profit") }}
+    {{ summary_card("ROI", roi) }}
+</section>
+{%- endmacro %}
+
+{% macro price_card(purchase, selling, profit, roi) -%}
+<article class="sourcing-panel sourcing-price-card" data-component="PriceCard">
+    <h2>価格</h2>
+    <dl class="sourcing-metric-list">
+        <div><dt>仕入価格</dt><dd class="price-buy-value">{{ purchase }}</dd></div>
+        <div><dt>販売予想価格</dt><dd class="price-sell-value">{{ selling }}</dd></div>
+        <div><dt>純利益</dt><dd class="profit">{{ profit }}</dd></div>
+        <div><dt>ROI</dt><dd>{{ roi }}</dd></div>
+    </dl>
+</article>
+{%- endmacro %}
+
+{% macro profit_breakdown(rows, collapsed=true) -%}
+<details class="sourcing-panel sourcing-profit-breakdown" data-component="ProfitBreakdown"{% if not collapsed %} open{% endif %} data-persist-key="sourcing-profit-breakdown">
+    <summary class="sourcing-panel-summary">利益内訳</summary>
+    <dl class="sourcing-metric-list">
+        {% for label, value in rows %}
+        {% set is_total = label == '純利益' or label.startswith('最終利益') or label == '表示利益' %}
+        <div{% if is_total %} class="is-total"{% endif %}>
+            <dt>{{ label }}</dt>
+            <dd{% if is_total %} class="profit"{% endif %}>{{ value }}</dd>
+        </div>
+        {% else %}
+        <div><dt>データ</dt><dd>-</dd></div>
+        {% endfor %}
+    </dl>
+</details>
+{%- endmacro %}
+
+{% macro ai_analysis_panel(positives, cautions, summary_parts, full_text) -%}
+<article class="sourcing-panel sourcing-ai-analysis" data-component="AIAnalysisPanel">
+    <h2>AI分析</h2>
+    <div class="sourcing-ai-sections">
+        <section class="sourcing-ai-section">
+            <h3>【良い点】</h3>
+            {% if positives %}
+            <ul>{% for item in positives %}<li>{{ item }}</li>{% endfor %}</ul>
+            {% else %}
+            <p class="meta">-</p>
+            {% endif %}
+        </section>
+        <section class="sourcing-ai-section">
+            <h3>【注意点】</h3>
+            {% if cautions %}
+            <ul>{% for item in cautions %}<li>{{ item }}</li>{% endfor %}</ul>
+            {% else %}
+            <p class="meta">-</p>
+            {% endif %}
+        </section>
+        <section class="sourcing-ai-section">
+            <h3>【総合コメント】</h3>
+            {% if summary_parts %}
+            <ul>{% for item in summary_parts %}<li>{{ item }}</li>{% endfor %}</ul>
+            {% elif full_text and not positives and not cautions %}
+            <p class="sourcing-analysis-full">{{ full_text }}</p>
+            {% else %}
+            <p class="meta">-</p>
+            {% endif %}
+        </section>
+    </div>
+</article>
+{%- endmacro %}
+
+{% macro warning_list(warnings) -%}
+<article class="sourcing-panel sourcing-warning-list" data-component="WarningList">
+    <h2>注意事項</h2>
+    {% if warnings %}
+    <ul class="sourcing-warnings">
+        {% for item in warnings %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="meta">注意事項はありません。</p>
+    {% endif %}
+</article>
+{%- endmacro %}
+
+{% macro sales_info(rows, title="販売情報") -%}
+<article class="sourcing-panel sourcing-sales-info" data-component="SalesInfo">
+    <h2>{{ title }}</h2>
+    <dl class="sourcing-metric-list">
+        {% for label, value in rows %}
+        <div><dt>{{ label }}</dt><dd>{{ value }}</dd></div>
+        {% else %}
+        <div><dt>データ</dt><dd>-</dd></div>
+        {% endfor %}
+    </dl>
+</article>
+{%- endmacro %}
+
+{% macro market_information(rows) -%}
+{# Market-facing layout for existing sales metrics; no new calculations. #}
+{% set ns = namespace(has_data=false) %}
+{% for _label, value in rows %}
+    {% if value and value != '-' %}
+        {% set ns.has_data = true %}
+    {% endif %}
+{% endfor %}
+<article class="sourcing-panel sourcing-market-info" data-component="SalesInfo" data-section="MarketInformation">
+    <h2>マーケット情報</h2>
+    {% if ns.has_data %}
+    <dl class="sourcing-metric-list">
+        {% for label, value in rows %}
+        <div><dt>{{ label }}</dt><dd>{{ value }}</dd></div>
+        {% endfor %}
+    </dl>
+    {% else %}
+    <dl class="sourcing-metric-list sourcing-coming-soon">
+        <div><dt>販売件数</dt><dd>Coming Soon</dd></div>
+        <div><dt>中央値</dt><dd>Coming Soon</dd></div>
+        <div><dt>最高価格</dt><dd>Coming Soon</dd></div>
+        <div><dt>最低価格</dt><dd>Coming Soon</dd></div>
+        <div><dt>Confidence</dt><dd>Coming Soon</dd></div>
+    </dl>
+    <p class="meta">将来のマーケット連携用セクションです。</p>
+    {% endif %}
+</article>
+{%- endmacro %}
+
+{% macro action_panel(purchase_url) -%}
+<article class="sourcing-panel sourcing-action-panel" data-component="ActionPanel">
+    <h2>アクション</h2>
+    <div class="sourcing-action-stack">
+        {% if purchase_url %}
+        <a class="btn btn-primary btn-view" href="{{ purchase_url }}" target="_blank" rel="noopener noreferrer">商品ページを開く<svg class="btn-view-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 5h5v5"/><path d="M10 14L19 5"/><path d="M19 14v4a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4"/></svg></a>
+        {% else %}
+        <p class="warning">商品ページURLが未設定または無効です</p>
+        {% endif %}
+        {# Future actions: Notes / Watchlist / Purchase Status #}
+        <div class="sourcing-action-future" data-extension-slot="actions" hidden></div>
+    </div>
+</article>
+{%- endmacro %}
+
+{% macro back_nav(back_url, demo_mode=false, position="top") -%}
+<div class="sourcing-detail-nav sourcing-detail-nav-{{ position }}">
+    <a class="back-link" href="{{ back_url }}" data-restore-ranking-scroll="1">← ランキングへ戻る</a>
+    {% if demo_mode and position == "top" %}
+    <span class="demo-badge">デモ表示中</span>
+    {% endif %}
+</div>
+{%- endmacro %}
+
+{% macro status_badge(workflow) -%}
+<span class="workflow-status-badge {{ workflow.css_class }}" data-component="StatusBadge" data-status="{{ workflow.status }}">{{ workflow.label }}</span>
+{%- endmacro %}
+
+{% macro status_selector(candidate_id, workflow, status_choices, compact=false) -%}
+<label class="workflow-status-selector{% if compact %} is-compact{% endif %}" data-component="StatusSelector">
+    <span class="visually-hidden">ステータス</span>
+    <select
+        class="workflow-status-select"
+        data-workflow-status-select
+        data-candidate-id="{{ candidate_id }}"
+        aria-label="候補ステータス"
+    >
+        {% for item in status_choices %}
+        <option value="{{ item.code }}"{% if item.code == workflow.status %} selected{% endif %}>{{ item.label }}</option>
+        {% endfor %}
+    </select>
+</label>
+{%- endmacro %}
+
+{% macro note_panel(candidate_id, workflow) -%}
+<article class="sourcing-panel sourcing-note-panel" data-component="NotePanel" data-extension-slot="notes">
+    <h2>メモ</h2>
+    <p class="meta">仕入れ判断用の短いメモを残せます。</p>
+    <textarea
+        class="workflow-notes-input"
+        data-workflow-notes
+        data-candidate-id="{{ candidate_id }}"
+        rows="4"
+        maxlength="2000"
+        placeholder="例: 箱なし / 角スレあり / 値下げ待ち / 店舗A"
+    >{{ workflow.notes }}</textarea>
+    <div class="workflow-notes-actions">
+        <button type="button" class="btn btn-secondary" data-workflow-notes-save data-candidate-id="{{ candidate_id }}">メモを保存</button>
+        <span class="workflow-save-status meta" data-workflow-save-status aria-live="polite"></span>
+    </div>
+</article>
+{%- endmacro %}
+
+{% macro candidate_action_bar(candidate_id, workflow, status_choices) -%}
+<article class="sourcing-panel sourcing-workflow-bar" data-component="CandidateActionBar" data-extension-slot="purchase-status">
+    <h2>ワークフロー</h2>
+    <div class="workflow-action-row">
+        {{ status_badge(workflow) }}
+        {{ status_selector(candidate_id, workflow, status_choices) }}
+    </div>
+</article>
+{%- endmacro %}
+
+{% macro management_card(candidate_id, workflow, status_choices) -%}
+<section class="sourcing-management-card" data-section="management" aria-label="管理">
+    <header class="sourcing-management-header">
+        <h2>管理</h2>
+        <p class="meta">ステータスとメモはユーザー操作です。商品情報ではありません。</p>
+    </header>
+    <div class="sourcing-management-body">
+        {{ candidate_action_bar(candidate_id, workflow, status_choices) }}
+        {{ note_panel(candidate_id, workflow) }}
+    </div>
+</section>
+{%- endmacro %}
+
+{% macro ranking_status_cell(candidate_id, workflow, status_choices) -%}
+<td class="col-workflow" data-component="CandidateActionBar">
+    <div class="ranking-workflow-cell">
+        {{ status_badge(workflow) }}
+        {{ status_selector(candidate_id, workflow, status_choices, true) }}
+    </div>
+</td>
+{%- endmacro %}
+
+{% macro workflow_filter_bar(filter_choices, active_filter="all") -%}
+<nav class="workflow-filter-bar" data-component="WorkflowFilterBar" aria-label="ステータス絞り込み">
+    {% for item in filter_choices %}
+    <button
+        type="button"
+        class="workflow-filter-chip{% if item.code == active_filter %} is-active{% endif %}"
+        data-workflow-filter="{{ item.code }}"
+    >{{ item.label }}</button>
+    {% endfor %}
+</nav>
+{%- endmacro %}
+
+{% macro extension_slot(name) -%}
+<section class="sourcing-extension-slot" data-extension-slot="{{ name }}" hidden aria-hidden="true"></section>
+{%- endmacro %}

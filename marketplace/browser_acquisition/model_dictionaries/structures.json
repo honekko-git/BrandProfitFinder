@@ -1,0 +1,12 @@
+{
+  "structures": [
+    {
+      "id": "Double Flap",
+      "aliases": ["double flap", "ダブルフラップ", "ダブル フラップ", "二重蓋", "wフラップ", "ｗフラップ", "Ｗフラップ"]
+    },
+    {
+      "id": "Single Flap",
+      "aliases": ["single flap", "シングルフラップ", "シングル フラップ"]
+    }
+  ]
+}

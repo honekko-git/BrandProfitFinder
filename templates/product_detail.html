@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block page_title %}{{ title }} — {{ detail.product }}{% endblock %}
+
+{% block content %}
+<section class="hero compact">
+    <a class="back-link" href="/">← ダッシュボードへ戻る</a>
+    <h1>{{ detail.product }}</h1>
+    <p class="subtitle">{{ detail.brand }} · {{ detail.category }}</p>
+</section>
+
+<section class="detail-grid">
+    <article class="detail-card">
+        <h2>商品情報</h2>
+        <dl class="metric-list">
+            <div><dt>ブランド</dt><dd>{{ detail.brand }}</dd></div>
+            <div><dt>カテゴリ</dt><dd>{{ detail.category }}</dd></div>
+            <div><dt>市場モード</dt><dd>{{ detail.market_mode }}</dd></div>
+            {% if detail.profit_rank %}
+            <div><dt>利益順位</dt><dd>#{{ detail.profit_rank }}</dd></div>
+            {% endif %}
+        </dl>
+    </article>
+
+    <article class="detail-card">
+        <h2>価格比較</h2>
+        <dl class="metric-list">
+            <div><dt>仕入先</dt><dd>{{ detail.purchase_source }}</dd></div>
+            <div><dt>仕入価格</dt><dd>{{ detail.purchase_price }}</dd></div>
+            <div><dt>販売市場</dt><dd>{{ detail.selling_market }}</dd></div>
+            <div><dt>販売価格</dt><dd>{{ detail.selling_price }}</dd></div>
+            <div><dt>価格差</dt><dd>{{ detail.price_difference }}</dd></div>
+        </dl>
+    </article>
+
+    <article class="detail-card">
+        <h2>利益</h2>
+        <dl class="metric-list">
+            <div><dt>推定利益</dt><dd class="profit">{{ detail.estimated_profit }}</dd></div>
+            <div><dt>利益率</dt><dd>{{ detail.profit_margin }}</dd></div>
+            <div><dt>ROI</dt><dd>{{ detail.roi }}</dd></div>
+        </dl>
+    </article>
+
+    <article class="detail-card">
+        <h2>需要・回転</h2>
+        <dl class="metric-list">
+            <div><dt>需要スコア</dt><dd>{{ "%.0f"|format(detail.demand_score) }}</dd></div>
+            <div><dt>回転スコア</dt><dd>{{ "%.1f"|format(detail.turnover_score) }}</dd></div>
+            <div><dt>裁定スコア</dt><dd>{{ "%.1f"|format(detail.arbitrage_score) }}</dd></div>
+        </dl>
+    </article>
+
+    <article class="detail-card">
+        <h2>保存状態</h2>
+        {% if detail.saved_record_id %}
+        <p class="status-badge status-{{ detail.saved_status|lower }}">{{ detail.saved_status }}</p>
+        <div class="status-actions">
+            {% for action in detail.status_actions %}
+            <form action="/saved/{{ detail.saved_record_id }}/status" method="post" class="inline-form">
+                <input type="hidden" name="status" value="{{ action }}">
+                <input type="hidden" name="redirect_to" value="/product/{{ detail.product_id }}">
+                <button type="submit">{{ action }} にする</button>
+            </form>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="empty-state">まだ保存されていません。</p>
+        <form action="/opportunities/{{ detail.product_id }}/save" method="post" class="save-form">
+            <button type="submit">候補を保存</button>
+        </form>
+        {% endif %}
+    </article>
+
+    <article class="detail-card">
+        <h2>AI判定</h2>
+        <p class="decision decision-{{ detail.decision|lower }}">{{ detail.decision }}</p>
+    </article>
+
+    <article class="detail-card">
+        <h2>市場出品</h2>
+        <dl class="metric-list">
+            <div><dt>市場ソース</dt><dd>{{ detail.market_source }}</dd></div>
+            <div><dt>状態</dt><dd>{{ detail.condition }}</dd></div>
+        </dl>
+    </article>
+
+    <article class="detail-card">
+        <h2>市場URL</h2>
+        <div class="url-links vertical">
+            {% if detail.listing_url %}
+            <a href="{{ detail.listing_url }}" target="_blank" rel="noopener noreferrer">出品URL</a>
+            {% endif %}
+            {% if detail.purchase_url %}
+            <a href="{{ detail.purchase_url }}" target="_blank" rel="noopener noreferrer">仕入URL</a>
+            {% endif %}
+            {% if detail.selling_url %}
+            <a href="{{ detail.selling_url }}" target="_blank" rel="noopener noreferrer">販売URL</a>
+            {% endif %}
+        </div>
+    </article>
+</section>
+{% endblock %}

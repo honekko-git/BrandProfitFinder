@@ -1,0 +1,488 @@
+{% extends "base.html" %}
+
+{% block body_class %}page-acquisition-workspace{% endblock %}
+
+{% block page_title %}仕入れ候補ワークスペース{% endblock %}
+
+{% block content %}
+{% set has_candidates = batch and rows %}
+{% set demo_mode = demo_mode|default(false) %}
+{% set price_cells = price_cells|default({}) %}
+{% set title_cells = title_cells|default({}) %}
+{% set analysis_badges = analysis_badges|default({}) %}
+{% set workflow_by_id = workflow_by_id|default({}) %}
+{% set status_choices = status_choices|default([]) %}
+{% set workflow_filters = workflow_filters|default([]) %}
+{% set active_workflow_filter = active_workflow_filter|default('all') %}
+{% from "macros/sourcing_components.html" import workflow_filter_bar %}
+{% set card_candidates = workspace_summary.candidates if workspace_summary else "-" %}
+{% set card_needs_review = workspace_summary.pending if workspace_summary else "-" %}
+{% set card_last_updated = workspace_summary.last_updated if workspace_summary and workspace_summary.last_updated else "-" %}
+{% if workspace_summary %}
+{% set card_profit_checked = workspace_summary.profit_checked ~ " / " ~ workspace_summary.candidates ~ "件" %}
+{% else %}
+{% set card_profit_checked = "-" %}
+{% endif %}
+
+{% set notices = notices|default([]) %}
+{% set brand_options = brand_options|default([]) %}
+{% set marketplace_runs = marketplace_runs|default({}) %}
+
+<section class="page-header workspace-header">
+    <h1>仕入れ候補ワークスペース</h1>
+    <p class="workspace-subtitle">仕入れ候補の確認・利益計算・管理を行います</p>
+</section>
+
+{% if errors %}
+<div class="alert alert-error">{% for error in errors %}<p>{{ error }}</p>{% endfor %}</div>
+{% endif %}
+{% if notices %}
+<div class="alert alert-success">{% for notice in notices %}<p>{{ notice }}</p>{% endfor %}</div>
+{% endif %}
+
+{% if demo_mode %}
+<div class="demo-banner" id="demo-banner" role="status">
+    <span class="demo-badge">デモ表示中</span>
+    <div class="demo-banner-copy">
+        <p>開発用の明示的デモモードです（?demo=1）。</p>
+        <p>通常運用ではサンプルは自動表示されません。</p>
+    </div>
+</div>
+{% endif %}
+
+{% if fx_batch_snapshot %}
+<section class="fx-batch-panel" id="fx-batch-panel" style="margin:12px 0;padding:12px 14px;border:1px solid #ddd4c8;background:rgba(255,255,255,0.7)">
+    <h2 style="margin:0 0 8px;font-size:1rem">このバッチの使用為替</h2>
+    <p style="margin:0 0 6px;color:#6b645c;font-size:0.9rem">一括取得セッション開始時に凍結したレートです（商品本体価格の円換算に使用）。</p>
+    <dl style="display:grid;grid-template-columns:auto 1fr;gap:4px 16px;margin:0">
+        <dt>USD/JPY</dt><dd>{{ fx_batch_snapshot.rates.get('USD_TO_JPY', '—') }}</dd>
+        <dt>EUR/JPY</dt><dd>{{ fx_batch_snapshot.rates.get('EUR_TO_JPY', '—') }}</dd>
+        <dt>GBP/JPY</dt><dd>{{ fx_batch_snapshot.rates.get('GBP_TO_JPY', '—') }}</dd>
+        <dt>取得時刻</dt><dd>{{ fx_batch_snapshot.retrieved_at }}</dd>
+        <dt>Source</dt><dd>{{ fx_batch_snapshot.source_name }}{% if fx_batch_snapshot.source_url %} ({{ fx_batch_snapshot.source_url }}){% endif %}</dd>
+        <dt>状態</dt><dd>
+            {% if fx_batch_snapshot.freshness_status == 'FRESH' %}最新
+            {% elif fx_batch_snapshot.freshness_status == 'STALE' %}保存レート・要注意
+            {% elif fx_batch_snapshot.freshness_status == 'MANUAL' %}手動設定
+            {% else %}{{ fx_batch_snapshot.freshness_status }}{% endif %}
+        </dd>
+        <dt>Snapshot ID</dt><dd>{{ fx_batch_snapshot.snapshot_id }}</dd>
+    </dl>
+    {% if fx_batch_snapshot.fallback_used %}
+    <p style="margin:8px 0 0;color:#8a4b08">{{ fx_batch_snapshot.user_message or fx_batch_snapshot.fallback_reason }}</p>
+    {% endif %}
+</section>
+{% endif %}
+
+{% if not has_candidates and not demo_mode %}
+<div class="empty-panel" id="empty-workspace">
+    <p>No acquisition candidates have been imported.</p>
+    <p>仕入れ候補はまだ取り込まれていません。下の取得パネルから検索するか、商品URL / CSVで取り込んでください。</p>
+</div>
+{% endif %}
+
+<section class="dashboard-summary" id="summary">
+    <article class="dash-card">
+        <div class="dash-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg>
+        </div>
+        <div class="dash-card-body">
+            <h3>候補数</h3>
+            <p class="dash-card-value">{% if card_candidates == "-" %}{{ card_candidates }}{% elif demo_mode %}{{ card_candidates }}件{% else %}{{ card_candidates }}{% endif %}</p>
+        </div>
+    </article>
+    <article class="dash-card">
+        <div class="dash-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
+        </div>
+        <div class="dash-card-body">
+            <h3>利益計算済</h3>
+            <p class="dash-card-value{% if card_profit_checked != '-' %} dash-card-value-progress{% endif %}">{{ card_profit_checked }}</p>
+        </div>
+    </article>
+    <article class="dash-card">
+        <div class="dash-card-icon dash-card-icon-warn" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v4"/><circle cx="12" cy="17" r="0.8" fill="currentColor"/></svg>
+        </div>
+        <div class="dash-card-body">
+            <h3>要確認</h3>
+            <p class="dash-card-value">{% if card_needs_review == "-" %}{{ card_needs_review }}{% elif demo_mode %}{{ card_needs_review }}件{% else %}{{ card_needs_review }}{% endif %}</p>
+        </div>
+    </article>
+    <article class="dash-card">
+        <div class="dash-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </div>
+        <div class="dash-card-body">
+            <h3>最終更新</h3>
+            <p class="dash-card-value dash-card-value-sm">{{ card_last_updated }}</p>
+        </div>
+    </article>
+</section>
+
+<section class="workspace-section workspace-ranking dashboard-primary" id="ranking" data-ranking-scroll-root="1">
+    <div class="workspace-section-header">
+        <span class="workspace-step" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4a2 2 0 0 0 2 4h1"/><path d="M17 6h3a2 2 0 0 1-2 4h-1"/></svg>
+        </span>
+        <div>
+            <h2>ランキング</h2>
+            <p class="workspace-section-lead">確認すべき候補と利益結果を表示します。</p>
+        </div>
+    </div>
+
+    {% if batch and not demo_mode %}
+    <div class="ranking-toolbar">
+        <form action="/acquisition-workspace/{{ batch.workspace_batch_id }}/select-all-eligible" method="post">
+            <button type="submit" class="btn btn-secondary">対象をすべて選択</button>
+        </form>
+        <form action="/acquisition-workspace/{{ batch.workspace_batch_id }}/deselect-all" method="post">
+            <button type="submit" class="btn btn-secondary">選択解除</button>
+        </form>
+        <form action="/acquisition-workspace/{{ batch.workspace_batch_id }}/run-profit" method="post" class="profit-run-form" data-operational-profit-form>
+            <label class="field-label">コスト設定
+                <select name="cost_profile" id="profit-cost-profile">
+                    <option value="standard">標準</option>
+                    <option value="conservative">保守的</option>
+                    <option value="custom">カスタム</option>
+                </select>
+            </label>
+            <label class="checkbox-label"><input type="checkbox" name="use_cache" id="profit-use-cache" value="on" checked> Yahooキャッシュを使用</label>
+            <button type="submit" class="btn btn-primary btn-profit" id="btn-profit-once" data-profit-once>利益分析</button>
+            <button type="button" class="btn btn-secondary btn-profit-continuous" id="btn-profit-continuous" data-profit-continuous data-batch-id="{{ batch.workspace_batch_id }}">連続分析</button>
+        </form>
+    </div>
+    <div class="continuous-profit-panel" id="continuous-profit-panel" data-continuous-profit-panel data-batch-id="{{ batch.workspace_batch_id }}" hidden>
+        <p class="continuous-profit-title" data-continuous-title>連続分析中...</p>
+        <p class="continuous-profit-progress" data-continuous-progress></p>
+        <p class="continuous-profit-remaining" data-continuous-remaining></p>
+        <p class="continuous-profit-detail" data-continuous-detail></p>
+        <div class="continuous-profit-actions">
+            <button type="button" class="btn btn-secondary" id="btn-profit-stop" data-profit-stop hidden>停止</button>
+            <button type="button" class="btn btn-primary" id="btn-profit-resume" data-profit-resume hidden>再開</button>
+        </div>
+    </div>
+    <div class="ranking-ops-filters" data-ranking-ops-filters>
+        <label class="field-label">Purchase Budget
+            <select data-budget-filter>
+                <option value="unlimited">Unlimited</option>
+                <option value="50000">≤ ¥50,000</option>
+                <option value="100000">≤ ¥100,000</option>
+                <option value="150000">≤ ¥150,000</option>
+                <option value="300000">≤ ¥300,000</option>
+                <option value="500000">≤ ¥500,000</option>
+                <option value="1000000">≤ ¥1,000,000</option>
+            </select>
+        </label>
+        <label class="field-label">Brand
+            <select data-brand-filter>
+                <option value="all">All Brands</option>
+                {% for brand in brand_options %}
+                <option value="{{ brand }}">{{ brand }}</option>
+                {% endfor %}
+            </select>
+        </label>
+    </div>
+    {% endif %}
+
+    {% if has_candidates %}
+    {{ workflow_filter_bar(workflow_filters, active_workflow_filter) }}
+    <p class="workflow-filter-empty meta" data-workflow-filter-empty hidden>該当するステータスの候補はありません。</p>
+    <p class="workflow-filter-empty meta" data-ops-filter-empty hidden>No analyzed opportunities.</p>
+    <div class="table-wrap ranking-table-wrap">
+        <table class="ranking-table" data-workflow-ranking-table data-ops-ranking-table>
+            <thead>
+                <tr>
+                    <th class="col-title sticky-col sticky-col-title">商品名</th>
+                    <th class="col-brand">ブランド</th>
+                    <th class="col-num col-purchase">仕入価格</th>
+                    <th class="col-num col-selling">販売予想価格</th>
+                    <th class="col-num col-profit">純利益</th>
+                    <th class="col-num col-margin">利益率</th>
+                    <th class="col-confidence">販売価格信頼度</th>
+                    <th class="col-risk">総合リスク</th>
+                    <th class="col-cta">商品を見る</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                {% set rank = ranking_by_id.get(row.candidate_id) %}
+                {% set price_cell = price_cells.get(row.candidate_id, {'purchase': '-', 'selling': '-', 'selling_label': '販売予想', 'selling_note': '', 'selling_quality': '', 'selling_confidence': '-', 'freshness_label': '-', 'new_market_risk': 'NONE', 'overall_risk': '-', 'latest_sold_date': '-'}) %}
+                {% set title_cell = title_cells.get(row.candidate_id, {'brand': row.brand, 'product': row.title}) %}
+                {% set workflow = workflow_by_id.get(row.candidate_id, {'status': 'unchecked', 'label': '未確認', 'css_class': 'status-unchecked', 'notes': ''}) %}
+                <tr data-candidate-id="{{ row.candidate_id }}" data-workflow-status="{{ workflow.status }}" data-brand="{{ row.brand }}" data-purchase-jpy="{{ row.purchase_price_jpy }}" data-source-name="{{ row.source_name }}" data-currency="{{ row.currency }}" data-purchase-url="{{ row.purchase_url }}">
+                    <td class="col-title sticky-col sticky-col-title">
+                        <div class="title-product">{{ title_cell.product }}</div>
+                    </td>
+                    <td class="col-brand">{{ title_cell.brand or row.brand or '-' }}</td>
+                    <td class="col-num col-purchase price-buy-value">{{ price_cell.purchase }}</td>
+                    <td class="col-num col-selling price-sell-value">
+                        <div>{{ price_cell.selling }}</div>
+                        {% if price_cell.selling == '算出不可' and price_cell.selling_note %}
+                        <div class="selling-unpublished-reason">{{ price_cell.selling_note }}</div>
+                        {% endif %}
+                    </td>
+                    <td class="col-num col-profit profit">{% if rank and rank.net_profit is not none %}{% if demo_mode %}¥{{ '{:,.0f}'.format(rank.net_profit) }}{% else %}{{ rank.net_profit }}{% endif %}{% elif row.last_net_profit is not none %}{{ row.last_net_profit }}{% elif row.last_gross_profit is not none %}{{ row.last_gross_profit }}{% else %}-{% endif %}</td>
+                    <td class="col-num col-margin">{% if rank and rank.roi is not none %}{{ rank.roi }}%{% else %}-{% endif %}</td>
+                    <td class="col-confidence">{{ price_cell.selling_confidence or price_cell.selling_quality or '-' }}</td>
+                    <td class="col-risk">{% if price_cell.overall_risk and price_cell.overall_risk != '-' %}{{ price_cell.overall_risk }}{% else %}-{% endif %}</td>
+                    <td class="col-cta">
+                        <a class="btn btn-view" href="/acquisition-workspace/candidate/{{ row.candidate_id }}?batch_id={{ batch.workspace_batch_id }}{% if demo_mode %}&amp;demo=1{% endif %}" data-save-ranking-scroll="1">商品を見る</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <details class="workspace-details ranking-details">
+        <summary>候補の詳細情報</summary>
+        <div class="table-wrap">
+            <table class="detail-candidates-table">
+                <thead>
+                    <tr>
+                        <th>順位</th><th>ステータス</th><th>分析状態</th><th>総合評価</th><th>選択</th><th>評価</th><th>信頼度</th><th>実行区分</th>
+                        <th>商品名</th><th>仕入先</th><th>価格</th><th>JPY</th><th>純利益</th><th>ROI</th>
+                        <th>販売実績</th><th>販売データ日付</th><th>新品価格詳細</th><th>AI</th><th>AI分析</th><th>商品ページ</th><th>ブランド</th><th>サブタイプ</th>
+                        <th>対象</th><th>検索/比較件数</th><th>データ取得情報</th><th>注意事項</th><th>重複</th><th>利益判定</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in rows %}
+                    {% set rank = ranking_by_id.get(row.candidate_id) %}
+                    {% set astatus = (analysis_status_by_id or {}).get(row.candidate_id, {'label': '未分析', 'reason': ''}) %}
+                    {% set price_cell = price_cells.get(row.candidate_id, {'purchase': '-', 'selling': '-', 'selling_label': '販売予想', 'selling_note': '', 'selling_quality': '', 'selling_confidence': '-', 'freshness_label': '-', 'new_market_risk': 'NONE', 'overall_risk': '-', 'latest_sold_date': '-'}) %}
+                    {% set badge = analysis_badges.get(row.candidate_id, '○') %}
+                    {% set workflow = workflow_by_id.get(row.candidate_id, {'status': 'unchecked', 'label': '未確認', 'css_class': 'status-unchecked', 'notes': ''}) %}
+                    {% set analysis_text = rank.analysis_summary if rank else (source_listing_url_warning(row) or 'まだ順位付けされていません。有効な商品URLを確認してから利益計算を実行してください。') %}
+                    <tr>
+                        <td>{% if rank %}{{ rank.rank }}{% else %}-{% endif %}</td>
+                        <td>{{ workflow.label }}</td>
+                        <td>
+                            {{ astatus.label }}
+                            {% if astatus.reason %}<br>理由: {{ astatus.reason }}{% endif %}
+                        </td>
+                        <td>{% if rank %}{{ rank.overall_score }}{% else %}-{% endif %}</td>
+                        <td>{% if row.selected_for_profit_check %}選択済{% else %}未選択{% endif %}</td>
+                        <td>{{ row.quality_grade }}</td>
+                        <td>{% if rank %}{{ rank.confidence_level }}{% else %}{{ row.data_truth_summary.confidence_level }}{% endif %}</td>
+                        <td>{{ row.discovery_metadata.runtime_mode }}</td>
+                        <td>{{ row.title }}</td>
+                        <td>{{ row.source_name }}</td>
+                        <td>{{ row.purchase_price }} {{ row.currency }}</td>
+                        <td>{{ row.purchase_price_jpy }}{% if fx_batch_snapshot %}<div class="note" style="font-size:11px;color:#6b645c">バッチ為替で換算</div>{% endif %}</td>
+                        <td>{% if rank and rank.net_profit is not none %}{{ rank.net_profit }}{% elif row.last_net_profit is not none %}{{ row.last_net_profit }}{% elif row.last_gross_profit is not none %}{{ row.last_gross_profit }}{% else %}-{% endif %}</td>
+                        <td>{% if rank and rank.roi is not none %}{{ rank.roi }}%{% else %}-{% endif %}</td>
+                        <td>{% if rank %}{{ rank.sales_count }}{% else %}{{ row.discovery_metadata.comparable_count }}{% endif %}</td>
+                        <td>{{ price_cell.freshness_label or price_cell.latest_sold_date or '-' }}</td>
+                        <td>{% if price_cell.new_market_risk == 'CRITICAL' %}DANGER{% elif price_cell.new_market_risk == 'WARNING' %}WARNING{% elif price_cell.new_market_risk == 'NORMAL' %}問題なし{% else %}-{% endif %}</td>
+                        <td><span class="analysis-badge" aria-hidden="true">{{ badge }}</span></td>
+                        <td>{{ analysis_text }}</td>
+                        <td>
+                            <a href="/acquisition-workspace/candidate/{{ row.candidate_id }}?batch_id={{ batch.workspace_batch_id }}{% if demo_mode %}&amp;demo=1{% endif %}">商品を見る</a>
+                        </td>
+                        <td>{{ row.brand }}</td>
+                        <td>{{ row.detected_subtype }}</td>
+                        <td>{% if row.eligible_for_profit_check %}対象{% else %}対象外{% endif %}</td>
+                        <td>検索 {{ row.discovery_metadata.query_count }} / 候補 {{ row.discovery_metadata.candidate_count }} / 比較 {{ row.discovery_metadata.comparable_count }}</td>
+                        <td>
+                            商品情報: {{ row.data_truth_summary.price_source }}<br>
+                            比較データ: {{ row.data_truth_summary.comparable_source or '-' }}<br>
+                            送料: {{ row.data_truth_summary.shipping_source or '-' }}<br>
+                            手数料: {{ row.data_truth_summary.fee_source or '-' }}<br>
+                            理由: {{ row.data_truth_summary.reasons | join(', ') }}
+                        </td>
+                        <td>
+                            {{ row.validation_warnings | join(', ') }}
+                            {% if rank and rank.ranking_warnings %}<br>{{ rank.ranking_warnings | join(', ') }}{% endif %}
+                            {% if not rank and source_listing_url_warning(row) %}<br>{{ source_listing_url_warning(row) }}{% endif %}
+                        </td>
+                        <td>{{ row.duplicate_of or '-' }}</td>
+                        <td>{{ row.last_decision or '-' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% if batch and workspace_summary %}
+        <dl class="metric-list workspace-batch-meta">
+            <div><dt>ワークスペースバッチID</dt><dd>{{ batch.workspace_batch_id }}</dd></div>
+            <div><dt>合計</dt><dd>{{ batch.total_rows }}</dd></div>
+            <div><dt>評価 A/B/C/除外</dt><dd>{{ grade_a }}/{{ grade_b }}/{{ grade_c }}/{{ batch.rejected_count }}</dd></div>
+            <div><dt>重複</dt><dd>{{ batch.duplicate_count }}</dd></div>
+            <div><dt>利益計算対象</dt><dd>{{ eligible_count }}</dd></div>
+            <div><dt>選択済み</dt><dd>{{ batch.selected_count }}</dd></div>
+            <div><dt>取得元</dt><dd>{{ batch.source_type }}</dd></div>
+            <div><dt>最終更新</dt><dd>{{ workspace_summary.last_updated }}</dd></div>
+            <div><dt>データ取得方法</dt><dd>{{ workspace_summary.discovery_runtime }}</dd></div>
+            <div><dt>取得モード</dt><dd>{{ workspace_summary.acquisition_mode }}</dd></div>
+            <div><dt>平均利益</dt><dd>{{ workspace_summary.average_profit }}</dd></div>
+            <div><dt>平均信頼度</dt><dd>{{ workspace_summary.average_confidence }}</dd></div>
+        </dl>
+        {% endif %}
+    </details>
+    {% else %}
+    <div class="empty-panel">
+        <p>No analyzed opportunities.</p>
+        <p>分析済みの候補はありません。候補を追加して「利益分析」を実行してください。</p>
+    </div>
+    {% endif %}
+</section>
+
+<section class="workspace-section workspace-intake" id="intake">
+    <div class="workspace-section-header">
+        <span class="workspace-step" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+        </span>
+        <div>
+            <h2>商品を追加</h2>
+            <p class="workspace-section-lead">海外仕入先を検索するか、商品URL / CSVで取り込んでください。</p>
+        </div>
+    </div>
+
+    <div class="intake-grid action-card-grid">
+        {% set fp_run = marketplace_runs.get('Fashionphile', {'status': '未実行', 'last_run': '-'}) %}
+        <form action="/acquisition-workspace/import/fashionphile-live" method="post" enctype="multipart/form-data" class="intake-panel action-card" data-live-acquisition-form data-marketplace="Fashionphile">
+            <h3>Fashionphile検索</h3>
+            <p class="action-card-desc">キーワード検索で候補を取込。ブロック時は下の「商品URL追加」またはCSVを使ってください。</p>
+            <input name="keyword" placeholder="例: Chanel wallet" required>
+            <label class="field-label">開発用HTML（任意・非推奨）<input type="file" name="html_file" accept=".html,.htm"></label>
+            <input type="hidden" name="limit" value="20">
+            <p class="meta intake-run-status">状態: {{ fp_run.status }} / 最終実行: {{ fp_run.last_run }}</p>
+            <button type="submit" class="btn btn-primary">Fashionphile検索</button>
+        </form>
+
+        {% set rebag_run = marketplace_runs.get('Rebag', {'status': '未実行', 'last_run': '-'}) %}
+        <form action="/acquisition-workspace/import/rebag-live" method="post" enctype="multipart/form-data" class="intake-panel action-card" data-live-acquisition-form data-marketplace="Rebag">
+            <h3>Rebag検索</h3>
+            <p class="action-card-desc">キーワード検索で候補を取込。ブロック時は「商品URL追加」またはCSVを使ってください。</p>
+            <input name="keyword" placeholder="例: Louis Vuitton Neverfull" required>
+            <label class="field-label">開発用HTML（任意・非推奨）<input type="file" name="html_file" accept=".html,.htm"></label>
+            <input type="hidden" name="limit" value="20">
+            <p class="meta intake-run-status">状態: {{ rebag_run.status }} / 最終実行: {{ rebag_run.last_run }}</p>
+            <button type="submit" class="btn btn-primary">Rebag検索</button>
+        </form>
+
+        {% set trr_run = marketplace_runs.get('The RealReal', {'status': '未実行', 'last_run': '-'}) %}
+        <form action="/acquisition-workspace/import/realreal-live" method="post" enctype="multipart/form-data" class="intake-panel action-card" data-live-acquisition-form data-marketplace="The RealReal">
+            <h3>The RealReal検索</h3>
+            <p class="action-card-desc">キーワード検索で候補を取込。ブロック時は「商品URL追加」またはCSVを使ってください。</p>
+            <input name="keyword" placeholder="例: Chanel Classic Flap" required>
+            <label class="field-label">開発用HTML（任意・非推奨）<input type="file" name="html_file" accept=".html,.htm"></label>
+            <input type="hidden" name="limit" value="20">
+            <p class="meta intake-run-status">状態: {{ trr_run.status }} / 最終実行: {{ trr_run.last_run }}</p>
+            <button type="submit" class="btn btn-primary">The RealReal検索</button>
+        </form>
+
+        {% set vc_run = marketplace_runs.get('Vestiaire Collective', {'status': '未実行', 'last_run': '-'}) %}
+        <form action="/acquisition-workspace/import/vestiaire-live" method="post" enctype="multipart/form-data" class="intake-panel action-card" data-live-acquisition-form data-marketplace="Vestiaire Collective">
+            <h3>Vestiaire Collective検索</h3>
+            <p class="action-card-desc">キーワード検索で候補を取込。ブロック時は「商品URL追加」またはCSVを使ってください。</p>
+            <input name="keyword" placeholder="例: Hermes Constance" required>
+            <label class="field-label">開発用HTML（任意・非推奨）<input type="file" name="html_file" accept=".html,.htm"></label>
+            <input type="hidden" name="limit" value="20">
+            <p class="meta intake-run-status">状態: {{ vc_run.status }} / 最終実行: {{ vc_run.last_run }}</p>
+            <button type="submit" class="btn btn-primary">Vestiaire検索</button>
+        </form>
+
+        <form action="/acquisition-workspace/import/csv" method="post" enctype="multipart/form-data" class="intake-panel action-card">
+            <h3>CSV取込</h3>
+            <p class="action-card-desc">CSVファイルから商品を一括取込</p>
+            <label class="field-label">CSVファイル<input type="file" name="csv_file" accept=".csv"></label>
+            <button type="submit" class="btn btn-primary">CSV取込</button>
+        </form>
+
+        <form action="/acquisition-workspace/import/public-url" method="post" class="intake-panel action-card">
+            <h3>商品URL追加</h3>
+            <p class="action-card-desc">商品ページURLを入力して商品を追加</p>
+            <input name="url" placeholder="商品URL">
+            <input name="title" placeholder="表示タイトル">
+            <div class="field-row">
+                <input name="price" placeholder="表示価格">
+                <input name="currency" value="USD" placeholder="通貨">
+            </div>
+            <button type="submit" class="btn btn-secondary">商品URL追加</button>
+        </form>
+
+        <form action="/acquisition-workspace/import/existing" method="post" class="intake-panel action-card">
+            <h3>保存済み候補をコピー</h3>
+            <p class="action-card-desc">過去の候補をコピー</p>
+            <button type="submit" class="btn btn-secondary">保存済み候補をコピー</button>
+        </form>
+
+        <form action="/acquisition-workspace/import/html" method="post" enctype="multipart/form-data" class="intake-panel action-card">
+            <h3>HTMLファイル取込</h3>
+            <p class="action-card-desc">保存済みHTMLから商品を追加</p>
+            <label class="field-label">HTMLファイル<input type="file" name="html_files" accept=".html,.htm" multiple></label>
+            <button type="submit" class="btn btn-secondary">HTMLファイル取込</button>
+        </form>
+    </div>
+
+    <details class="workspace-details intake-manual-details" id="manual-input-details" data-persist-key="workspace-manual-input">
+        <summary>手動入力</summary>
+        <form action="/acquisition-workspace/import/manual" method="post" class="intake-panel intake-manual" id="manual-intake-form">
+            <p class="meta">必要な行だけ入力してください。空欄の行は無視されます。</p>
+            <div id="manual-rows" data-next-index="3" data-max-index="10">
+                {% for i in range(3) %}
+                <div class="manual-row">
+                    <input name="title_{{ i }}" placeholder="商品名">
+                    <input name="price_{{ i }}" placeholder="価格">
+                    <input name="currency_{{ i }}" placeholder="通貨" value="USD">
+                    <input name="url_{{ i }}" placeholder="URL">
+                    <input name="source_{{ i }}" placeholder="仕入先" value="Manual">
+                </div>
+                {% endfor %}
+            </div>
+            <div class="manual-actions">
+                <button type="button" class="btn btn-secondary" id="add-manual-row">＋入力欄を追加</button>
+                <button type="submit" class="btn btn-secondary">手動取込</button>
+            </div>
+        </form>
+    </details>
+</section>
+
+<details class="workspace-section workspace-advanced workspace-advanced-details" id="advanced" data-persist-key="workspace-advanced">
+    <summary class="workspace-advanced-summary">
+        <span class="workspace-step" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9c.1.7.7 1.2 1.5 1.2H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+        </span>
+        <span>
+            <span class="workspace-advanced-title">詳細設定</span>
+            <span class="workspace-section-lead">カスタムコストと取込履歴</span>
+        </span>
+    </summary>
+
+    <div class="workspace-advanced-body">
+        <details class="workspace-details">
+            <summary>カスタムコスト設定</summary>
+            <form action="/acquisition-workspace/cost-profile/save" method="post" class="form-grid cost-form">
+                <input name="exchange_rate" placeholder="為替レート（任意）">
+                <input name="international_shipping_jpy" placeholder="国際送料（JPY）">
+                <input name="forwarding_fee_jpy" placeholder="転送手数料（JPY）">
+                <input name="import_duty_rate" placeholder="関税率（0-1）">
+                <input name="import_tax_rate" placeholder="消費税等（0-1）">
+                <input name="payment_fee_rate" placeholder="決済手数料率（0-1）">
+                <input name="domestic_platform_fee_rate" placeholder="国内販売手数料率（0-1）">
+                <input name="domestic_shipping_jpy" placeholder="国内送料（JPY）">
+                <input name="inspection_or_repair_reserve_jpy" placeholder="検品・修理予備（JPY）">
+                <input name="miscellaneous_cost_jpy" placeholder="その他費用（JPY）">
+                <button type="submit" class="btn btn-secondary">カスタムコストを保存</button>
+            </form>
+            {% if cost_profile %}
+            <p class="meta">設定名: {{ cost_profile.profile_name }} | 純利益計算完了: {{ cost_profile.net_complete }} | 未設定: {{ cost_profile.missing_fields | join(', ') }}</p>
+            {% endif %}
+        </details>
+
+        <details class="workspace-details">
+            <summary>取込履歴</summary>
+            <ul class="history-list">
+                {% for item in history %}
+                <li><a href="/acquisition-workspace?batch_id={{ item.workspace_batch_id }}">{{ item.workspace_batch_id }}</a> — {{ item.name }} ({{ item.total_rows }})</li>
+                {% else %}
+                <li class="meta">履歴はまだありません。</li>
+                {% endfor %}
+            </ul>
+        </details>
+    </div>
+</details>
+{% endblock %}

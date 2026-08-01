@@ -20,19 +20,19 @@ def test_showcase_formatter_formats_top_ranking() -> None:
 
     rendered = ShowcaseFormatter().format_top_opportunities(opportunities)
 
-    assert "AI PROFIT DISCOVERY SHOWCASE" in rendered
-    assert "TOP OPPORTUNITIES" in rendered
-    assert "Product:" in rendered
+    assert "AI利益発見ショーケース" in rendered
+    assert "注目候補" in rendered
+    assert "商品名:" in rendered
     assert "Chanel Wallet" in rendered
-    assert "Brand:" in rendered
+    assert "ブランド:" in rendered
     assert "Chanel" in rendered
-    assert "Supplier:" in rendered
+    assert "仕入先:" in rendered
     assert "Fashionphile" in rendered
     assert "35,000 JPY" in rendered
     assert "42%" in rendered
     assert "92/100" in rendered
     assert "94.5" in rendered
-    assert "Decision:" in rendered
+    assert "判定:" in rendered
     assert "BUY" in rendered
 
 
@@ -52,13 +52,33 @@ def test_showcase_formatter_formats_summary_counts() -> None:
 
     rendered = ShowcaseFormatter().format_summary(result)
 
-    assert "Summary:" in rendered
-    assert "Total Candidates:" in rendered
+    assert "概要:" in rendered
+    assert "候補合計:" in rendered
     assert "3" in rendered
     assert "BUY:" in rendered
     assert "1" in rendered
     assert "HOLD:" in rendered
     assert "PASS:" in rendered
+
+
+def test_showcase_formatter_formats_structured_data_source_summary() -> None:
+    rendered = ShowcaseFormatter().format_data_source_summary(
+        {
+            "商品情報": "Manual",
+            "比較データ": "Yahoo LIVE",
+            "送料": "Estimated",
+            "手数料": "Configured",
+            "信頼度": "HIGH",
+            "Missing": "",
+        }
+    )
+    assert "データ取得情報" in rendered
+    assert "商品情報:" in rendered
+    assert "Manual" in rendered
+    assert "比較データ:" in rendered
+    assert "Yahoo LIVE" in rendered
+    assert "信頼度:" in rendered
+    assert "Missing:" not in rendered
 
 
 def _opportunity(

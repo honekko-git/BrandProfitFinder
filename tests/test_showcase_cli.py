@@ -37,9 +37,9 @@ def test_showcase_cli_output_includes_dashboard_view() -> None:
     )
 
     rendered = output.getvalue()
-    assert "AI PROFIT DISCOVERY SHOWCASE" in rendered
-    assert "TOP OPPORTUNITIES" in rendered
-    assert "Summary:" in rendered
-    assert "Total Candidates:" in rendered
-    assert "Demand Opportunity Ranking" in rendered
-    assert "Discovery Summary" in rendered
+    assert "AI利益発見ショーケース" in rendered
+    assert "注目候補" in rendered
+    assert "概要:" in rendered
+    assert "候補合計:" in rendered
+    assert "需要込み候補順位" in rendered
+    assert "検索概要" in rendered

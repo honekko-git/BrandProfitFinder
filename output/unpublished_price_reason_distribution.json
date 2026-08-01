@@ -1,0 +1,69 @@
+{
+  "audit_timestamp": "2026-08-01T10:49:42.827607+00:00",
+  "workspace_batch_id": "ws-20260731183118-b673ef",
+  "total_unpublished": 410,
+  "primary_reasons": [
+    {
+      "reason": "NO_SOLD_DATA",
+      "count": 204,
+      "percent": 49.8
+    },
+    {
+      "reason": "MISSING_REQUIRED_TRACE_DATA",
+      "count": 132,
+      "percent": 32.2
+    },
+    {
+      "reason": "COMPARABLE_DATA_SUSPECT",
+      "count": 51,
+      "percent": 12.4
+    },
+    {
+      "reason": "IDENTITY_EXTRACTION_INCOMPLETE",
+      "count": 16,
+      "percent": 3.9
+    },
+    {
+      "reason": "INSUFFICIENT_ACCEPTED_COUNT",
+      "count": 4,
+      "percent": 1.0
+    },
+    {
+      "reason": "LOW_MATCH_SCORE",
+      "count": 2,
+      "percent": 0.5
+    },
+    {
+      "reason": "NO_ACCEPTED_COMPARABLES",
+      "count": 1,
+      "percent": 0.2
+    }
+  ],
+  "quality_distribution": {
+    "INSUFFICIENT": 227,
+    "SUSPECT": 51,
+    "missing": 132
+  },
+  "identity_completeness": {
+    "collection_present": 194,
+    "family_present": 194,
+    "material_present": 410,
+    "category_only_identity": 202,
+    "reference_present": 28
+  },
+  "marketplace_evidence": {
+    "neither": 352,
+    "yahoo_only": 58
+  },
+  "recoverability": {
+    "C_RECOVERABLE_BY_QUERY": 204,
+    "B_RECOVERABLE_BY_IDENTITY": 16,
+    "A_CORRECT_REJECTION": 184,
+    "D_RECOVERABLE_BY_MARKET_LIQUIDITY": 2,
+    "F_POSSIBLE_THRESHOLD_TUNING": 4
+  },
+  "analysis_version_distribution": {
+    "v2": 278,
+    "missing": 132
+  }
+}

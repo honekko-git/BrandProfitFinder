@@ -1,0 +1,409 @@
+{
+  "audit_timestamp": "2026-08-01T10:49:42.827607+00:00",
+  "workspace_batch_id": "ws-20260731183118-b673ef",
+  "count": 0,
+  "items": [],
+  "correct_rejection_samples": [
+    {
+      "candidate_id": "ac-b8cd31819368",
+      "title": "Prada Snakeskin Cahier Pochette Naturale",
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-4b2e37db641a",
+      "title": "Prada Raffia Metal Triangle Logo Woven Flatform 35mm Slide Sandals 36 Naturale",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-b3dd2a4623bc",
+      "title": "Prada Terry Cloth Logo Embroidered Womens Bucket Hat S Black White",
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-2e5a023fabae",
+      "title": "Prada Suede Metal Triangle Logo Womens Double Buckle 20mm Slide Sandals 36.5 Ecru",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-ed1e25b1b320",
+      "title": "Prada Spazzolato Calzature Donna Triangle Logo 50mm Derby Loafers 38.5 White 38.5 White",
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-770390a8464f",
+      "title": "Prada Nappa Pleated Hobo Grafite Mordore",
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-3c4960593e00",
+      "title": "Prada Vitello Move Triangle Bi-Fold Wallet Cobalto",
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-9551072e4b4a",
+      "title": "Prada Sequin Mesh Small Tote Bag Lilium",
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-03d042d945ab",
+      "title": "Prada Cinghiale Antik Top Handle Bag Rubino",
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-aaa5770fa0af",
+      "title": "Prada Canapa Cinghiale Cuir Tote Grezzo Crema",
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-90d255f326a9",
+      "title": "Prada Spazzolato Rois Nylon Metal Triangle Logo Monolith Pouch Pocket 55mm Boots 38.5 Black",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-e7cb55e2b556",
+      "title": "Prada Spazzolato Padded Triangle Logo Pointed Toe Slingback Flats 40 Papaya",
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-f5f7adf6756f",
+      "title": "Prada Spazzolato Metal Triangle Logo 50mm Loafers 36.5 Black",
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-e1e9df30e845",
+      "title": "Prada Grace Lux Triangle Logo Embossed Triangle Wristlet Pouch Black",
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-3a5d35eeeaf6",
+      "title": "Prada Crocodile Mens Oxford 9 Black",
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-c2f1af88d407",
+      "title": "Prada Spazzolato Diapason Mens Lace Up Derby Loafers 9 Black",
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-ce0d69165199",
+      "title": "Prada Spazzolato Square Toe Lace Up Derby 9 Black",
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-f0e3439587e6",
+      "title": "Prada Tessuto Nylon Kisslock Frame Shoulder Bag Black",
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-9d54476dc2e1",
+      "title": "Prada Tessuto Nylon Belt Bag Black",
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-711d7cc55ad0",
+      "title": "Prada Calfskin Metal Triangle Logo Womens Sneakers 40 Neutral",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-297d0addc8f7",
+      "title": "Prada Nylon Small Flat Messenger Bag Baltico",
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-0ecc665f16eb",
+      "title": "Prada Nappa Shopping Satchel Black",
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-7de05b3c5476",
+      "title": "Prada Saffiano Cuir Medium Double Bag Fuoco Black",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-85351b0d1ecc",
+      "title": "Prada Spazzolato Rois Metal Triangle Logo Monolith 55mm Loafers 36.5 Black",
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-4294238cc298",
+      "title": "Verify Prada Cont 1785547175-2",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-d1745d07f276",
+      "title": "Verify Prada Cont 1785547175-3",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-0ea2cc6b2e1d",
+      "title": "Verify Prada Cont 1785547175-4",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-944f6f932e5b",
+      "title": "Verify Prada Cont 1785547175-5",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-db275b69a141",
+      "title": "Verify Prada Cont 1785547175-6",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-39b1f9ba4809",
+      "title": "Verify Prada Cont 1785547175-7",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-00ec17110437",
+      "title": "Verify Prada Cont 1785547175-8",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-c4772fee6201",
+      "title": "Verify Prada Cont 1785547175-9",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-46920d144715",
+      "title": "Verify Prada Cont 1785547175-10",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-a19aee56538c",
+      "title": "Verify Prada Cont 1785547175-11",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-a8a71c5fc75a",
+      "title": "Verify Prada Cont 1785547175-12",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-9b573552128c",
+      "title": "Verify Prada Cont 1785547175-13",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-9d348df9086d",
+      "title": "Verify Prada Cont 1785547175-14",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-7d9b221d1c8e",
+      "title": "Verify Prada Cont 1785547175-15",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-c4fa25208c6e",
+      "title": "Verify Prada Cont 1785547175-16",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-d4a2023ab16b",
+      "title": "Verify Prada Cont 1785547175-17",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-a6dcb5327d8c",
+      "title": "Verify Prada Cont 1785547175-18",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-dfd61734f3fb",
+      "title": "Verify Prada Cont 1785547175-19",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-8b1b46c32bf4",
+      "title": "Verify Prada Cont 1785547175-20",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-9a65546e03f7",
+      "title": "Verify Prada Cont 1785547175-21",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-3e40f07c1412",
+      "title": "Verify Prada Cont 1785547175-22",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-3b28dd01132a",
+      "title": "Verify Prada Cont 1785547175-23",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-f92321d04fb3",
+      "title": "Verify Prada Cont 1785547175-24",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-37cd78d137d3",
+      "title": "Verify Prada Cont 1785547175-25",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-c67bbbb8c38d",
+      "title": "Verify Prada Cont 1785547175-26",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    },
+    {
+      "candidate_id": "ac-0e07d1742eec",
+      "title": "Verify Prada Cont 1785547175-27",
+      "primary_reason": "MISSING_REQUIRED_TRACE_DATA",
+      "same_model": 0,
+      "sold": 0,
+      "category_matches": 0
+    }
+  ],
+  "note": "Suspected false negatives are evidence-based hypotheses — not automatic defects."
+}

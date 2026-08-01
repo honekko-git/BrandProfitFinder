@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-08-01T01:54:00+00:00",
+  "batch_id": "ws-20260731183118-b673ef",
+  "verification_mode": "live_server_continuous_profit",
+  "ui": {
+    "has_continuous_button": true,
+    "has_manual_button": true,
+    "has_panel": true
+  },
+  "before": {
+    "total_candidates": 281,
+    "eligible": 153,
+    "analyzed": 135,
+    "remaining": 18
+  },
+  "progression": {
+    "start_status": "running",
+    "double_start_status": "busy",
+    "detail_messages_observed": [
+      "Yahoo!オークション検索中...",
+      "Mercari検索中...",
+      "利益計算中..."
+    ],
+    "final_analyzed": 153,
+    "final_remaining": 0,
+    "final_status": "complete"
+  },
+  "notes": [
+    "Existing Fashionphile workspace had 18 unanalyzed eligible candidates remaining.",
+    "Continuous analysis completed them in one existing 20-cap tranche (135 → 153).",
+    "Uvicorn auto-reload was disabled by default so in-process continuous workers survive file changes; set BPF_WEB_RELOAD=1 for development reload.",
+    "Full multi-tranche live Yahoo progression (20→40→60...) is covered by deterministic tests with the real run_batch_profit orchestration path."
+  ],
+  "failures": []
+}

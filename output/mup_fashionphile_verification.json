@@ -1,0 +1,12 @@
+{
+  "mode": "live",
+  "keyword": "Chanel wallet",
+  "limit": 5,
+  "count": 0,
+  "ok_count": 0,
+  "fail_count": 0,
+  "failures": [],
+  "samples": [],
+  "status": "BLOCKED",
+  "detail": "CAPTCHA_REQUIRED: https://www.fashionphile.com/shop?search=Chanel+wallet"
+}

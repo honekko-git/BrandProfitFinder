@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% from "macros/sourcing_components.html" import decision_summary, market_information, profit_breakdown, ai_analysis_panel, warning_list, action_panel, back_nav, extension_slot, management_card %}
+
+{% block page_title %}{{ detail.brand }} {{ detail.product_name }}{% endblock %}
+
+{% block content %}
+{% set workflow = workflow|default({'status': 'unchecked', 'label': '未確認', 'css_class': 'status-unchecked', 'notes': ''}) %}
+{% set status_choices = status_choices|default([]) %}
+<section class="sourcing-detail-page" id="sourcing-detail" data-workspace="sourcing-detail" data-candidate-id="{{ detail.candidate_id }}">
+    {{ back_nav(detail.back_url, detail.demo_mode, "top") }}
+
+    {# 1. Product Header — identity first #}
+    <header class="sourcing-detail-header">
+        <p class="sourcing-detail-brand">{{ detail.brand }}</p>
+        <h1>{{ detail.product_name }}</h1>
+        <p class="sourcing-detail-meta">
+            <span class="sourcing-meta-item">{{ detail.marketplace }}</span>
+            <span class="sourcing-meta-sep" aria-hidden="true">·</span>
+            <span class="sourcing-meta-item">{{ detail.category }}</span>
+        </p>
+    </header>
+
+    {# 2. Decision Summary #}
+    {{ decision_summary(
+        detail.overall_score,
+        detail.purchase_price,
+        detail.selling_price,
+        detail.net_profit,
+        detail.roi
+    ) }}
+
+    <div class="sourcing-detail-stack">
+        {# 3. Market Information (replaces duplicate Price section) #}
+        {{ market_information(detail.sales_info) }}
+
+        {# 4. Profit Breakdown #}
+        {{ profit_breakdown(detail.breakdown, true) }}
+
+        {# 5. AI Analysis #}
+        {{ ai_analysis_panel(
+            detail.analysis_positives,
+            detail.analysis_cautions,
+            detail.analysis_summary,
+            detail.analysis
+        ) }}
+
+        {# 6. Warnings #}
+        {{ warning_list(detail.warnings) }}
+
+        {# 7. Action Panel #}
+        {{ action_panel(detail.purchase_url) }}
+
+        {{ extension_slot("watchlist") }}
+        {{ extension_slot("price-history") }}
+        {{ extension_slot("inventory") }}
+
+        {# 8. Management — user actions after the decision #}
+        {{ management_card(detail.candidate_id, workflow, status_choices) }}
+    </div>
+
+    {# 9. Navigation #}
+    {{ back_nav(detail.back_url, false, "bottom") }}
+</section>
+{% endblock %}

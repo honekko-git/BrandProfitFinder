@@ -1,0 +1,1757 @@
+{
+  "audit_timestamp": "2026-08-01T10:49:42.827607+00:00",
+  "workspace_batch_id": "ws-20260731183118-b673ef",
+  "order": "purchase_price_jpy desc, same_model, accepted, best_score",
+  "items": [
+    {
+      "title": "Prada Bullhide Large Explore Shoulder Bag Coffee",
+      "brand": "Prada",
+      "purchase_price": 3495.0,
+      "purchase_price_jpy": 559200.0,
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": false,
+      "recoverability": "A_CORRECT_REJECTION"
+    },
+    {
+      "title": "Prada Glossy Calfskin Triangle Medium Bonnie Shoulder Bag Dark Brown",
+      "brand": "Prada",
+      "purchase_price": 3095.0,
+      "purchase_price_jpy": 495200.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Calfskin Triangle",
+        "collection": "Calfskin Triangle"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Vitello Shine Shoulder Bag Black",
+      "brand": "Prada",
+      "purchase_price": 2895.0,
+      "purchase_price_jpy": 463200.0,
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": false,
+      "recoverability": "A_CORRECT_REJECTION"
+    },
+    {
+      "title": "Prada Satin Crystal Mini Galleria Double Zip Tote Alabastro",
+      "brand": "Prada",
+      "purchase_price": 2750.0,
+      "purchase_price_jpy": 440000.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Galleria",
+        "collection": "Galleria"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Scamosciato Triangle Small Bonnie Shoulder Bag Salvia",
+      "brand": "Prada",
+      "purchase_price": 2395.0,
+      "purchase_price_jpy": 383200.0,
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": false,
+      "recoverability": "A_CORRECT_REJECTION"
+    },
+    {
+      "title": "Prada Nubuck Small Arque Shoulder Bag Aviation Blue",
+      "brand": "Prada",
+      "purchase_price": 2395.0,
+      "purchase_price_jpy": 383200.0,
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": false,
+      "recoverability": "A_CORRECT_REJECTION"
+    },
+    {
+      "title": "Prada Soft Grain Calfskin Large Demi-Lune Shoulder Bag White",
+      "brand": "Prada",
+      "purchase_price": 2395.0,
+      "purchase_price_jpy": 383200.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Calfskin Large",
+        "collection": "Calfskin Large"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Glossy Calfskin Medium Sound Shoulder Bag Peltro",
+      "brand": "Prada",
+      "purchase_price": 2295.0,
+      "purchase_price_jpy": 367200.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Calfskin Medium",
+        "collection": "Calfskin Medium"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Satin Crystal Cleo Adjustable Strap Shoulder Bag Black",
+      "brand": "Prada",
+      "purchase_price": 2295.0,
+      "purchase_price_jpy": 367200.0,
+      "primary_reason": "NO_ACCEPTED_COMPARABLES",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": false,
+      "recoverability": "A_CORRECT_REJECTION"
+    },
+    {
+      "title": "Prada Re-Nylon Triangle Medium Explore Tote Black",
+      "brand": "Prada",
+      "purchase_price": 2295.0,
+      "purchase_price_jpy": 367200.0,
+      "primary_reason": "IDENTITY_EXTRACTION_INCOMPLETE",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "B_RECOVERABLE_BY_IDENTITY"
+    },
+    {
+      "title": "Prada Saffiano Lux Re-Edition 2005 Shoulder Bag Black",
+      "brand": "Prada",
+      "purchase_price": 2175.0,
+      "purchase_price_jpy": 348000.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Saffiano Lux",
+        "collection": "Saffiano Lux"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Vintage Nappa Shoulder Bag Moro",
+      "brand": "Prada",
+      "purchase_price": 2095.0,
+      "purchase_price_jpy": 335200.0,
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": false,
+      "recoverability": "A_CORRECT_REJECTION"
+    },
+    {
+      "title": "Prada Yarn Raffia Effect Calfskin Crochet Embroidered Logo Tote Tan Black",
+      "brand": "Prada",
+      "purchase_price": 2050.0,
+      "purchase_price_jpy": 328000.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Calfskin Crochet",
+        "collection": "Calfskin Crochet"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Vitello Daino Soft Large Zippered Messenger Hobo Black",
+      "brand": "Prada",
+      "purchase_price": 1995.0,
+      "purchase_price_jpy": 319200.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Vitello Daino",
+        "collection": "Vitello Daino"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Re-Nylon Saffiano Medium Re-Edition 1978 Two Handle Bag White Biege",
+      "brand": "Prada",
+      "purchase_price": 1995.0,
+      "purchase_price_jpy": 319200.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Re-Edition",
+        "collection": "Re-Edition"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Soft Lux Calfskin Mini Bonnie Black",
+      "brand": "Prada",
+      "purchase_price": 1995.0,
+      "purchase_price_jpy": 319200.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Calfskin Mini",
+        "collection": "Calfskin Mini"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Saffiano Travel Medium Brique Crossbody Bag Black",
+      "brand": "Prada",
+      "purchase_price": 1850.0,
+      "purchase_price_jpy": 296000.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Saffiano Travel",
+        "collection": "Saffiano Travel"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Nylon Saffiano Medium Backpack Deserto",
+      "brand": "Prada",
+      "purchase_price": 1750.0,
+      "purchase_price_jpy": 280000.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Saffiano Medium",
+        "collection": "Saffiano Medium"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Spazzolato Femme Flap Shoulder Bag Black",
+      "brand": "Prada",
+      "purchase_price": 1695.0,
+      "purchase_price_jpy": 271200.0,
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": false,
+      "recoverability": "A_CORRECT_REJECTION"
+    },
+    {
+      "title": "Prada Saffiano Lux Logo Embossed Medium Shoulder Tote Handbag White",
+      "brand": "Prada",
+      "purchase_price": 1550.0,
+      "purchase_price_jpy": 248000.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Saffiano Lux",
+        "collection": "Saffiano Lux"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Tessuto Nylon Saffiano Medium Backpack Black",
+      "brand": "Prada",
+      "purchase_price": 1550.0,
+      "purchase_price_jpy": 248000.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Saffiano Medium",
+        "collection": "Saffiano Medium"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Yarn Raffia Effect Crochet Logo Embroidered Small Tote Bag Naturale",
+      "brand": "Prada",
+      "purchase_price": 1525.0,
+      "purchase_price_jpy": 244000.0,
+      "primary_reason": "IDENTITY_EXTRACTION_INCOMPLETE",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "B_RECOVERABLE_BY_IDENTITY"
+    },
+    {
+      "title": "Prada Spazzolato Cleo Flap Shoulder Bag Black",
+      "brand": "Prada",
+      "purchase_price": 1495.0,
+      "purchase_price_jpy": 239200.0,
+      "primary_reason": "INSUFFICIENT_ACCEPTED_COUNT",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "美品 付属品有 PRADA プラダ cleo クレオ ショルダーバッグ ワンショルダー アクセサリーポーチ ハンド 三角ロゴ ナッパレザー 革 白タグ",
+        "score": 76,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": 73000.0,
+        "url": "https://auctions.yahoo.co.jp/jp/auction/s1207164994"
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 76,
+      "accepted_count": 1,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need sold>=3 (have 1)",
+      "recovery_appears_possible": true,
+      "recoverability": "F_POSSIBLE_THRESHOLD_TUNING"
+    },
+    {
+      "title": "Prada Tessuto Nylon Nappa Zip Pocket Chain Tote Black",
+      "brand": "Prada",
+      "purchase_price": 1495.0,
+      "purchase_price_jpy": 239200.0,
+      "primary_reason": "IDENTITY_EXTRACTION_INCOMPLETE",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "B_RECOVERABLE_BY_IDENTITY"
+    },
+    {
+      "title": "Prada Nylon Re-Edition 2005 Shoulder Bag Black Black",
+      "brand": "Prada",
+      "purchase_price": 1495.0,
+      "purchase_price_jpy": 239200.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Re-Edition",
+        "collection": "Re-Edition"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Nylon New Vela Studded Messenger Bag Black",
+      "brand": "Prada",
+      "purchase_price": 1495.0,
+      "purchase_price_jpy": 239200.0,
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": false,
+      "recoverability": "A_CORRECT_REJECTION"
+    },
+    {
+      "title": "Prada Yarn Raffia Effect Crochet Logo Embroidered Tote Bag Naturale",
+      "brand": "Prada",
+      "purchase_price": 1475.0,
+      "purchase_price_jpy": 236000.0,
+      "primary_reason": "IDENTITY_EXTRACTION_INCOMPLETE",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "B_RECOVERABLE_BY_IDENTITY"
+    },
+    {
+      "title": "Prada Saffiano Cuir Calfskin Small Monochrome Top Handle Tote Black",
+      "brand": "Prada",
+      "purchase_price": 1450.0,
+      "purchase_price_jpy": 232000.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Saffiano Cuir",
+        "collection": "Saffiano Cuir"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Saffiano Medium Galleria Double Zip Tote Black",
+      "brand": "Prada",
+      "purchase_price": 1450.0,
+      "purchase_price_jpy": 232000.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Galleria",
+        "collection": "Galleria"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Canvas Shopping Logo Tote Naturale",
+      "brand": "Prada",
+      "purchase_price": 1395.0,
+      "purchase_price_jpy": 223200.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Canvas Shopping",
+        "collection": "Canvas Shopping"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Saffiano Soft Calfskin Metal Triangle Logo Envelope Chain Shoulder Bag Cammeo",
+      "brand": "Prada",
+      "purchase_price": 1395.0,
+      "purchase_price_jpy": 223200.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Saffiano Soft",
+        "collection": "Saffiano Soft"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Saffiano Chain Shoulder Bag Black",
+      "brand": "Prada",
+      "purchase_price": 1350.0,
+      "purchase_price_jpy": 216000.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Saffiano Chain",
+        "collection": "Saffiano Chain"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Satin Crystal Metal Triangle Logo Chain Crossbody Handbag Cristal",
+      "brand": "Prada",
+      "purchase_price": 1350.0,
+      "purchase_price_jpy": 216000.0,
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": false,
+      "recoverability": "A_CORRECT_REJECTION"
+    },
+    {
+      "title": "Prada Spazzolato Cleo Flap Shoulder Bag White",
+      "brand": "Prada",
+      "purchase_price": 1325.0,
+      "purchase_price_jpy": 212000.0,
+      "primary_reason": "INSUFFICIENT_ACCEPTED_COUNT",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "美品 付属品有 PRADA プラダ cleo クレオ ショルダーバッグ ワンショルダー アクセサリーポーチ ハンド 三角ロゴ ナッパレザー 革 白タグ",
+        "score": 91,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": 73000.0,
+        "url": "https://auctions.yahoo.co.jp/jp/auction/s1207164994"
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 91,
+      "accepted_count": 1,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need sold>=3 (have 1)",
+      "recovery_appears_possible": true,
+      "recoverability": "F_POSSIBLE_THRESHOLD_TUNING"
+    },
+    {
+      "title": "Prada Saffiano Lux Medium Galleria Double Zip Tote Black",
+      "brand": "Prada",
+      "purchase_price": 1325.0,
+      "purchase_price_jpy": 212000.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Saffiano Lux",
+        "collection": "Saffiano Lux"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Nylon Re-Edition 2005 Shoulder Bag Black",
+      "brand": "Prada",
+      "purchase_price": 1295.0,
+      "purchase_price_jpy": 207200.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Re-Edition",
+        "collection": "Re-Edition"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Saffiano Flap Shoulder Bag Bluette",
+      "brand": "Prada",
+      "purchase_price": 1295.0,
+      "purchase_price_jpy": 207200.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Saffiano Flap",
+        "collection": "Saffiano Flap"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Saffiano Soft Calfskin Tote Baltico",
+      "brand": "Prada",
+      "purchase_price": 1250.0,
+      "purchase_price_jpy": 200000.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Saffiano Soft",
+        "collection": "Saffiano Soft"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Satin Crystal Metal Triangle Logo Card Holder With Strap Cristal",
+      "brand": "Prada",
+      "purchase_price": 1250.0,
+      "purchase_price_jpy": 200000.0,
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": false,
+      "recoverability": "A_CORRECT_REJECTION"
+    },
+    {
+      "title": "Prada Spazzolato Maxi Cleo Adjustable Strap Shoulder Bag White",
+      "brand": "Prada",
+      "purchase_price": 1195.0,
+      "purchase_price_jpy": 191200.0,
+      "primary_reason": "INSUFFICIENT_ACCEPTED_COUNT",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "美品 付属品有 PRADA プラダ cleo クレオ ショルダーバッグ ワンショルダー アクセサリーポーチ ハンド 三角ロゴ ナッパレザー 革 白タグ",
+        "score": 86,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": 73000.0,
+        "url": "https://auctions.yahoo.co.jp/jp/auction/s1207164994"
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 86,
+      "accepted_count": 1,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need sold>=3 (have 1)",
+      "recovery_appears_possible": true,
+      "recoverability": "F_POSSIBLE_THRESHOLD_TUNING"
+    },
+    {
+      "title": "Prada Saffiano Lux Double Zip Crossbody Bag Black",
+      "brand": "Prada",
+      "purchase_price": 1195.0,
+      "purchase_price_jpy": 191200.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Saffiano Lux",
+        "collection": "Saffiano Lux"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Yarn Raffia Effect Crochet Small Logo Tote Black",
+      "brand": "Prada",
+      "purchase_price": 1150.0,
+      "purchase_price_jpy": 184000.0,
+      "primary_reason": "IDENTITY_EXTRACTION_INCOMPLETE",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "B_RECOVERABLE_BY_IDENTITY"
+    },
+    {
+      "title": "Prada Saffiano Flap Crossbody Black",
+      "brand": "Prada",
+      "purchase_price": 1150.0,
+      "purchase_price_jpy": 184000.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Saffiano Flap",
+        "collection": "Saffiano Flap"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Jacquard Logo Mini Bucket Crossbody Bag Corda Talco",
+      "brand": "Prada",
+      "purchase_price": 1150.0,
+      "purchase_price_jpy": 184000.0,
+      "primary_reason": "COMPARABLE_DATA_SUSPECT",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": false,
+      "recoverability": "A_CORRECT_REJECTION"
+    },
+    {
+      "title": "Prada Re-Nylon Saffiano Mini Re-Edition 2005 Bag Alabastro",
+      "brand": "Prada",
+      "purchase_price": 1125.0,
+      "purchase_price_jpy": 180000.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Re-Edition",
+        "collection": "Re-Edition"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Paillettes Sequin Logo Cleo Adjustable Strap Shoulder Bag Black White",
+      "brand": "Prada",
+      "purchase_price": 1095.0,
+      "purchase_price_jpy": 175200.0,
+      "primary_reason": "INSUFFICIENT_ACCEPTED_COUNT",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "美品 付属品有 PRADA プラダ cleo クレオ ショルダーバッグ ワンショルダー アクセサリーポーチ ハンド 三角ロゴ ナッパレザー 革 白タグ",
+        "score": 81,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": 73000.0,
+        "url": "https://auctions.yahoo.co.jp/jp/auction/s1207164994"
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 81,
+      "accepted_count": 1,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need sold>=3 (have 1)",
+      "recovery_appears_possible": true,
+      "recoverability": "F_POSSIBLE_THRESHOLD_TUNING"
+    },
+    {
+      "title": "Prada Yarn Raffia Effect Crochet Embroidered Logo Tote Messenger Bag Celeste",
+      "brand": "Prada",
+      "purchase_price": 1095.0,
+      "purchase_price_jpy": 175200.0,
+      "primary_reason": "IDENTITY_EXTRACTION_INCOMPLETE",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "B_RECOVERABLE_BY_IDENTITY"
+    },
+    {
+      "title": "Prada Nylon Re-Edition 2005 Shoulder Bag Alabastro",
+      "brand": "Prada",
+      "purchase_price": 1095.0,
+      "purchase_price_jpy": 175200.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Re-Edition",
+        "collection": "Re-Edition"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Re-Nylon Saffiano Re-Edition 2000 Double Zip Crossbody Bag Cammeo",
+      "brand": "Prada",
+      "purchase_price": 1095.0,
+      "purchase_price_jpy": 175200.0,
+      "primary_reason": "NO_SOLD_DATA",
+      "reference_family": {
+        "references": [],
+        "family": "Re-Edition",
+        "collection": "Re-Edition"
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "C_RECOVERABLE_BY_QUERY"
+    },
+    {
+      "title": "Prada Yarn Raffia Effect Crochet Logo Embroidered Small Tote Bag Black",
+      "brand": "Prada",
+      "purchase_price": 1095.0,
+      "purchase_price_jpy": 175200.0,
+      "primary_reason": "IDENTITY_EXTRACTION_INCOMPLETE",
+      "reference_family": {
+        "references": [],
+        "family": "",
+        "collection": ""
+      },
+      "best_yahoo_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Yahoo Auctions",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_mercari_comparable": {
+        "title": "",
+        "score": 0,
+        "marketplace": "Mercari",
+        "sold_date": "",
+        "price_jpy": null,
+        "url": ""
+      },
+      "best_match_score": 0,
+      "accepted_count": 0,
+      "required_count": 3,
+      "required_same_model": 1,
+      "nearest_missing_condition": "need same_model>=1 (have 0)",
+      "recovery_appears_possible": true,
+      "recoverability": "B_RECOVERABLE_BY_IDENTITY"
+    }
+  ]
+}

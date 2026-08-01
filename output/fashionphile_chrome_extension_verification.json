@@ -1,0 +1,95 @@
+{
+  "phase": "V1-RC-FP1",
+  "executive_result": "PARTIAL",
+  "verification_mode": "real_chrome_dom_snapshot_plus_local_import",
+  "notes": [
+    "Live Fashionphile PRADA and Louis Vuitton search pages rendered in Chrome; selectors found 120 product cards each.",
+    "Extraction + workspace import verified against real Chrome DOM snapshot (>=20 products).",
+    "Unpacked Chrome extension UI click (popup 一括取込) was not executed in this automated session.",
+    "Automatic profit analysis is capped at 10 eligible products per capture; remainder stays in workspace."
+  ],
+  "source_page_url": "https://www.fashionphile.com/search?q=PRADA",
+  "dom_snapshot_path": "output/fashionphile_prada_browser_dom.html",
+  "capture_timestamp": "2026-07-31T18:05:16.470493+00:00",
+  "visible_product_card_count": 120,
+  "extracted_product_count": 120,
+  "skipped_count": 0,
+  "skipped_reasons": {},
+  "products_with_valid_individual_urls": 120,
+  "import_attempted_count": 40,
+  "imported_count": 40,
+  "eligible_count": 37,
+  "analyzed_count": 0,
+  "ranked_count": 0,
+  "batch_id": "ws-20260731180517-2c1896",
+  "workspace_url": "/acquisition-workspace?batch_id=ws-20260731180517-2c1896",
+  "yahoo_searches_executed": 0,
+  "mercari_searches_executed": 0,
+  "extension_errors": [],
+  "backend_errors": [],
+  "all_imported_urls_fashionphile_products": true,
+  "all_imported_source_fashionphile": true,
+  "sample_products": [
+    {
+      "title": "Prada Vitello Daino Pocket Hobo Bag Blue",
+      "price": "695",
+      "url": "https://www.fashionphile.com/products/prada-vitello-daino-pocket-hobo-bag-blue-1942888"
+    },
+    {
+      "title": "Prada Saffiano Metal Tri-Fold Wallet Black",
+      "price": "250",
+      "url": "https://www.fashionphile.com/products/prada-saffiano-metal-tri-fold-wallet-black-1945331"
+    },
+    {
+      "title": "Prada Acetate Sunglasses SPR 16R Black Tortoise Grey",
+      "price": "195",
+      "url": "https://www.fashionphile.com/products/prada-acetate-sunglasses-spr-16r-black-tortoise-grey-1945256"
+    },
+    {
+      "title": "Prada Acetate Symbole Sunglasses SPR 19Z Black",
+      "price": "295",
+      "url": "https://www.fashionphile.com/products/prada-acetate-symbole-sunglasses-spr-19z-black-1943509"
+    },
+    {
+      "title": "Prada Saffiano Lux Logo Embossed Medium Shoulder Tote Handbag White",
+      "price": "1550",
+      "url": "https://www.fashionphile.com/products/prada-saffiano-lux-logo-embossed-medium-shoulder-tote-handbag-white-1936354"
+    }
+  ],
+  "duration_seconds": 1.563,
+  "four_source_roles": {
+    "Fashionphile": "overseas_acquisition",
+    "Rebag": "overseas_acquisition",
+    "The RealReal": "overseas_acquisition",
+    "Vestiaire Collective": "overseas_acquisition",
+    "Yahoo Auctions": "domestic_comparable_only",
+    "Mercari": "domestic_comparable_only"
+  },
+  "constraints_honored": {
+    "no_purchase_automation": true,
+    "no_captcha_bypass": true,
+    "no_ai_matching": true,
+    "extension_reads_rendered_dom_only": true
+  },
+  "live_chrome_dom_verification": {
+    "method": "cursor_ide_browser_cdp_on_rendered_fashionphile_search",
+    "prada": {
+      "source_page_url": "https://www.fashionphile.com/search?q=PRADA",
+      "visible_product_card_count": 120,
+      "extracted_product_count": 120,
+      "has_hcaptcha": false,
+      "sample_titles": [
+        "Prada Patent Triangle Ballerina Flats 37 Black",
+        "Prada Tessuto Nylon Mini Re-Edition 2000 Bag Black"
+      ],
+      "verified_at": "2026-07-31T18:07:47.078763+00:00"
+    },
+    "louis_vuitton": {
+      "source_page_url": "https://www.fashionphile.com/search?q=Louis%20Vuitton",
+      "visible_product_card_count": 120,
+      "verified_at": "2026-07-31T18:07:47.078777+00:00"
+    },
+    "extension_popup_click": "not_executed_in_this_session_requires_unpacked_chrome_extension",
+    "yahoo_mercari_live_profit": "not_executed_in_verification_report_run_profit_false"
+  }
+}

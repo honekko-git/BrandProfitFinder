@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+
+{% block page_title %}{{ title }} — 利益検証{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>利益検証</h1>
+    <p class="subtitle">
+        {% if is_controlled_live_mode %}
+        CONTROLLED LIVE 利益結果
+        {% elif is_real_mode %}
+        REAL 利益検証
+        {% else %}
+        利益検証結果
+        {% endif %}
+    </p>
+    {% if message %}
+    <p class="notice">{{ message }}</p>
+    {% endif %}
+    {% if blocking_reason %}
+    <p class="error-list">ブロック: {{ blocking_reason }}</p>
+    {% endif %}
+    {% if errors %}
+    <ul class="error-list">
+        {% for error in errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</section>
+
+<section class="search-panel">
+    <h2>検証検索</h2>
+    <form action="/validation" method="post" class="search-form">
+        <label>
+            モード
+            <select name="verification_mode">
+                <option value="STANDARD" {% if form.verification_mode == "STANDARD" %}selected{% endif %}>標準検証</option>
+                <option value="REAL" {% if form.verification_mode == "REAL" %}selected{% endif %}>REAL利益検証</option>
+            </select>
+        </label>
+        <label>
+            ブランド
+            <select name="brand">
+                {% if form.verification_mode == "REAL" %}
+                    {% for brand in real_route_brands %}
+                    <option value="{{ brand }}" {% if form.brand == brand %}selected{% endif %}>{{ brand }}</option>
+                    {% endfor %}
+                {% else %}
+                    {% for brand in tier_s_brands %}
+                    <option value="{{ brand }}" {% if form.brand == brand %}selected{% endif %}>{{ brand }}</option>
+                    {% endfor %}
+                {% endif %}
+            </select>
+        </label>
+        <label>
+            カテゴリ
+            <select name="category">
+                {% if form.verification_mode == "REAL" %}
+                <option value="Wallet" {% if form.category == "Wallet" %}selected{% endif %}>Wallet</option>
+                {% else %}
+                    {% for category in priority_categories %}
+                    <option value="{{ category }}" {% if form.category == category %}selected{% endif %}>{{ category }}</option>
+                    {% endfor %}
+                {% endif %}
+            </select>
+        </label>
+        {% if form.verification_mode != "REAL" %}
+        <input type="hidden" name="market_mode" value="{{ form.market_mode }}">
+        {% else %}
+        <label>
+            商品名
+            <input type="text" name="manual_purchase_title" value="{{ form.manual_purchase_title }}" placeholder="Chanel Classic Wallet Black Caviar">
+        </label>
+        <label>
+            Fashionphile URL（手動入力）
+            <input type="url" name="manual_purchase_url" value="{{ form.manual_purchase_url }}">
+        </label>
+        <label>
+            仕入価格
+            <input type="text" name="manual_purchase_price" value="{{ form.manual_purchase_price }}">
+        </label>
+        <label>
+            通貨
+            <input type="text" name="manual_purchase_currency" value="{{ form.manual_purchase_currency }}">
+        </label>
+        <input type="hidden" name="market_mode" value="REAL">
+        {% endif %}
+        <button type="submit">利益検証を実行</button>
+    </form>
+
+    <form action="/validation/controlled-live" method="post" class="search-form">
+        <input type="hidden" name="brand" value="Chanel">
+        <input type="hidden" name="category" value="Wallet">
+        <button type="submit">Controlled Live確認を実行</button>
+    </form>
+</section>
+
+<section class="results-panel" id="validation-results">
+    <div class="results-header">
+        <h2>
+            {% if is_controlled_live_mode %}
+            Controlled Live 利益結果
+            {% elif is_real_mode %}
+            REAL利益検証
+            {% else %}
+            検証順位
+            {% endif %}
+        </h2>
+        <span class="result-count">{{ result_count }} 件</span>
+    </div>
+
+    {% if is_controlled_live_mode and controlled_live_rows %}
+    <div class="card-grid">
+        {% for row in controlled_live_rows %}
+        <article class="rank-card">
+            <div class="rank-badge">#{{ row.rank }}</div>
+            <h3>{{ row.product }}</h3>
+            <p class="meta">データ状態: {{ row.data_status }}</p>
+            <dl class="metric-list">
+                <div><dt>商品名</dt><dd>{{ row.product }}</dd></div>
+                <div><dt>Fashionphile URL</dt><dd>{% if row.fashionphile_url %}<a href="{{ row.fashionphile_url }}" target="_blank" rel="noopener noreferrer">開く</a>{% else %}N/A{% endif %}</dd></div>
+                <div><dt>実仕入価格</dt><dd>{{ row.purchase_price }}</dd></div>
+                <div><dt>通貨</dt><dd>{{ row.purchase_currency }}</dd></div>
+                <div><dt>JPY仕入見積</dt><dd>{{ row.purchase_price_jpy }}</dd></div>
+                <div><dt>為替レート</dt><dd>{{ row.exchange_rate }}</dd></div>
+                <div><dt>Yahoo検索語</dt><dd>{{ row.yahoo_search_terms }}</dd></div>
+                <div><dt>Yahoo売切サンプル</dt><dd>{{ row.yahoo_sold_samples }}（一致 {{ row.yahoo_matched_samples }}）</dd></div>
+                <div><dt>マッチングスコア</dt><dd>{{ "%.0f"|format(row.matching_score) }}</dd></div>
+                <div><dt>マッチング信頼性</dt><dd>{{ row.matching_reliability }}</dd></div>
+                <div><dt>販売価格中央値</dt><dd>{{ row.median_selling_price }}</dd></div>
+                <div><dt>コスト設定状態</dt><dd>{{ row.cost_configuration_status }}</dd></div>
+                <div><dt>推定送料</dt><dd>{{ row.estimated_shipping }}</dd></div>
+                <div><dt>推定輸入コスト</dt><dd>{{ row.estimated_import_cost }}</dd></div>
+                <div><dt>推定利益</dt><dd class="profit">{{ row.estimated_profit }}</dd></div>
+                <div><dt>利益率</dt><dd>{{ row.profit_margin }}</dd></div>
+                <div><dt>ROI</dt><dd>{{ row.roi }}</dd></div>
+                <div><dt>判定</dt><dd class="decision decision-{{ row.decision|lower|replace(' ', '-') }}">{{ row.decision }}</dd></div>
+                <div><dt>取得状態</dt><dd>{{ row.acquisition_status }}</dd></div>
+                <div><dt>検証完了</dt><dd>{% if row.verification_complete %}はい{% else %}いいえ{% endif %}</dd></div>
+                <div><dt>取得日時</dt><dd>{{ row.retrieved_at }}</dd></div>
+                {% if row.blocking_reason %}
+                <div><dt>ブロック理由</dt><dd>{{ row.blocking_reason }}</dd></div>
+                {% endif %}
+            </dl>
+        </article>
+        {% endfor %}
+    </div>
+    {% elif is_real_mode and real_rows %}
+    <div class="card-grid">
+        {% for row in real_rows %}
+        <article class="rank-card">
+            <div class="rank-badge">#{{ row.rank }}</div>
+            <h3>{{ row.product }}</h3>
+            <p class="meta">データ状態: {{ row.data_status }}</p>
+            <dl class="metric-list">
+                <div><dt>仕入先</dt><dd>{{ row.purchase_source }} ({{ row.actual_purchase_source }})</dd></div>
+                <div><dt>仕入URL</dt><dd>{% if row.purchase_url %}<a href="{{ row.purchase_url }}" target="_blank" rel="noopener noreferrer">開く</a>{% else %}N/A{% endif %}</dd></div>
+                <div><dt>仕入価格</dt><dd>{{ row.purchase_price }}</dd></div>
+                <div><dt>通貨</dt><dd>{{ row.purchase_currency }}</dd></div>
+                <div><dt>JPY仕入見積</dt><dd>{{ row.purchase_price_jpy }}</dd></div>
+                <div><dt>為替レート</dt><dd>{{ row.exchange_rate }}</dd></div>
+                <div><dt>推定送料</dt><dd>{{ row.estimated_shipping }}</dd></div>
+                <div><dt>推定輸入コスト</dt><dd>{{ row.estimated_import_cost }}</dd></div>
+                <div><dt>国内ソース</dt><dd>{{ row.domestic_source }} ({{ row.actual_domestic_source }})</dd></div>
+                <div><dt>国内売切サンプル</dt><dd>{{ row.domestic_sold_samples }}</dd></div>
+                <div><dt>国内平均</dt><dd>{{ row.domestic_average }}</dd></div>
+                <div><dt>国内中央値</dt><dd>{{ row.domestic_median }}</dd></div>
+                {% if row.yahoo_search_queries %}
+                <div><dt>仕入サブタイプ</dt><dd>{{ row.purchase_subtype or "N/A" }}</dd></div>
+                <div><dt>仕入素材</dt><dd>{{ row.purchase_material or "N/A" }}</dd></div>
+                <div><dt>Yahoo検索クエリ</dt><dd>{{ row.yahoo_search_queries }}</dd></div>
+                <div><dt>Yahoo生サンプル</dt><dd>{{ row.yahoo_live_sample_count }}</dd></div>
+                <div><dt>採用比較</dt><dd>{{ row.yahoo_matched_sample_count }} — {{ row.yahoo_accepted_comparables or row.yahoo_matched_sample_titles or "N/A" }}</dd></div>
+                <div><dt>除外サンプル</dt><dd>{{ row.yahoo_rejected_sample_count }} — {{ row.yahoo_rejected_samples or "N/A" }}</dd></div>
+                <div><dt>売切価格（JPY）</dt><dd>{{ row.yahoo_sold_prices_display or "N/A" }}</dd></div>
+                <div><dt>比較中央値</dt><dd>{{ row.comparable_median or row.domestic_median }}</dd></div>
+                <div><dt>旧中央値</dt><dd>{{ row.legacy_median or "N/A" }}</dd></div>
+                <div><dt>信頼性</dt><dd>{{ row.matching_reliability or "N/A" }}（スコア {{ "%.0f"|format(row.matching_score) }}）</dd></div>
+                {% if row.comparable_data_warning %}
+                <div><dt>比較データ注意</dt><dd class="warning">{{ row.comparable_data_warning }}</dd></div>
+                {% endif %}
+                {% if row.yahoo_diagnostics %}
+                <div><dt>Yahoo診断</dt><dd><code>{{ row.yahoo_diagnostics }}</code></dd></div>
+                {% endif %}
+                {% endif %}
+                <div><dt>推定利益</dt><dd class="profit">{{ row.estimated_profit }}</dd></div>
+                <div><dt>利益率</dt><dd>{{ row.profit_margin }}</dd></div>
+                <div><dt>ROI</dt><dd>{{ row.roi }}</dd></div>
+                <div><dt>需要</dt><dd>{{ "%.0f"|format(row.demand_score) }}</dd></div>
+                <div><dt>回転</dt><dd>{{ "%.1f"|format(row.turnover_score) }}</dd></div>
+                <div><dt>判定</dt><dd class="decision decision-{{ row.decision|lower }}">{{ row.decision }}</dd></div>
+                <div><dt>要求モード</dt><dd>{{ row.requested_mode }}</dd></div>
+                <div><dt>フォールバック</dt><dd>{% if row.purchase_fallback or row.domestic_fallback %}はい{% else %}いいえ{% endif %}</dd></div>
+                <div><dt>取得日時</dt><dd>{{ row.retrieved_at }}</dd></div>
+            </dl>
+            {% if row.can_save %}
+            <form action="/validation/{{ row.product_id }}/save" method="post" class="save-form">
+                <button type="submit">BUY候補を保存</button>
+            </form>
+            {% endif %}
+        </article>
+        {% endfor %}
+    </div>
+    {% elif rows %}
+    <div class="card-grid">
+        {% for row in rows %}
+        <article class="rank-card">
+            <div class="rank-badge">#{{ row.rank }}</div>
+            <h3>{{ row.product }}</h3>
+            <dl class="metric-list">
+                <div><dt>仕入先</dt><dd>{{ row.purchase_source }}</dd></div>
+                <div><dt>仕入価格</dt><dd>{{ row.purchase_price }}</dd></div>
+                <div><dt>販売市場</dt><dd>{{ row.domestic_market }}</dd></div>
+                <div><dt>販売価格</dt><dd>{{ row.domestic_price }}</dd></div>
+                <div><dt>利益</dt><dd class="profit">{{ row.estimated_profit }}</dd></div>
+                <div><dt>利益率</dt><dd>{{ row.profit_margin }}</dd></div>
+                <div><dt>需要</dt><dd>{{ "%.0f"|format(row.demand_score) }}</dd></div>
+                <div><dt>回転</dt><dd>{{ "%.1f"|format(row.turnover_score) }}</dd></div>
+                <div><dt>判定</dt><dd class="decision decision-{{ row.decision|lower }}">{{ row.decision }}</dd></div>
+            </dl>
+            {% if row.can_save %}
+            <form action="/validation/{{ row.product_id }}/save" method="post" class="save-form">
+                <button type="submit">BUY候補を保存</button>
+            </form>
+            {% endif %}
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="empty-state">検証を実行すると、海外仕入価格と国内販売市場の比較が表示されます。</p>
+    {% endif %}
+</section>
+{% endblock %}

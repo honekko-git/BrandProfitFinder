@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block page_title %}{{ title }} — 取込一覧{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>取込一覧</h1>
+    <p class="subtitle">手動入力およびCSVから取り込んだ市場出品一覧です。</p>
+</section>
+
+<section class="results-panel">
+    {% if rows %}
+    <table class="saved-table">
+        <thead>
+            <tr>
+                <th>商品名</th>
+                <th>ブランド</th>
+                <th>市場</th>
+                <th>価格</th>
+                <th>状態</th>
+                <th>URL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row.product }}</td>
+                <td>{{ row.brand }}</td>
+                <td>{{ row.market_name }}</td>
+                <td>{{ row.price }}</td>
+                <td>{{ row.condition }}</td>
+                <td>
+                    {% if row.url %}
+                    <a href="{{ row.url }}" target="_blank" rel="noopener noreferrer">開く</a>
+                    {% else %}
+                    N/A
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="empty-state">取込済み商品はまだありません。データ取込から追加してください。</p>
+    {% endif %}
+</section>
+{% endblock %}

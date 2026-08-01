@@ -1,0 +1,22 @@
+{
+  "feature": "profit_analysis_versioning",
+  "profit_analysis_version": "v2",
+  "storage": "discovery_metadata.profit_analysis_version + operational_trace.profit.profit_analysis_version",
+  "db_schema_changed": false,
+  "profit_calculator_changed": false,
+  "ranking_formula_changed": false,
+  "selection_rule": "complete iff profit markers exist AND stored version == PROFIT_ANALYSIS_VERSION",
+  "ui_labels": {
+    "analyzed": "分析済み",
+    "needs_reanalysis": "再分析対象",
+    "reason": "分析ルール更新"
+  },
+  "tests": [
+    "tests/test_profit_analysis_versioning.py::test_old_version_is_selected_again",
+    "tests/test_profit_analysis_versioning.py::test_current_version_is_skipped",
+    "tests/test_profit_analysis_versioning.py::test_continuous_analysis_handles_outdated_candidates",
+    "tests/test_profit_analysis_versioning.py::test_profit_calculator_unchanged",
+    "tests/test_profit_analysis_versioning.py::test_ranking_formula_unchanged"
+  ],
+  "verify_command": "python -m pytest tests/test_profit_analysis_versioning.py -q --tb=short"
+}

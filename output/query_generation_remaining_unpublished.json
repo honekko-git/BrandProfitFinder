@@ -1,0 +1,1008 @@
+{
+  "audit_timestamp": "2026-08-01T11:09:32.916407+00:00",
+  "workspace_batch_id": "ws-20260731183118-b673ef",
+  "note": "Planned-query view; live publish counts require Playwright reanalysis.",
+  "fallback_or_no_query_count": 175,
+  "items": [
+    {
+      "candidate_id": "ac-4b2e37db641a",
+      "title": "Prada Raffia Metal Triangle Logo Woven Flatform 35mm Slide Sandals 36 Naturale",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ シューズ",
+        "Prada shoes"
+      ]
+    },
+    {
+      "candidate_id": "ac-b3dd2a4623bc",
+      "title": "Prada Terry Cloth Logo Embroidered Womens Bucket Hat S Black White",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ 黒",
+        "Prada bag black"
+      ]
+    },
+    {
+      "candidate_id": "ac-2e5a023fabae",
+      "title": "Prada Suede Metal Triangle Logo Womens Double Buckle 20mm Slide Sandals 36.5 Ecru",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ シューズ",
+        "Prada shoes"
+      ]
+    },
+    {
+      "candidate_id": "ac-ed1e25b1b320",
+      "title": "Prada Spazzolato Calzature Donna Triangle Logo 50mm Derby Loafers 38.5 White 38.5 White",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ 白",
+        "Prada bag white"
+      ]
+    },
+    {
+      "candidate_id": "ac-770390a8464f",
+      "title": "Prada Nappa Pleated Hobo Grafite Mordore",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-3c4960593e00",
+      "title": "Prada Vitello Move Triangle Bi-Fold Wallet Cobalto",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ 財布",
+        "Prada wallet"
+      ]
+    },
+    {
+      "candidate_id": "ac-4f7e839cb9c7",
+      "title": "Prada Satin Pumps 41 Red",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ 赤",
+        "Prada bag red"
+      ]
+    },
+    {
+      "candidate_id": "ac-03d042d945ab",
+      "title": "Prada Cinghiale Antik Top Handle Bag Rubino",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-90d255f326a9",
+      "title": "Prada Spazzolato Rois Nylon Metal Triangle Logo Monolith Pouch Pocket 55mm Boots 38.5 Black",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ シューズ 黒",
+        "Prada shoes black"
+      ]
+    },
+    {
+      "candidate_id": "ac-e7cb55e2b556",
+      "title": "Prada Spazzolato Padded Triangle Logo Pointed Toe Slingback Flats 40 Papaya",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-f5f7adf6756f",
+      "title": "Prada Spazzolato Metal Triangle Logo 50mm Loafers 36.5 Black",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ 黒",
+        "Prada bag black"
+      ]
+    },
+    {
+      "candidate_id": "ac-e1e9df30e845",
+      "title": "Prada Grace Lux Triangle Logo Embossed Triangle Wristlet Pouch Black",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ 黒",
+        "Prada bag black"
+      ]
+    },
+    {
+      "candidate_id": "ac-3a5d35eeeaf6",
+      "title": "Prada Crocodile Mens Oxford 9 Black",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ 黒",
+        "Prada bag black"
+      ]
+    },
+    {
+      "candidate_id": "ac-c2f1af88d407",
+      "title": "Prada Spazzolato Diapason Mens Lace Up Derby Loafers 9 Black",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ 黒",
+        "Prada bag black"
+      ]
+    },
+    {
+      "candidate_id": "ac-ce0d69165199",
+      "title": "Prada Spazzolato Square Toe Lace Up Derby 9 Black",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ 黒",
+        "Prada bag black"
+      ]
+    },
+    {
+      "candidate_id": "ac-f0e3439587e6",
+      "title": "Prada Tessuto Nylon Kisslock Frame Shoulder Bag Black",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ ショルダーバッグ 黒",
+        "Prada shoulder bag black"
+      ]
+    },
+    {
+      "candidate_id": "ac-9d54476dc2e1",
+      "title": "Prada Tessuto Nylon Belt Bag Black",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ 黒",
+        "Prada bag black"
+      ]
+    },
+    {
+      "candidate_id": "ac-297d0addc8f7",
+      "title": "Prada Nylon Small Flat Messenger Bag Baltico",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-0ecc665f16eb",
+      "title": "Prada Nappa Shopping Satchel Black",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ 黒",
+        "Prada bag black"
+      ]
+    },
+    {
+      "candidate_id": "ac-85351b0d1ecc",
+      "title": "Prada Spazzolato Rois Metal Triangle Logo Monolith 55mm Loafers 36.5 Black",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ 黒",
+        "Prada bag black"
+      ]
+    },
+    {
+      "candidate_id": "ac-95ba3a13564e",
+      "title": "Verify Prada Cont 1785547175-1",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-4294238cc298",
+      "title": "Verify Prada Cont 1785547175-2",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-d1745d07f276",
+      "title": "Verify Prada Cont 1785547175-3",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-0ea2cc6b2e1d",
+      "title": "Verify Prada Cont 1785547175-4",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-944f6f932e5b",
+      "title": "Verify Prada Cont 1785547175-5",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-db275b69a141",
+      "title": "Verify Prada Cont 1785547175-6",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-39b1f9ba4809",
+      "title": "Verify Prada Cont 1785547175-7",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-00ec17110437",
+      "title": "Verify Prada Cont 1785547175-8",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-c4772fee6201",
+      "title": "Verify Prada Cont 1785547175-9",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-46920d144715",
+      "title": "Verify Prada Cont 1785547175-10",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-a19aee56538c",
+      "title": "Verify Prada Cont 1785547175-11",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-a8a71c5fc75a",
+      "title": "Verify Prada Cont 1785547175-12",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-9b573552128c",
+      "title": "Verify Prada Cont 1785547175-13",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-9d348df9086d",
+      "title": "Verify Prada Cont 1785547175-14",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-7d9b221d1c8e",
+      "title": "Verify Prada Cont 1785547175-15",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-c4fa25208c6e",
+      "title": "Verify Prada Cont 1785547175-16",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-d4a2023ab16b",
+      "title": "Verify Prada Cont 1785547175-17",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-a6dcb5327d8c",
+      "title": "Verify Prada Cont 1785547175-18",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-dfd61734f3fb",
+      "title": "Verify Prada Cont 1785547175-19",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-8b1b46c32bf4",
+      "title": "Verify Prada Cont 1785547175-20",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-9a65546e03f7",
+      "title": "Verify Prada Cont 1785547175-21",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-3e40f07c1412",
+      "title": "Verify Prada Cont 1785547175-22",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-3b28dd01132a",
+      "title": "Verify Prada Cont 1785547175-23",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-f92321d04fb3",
+      "title": "Verify Prada Cont 1785547175-24",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-37cd78d137d3",
+      "title": "Verify Prada Cont 1785547175-25",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-c67bbbb8c38d",
+      "title": "Verify Prada Cont 1785547175-26",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-0e07d1742eec",
+      "title": "Verify Prada Cont 1785547175-27",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-f46a5dd16dbc",
+      "title": "Verify Prada Cont 1785547175-28",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-285b8fd2329d",
+      "title": "Verify Prada Cont 1785547175-29",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-df8b623389a8",
+      "title": "Verify Prada Cont 1785547175-30",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-0a2264006e75",
+      "title": "Verify Prada Cont 1785547175-31",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-9d837238fae2",
+      "title": "Verify Prada Cont 1785547175-32",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-a083008c6352",
+      "title": "Verify Prada Cont 1785547175-33",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-6c794ad7f192",
+      "title": "Verify Prada Cont 1785547175-34",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-5fb0546dd1bb",
+      "title": "Verify Prada Cont 1785547175-35",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-4323cf28c881",
+      "title": "Verify Prada Cont 1785547175-36",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-f83b65e884dd",
+      "title": "Verify Prada Cont 1785547175-37",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-e5ce780187c6",
+      "title": "Verify Prada Cont 1785547175-38",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-8a581dee1945",
+      "title": "Verify Prada Cont 1785547175-39",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-8029d106aa6b",
+      "title": "Verify Prada Cont 1785547175-40",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-d6353a82d117",
+      "title": "Verify Prada Cont 1785547175-41",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-cb2c15b04151",
+      "title": "Verify Prada Cont 1785547175-42",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-651cd6cd7386",
+      "title": "Verify Prada Cont 1785547175-43",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-10c0630b04d9",
+      "title": "Verify Prada Cont 1785547175-44",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-3c6dc44bee93",
+      "title": "Verify Prada Cont 1785547175-45",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-ed23686994c5",
+      "title": "Verify Prada Cont 1785547175-46",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-2f764d54bddc",
+      "title": "Verify Prada Cont 1785547175-47",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-f715d34a8365",
+      "title": "Verify Prada Cont 1785547175-48",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-e07d43d05e9a",
+      "title": "Verify Prada Cont 1785547175-49",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-855dd4238d04",
+      "title": "Verify Prada Cont 1785547175-50",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-7f8cd33dd13a",
+      "title": "Verify Prada Cont 1785547175-51",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-c48028849b51",
+      "title": "Verify Prada Cont 1785547175-52",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-50a05f66bf0b",
+      "title": "Verify Prada Cont 1785547175-53",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-8444687cddda",
+      "title": "Verify Prada Cont 1785547175-54",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-292ab2f1936b",
+      "title": "Verify Prada Cont 1785547175-55",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-7bd263ffeb40",
+      "title": "Verify Prada Cont 1785547175-56",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-8376310b3341",
+      "title": "Verify Prada Cont 1785547175-57",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-642c8b45666e",
+      "title": "Verify Prada Cont 1785547175-58",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-fa750b93a96c",
+      "title": "Verify Prada Cont 1785547175-59",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-876b6bc471c0",
+      "title": "Verify Prada Cont 1785547175-60",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-75b243a1bf99",
+      "title": "Verify Prada Cont 1785547175-61",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-e2917d742c02",
+      "title": "Verify Prada Cont 1785547175-62",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-1f71207dee19",
+      "title": "Verify Prada Cont 1785547175-63",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-d2ab4fe8fee0",
+      "title": "Verify Prada Cont 1785547175-64",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-3790c20c51c8",
+      "title": "Verify Prada Cont 1785547175-65",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-a041d5ae8336",
+      "title": "Verify Prada Cont 1785547175-66",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-e5c3b234b50d",
+      "title": "Verify Prada Cont 1785547175-67",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-c5d2e0773848",
+      "title": "Verify Prada Cont 1785547175-68",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-17c1cad6dbc8",
+      "title": "Verify Prada Cont 1785547175-69",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-3a0df78dbd3a",
+      "title": "Verify Prada Cont 1785547175-70",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-82a9e8cbd959",
+      "title": "Verify Prada Cont 1785547175-71",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-c2a66fdb3907",
+      "title": "Verify Prada Cont 1785547175-72",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-454f4cafc78b",
+      "title": "Verify Prada Cont 1785547175-73",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-2c7698b9771a",
+      "title": "Verify Prada Cont 1785547175-74",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-19f64e2bde4c",
+      "title": "Verify Prada Cont 1785547175-75",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-0058dff05ae3",
+      "title": "Verify Prada Cont 1785547175-76",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-3f1bf8f50d4e",
+      "title": "Verify Prada Cont 1785547175-77",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-f54cb0b3fe85",
+      "title": "Verify Prada Cont 1785547175-78",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-557d9e215f77",
+      "title": "Verify Prada Cont 1785547175-79",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    },
+    {
+      "candidate_id": "ac-02c1e16914a5",
+      "title": "Verify Prada Cont 1785547175-80",
+      "reason": "STRONG_IDENTITY_MISSING_USED_CATEGORY_FALLBACK",
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "queries": [
+        "プラダ バッグ",
+        "Prada bag"
+      ]
+    }
+  ]
+}

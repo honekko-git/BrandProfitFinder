@@ -38,3 +38,40 @@ Thumbs.db
 # Environment
 
 .env
+
+# Local operational databases / uploads (not part of source release)
+data/
+*.db
+_mup_check.db
+
+# Probe / transient audit artifacts
+output/_*/
+output/_*.json
+output/_*.html
+output/_*.txt
+output/_*.bat
+output/_*.png
+output/*.html
+output/screenshots/
+output/mercari_*
+output/vestiaire_*
+output/realreal_*
+output/rebag_*
+output/fashionphile_prada_browser_dom.html
+
+# Keep Version 1.0 validation evidence tracked
+!output/version1_validation.json
+!output/version1_scorecard.json
+!output/version1_false_positive.json
+!output/version1_false_negative.json
+!output/query_generation_*.json
+!output/unpublished_price_*.json
+!output/analysis_versioning_verification.json
+!output/comparable_quality_verification.json
+!output/continuous_profit_analysis_verification.json
+!output/trust_layer_verification.json
+!output/fashionphile_capture_continuation_verification.json
+!output/fashionphile_chrome_extension_verification.json
+!output/mup_fashionphile_verification.json
+!output/new_market_price_verification.json
+!output/ranking_ui_audit.json

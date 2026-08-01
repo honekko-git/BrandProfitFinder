@@ -67,12 +67,12 @@ def test_discovery_cli_output_includes_demand_opportunity_ranking() -> None:
 
     rendered = output.getvalue()
     assert result.ranked_demand_opportunities
-    assert "Demand Opportunity Ranking" in rendered
-    assert "Product:" in rendered
-    assert "Supplier:" in rendered
-    assert "Demand:" in rendered
-    assert "Score:" in rendered
-    assert "Decision:" in rendered
+    assert "需要込み候補順位" in rendered
+    assert "商品名:" in rendered
+    assert "仕入先:" in rendered
+    assert "需要:" in rendered
+    assert "スコア:" in rendered
+    assert "判定:" in rendered
 
     successful = [
         candidate

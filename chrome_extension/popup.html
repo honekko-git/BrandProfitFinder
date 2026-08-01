@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>BrandProfitFinder</title>
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --ink: #1c1917;
+      --accent: #0f3d2e;
+      --muted: #6b645c;
+      --line: #ddd4c8;
+      --ok: #0f3d2e;
+      --warn: #8a4b08;
+      --err: #8b1e1e;
+    }
+    body {
+      margin: 0;
+      font: 13px/1.45 "Segoe UI", "Hiragino Sans", sans-serif;
+      color: var(--ink);
+      background: linear-gradient(160deg, #f7f4ef, #efe8dc);
+      min-width: 320px;
+      max-width: 380px;
+    }
+    header {
+      padding: 14px 16px 8px;
+      border-bottom: 1px solid var(--line);
+    }
+    h1 {
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: 0.02em;
+      color: var(--accent);
+    }
+    h2 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: var(--accent);
+    }
+    .meta { color: var(--muted); margin-top: 4px; }
+    main { padding: 12px 16px 16px; }
+    .stat {
+      display: flex;
+      justify-content: space-between;
+      margin: 8px 0 12px;
+      padding: 8px 10px;
+      background: rgba(255,255,255,0.65);
+      border: 1px solid var(--line);
+    }
+    button {
+      width: 100%;
+      border: 0;
+      background: var(--accent);
+      color: #fff;
+      padding: 11px 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button:disabled { opacity: 0.55; cursor: default; }
+    button.secondary {
+      background: #fff;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+    button.danger {
+      background: #fff;
+      color: var(--err);
+      border: 1px solid var(--err);
+    }
+    .status { margin-top: 12px; min-height: 3.2em; color: var(--muted); white-space: pre-wrap; }
+    .status.ok { color: var(--ok); }
+    .status.err { color: var(--err); }
+    .status.warn { color: var(--warn); }
+    .status.info { color: var(--warn); }
+    .actions { margin-top: 10px; display: grid; gap: 8px; }
+    .batch-confirm { margin-top: 10px; display: grid; gap: 8px; }
+    a.button-link {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      background: #fff;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 9px 12px;
+      font-weight: 600;
+    }
+    .hidden { display: none; }
+    .section {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+    .brand-search {
+      width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 8px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .brand-toolbar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .brand-list {
+      max-height: 140px;
+      overflow: auto;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.7);
+      padding: 6px 8px;
+      margin-bottom: 10px;
+    }
+    .brand-list label {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      padding: 4px 0;
+    }
+    .bulk-progress {
+      white-space: pre-wrap;
+      color: var(--muted);
+      margin: 8px 0;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.65);
+    }
+    .bulk-actions {
+      display: grid;
+      gap: 8px;
+    }
+    .note {
+      color: var(--muted);
+      font-size: 12px;
+      margin: 6px 0 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>BrandProfitFinder</h1>
+    <div class="meta">Detected marketplace: <strong id="marketplace">—</strong></div>
+  </header>
+  <main>
+    <div class="stat">
+      <span>Products currently visible</span>
+      <strong id="visible-count">0</strong>
+    </div>
+    <button id="capture-btn" type="button">現在の検索結果を一括取込</button>
+    <div id="status" class="status">ページを確認しています…</div>
+    <div id="batch-confirm" class="batch-confirm hidden">
+      <button id="batch-confirm-btn" type="button">80件取り込む</button>
+      <button id="batch-cancel-btn" type="button" class="secondary">キャンセル</button>
+    </div>
+    <div id="actions" class="actions hidden">
+      <a id="workspace-link" class="button-link" href="#" target="_blank" rel="noreferrer">ワークスペースを開く</a>
+    </div>
+
+    <section class="section" id="bulk-section">
+      <h2>人気ブランド一括取得</h2>
+      <input id="brand-search" class="brand-search" type="search" placeholder="ブランドを検索" />
+      <div class="brand-toolbar">
+        <button id="brand-select-all" type="button" class="secondary">すべて選択</button>
+        <button id="brand-clear-all" type="button" class="secondary">すべて解除</button>
+      </div>
+      <div id="brand-list" class="brand-list"></div>
+      <div class="budget-block">
+        <label for="budget-preset"><strong>仕入れ価格上限</strong></label>
+        <select id="budget-preset" class="brand-search">
+          <option value="none">制限なし</option>
+          <option value="30000">30,000円以下</option>
+          <option value="50000">50,000円以下</option>
+          <option value="100000" selected>100,000円以下</option>
+          <option value="150000">150,000円以下</option>
+          <option value="300000">300,000円以下</option>
+          <option value="500000">500,000円以下</option>
+          <option value="custom">自由入力</option>
+        </select>
+        <input id="budget-custom" class="brand-search hidden" type="text" inputmode="numeric" placeholder="例: 120000" />
+        <p class="note">商品本体の円換算価格で判定（送料・関税は含みません）</p>
+      </div>
+      <div id="bulk-summary" class="bulk-progress hidden"></div>
+      <button id="bulk-start-btn" type="button">一括取得を開始</button>
+      <p class="note">選択したブランドのFashionphile検索ページを順に開きます。表示中の商品のみ取り込みます（自動スクロールなし）。使用予定為替は開始時に最新レートを取得します。</p>
+
+      <div id="bulk-active" class="hidden">
+        <h2 style="margin-top:12px">一括取得進捗</h2>
+        <div id="fx-panel" class="bulk-progress"></div>
+        <div id="bulk-progress" class="bulk-progress"></div>
+        <div class="bulk-actions">
+          <button id="bulk-import-btn" type="button">現在のブランドを取り込む</button>
+          <button id="bulk-next-btn" type="button" class="secondary hidden">次のブランドへ</button>
+          <button id="bulk-retry-btn" type="button" class="secondary hidden">再試行</button>
+          <button id="bulk-skip-btn" type="button" class="secondary hidden">このブランドをスキップ</button>
+          <button id="bulk-pause-btn" type="button" class="secondary">一時停止</button>
+          <button id="bulk-resume-btn" type="button" class="secondary hidden">再開</button>
+          <button id="bulk-end-btn" type="button" class="danger">一括取得を終了</button>
+          <a id="bulk-workspace-link" class="button-link hidden" href="#" target="_blank" rel="noreferrer">ワークスペースを開く</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="shared/messages.js"></script>
+  <script src="shared/validation.js"></script>
+  <script src="shared/popular_brands.js"></script>
+  <script src="shared/bulk_session.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

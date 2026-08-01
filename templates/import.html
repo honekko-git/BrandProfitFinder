@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block page_title %}{{ title }} — データ取込{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>市場データ取込</h1>
+    <p class="subtitle">手動入力またはCSVアップロードで商品を追加します。</p>
+    {% if message %}
+    <p class="notice">{{ message }}</p>
+    {% endif %}
+    {% if errors %}
+    <ul class="error-list">
+        {% for error in errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</section>
+
+<section class="search-panel">
+    <h2>手動入力</h2>
+    <form action="/import/manual" method="post" class="search-form import-form">
+        <label>
+            商品名
+            <input type="text" name="title" value="{{ form.title }}" required>
+        </label>
+        <label>
+            ブランド
+            <input type="text" name="brand" value="{{ form.brand }}" required>
+        </label>
+        <label>
+            カテゴリ
+            <input type="text" name="category" value="{{ form.category }}">
+        </label>
+        <label>
+            状態
+            <input type="text" name="condition" value="{{ form.condition }}">
+        </label>
+        <label>
+            価格
+            <input type="text" name="price" value="{{ form.price }}" required>
+        </label>
+        <label>
+            通貨
+            <input type="text" name="currency" value="{{ form.currency }}">
+        </label>
+        <label>
+            市場
+            <input type="text" name="market_name" value="{{ form.market_name }}" required>
+        </label>
+        <label>
+            URL
+            <input type="url" name="url" value="{{ form.url }}">
+        </label>
+        <button type="submit">商品を登録</button>
+    </form>
+</section>
+
+<section class="search-panel">
+    <h2>CSVアップロード</h2>
+    <p class="meta">想定カラム: title, brand, category, condition, price, currency, market_name, url</p>
+    <form action="/import/csv" method="post" enctype="multipart/form-data" class="search-form">
+        <label>
+            market_listings.csv
+            <input type="file" name="csv_file" accept=".csv,text/csv" required>
+        </label>
+        <button type="submit">CSV取込</button>
+    </form>
+</section>
+{% endblock %}

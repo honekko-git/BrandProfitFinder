@@ -1,0 +1,86 @@
+{
+
+  "manifest_version": 3,
+
+  "name": "BrandProfitFinder",
+
+  "version": "1.0.3",
+
+  "description": "Bulk-import visible Fashionphile search results with JPY budget filter into local BrandProfitFinder.",
+
+  "action": {
+
+    "default_title": "BrandProfitFinder",
+
+    "default_popup": "popup.html",
+
+    "default_icon": {
+
+      "16": "icons/icon16.png",
+
+      "48": "icons/icon48.png",
+
+      "128": "icons/icon128.png"
+
+    }
+
+  },
+
+  "icons": {
+
+    "16": "icons/icon16.png",
+
+    "48": "icons/icon48.png",
+
+    "128": "icons/icon128.png"
+
+  },
+
+  "permissions": ["activeTab", "scripting", "storage", "tabs"],
+
+  "host_permissions": [
+
+    "http://127.0.0.1:8000/*",
+
+    "http://localhost:8000/*",
+
+    "https://www.fashionphile.com/*",
+
+    "https://fashionphile.com/*"
+
+  ],
+
+  "content_scripts": [
+
+    {
+
+      "matches": [
+
+        "https://www.fashionphile.com/*",
+
+        "https://fashionphile.com/*"
+
+      ],
+
+      "js": ["shared/messages.js", "shared/validation.js", "content/fashionphile.js"],
+
+      "run_at": "document_idle"
+
+    }
+
+  ],
+
+  "web_accessible_resources": [
+
+    {
+
+      "resources": ["data/popular_brands.json"],
+
+      "matches": ["http://127.0.0.1:8000/*", "http://localhost:8000/*"]
+
+    }
+
+  ]
+
+}
+

@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block page_title %}一括利益計算{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <h1>一括利益計算</h1>
+    <p>複数の仕入候補を取り込み、Yahoo LIVEの売切データを取得して利益候補を順位付けします。</p>
+</section>
+
+{% if errors %}
+<div class="alert alert-error">
+    {% for error in errors %}
+    <p>{{ error }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+
+<section class="card">
+    <h2>入力</h2>
+    <form action="/profit-batch/run" method="post" enctype="multipart/form-data" class="form-grid">
+        <label>CSVアップロード<input type="file" name="csv_file" accept=".csv"></label>
+        <label><input type="checkbox" name="use_imported" value="on"> 取込済み商品を使用</label>
+        <label>コスト設定
+            <select name="cost_profile">
+                <option value="standard">標準（未設定が多い）</option>
+                <option value="conservative">保守的（仮定値あり）</option>
+                <option value="custom">カスタム</option>
+            </select>
+        </label>
+        <label>候補上限<input type="number" name="candidate_limit" min="1" max="20" value="10"></label>
+        <label><input type="checkbox" name="use_cache" value="on" checked> Yahooキャッシュを使用</label>
+        <button type="submit">一括検証を実行</button>
+    </form>
+</section>
+
+{% if run %}
+<section class="card">
+    <h2>実行概要</h2>
+    <dl class="metric-list">
+        <div><dt>バッチID</dt><dd>{{ run.summary.batch_id }}</dd></div>
+        <div><dt>合計</dt><dd>{{ run.summary.total_candidates }}</dd></div>
+        <div><dt>処理済み</dt><dd>{{ run.summary.processed_count }}</dd></div>
+        <div><dt>有力候補</dt><dd>{{ run.summary.strong_candidate_count }}</dd></div>
+        <div><dt>要確認</dt><dd>{{ run.summary.review_count }}</dd></div>
+        <div><dt>保留</dt><dd>{{ run.summary.hold_count }}</dd></div>
+        <div><dt>除外</dt><dd>{{ run.summary.reject_count }}</dd></div>
+        <div><dt>失敗</dt><dd>{{ run.summary.failed_count }}</dd></div>
+        <div><dt>ブロック</dt><dd>{{ run.summary.blocked_count }}</dd></div>
+        <div><dt>Yahoo LIVEリクエスト</dt><dd>{{ run.summary.total_yahoo_requests }}</dd></div>
+        <div><dt>キャッシュヒット</dt><dd>{{ run.summary.cache_hits }}</dd></div>
+        <div><dt>為替レート</dt><dd>{{ run.summary.exchange_rate }}</dd></div>
+        <div><dt>コスト設定</dt><dd>{{ run.summary.cost_profile }}</dd></div>
+        <div><dt>開始</dt><dd>{{ run.summary.started_at }}</dd></div>
+        <div><dt>完了</dt><dd>{{ run.summary.completed_at }}</dd></div>
+    </dl>
+</section>
+
+<section class="card">
+    <h2>順位</h2>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>順位</th><th>商品名</th><th>仕入</th><th>JPY</th><th>サブタイプ</th><th>素材</th>
+                    <th>採用比較</th><th>信頼性</th><th>推定</th><th>粗利</th><th>純利益</th>
+                    <th>利益率</th><th>ROI</th><th>判定</th><th>データ</th><th>注意事項</th><th>Yahoo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    <td>{{ row.rank }}</td>
+                    <td>{{ row.product }}</td>
+                    <td>{{ row.purchase_price }}</td>
+                    <td>{{ row.purchase_price_jpy }}</td>
+                    <td>{{ row.subtype }}</td>
+                    <td>{{ row.material }}</td>
+                    <td>{{ row.accepted_comparables }}</td>
+                    <td>{{ row.reliability }}</td>
+                    <td>{{ row.recommended_estimate }}</td>
+                    <td>{{ row.gross_profit }}</td>
+                    <td>{{ row.net_profit }}</td>
+                    <td>{{ row.margin }}</td>
+                    <td>{{ row.roi }}</td>
+                    <td>{{ row.decision }}</td>
+                    <td>{{ row.data_status }}</td>
+                    <td>{{ row.warning }}</td>
+                    <td>{{ row.yahoo_source }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endif %}
+
+<section class="card">
+    <h2>バッチ履歴</h2>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr><th>バッチID</th><th>実行日</th><th>商品数</th><th>有力</th><th>コスト設定</th><th>操作</th></tr>
+            </thead>
+            <tbody>
+                {% for item in history_rows %}
+                <tr>
+                    <td><a href="/profit-batch?batch_id={{ item.batch_id }}">{{ item.batch_id }}</a></td>
+                    <td>{{ item.run_date }}</td>
+                    <td>{{ item.product_count }}</td>
+                    <td>{{ item.strong_candidate_count }}</td>
+                    <td>{{ item.cost_profile }}</td>
+                    <td>
+                        <form action="/profit-batch/{{ item.batch_id }}/delete" method="post">
+                            <button type="submit">削除</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,938 @@
+{
+  "audit_timestamp": "2026-08-01T11:09:32.916407+00:00",
+  "workspace_batch_id": "ws-20260731183118-b673ef",
+  "analysis_version_now": "v3",
+  "total_candidates": 410,
+  "before_empty_query_zero_raw": 352,
+  "before_nonempty_queries": 58,
+  "after_rebuilt_nonempty": 410,
+  "after_rebuilt_empty": 0,
+  "generic_primary_before": 12,
+  "generic_primary_after": 129,
+  "query_recoverable_now": 352,
+  "replay_sample_size": 20,
+  "replay_nonempty_query_traces": 20,
+  "replay_published_selling_prices": 10,
+  "contaminated_7975_count": 0,
+  "empty_query_root_cause": "Playwright chromium missing → BrowserType.launch Error bubbled; pipeline except wiped queries to []. Fixed: generate queries first, wrap launch as PLAYWRIGHT_UNAVAILABLE, persist queries on failure.",
+  "mercari_finding": "All 278 prior results REQUEST_FAILED on Mercari for the same Playwright binary gap after mercapi returned empty. Mercari now receives the same planned query list; live sold evidence still requires working browser/API.",
+  "safety": {
+    "category_fallback_not_primary_when_identity": true,
+    "publish_gate_unchanged": true,
+    "no_7975_contamination_in_replay": true
+  },
+  "sample_recoverable": [
+    {
+      "candidate_id": "ac-2c15a12a9d38",
+      "title": "Prada Tessuto Nylon Mini Re-Edition 2000 Bag Black",
+      "brand": "Prada",
+      "category": "Bag",
+      "before_queries": [],
+      "after_queries": [
+        "プラダ リエディション",
+        "プラダ リエディション ナイロン",
+        "プラダ リエディション 2005",
+        "プラダ リナイロン リエディション"
+      ],
+      "tiers": [
+        "COLLECTION_FAMILY_SIZE",
+        "COLLECTION_FAMILY_SIZE",
+        "COLLECTION_FAMILY_CATEGORY",
+        "COLLECTION_FAMILY_CATEGORY"
+      ],
+      "status": "OK",
+      "identity": {
+        "brand": "PRADA",
+        "category": "BAG",
+        "references": [],
+        "collection": "Re-Edition",
+        "family": "Re-Edition",
+        "material": "",
+        "size": "Mini",
+        "color": "BLACK",
+        "bag_model_family": "Re-Edition"
+      }
+    },
+    {
+      "candidate_id": "ac-0d831e9650af",
+      "title": "Prada Saffiano Metal Tri-Fold Wallet Black",
+      "brand": "Prada",
+      "category": "Wallet",
+      "before_queries": [],
+      "after_queries": [
+        "プラダ Saffiano Metal サフィアーノ",
+        "プラダ Saffiano Metal 財布",
+        "Prada Saffiano Metal Saffiano",
+        "Prada Saffiano Metal Wallet"
+      ],
+      "tiers": [
+        "COLLECTION_FAMILY_MATERIAL",
+        "COLLECTION_FAMILY_CATEGORY",
+        "COLLECTION_FAMILY_MATERIAL_EN",
+        "COLLECTION_FAMILY_CATEGORY_EN"
+      ],
+      "status": "OK",
+      "identity": {
+        "brand": "PRADA",
+        "category": "WALLET",
+        "references": [],
+        "collection": "Saffiano Metal",
+        "family": "Saffiano Metal",
+        "material": "SAFFIANO",
+        "size": "",
+        "color": "BLACK",
+        "bag_model_family": ""
+      }
+    },
+    {
+      "candidate_id": "ac-26e76b64a0fd",
+      "title": "Prada Saffiano City Calf Coin Case Card Holder Alabastro",
+      "brand": "Prada",
+      "category": "Wallet",
+      "before_queries": [],
+      "after_queries": [
+        "プラダ Saffiano City サフィアーノ",
+        "プラダ Saffiano City カードケース",
+        "Prada Saffiano City Saffiano",
+        "Prada Saffiano City Card Holder"
+      ],
+      "tiers": [
+        "COLLECTION_FAMILY_MATERIAL",
+        "COLLECTION_FAMILY_CATEGORY",
+        "COLLECTION_FAMILY_MATERIAL_EN",
+        "COLLECTION_FAMILY_CATEGORY_EN"
+      ],
+      "status": "OK",
+      "identity": {
+        "brand": "PRADA",
+        "category": "CARD_HOLDER",
+        "references": [],
+        "collection": "Saffiano City",
+        "family": "Saffiano City",
+        "material": "SAFFIANO",
+        "size": "",
+        "color": "",
+        "bag_model_family": ""
+      }
+    },
+    {
+      "candidate_id": "ac-a1b9e05de42f",
+      "title": "Prada Tessuto Nylon Tote Black",
+      "brand": "Prada",
+      "category": "Bag",
+      "before_queries": [],
+      "after_queries": [
+        "プラダ Tote トートバッグ",
+        "Prada Tote Tote"
+      ],
+      "tiers": [
+        "COLLECTION_FAMILY_CATEGORY",
+        "COLLECTION_FAMILY_CATEGORY_EN"
+      ],
+      "status": "OK",
+      "identity": {
+        "brand": "PRADA",
+        "category": "TOTE_BAG",
+        "references": [],
+        "collection": "Tote",
+        "family": "Tote",
+        "material": "",
+        "size": "",
+        "color": "BLACK",
+        "bag_model_family": "Tote"
+      }
+    },
+    {
+      "candidate_id": "ac-061d3d2570ff",
+      "title": "Prada Tessuto Nylon Saffiano Vela Medium Backpack Fuxia",
+      "brand": "Prada",
+      "category": "Bag",
+      "before_queries": [],
+      "after_queries": [
+        "プラダ Saffiano Vela Medium リュック",
+        "プラダ Saffiano Vela サフィアーノ",
+        "プラダ Saffiano Vela リュック",
+        "Prada Saffiano Vela Medium Backpack"
+      ],
+      "tiers": [
+        "COLLECTION_FAMILY_SIZE",
+        "COLLECTION_FAMILY_MATERIAL",
+        "COLLECTION_FAMILY_CATEGORY",
+        "COLLECTION_FAMILY_SIZE_EN"
+      ],
+      "status": "OK",
+      "identity": {
+        "brand": "PRADA",
+        "category": "BACKPACK",
+        "references": [],
+        "collection": "Saffiano Vela",
+        "family": "Saffiano Vela",
+        "material": "SAFFIANO",
+        "size": "Medium",
+        "color": "",
+        "bag_model_family": ""
+      }
+    },
+    {
+      "candidate_id": "ac-4b2e37db641a",
+      "title": "Prada Raffia Metal Triangle Logo Woven Flatform 35mm Slide Sandals 36 Naturale",
+      "brand": "Prada",
+      "category": "Shoes",
+      "before_queries": [],
+      "after_queries": [
+        "プラダ シューズ",
+        "Prada shoes"
+      ],
+      "tiers": [
+        "CATEGORY_FALLBACK",
+        "CATEGORY_FALLBACK_EN"
+      ],
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "identity": {
+        "brand": "PRADA",
+        "category": "Shoes",
+        "references": [],
+        "collection": "",
+        "family": "",
+        "material": "",
+        "size": "Medium",
+        "color": "",
+        "bag_model_family": ""
+      }
+    },
+    {
+      "candidate_id": "ac-426d2dcedc3c",
+      "title": "Prada Glace Calfskin Embossed Logo Crossbody Cammeo",
+      "brand": "Prada",
+      "category": "Bag",
+      "before_queries": [],
+      "after_queries": [
+        "プラダ Calfskin Embossed Medium バッグ",
+        "プラダ Calfskin Embossed CALFSKIN",
+        "プラダ Calfskin Embossed バッグ",
+        "Prada Calfskin Embossed Medium Crossbody"
+      ],
+      "tiers": [
+        "COLLECTION_FAMILY_SIZE",
+        "COLLECTION_FAMILY_MATERIAL",
+        "COLLECTION_FAMILY_CATEGORY",
+        "COLLECTION_FAMILY_SIZE_EN"
+      ],
+      "status": "OK",
+      "identity": {
+        "brand": "PRADA",
+        "category": "CROSSBODY",
+        "references": [],
+        "collection": "Calfskin Embossed",
+        "family": "Calfskin Embossed",
+        "material": "CALFSKIN",
+        "size": "Medium",
+        "color": "",
+        "bag_model_family": ""
+      }
+    },
+    {
+      "candidate_id": "ac-15636c894de5",
+      "title": "Prada Acetate Symbole Sunglasses SPR 17W Havana",
+      "brand": "Prada",
+      "category": "Bag",
+      "before_queries": [],
+      "after_queries": [
+        "プラダ SPR17W",
+        "Prada SPR17W sunglasses",
+        "プラダ シンボル サングラス",
+        "Prada Symbole Sunglasses"
+      ],
+      "tiers": [
+        "REFERENCE_EXACT",
+        "REFERENCE_EXACT_EN",
+        "COLLECTION_FAMILY_SIZE",
+        "COLLECTION_FAMILY_SIZE_EN"
+      ],
+      "status": "OK",
+      "identity": {
+        "brand": "PRADA",
+        "category": "SUNGLASSES",
+        "references": [
+          "SPR17W"
+        ],
+        "collection": "Acetate Symbole",
+        "family": "Acetate Symbole",
+        "material": "ACETATE",
+        "size": "",
+        "color": "",
+        "bag_model_family": "Symbole"
+      }
+    },
+    {
+      "candidate_id": "ac-6a938b9e0886",
+      "title": "Prada Saffiano Small Galleria Double Zip Tote Cobalto",
+      "brand": "Prada",
+      "category": "Bag",
+      "before_queries": [],
+      "after_queries": [
+        "プラダ ガレリア",
+        "プラダ ガレリア トート",
+        "プラダ ガレリア スモール",
+        "プラダ ガレリア Other"
+      ],
+      "tiers": [
+        "COLLECTION_FAMILY_SIZE",
+        "COLLECTION_FAMILY_SIZE",
+        "COLLECTION_FAMILY_CATEGORY",
+        "COLLECTION_FAMILY_CATEGORY"
+      ],
+      "status": "OK",
+      "identity": {
+        "brand": "PRADA",
+        "category": "TOTE_BAG",
+        "references": [],
+        "collection": "Galleria",
+        "family": "Galleria",
+        "material": "SAFFIANO",
+        "size": "Small",
+        "color": "",
+        "bag_model_family": "Galleria"
+      }
+    },
+    {
+      "candidate_id": "ac-15889fd519f1",
+      "title": "Prada Tessuto Nylon Saffiano Re-Edition 2006 Shoulder Bag Black Black",
+      "brand": "Prada",
+      "category": "Bag",
+      "before_queries": [],
+      "after_queries": [
+        "プラダ リエディション",
+        "プラダ リエディション ナイロン",
+        "プラダ リエディション 2005",
+        "プラダ リナイロン リエディション"
+      ],
+      "tiers": [
+        "COLLECTION_FAMILY_SIZE",
+        "COLLECTION_FAMILY_SIZE",
+        "COLLECTION_FAMILY_CATEGORY",
+        "COLLECTION_FAMILY_CATEGORY"
+      ],
+      "status": "OK",
+      "identity": {
+        "brand": "PRADA",
+        "category": "SHOULDER_BAG",
+        "references": [],
+        "collection": "Re-Edition",
+        "family": "Re-Edition",
+        "material": "SAFFIANO",
+        "size": "",
+        "color": "BLACK",
+        "bag_model_family": "Re-Edition"
+      }
+    },
+    {
+      "candidate_id": "ac-2e5a023fabae",
+      "title": "Prada Suede Metal Triangle Logo Womens Double Buckle 20mm Slide Sandals 36.5 Ecru",
+      "brand": "Prada",
+      "category": "Shoes",
+      "before_queries": [],
+      "after_queries": [
+        "プラダ シューズ",
+        "Prada shoes"
+      ],
+      "tiers": [
+        "CATEGORY_FALLBACK",
+        "CATEGORY_FALLBACK_EN"
+      ],
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "identity": {
+        "brand": "PRADA",
+        "category": "Shoes",
+        "references": [],
+        "collection": "",
+        "family": "",
+        "material": "",
+        "size": "Medium",
+        "color": "",
+        "bag_model_family": ""
+      }
+    },
+    {
+      "candidate_id": "ac-b00ef5159ec7",
+      "title": "Prada Tessuto Nylon Saffiano Re-Edition 2000 Bag Alabastro",
+      "brand": "Prada",
+      "category": "Bag",
+      "before_queries": [],
+      "after_queries": [
+        "プラダ リエディション",
+        "プラダ リエディション ナイロン",
+        "プラダ リエディション 2005",
+        "プラダ リナイロン リエディション"
+      ],
+      "tiers": [
+        "COLLECTION_FAMILY_SIZE",
+        "COLLECTION_FAMILY_SIZE",
+        "COLLECTION_FAMILY_CATEGORY",
+        "COLLECTION_FAMILY_CATEGORY"
+      ],
+      "status": "OK",
+      "identity": {
+        "brand": "PRADA",
+        "category": "BAG",
+        "references": [],
+        "collection": "Re-Edition",
+        "family": "Re-Edition",
+        "material": "SAFFIANO",
+        "size": "",
+        "color": "",
+        "bag_model_family": "Re-Edition"
+      }
+    },
+    {
+      "candidate_id": "ac-3e15536d44b1",
+      "title": "Prada Baroque Sunglasses SPR 27N Black",
+      "brand": "Prada",
+      "category": "Bag",
+      "before_queries": [],
+      "after_queries": [
+        "プラダ SPR27N",
+        "Prada SPR27N sunglasses"
+      ],
+      "tiers": [
+        "REFERENCE_EXACT",
+        "REFERENCE_EXACT_EN"
+      ],
+      "status": "OK",
+      "identity": {
+        "brand": "PRADA",
+        "category": "SUNGLASSES",
+        "references": [
+          "SPR27N"
+        ],
+        "collection": "",
+        "family": "",
+        "material": "",
+        "size": "",
+        "color": "BLACK",
+        "bag_model_family": ""
+      }
+    },
+    {
+      "candidate_id": "ac-8c613ef591b4",
+      "title": "Prada Acetate Sunglasses SPR 14Y Black Slate Gray",
+      "brand": "Prada",
+      "category": "Bag",
+      "before_queries": [],
+      "after_queries": [
+        "プラダ SPR14Y",
+        "Prada SPR14Y sunglasses"
+      ],
+      "tiers": [
+        "REFERENCE_EXACT",
+        "REFERENCE_EXACT_EN"
+      ],
+      "status": "OK",
+      "identity": {
+        "brand": "PRADA",
+        "category": "SUNGLASSES",
+        "references": [
+          "SPR14Y"
+        ],
+        "collection": "",
+        "family": "",
+        "material": "ACETATE",
+        "size": "",
+        "color": "BLACK",
+        "bag_model_family": ""
+      }
+    },
+    {
+      "candidate_id": "ac-136160332f2b",
+      "title": "Prada Saffiano Metal Oro Chain Wallet Bleuette",
+      "brand": "Prada",
+      "category": "Wallet",
+      "before_queries": [],
+      "after_queries": [
+        "プラダ Saffiano Metal サフィアーノ",
+        "プラダ Saffiano Metal 財布",
+        "Prada Saffiano Metal Saffiano",
+        "Prada Saffiano Metal Wallet"
+      ],
+      "tiers": [
+        "COLLECTION_FAMILY_MATERIAL",
+        "COLLECTION_FAMILY_CATEGORY",
+        "COLLECTION_FAMILY_MATERIAL_EN",
+        "COLLECTION_FAMILY_CATEGORY_EN"
+      ],
+      "status": "OK",
+      "identity": {
+        "brand": "PRADA",
+        "category": "WALLET",
+        "references": [],
+        "collection": "Saffiano Metal",
+        "family": "Saffiano Metal",
+        "material": "SAFFIANO",
+        "size": "",
+        "color": "BLUE",
+        "bag_model_family": ""
+      }
+    },
+    {
+      "candidate_id": "ac-4f7e839cb9c7",
+      "title": "Prada Satin Pumps 41 Red",
+      "brand": "Prada",
+      "category": "Bag",
+      "before_queries": [],
+      "after_queries": [
+        "プラダ バッグ 赤",
+        "Prada bag red"
+      ],
+      "tiers": [
+        "CATEGORY_FALLBACK",
+        "CATEGORY_FALLBACK_EN"
+      ],
+      "status": "OK_WITH_CATEGORY_FALLBACK",
+      "identity": {
+        "brand": "PRADA",
+        "category": "BAG",
+        "references": [],
+        "collection": "",
+        "family": "",
+        "material": "",
+        "size": "",
+        "color": "RED",
+        "bag_model_family": ""
+      }
+    },
+    {
+      "candidate_id": "ac-11e11571d077",
+      "title": "Prada Acetate Oval Sunglasses SPR 26Z-F Black",
+      "brand": "Prada",
+      "category": "Bag",
+      "before_queries": [],
+      "after_queries": [
+        "プラダ SPR26Z",
+        "Prada SPR26Z sunglasses"
+      ],
+      "tiers": [
+        "REFERENCE_EXACT",
+        "REFERENCE_EXACT_EN"
+      ],
+      "status": "OK",
+      "identity": {
+        "brand": "PRADA",
+        "category": "SUNGLASSES",
+        "references": [
+          "SPR26Z"
+        ],
+        "collection": "",
+        "family": "",
+        "material": "ACETATE",
+        "size": "",
+        "color": "BLACK",
+        "bag_model_family": ""
+      }
+    },
+    {
+      "candidate_id": "ac-9b021d5e0560",
+      "title": "Prada Saffiano Metal Zip Around Wallet Peonia",
+      "brand": "Prada",
+      "category": "Wallet",
+      "before_queries": [],
+      "after_queries": [
+        "プラダ Saffiano Metal サフィアーノ",
+        "プラダ Saffiano Metal ラウンドファスナー",
+        "Prada Saffiano Metal Saffiano",
+        "Prada Saffiano Metal Round Zip"
+      ],
+      "tiers": [
+        "COLLECTION_FAMILY_MATERIAL",
+        "COLLECTION_FAMILY_CATEGORY",
+        "COLLECTION_FAMILY_MATERIAL_EN",
+        "COLLECTION_FAMILY_CATEGORY_EN"
+      ],
+      "status": "OK",
+      "identity": {
+        "brand": "PRADA",
+        "category": "ROUND_ZIP",
+        "references": [],
+        "collection": "Saffiano Metal",
+        "family": "Saffiano Metal",
+        "material": "SAFFIANO",
+        "size": "",
+        "color": "",
+        "bag_model_family": ""
+      }
+    },
+    {
+      "candidate_id": "ac-5cbdc80e0146",
+      "title": "Prada Terry Cloth Mini Re-Edition 2000 Bag Black White Black White",
+      "brand": "Prada",
+      "category": "Bag",
+      "before_queries": [],
+      "after_queries": [
+        "プラダ リエディション",
+        "プラダ リエディション ナイロン",
+        "プラダ リエディション 2005",
+        "プラダ リナイロン リエディション"
+      ],
+      "tiers": [
+        "COLLECTION_FAMILY_SIZE",
+        "COLLECTION_FAMILY_SIZE",
+        "COLLECTION_FAMILY_CATEGORY",
+        "COLLECTION_FAMILY_CATEGORY"
+      ],
+      "status": "OK",
+      "identity": {
+        "brand": "PRADA",
+        "category": "BAG",
+        "references": [],
+        "collection": "Re-Edition",
+        "family": "Re-Edition",
+        "material": "",
+        "size": "Mini",
+        "color": "BLACK",
+        "bag_model_family": "Re-Edition"
+      }
+    },
+    {
+      "candidate_id": "ac-aabb65d6fd13",
+      "title": "Prada Saffiano Medium Galleria Double Zip Tote Cammeo",
+      "brand": "Prada",
+      "category": "Bag",
+      "before_queries": [],
+      "after_queries": [
+        "プラダ ガレリア",
+        "プラダ ガレリア トート",
+        "プラダ ガレリア スモール",
+        "プラダ ガレリア ミディアム"
+      ],
+      "tiers": [
+        "COLLECTION_FAMILY_SIZE",
+        "COLLECTION_FAMILY_SIZE",
+        "COLLECTION_FAMILY_CATEGORY",
+        "COLLECTION_FAMILY_CATEGORY"
+      ],
+      "status": "OK",
+      "identity": {
+        "brand": "PRADA",
+        "category": "TOTE_BAG",
+        "references": [],
+        "collection": "Galleria",
+        "family": "Galleria",
+        "material": "SAFFIANO",
+        "size": "Medium",
+        "color": "",
+        "bag_model_family": "Galleria"
+      }
+    }
+  ],
+  "live_mini_replay": {
+    "audit_timestamp": "2026-08-01T11:11:15.318347+00:00",
+    "workspace_batch_id": "ws-20260731183118-b673ef",
+    "count": 8,
+    "nonempty_yahoo_queries": 8,
+    "yahoo_with_raw": 8,
+    "mercari_with_raw": 8,
+    "published": 3,
+    "items": [
+      {
+        "candidate_id": "ac-15636c894de5",
+        "title": "Prada Acetate Symbole Sunglasses SPR 17W Havana",
+        "planned_queries": [
+          "プラダ SPR17W",
+          "Prada SPR17W sunglasses",
+          "プラダ シンボル サングラス",
+          "Prada Symbole Sunglasses"
+        ],
+        "tiers": [
+          "REFERENCE_EXACT",
+          "REFERENCE_EXACT_EN",
+          "COLLECTION_FAMILY_SIZE",
+          "COLLECTION_FAMILY_SIZE_EN"
+        ],
+        "yahoo_queries": [
+          "プラダ SPR17W",
+          "Prada SPR17W sunglasses",
+          "プラダ シンボル サングラス",
+          "Prada Symbole Sunglasses"
+        ],
+        "yahoo_raw": 12,
+        "yahoo_sold": 12,
+        "yahoo_matched": 4,
+        "yahoo_status": "LIVE_CACHE",
+        "yahoo_failure": null,
+        "mercari_queries": [
+          "プラダ SPR17W",
+          "Prada SPR17W sunglasses",
+          "プラダ シンボル サングラス",
+          "Prada Symbole Sunglasses"
+        ],
+        "mercari_raw": 20,
+        "mercari_sold": 20,
+        "mercari_matched": 0,
+        "mercari_status": "LIVE",
+        "mercari_failure": "MERCARI_ALL_MATCHES_REJECTED",
+        "publish_price": true,
+        "quality": "HIGH",
+        "selling": "17975",
+        "median_yahoo": 17975
+      },
+      {
+        "candidate_id": "ac-3e15536d44b1",
+        "title": "Prada Baroque Sunglasses SPR 27N Black",
+        "planned_queries": [
+          "プラダ SPR27N",
+          "Prada SPR27N sunglasses"
+        ],
+        "tiers": [
+          "REFERENCE_EXACT",
+          "REFERENCE_EXACT_EN"
+        ],
+        "yahoo_queries": [
+          "プラダ SPR27N",
+          "Prada SPR27N sunglasses"
+        ],
+        "yahoo_raw": 18,
+        "yahoo_sold": 18,
+        "yahoo_matched": 3,
+        "yahoo_status": "LIVE_CACHE",
+        "yahoo_failure": null,
+        "mercari_queries": [
+          "プラダ SPR27N",
+          "Prada SPR27N sunglasses"
+        ],
+        "mercari_raw": 20,
+        "mercari_sold": 20,
+        "mercari_matched": 5,
+        "mercari_status": "LIVE",
+        "mercari_failure": null,
+        "publish_price": true,
+        "quality": "HIGH",
+        "selling": "20000",
+        "median_yahoo": 20000
+      },
+      {
+        "candidate_id": "ac-8c613ef591b4",
+        "title": "Prada Acetate Sunglasses SPR 14Y Black Slate Gray",
+        "planned_queries": [
+          "プラダ SPR14Y",
+          "Prada SPR14Y sunglasses"
+        ],
+        "tiers": [
+          "REFERENCE_EXACT",
+          "REFERENCE_EXACT_EN"
+        ],
+        "yahoo_queries": [
+          "プラダ SPR14Y",
+          "Prada SPR14Y sunglasses"
+        ],
+        "yahoo_raw": 1,
+        "yahoo_sold": 1,
+        "yahoo_matched": 0,
+        "yahoo_status": "LIVE_CACHE",
+        "yahoo_failure": "YAHOO_ALL_MATCHES_REJECTED",
+        "mercari_queries": [
+          "プラダ SPR14Y",
+          "Prada SPR14Y sunglasses"
+        ],
+        "mercari_raw": 20,
+        "mercari_sold": 20,
+        "mercari_matched": 3,
+        "mercari_status": "LIVE",
+        "mercari_failure": null,
+        "publish_price": true,
+        "quality": "HIGH",
+        "selling": "30000",
+        "median_yahoo": null
+      },
+      {
+        "candidate_id": "ac-11e11571d077",
+        "title": "Prada Acetate Oval Sunglasses SPR 26Z-F Black",
+        "planned_queries": [
+          "プラダ SPR26Z",
+          "Prada SPR26Z sunglasses"
+        ],
+        "tiers": [
+          "REFERENCE_EXACT",
+          "REFERENCE_EXACT_EN"
+        ],
+        "yahoo_queries": [
+          "プラダ SPR16W",
+          "Prada SPR16W sunglasses"
+        ],
+        "yahoo_raw": 4,
+        "yahoo_sold": 4,
+        "yahoo_matched": 0,
+        "yahoo_status": "LIVE",
+        "yahoo_failure": "YAHOO_ALL_MATCHES_REJECTED",
+        "mercari_queries": [
+          "プラダ SPR16W",
+          "Prada SPR16W sunglasses"
+        ],
+        "mercari_raw": 20,
+        "mercari_sold": 20,
+        "mercari_matched": 0,
+        "mercari_status": "LIVE",
+        "mercari_failure": "MERCARI_ALL_MATCHES_REJECTED",
+        "publish_price": false,
+        "quality": "SUSPECT",
+        "selling": "0",
+        "median_yahoo": null
+      },
+      {
+        "candidate_id": "ac-1696b5baa56e",
+        "title": "Prada Acetate Symbole Sunglasses SPR 06Y Black Black",
+        "planned_queries": [
+          "プラダ SPR06Y",
+          "Prada SPR06Y sunglasses",
+          "プラダ シンボル サングラス",
+          "Prada Symbole Sunglasses"
+        ],
+        "tiers": [
+          "REFERENCE_EXACT",
+          "REFERENCE_EXACT_EN",
+          "COLLECTION_FAMILY_SIZE",
+          "COLLECTION_FAMILY_SIZE_EN"
+        ],
+        "yahoo_queries": [
+          "プラダ SPR26Z",
+          "Prada SPR26Z sunglasses"
+        ],
+        "yahoo_raw": 5,
+        "yahoo_sold": 5,
+        "yahoo_matched": 2,
+        "yahoo_status": "LIVE_CACHE",
+        "yahoo_failure": null,
+        "mercari_queries": [
+          "プラダ SPR26Z",
+          "Prada SPR26Z sunglasses"
+        ],
+        "mercari_raw": 20,
+        "mercari_sold": 20,
+        "mercari_matched": 0,
+        "mercari_status": "LIVE",
+        "mercari_failure": "MERCARI_ALL_MATCHES_REJECTED",
+        "publish_price": false,
+        "quality": "INSUFFICIENT",
+        "selling": "0",
+        "median_yahoo": 28050
+      },
+      {
+        "candidate_id": "ac-ee7f069fc686",
+        "title": "Prada Acetate Sunglasses SPR 15P Black",
+        "planned_queries": [
+          "プラダ SPR15P",
+          "Prada SPR15P sunglasses"
+        ],
+        "tiers": [
+          "REFERENCE_EXACT",
+          "REFERENCE_EXACT_EN"
+        ],
+        "yahoo_queries": [
+          "プラダ SPR06Y",
+          "Prada SPR06Y sunglasses",
+          "プラダ シンボル サングラス",
+          "Prada Symbole Sunglasses"
+        ],
+        "yahoo_raw": 7,
+        "yahoo_sold": 7,
+        "yahoo_matched": 1,
+        "yahoo_status": "LIVE_CACHE",
+        "yahoo_failure": null,
+        "mercari_queries": [
+          "プラダ SPR06Y",
+          "Prada SPR06Y sunglasses",
+          "プラダ シンボル サングラス",
+          "Prada Symbole Sunglasses"
+        ],
+        "mercari_raw": 20,
+        "mercari_sold": 19,
+        "mercari_matched": 2,
+        "mercari_status": "LIVE",
+        "mercari_failure": null,
+        "publish_price": false,
+        "quality": "INSUFFICIENT",
+        "selling": "0",
+        "median_yahoo": 14300
+      },
+      {
+        "candidate_id": "ac-673b46bdfb80",
+        "title": "Prada Acetate Symbole Sunglasses SPR 19Z Black",
+        "planned_queries": [
+          "プラダ SPR19Z",
+          "Prada SPR19Z sunglasses",
+          "プラダ シンボル サングラス",
+          "Prada Symbole Sunglasses"
+        ],
+        "tiers": [
+          "REFERENCE_EXACT",
+          "REFERENCE_EXACT_EN",
+          "COLLECTION_FAMILY_SIZE",
+          "COLLECTION_FAMILY_SIZE_EN"
+        ],
+        "yahoo_queries": [
+          "プラダ SPR15P",
+          "Prada SPR15P sunglasses"
+        ],
+        "yahoo_raw": 2,
+        "yahoo_sold": 2,
+        "yahoo_matched": 0,
+        "yahoo_status": "LIVE",
+        "yahoo_failure": "YAHOO_ALL_MATCHES_REJECTED",
+        "mercari_queries": [
+          "プラダ SPR15P",
+          "Prada SPR15P sunglasses"
+        ],
+        "mercari_raw": 20,
+        "mercari_sold": 20,
+        "mercari_matched": 0,
+        "mercari_status": "LIVE",
+        "mercari_failure": "MERCARI_ALL_MATCHES_REJECTED",
+        "publish_price": false,
+        "quality": "INSUFFICIENT",
+        "selling": "0",
+        "median_yahoo": null
+      },
+      {
+        "candidate_id": "ac-eea00879cfc8",
+        "title": "Prada Acetate Sunglasses SPR 16W Tortoise",
+        "planned_queries": [
+          "プラダ SPR16W",
+          "Prada SPR16W sunglasses"
+        ],
+        "tiers": [
+          "REFERENCE_EXACT",
+          "REFERENCE_EXACT_EN"
+        ],
+        "yahoo_queries": [
+          "プラダ SPR19Z",
+          "Prada SPR19Z sunglasses",
+          "プラダ シンボル サングラス",
+          "Prada Symbole Sunglasses"
+        ],
+        "yahoo_raw": 12,
+        "yahoo_sold": 12,
+        "yahoo_matched": 1,
+        "yahoo_status": "LIVE_CACHE",
+        "yahoo_failure": null,
+        "mercari_queries": [
+          "プラダ SPR19Z",
+          "Prada SPR19Z sunglasses",
+          "プラダ シンボル サングラス",
+          "Prada Symbole Sunglasses"
+        ],
+        "mercari_raw": 20,
+        "mercari_sold": 20,
+        "mercari_matched": 0,
+        "mercari_status": "LIVE",
+        "mercari_failure": "MERCARI_ALL_MATCHES_REJECTED",
+        "publish_price": false,
+        "quality": "INSUFFICIENT",
+        "selling": "0",
+        "median_yahoo": 14300
+      }
+    ]
+  },
+  "identity_query_quality": {
+    "strong_identity_non_fallback_primary": 235,
+    "strong_identity_fallback_primary_bug": 0,
+    "weak_identity_category_fallback": 175
+  }
+}

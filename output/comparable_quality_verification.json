@@ -1,0 +1,186 @@
+{
+  "generated_at": "2026-08-01T03:23:28.786975+00:00",
+  "version": "1.0-comparable-quality",
+  "method": "replay_of_contaminated_yahoo_audit_comps_plus_optional_clean_saffiano",
+  "summary": {
+    "before": "Predicted selling price collapsed to ¥7,975 from junk/category Yahoo comps; COMPARABLE_DATA_SUSPECT did not suppress published price.",
+    "after": "Sold-only + junk + relative low-price floor + strong-match preference + SUSPECT publish gate. Contaminated Promenade/Vitello must not publish ¥7,975."
+  },
+  "products": [
+    {
+      "product": "Prada Saffiano Lux Promenade Tote Argilla",
+      "purchase_price_jpy": "152000",
+      "before_predicted_price_jpy": "7975",
+      "after_predicted_price_jpy": "0",
+      "after_publish_price": false,
+      "quality": "SUSPECT",
+      "reason": "比較データ品質不足",
+      "filter_counts": {
+        "input": 20,
+        "junk_excluded": 10,
+        "active_excluded": 0,
+        "unknown_excluded": 0,
+        "suspicious_low_excluded": 7,
+        "sold_kept": 3
+      },
+      "same_model_matches": 0,
+      "category_matches": 3,
+      "sold_confirmed_used": 3,
+      "evidence_sample": [
+        {
+          "marketplace": "Yahoo Auctions",
+          "title": "プラダ 2way トートバッグ BN2495",
+          "sale_price": 63800,
+          "status": "SOLD_COMPLETED",
+          "sold_date": "2026-07-30",
+          "match_score": 75,
+          "url": "https://auctions.yahoo.co.jp/jp/auction/x",
+          "match_attributes": "family:Tote; model_family:40, category_exact:35",
+          "rejected_reason": ""
+        },
+        {
+          "marketplace": "Yahoo Auctions",
+          "title": "☆PRADA 1BG356 デニム レザー トートバッグ",
+          "sale_price": 77200,
+          "status": "SOLD_COMPLETED",
+          "sold_date": "2026-07-30",
+          "match_score": 78,
+          "url": "https://auctions.yahoo.co.jp/jp/auction/x",
+          "match_attributes": "family:Tote; model_family:40, category_exact:35, title_similarity:3",
+          "rejected_reason": ""
+        },
+        {
+          "marketplace": "Yahoo Auctions",
+          "title": "良品 PRADA ラフィア トート",
+          "sale_price": 140000,
+          "status": "SOLD_COMPLETED",
+          "sold_date": "2026-07-30",
+          "match_score": 83,
+          "url": "https://auctions.yahoo.co.jp/jp/auction/x",
+          "match_attributes": "family:Tote; model_family:40, category_exact:35, title_similarity:3, condition:5",
+          "rejected_reason": ""
+        }
+      ],
+      "user_message": "販売予想価格: 信頼性不足（比較データ品質不足） 同一モデル一致:0 / カテゴリ一致:3"
+    },
+    {
+      "product": "Prada Saffiano Lux Medium Tote Cammeo",
+      "purchase_price_jpy": "143200",
+      "before_predicted_price_jpy": "7975",
+      "after_predicted_price_jpy": "155000",
+      "after_publish_price": true,
+      "quality": "HIGH",
+      "reason": "落札済・同一モデル一致が十分",
+      "filter_counts": {
+        "input": 23,
+        "junk_excluded": 10,
+        "active_excluded": 0,
+        "unknown_excluded": 0,
+        "suspicious_low_excluded": 7,
+        "sold_kept": 6
+      },
+      "same_model_matches": 3,
+      "category_matches": 0,
+      "sold_confirmed_used": 3,
+      "evidence_sample": [
+        {
+          "marketplace": "Yahoo Auctions",
+          "title": "PRADA サフィアーノ ラックス ミディアム トート",
+          "sale_price": 148000,
+          "status": "SOLD_COMPLETED",
+          "sold_date": "2026-07-30",
+          "match_score": 100,
+          "url": "https://auctions.yahoo.co.jp/jp/auction/x",
+          "match_attributes": "family:Tote; model_family:40, size:8, category_exact:35, material:20, title_similarity:3",
+          "rejected_reason": ""
+        },
+        {
+          "marketplace": "Yahoo Auctions",
+          "title": "プラダ サフィアーノ ミディアム トート",
+          "sale_price": 160000,
+          "status": "SOLD_COMPLETED",
+          "sold_date": "2026-07-30",
+          "match_score": 100,
+          "url": "https://auctions.yahoo.co.jp/jp/auction/x",
+          "match_attributes": "family:Tote; model_family:40, size:8, category_exact:35, material:20",
+          "rejected_reason": ""
+        },
+        {
+          "marketplace": "Yahoo Auctions",
+          "title": "PRADA Saffiano Lux Medium Tote",
+          "sale_price": 155000,
+          "status": "SOLD_COMPLETED",
+          "sold_date": "2026-07-30",
+          "match_score": 100,
+          "url": "https://auctions.yahoo.co.jp/jp/auction/x",
+          "match_attributes": "family:Tote; model_family:40, size:8, category_exact:35, material:20, title_similarity:12",
+          "rejected_reason": ""
+        }
+      ],
+      "user_message": "根拠: 落札済 3件 / 同一モデル 3件 / 品質 HIGH"
+    },
+    {
+      "product": "Prada Vitello Daino Tote",
+      "purchase_price_jpy": "175200",
+      "before_predicted_price_jpy": "7975",
+      "after_predicted_price_jpy": "0",
+      "after_publish_price": false,
+      "quality": "SUSPECT",
+      "reason": "比較データ品質不足",
+      "filter_counts": {
+        "input": 20,
+        "junk_excluded": 10,
+        "active_excluded": 0,
+        "unknown_excluded": 0,
+        "suspicious_low_excluded": 7,
+        "sold_kept": 3
+      },
+      "same_model_matches": 0,
+      "category_matches": 3,
+      "sold_confirmed_used": 3,
+      "evidence_sample": [
+        {
+          "marketplace": "Yahoo Auctions",
+          "title": "プラダ 2way トートバッグ BN2495",
+          "sale_price": 63800,
+          "status": "SOLD_COMPLETED",
+          "sold_date": "2026-07-30",
+          "match_score": 75,
+          "url": "https://auctions.yahoo.co.jp/jp/auction/x",
+          "match_attributes": "family:Tote; model_family:40, category_exact:35",
+          "rejected_reason": ""
+        },
+        {
+          "marketplace": "Yahoo Auctions",
+          "title": "☆PRADA 1BG356 デニム レザー トートバッグ",
+          "sale_price": 77200,
+          "status": "SOLD_COMPLETED",
+          "sold_date": "2026-07-30",
+          "match_score": 78,
+          "url": "https://auctions.yahoo.co.jp/jp/auction/x",
+          "match_attributes": "family:Tote; model_family:40, category_exact:35, title_similarity:3",
+          "rejected_reason": ""
+        },
+        {
+          "marketplace": "Yahoo Auctions",
+          "title": "良品 PRADA ラフィア トート",
+          "sale_price": 140000,
+          "status": "SOLD_COMPLETED",
+          "sold_date": "2026-07-30",
+          "match_score": 83,
+          "url": "https://auctions.yahoo.co.jp/jp/auction/x",
+          "match_attributes": "family:Tote; model_family:40, category_exact:35, title_similarity:3, condition:5",
+          "rejected_reason": ""
+        }
+      ],
+      "user_message": "販売予想価格: 信頼性不足（比較データ品質不足） 同一モデル一致:0 / カテゴリ一致:3"
+    }
+  ],
+  "confirmations": {
+    "ProfitCalculator_unchanged": true,
+    "ranking_formula_unchanged": true,
+    "acquisition_unchanged": true,
+    "continuous_analysis_unchanged": true,
+    "db_schema_unchanged": true
+  }
+}

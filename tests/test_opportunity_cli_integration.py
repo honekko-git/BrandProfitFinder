@@ -36,11 +36,11 @@ def test_discovery_cli_output_includes_opportunity_ranking() -> None:
     )
 
     rendered = output.getvalue()
-    assert "Opportunity Ranking" in rendered
-    assert "Product:" in rendered
-    assert "Supplier:" in rendered
-    assert "Score:" in rendered
-    assert "Decision:" in rendered
+    assert "候補順位" in rendered
+    assert "商品名:" in rendered
+    assert "仕入先:" in rendered
+    assert "スコア:" in rendered
+    assert "判定:" in rendered
 
 
 def test_discovery_cli_opportunity_ranking_is_sorted_by_score() -> None:

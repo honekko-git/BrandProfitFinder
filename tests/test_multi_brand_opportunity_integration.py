@@ -88,7 +88,7 @@ def test_discovery_cli_displays_runner_opportunity_ranking() -> None:
     ]
     rendered = output.getvalue()
     top = cli_result.ranked_demand_opportunities[0]
-    assert "Demand Opportunity Ranking" in rendered
+    assert "需要込み候補順位" in rendered
     assert top.demand_profile is not None
     assert top.demand_profile.query in rendered
     assert f"{top.score.total_score:.1f}" in rendered

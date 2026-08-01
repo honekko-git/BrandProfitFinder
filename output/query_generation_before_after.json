@@ -1,0 +1,17 @@
+{
+  "audit_timestamp": "2026-08-01T11:09:32.916407+00:00",
+  "workspace_batch_id": "ws-20260731183118-b673ef",
+  "analysis_version_now": "v3",
+  "total_candidates": 410,
+  "before_empty_query_zero_raw": 352,
+  "before_nonempty_queries": 58,
+  "after_rebuilt_nonempty": 410,
+  "after_rebuilt_empty": 0,
+  "generic_primary_before": 12,
+  "generic_primary_after": 129,
+  "query_recoverable_now": 352,
+  "replay_sample_size": 20,
+  "replay_nonempty_query_traces": 20,
+  "replay_published_selling_prices": 10,
+  "contaminated_7975_count": 0
+}

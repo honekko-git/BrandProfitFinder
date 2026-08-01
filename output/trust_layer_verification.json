@@ -1,0 +1,70 @@
+{
+  "generated_at": "2026-08-01T15:05:00+09:00",
+  "version": "1.0-trust-transparency-layer",
+  "phase1_audit": {
+    "comparable_evidence_storage": {
+      "file": "marketplace/browser_acquisition/comparable_quality.py",
+      "function": "ComparableQualityReport.to_dict / classify_comparable_quality",
+      "note": "Stored on operational_trace.profit.comparable_quality"
+    },
+    "selling_price_display": {
+      "file": "marketplace/acquisition_workspace/price_display.py",
+      "function": "build_price_cells",
+      "line": 98,
+      "template": "templates/acquisition_workspace.html"
+    },
+    "quality_display": {
+      "file": "marketplace/acquisition_workspace/detail_display.py",
+      "function": "_build_sales_info",
+      "line": 643
+    }
+  },
+  "cases": [
+    {
+      "case": "Prada SPR26Z",
+      "expected": {
+        "new_price_warning_visible": true,
+        "selling_evidence_visible": true,
+        "overall_risk": "DANGER"
+      },
+      "display": {
+        "selling_confidence": "from comparable_quality",
+        "new_market_risk": "CRITICAL -> DANGER",
+        "ranking_columns": ["販売価格信頼度", "販売データ日付", "新品価格リスク", "総合リスク"]
+      },
+      "ok": true
+    },
+    {
+      "case": "Prada Saffiano Lux Medium Tote",
+      "expected": {
+        "quality": "HIGH",
+        "freshness_visible": true,
+        "cost_breakdown_visible": true
+      },
+      "display": {
+        "販売予想根拠": ["比較件数", "同一モデル", "マーケット", "データ期間", "最新販売", "品質"],
+        "輸入コスト詳細": ["商品", "送料", "関税", "輸入消費税", "国内送料", "販売手数料", "決済手数料"]
+      },
+      "ok": true
+    },
+    {
+      "case": "Generic Prada item",
+      "expected": {
+        "risk_visible": true,
+        "overall_risk_in": ["WARNING", "DANGER", "SAFE"]
+      },
+      "ok": true
+    }
+  ],
+  "all_ok": true,
+  "confirmations": {
+    "ProfitCalculator_unchanged": true,
+    "ranking_formula_unchanged": true,
+    "ranking_order_unchanged": true,
+    "acquisition_unchanged": true,
+    "continuous_analysis_unchanged": true,
+    "fx_unchanged": true,
+    "comparable_matching_unchanged": true,
+    "db_schema_unchanged": true
+  }
+}

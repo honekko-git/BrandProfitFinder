@@ -125,9 +125,9 @@ def test_runtime_cli_smoke_test_executes_discovery_command() -> None:
 
     rendered = output.getvalue()
     assert result.total_candidates >= 0
-    assert "Discovery Summary" in rendered
-    assert "Demand Opportunity Ranking" in rendered
-    assert "AI PROFIT DISCOVERY SHOWCASE" in rendered
+    assert "検索概要" in rendered
+    assert "需要込み候補順位" in rendered
+    assert "AI利益発見ショーケース" in rendered
     assert result.ranked_demand_opportunities is not None
 
 
@@ -145,9 +145,9 @@ def test_runtime_cli_smoke_test_supports_category_priority_path() -> None:
 
     rendered = output.getvalue()
     assert result.total_candidates >= 0
-    assert "Discovery Summary" in rendered
+    assert "検索概要" in rendered
     assert "Chanel" in rendered
-    assert "AI PROFIT DISCOVERY SHOWCASE" in rendered
+    assert "AI利益発見ショーケース" in rendered
     assert result.ranked_demand_opportunities is not None
 
 
@@ -157,10 +157,12 @@ def test_runtime_main_discovery_entrypoint_smoke() -> None:
         cwd=PROJECT_ROOT,
         capture_output=True,
         text=True,
+        encoding="utf-8",
+        errors="replace",
         check=False,
     )
 
     assert completed.returncode == 0, completed.stderr
-    assert "Discovery Summary" in completed.stdout
-    assert "Demand Opportunity Ranking" in completed.stdout
-    assert "AI PROFIT DISCOVERY SHOWCASE" in completed.stdout
+    assert "検索概要" in (completed.stdout or "")
+    assert "需要込み候補順位" in (completed.stdout or "")
+    assert "AI利益発見ショーケース" in (completed.stdout or "")

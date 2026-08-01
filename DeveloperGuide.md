@@ -212,6 +212,77 @@ result = MarketplaceSearchService().search(stockx_adapter, request)
 print(result.status, len(result.valid_listings))
 ```
 
+### Data truth and discovery transparency
+
+Version 2 workspace and batch-profit outputs expose two reusable transparency objects on acquisition candidates:
+
+- `DataTruthSummary`
+- `DiscoveryMetadata`
+
+Use them to explain where values came from and how trustworthy they are without changing pipeline logic.
+
+#### Runtime labels
+
+- `LIVE` — comparable or market data came from a live request or live cache
+- `FIXTURE` — comparable or market data came from deterministic fixture input
+- `IMPORT` — purchase-side candidate data came from CSV, manual entry, saved HTML, public URL, or existing imported rows
+
+#### Acquisition modes
+
+- `MANUAL` — user-entered listing fields
+- `CSV` — uploaded structured import
+- `SAVED_HTML` — parsed saved browser HTML
+- `PUBLIC_URL` — manually supplied public listing URL
+- `EXISTING_IMPORT` — copied from persisted imported listings
+
+#### Estimated fields
+
+- `used_estimated_price=True` means the selling-side estimate was inferred from comparable results
+- `used_estimated_shipping=True` means shipping cost is not live-carrier quoted and remains a modeled estimate
+- `fee_source="Configured"` means cost profile configuration provided the fee inputs
+
+#### Confidence
+
+- `HIGH` — live comparable evidence with enough accepted results for a stable estimate
+- `MEDIUM` — some evidence exists, but the estimate is still partly inferred
+- `LOW` — weak or missing comparable evidence
+
+#### Developer expectations
+
+- `confidence_level` must never be blank
+- `runtime_mode` must always be populated
+- `query_count >= 1`
+- `candidate_count >= comparable_count`
+
+CLI, browser workspace pages, and acquisition exports should all read from the same candidate transparency metadata rather than synthesizing their own labels.
+
+### Used Listing Ranking MVP
+
+Purpose: give operators a practical ordered view of acquisition candidates so they can compare profit, ROI, demand proxies, and confidence, then open the original overseas listing and decide manually.
+
+#### Components and fixed weights
+
+| Component | Weight | Source |
+|-----------|--------|--------|
+| Profit | 35% | `last_net_profit` falling back to `last_gross_profit` |
+| ROI | 30% | profit / `purchase_price_jpy` as percent |
+| Demand | 20% | `discovery_metadata.comparable_count` as sold-sample proxy |
+| Confidence | 15% | `DataTruthSummary.confidence_level` mapped HIGH=100, MEDIUM=60, LOW=25 |
+
+Overall score = weighted sum of 0–100 component scores, rounded to one decimal. Normalization is min-max within the current eligible set. Negative profit and zero/negative ROI score 0. Missing sales count scores 0.
+
+#### Mandatory source listing URL
+
+Ranking eligibility requires a non-empty `http://` or `https://` value in the existing `purchase_url` field. Candidates without a valid URL stay visible in the workspace with a warning, but are excluded from ranked results. There is no URL-less purchasable candidate concept.
+
+#### Short analysis
+
+`analysis_summary` is a deterministic two-to-four sentence text built from scores and warnings. It never says “buy this” or issues a final decision. The human user must inspect the original listing and make the sourcing decision.
+
+#### Intentionally deferred
+
+Adaptive/custom weights, ML, advanced condition/liquidity/price-stability scoring, forecasting, and automatic purchasing/payment/negotiation are deferred until after real prototype usage feedback.
+
 ---
 
 ## Module Docstring Standards

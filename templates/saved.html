@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block page_title %}{{ title }} — 保存済み候補{% endblock %}
+
+{% block content %}
+<section class="hero compact">
+    <h1>保存済み候補</h1>
+    <p class="subtitle">発見した中古高級品の利益候補を管理します</p>
+</section>
+
+<section class="results-panel">
+    {% if rows %}
+    <div class="saved-table-wrap">
+        <table class="saved-table">
+            <thead>
+                <tr>
+                    <th>商品名</th>
+                    <th>ブランド</th>
+                    <th>仕入先</th>
+                    <th>利益</th>
+                    <th>スコア</th>
+                    <th>状態</th>
+                    <th>作成日</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    <td>{{ row.product }}</td>
+                    <td>{{ row.brand }}</td>
+                    <td>{{ row.purchase_source }}</td>
+                    <td class="profit">{{ row.profit }}</td>
+                    <td>{{ "%.1f"|format(row.score) }}</td>
+                    <td><span class="status-badge status-{{ row.status|lower }}">{{ row.status }}</span></td>
+                    <td>{{ row.created_date }}</td>
+                    <td>
+                        {% if row.status == "NEW" %}
+                        <form action="/saved/{{ row.id }}/status" method="post" class="inline-form">
+                            <input type="hidden" name="status" value="WATCHING">
+                            <input type="hidden" name="redirect_to" value="/saved">
+                            <button type="submit">ウォッチ</button>
+                        </form>
+                        {% elif row.status == "WATCHING" %}
+                        <form action="/saved/{{ row.id }}/status" method="post" class="inline-form">
+                            <input type="hidden" name="status" value="PURCHASED">
+                            <input type="hidden" name="redirect_to" value="/saved">
+                            <button type="submit">購入済み</button>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="empty-state">保存済み候補はまだありません。検索して候補を保存してください。</p>
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block page_title %}{{ title }}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="{% block body_class %}{% endblock %}">
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand-link" href="/">LuxuryBrandProfitFinder</a>
+            <nav class="site-nav">
+                <a href="/">検索</a>
+                <a href="/#rankings">ランキング</a>
+                <a href="/saved">保存済み候補</a>
+                <a href="/import">データ取込</a>
+                <a href="/imported">取込一覧</a>
+                <a href="/validation">利益検証</a>
+                <a href="/profit-batch">一括利益計算</a>
+                <a href="/acquisition-workspace">仕入れ候補</a>
+            </nav>
+        </div>
+    </header>
+    <main class="page-content">
+        {% block content %}{% endblock %}
+    </main>
+    <script src="/static/app.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

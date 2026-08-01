@@ -1,0 +1,35 @@
+{
+  "audit_timestamp": "2026-08-01T12:01:54.215809+00:00",
+  "workspace_batch_id": "ws-20260731183118-b673ef",
+  "analysis_version": "v3",
+  "scores": {
+    "Acquisition": "PASS",
+    "Duplicate prevention": "PASS",
+    "Bulk acquisition": "PASS",
+    "Budget filter": "PASS",
+    "FX snapshot": "PASS",
+    "Continuous analysis": "PASS",
+    "Analysis versioning": "PASS",
+    "Comparable quality": "PASS",
+    "Identity extraction": "PASS",
+    "Query generation": "PASS",
+    "Yahoo retrieval": "PASS",
+    "Mercari retrieval": "PASS",
+    "New-market validation": "PASS",
+    "Trust layer": "PASS",
+    "Ranking": "PASS",
+    "UI": "PASS"
+  },
+  "evidence": {
+    "published": 64,
+    "unpublished": 214,
+    "false_positives": 0,
+    "false_negatives_flagged": 22,
+    "yahoo_with_raw_v3": 278,
+    "mercari_with_raw_v3": 278,
+    "unexplained_empty_queries_v3": 0,
+    "analyzed_current": 278,
+    "eligible": 278,
+    "false_negative_note": "22 flagged near-misses: mostly same_model=2 (gate needs 3 for HIGH) or INSUFFICIENT — correct under unchanged thresholds, not pipeline defects."
+  }
+}

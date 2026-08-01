@@ -1409,6 +1409,32 @@ def main() -> None:
         from profit_discovery.cli.discovery_command import run_discovery_cli
 
         raise SystemExit(run_discovery_cli(sys.argv[2:]))
+    if len(sys.argv) > 1 and sys.argv[1] == "live-profit-check":
+        from profit_discovery.cli.live_profit_check_command import run_live_profit_check_cli
+
+        raise SystemExit(run_live_profit_check_cli(sys.argv[2:]))
+    if len(sys.argv) > 1 and sys.argv[1] == "batch-profit-check":
+        from profit_discovery.cli.batch_profit_command import run_batch_profit_cli
+
+        raise SystemExit(run_batch_profit_cli(sys.argv[2:]))
+    if len(sys.argv) > 1 and sys.argv[1] == "version1-rc-validate":
+        from profit_discovery.cli.version1_rc_validate_command import run_version1_rc_validate
+
+        raise SystemExit(run_version1_rc_validate(sys.argv[2:]))
+    if len(sys.argv) > 1 and sys.argv[1] in {
+        "acquisition-import",
+        "acquisition-list",
+        "acquisition-export",
+        "acquisition-run-profit",
+    }:
+        from profit_discovery.cli.acquisition_workspace_command import run_acquisition_cli
+
+        raise SystemExit(run_acquisition_cli(sys.argv[1:]))
+    if len(sys.argv) > 1 and sys.argv[1] == "web":
+        from app.main import run_web_server
+
+        run_web_server()
+        return
     if "--help" in sys.argv or "-h" in sys.argv:
         build_cli_parser().print_help()
         return

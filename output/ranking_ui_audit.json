@@ -1,0 +1,38 @@
+{
+  "generated_at": "2026-08-01T10:25:00+00:00",
+  "scope": "acquisition_workspace ranking table column set (display-only)",
+  "status": "implemented",
+  "ranking_columns": [
+    "商品名",
+    "ブランド",
+    "仕入価格",
+    "販売予想価格",
+    "純利益",
+    "利益率",
+    "販売価格信頼度",
+    "総合リスク",
+    "商品を見る"
+  ],
+  "detail_only": [
+    "順位",
+    "ステータス",
+    "ROI",
+    "分析状態",
+    "販売データ日付",
+    "新品価格詳細",
+    "AI badge",
+    "AI explanation"
+  ],
+  "unchanged": [
+    "sorting",
+    "profit",
+    "ranking",
+    "risk",
+    "trust"
+  ],
+  "files": [
+    "templates/acquisition_workspace.html",
+    "static/style.css",
+    "tests/test_acquisition_workspace_browser.py"
+  ]
+}

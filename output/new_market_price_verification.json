@@ -1,0 +1,150 @@
+{
+  "generated_at": "2026-08-01T03:45:47.182976+00:00",
+  "version": "1.0-new-market-price-validation",
+  "cases": [
+    {
+      "case": "Prada SPR26Z",
+      "identity": {
+        "brand": "PRADA",
+        "category": "SUNGLASSES",
+        "reference_numbers": [
+          "SPR26Z"
+        ],
+        "collection": "",
+        "family": "",
+        "material": "ACETATE",
+        "color": "PINK",
+        "size": "",
+        "cleaned_title": "prada acetate oval sunglasses spr 26z pink"
+      },
+      "used_estimate_jpy": 120000,
+      "validation": {
+        "risk": "CRITICAL",
+        "code": "NEW_PRICE_LOWER_THAN_USED",
+        "reason": "新品価格が中古予想を大きく下回っています",
+        "used_predicted_price_jpy": 120000,
+        "new_market_price_jpy": 42800,
+        "currency": "JPY",
+        "marketplace": "BUYMA",
+        "evidence": {
+          "marketplace": "BUYMA",
+          "title": "PRADA SPR26Z Sunglasses Pink",
+          "price": 42800,
+          "currency": "JPY",
+          "url": "https://www.buyma.com/example/spr26z",
+          "retrieved_at": "2026-08-01T03:45:47.181286+00:00",
+          "availability": "in_stock",
+          "condition": "NEW",
+          "match_score": 70
+        },
+        "match_score": 70,
+        "ranking_safe": false,
+        "display_label": "⚠ 要確認",
+        "user_message": "新品価格: ¥42,800 / 中古予想: ¥120,000 / 利益ランキング: 注意"
+      },
+      "expected": "CRITICAL warning possible when exact new price lower",
+      "ok": true
+    },
+    {
+      "case": "Prada Saffiano Lux Medium Tote",
+      "identity": {
+        "brand": "PRADA",
+        "category": "TOTE_BAG",
+        "reference_numbers": [],
+        "collection": "Saffiano Lux",
+        "family": "Saffiano Lux",
+        "material": "SAFFIANO",
+        "color": "",
+        "size": "Medium",
+        "cleaned_title": "prada saffiano lux medium tote cammeo"
+      },
+      "used_estimate_jpy": 155000,
+      "validation": {
+        "risk": "NORMAL",
+        "code": "NEW_PRICE_OK",
+        "reason": "新品参考価格は中古予想以上です",
+        "used_predicted_price_jpy": 155000,
+        "new_market_price_jpy": 220000,
+        "currency": "JPY",
+        "marketplace": "BUYMA",
+        "evidence": {
+          "marketplace": "BUYMA",
+          "title": "PRADA Saffiano Lux Medium Tote NEW",
+          "price": 220000,
+          "currency": "JPY",
+          "url": "",
+          "retrieved_at": "2026-08-01T03:45:47.182057+00:00",
+          "availability": "",
+          "condition": "NEW",
+          "match_score": 75
+        },
+        "match_score": 75,
+        "ranking_safe": true,
+        "display_label": "販売価格チェック",
+        "user_message": "中古予想: ¥155,000 / 新品参考: ¥220,000 / 判定: 正常"
+      },
+      "expected": "No false warning when new >= used",
+      "ok": true
+    },
+    {
+      "case": "Generic Prada item",
+      "identity": {
+        "brand": "PRADA",
+        "category": "TOTE_BAG",
+        "reference_numbers": [],
+        "collection": "",
+        "family": "",
+        "material": "UNKNOWN",
+        "color": "",
+        "size": "",
+        "cleaned_title": "prada tote"
+      },
+      "validation": {
+        "risk": "NONE",
+        "code": "",
+        "reason": "",
+        "used_predicted_price_jpy": 90000,
+        "new_market_price_jpy": null,
+        "currency": "JPY",
+        "marketplace": "",
+        "evidence": null,
+        "match_score": 0,
+        "ranking_safe": true,
+        "display_label": "販売価格チェック",
+        "user_message": ""
+      },
+      "expected": "No unrelated new-price match",
+      "ok": true
+    },
+    {
+      "case": "No new data",
+      "validation": {
+        "risk": "NONE",
+        "code": "",
+        "reason": "",
+        "used_predicted_price_jpy": 120000,
+        "new_market_price_jpy": null,
+        "currency": "JPY",
+        "marketplace": "",
+        "evidence": null,
+        "match_score": 0,
+        "ranking_safe": true,
+        "display_label": "販売価格チェック",
+        "user_message": ""
+      },
+      "expected": "No ranking impact",
+      "ok": true
+    }
+  ],
+  "all_ok": true,
+  "confirmations": {
+    "ProfitCalculator_unchanged": true,
+    "ranking_formula_unchanged": true,
+    "ranking_eligibility_safety_flag_only": true,
+    "acquisition_unchanged": true,
+    "continuous_analysis_unchanged": true,
+    "comparable_matching_unchanged": true,
+    "fx_unchanged": true,
+    "db_schema_unchanged": true
+  }
+}

@@ -1,0 +1,399 @@
+{
+  "audit_timestamp": "2026-08-01T12:01:54.215844+00:00",
+  "workspace_batch_id": "ws-20260731183118-b673ef",
+  "count": 22,
+  "by_class": {
+    "Liquidity": 12,
+    "Threshold": 10
+  },
+  "items": [
+    {
+      "candidate_id": "ac-11e11571d077",
+      "title": "Prada Acetate Oval Sunglasses SPR 26Z-F Black",
+      "class": "Liquidity",
+      "unpublished_reason": "OTHER",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 5,
+      "mercari_raw": 20,
+      "same_model": 2,
+      "accepted": 2,
+      "queries": [
+        "プラダ SPR26Z",
+        "Prada SPR26Z sunglasses"
+      ],
+      "new_market_risk": "NONE"
+    },
+    {
+      "candidate_id": "ac-cd724ef75f0d",
+      "title": "Prada Saffiano Lux Small Tote Argilla",
+      "class": "Threshold",
+      "unpublished_reason": "LOW_MATCH_SCORE",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 20,
+      "mercari_raw": 20,
+      "same_model": 2,
+      "accepted": 2,
+      "queries": [
+        "プラダ Saffiano Lux Small トートバッグ",
+        "プラダ Saffiano Lux サフィアーノ",
+        "プラダ Saffiano Lux トートバッグ",
+        "Prada Saffiano Lux Small Tote"
+      ],
+      "new_market_risk": "NONE"
+    },
+    {
+      "candidate_id": "ac-1696b5baa56e",
+      "title": "Prada Acetate Symbole Sunglasses SPR 06Y Black Black",
+      "class": "Liquidity",
+      "unpublished_reason": "OTHER",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 7,
+      "mercari_raw": 20,
+      "same_model": 2,
+      "accepted": 2,
+      "queries": [
+        "プラダ SPR06Y",
+        "Prada SPR06Y sunglasses",
+        "プラダ シンボル サングラス",
+        "Prada Symbole Sunglasses"
+      ],
+      "new_market_risk": "NONE"
+    },
+    {
+      "candidate_id": "ac-ee7f069fc686",
+      "title": "Prada Acetate Sunglasses SPR 15P Black",
+      "class": "Threshold",
+      "unpublished_reason": "NO_SAME_MODEL",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 2,
+      "mercari_raw": 20,
+      "same_model": 0,
+      "accepted": 0,
+      "queries": [
+        "プラダ SPR15P",
+        "Prada SPR15P sunglasses"
+      ],
+      "new_market_risk": "NONE"
+    },
+    {
+      "candidate_id": "ac-ff55fb8bb2ce",
+      "title": "Prada Saffiano Lux Medium Promenade Tote Talco",
+      "class": "Threshold",
+      "unpublished_reason": "LOW_MATCH_SCORE",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 20,
+      "mercari_raw": 20,
+      "same_model": 2,
+      "accepted": 2,
+      "queries": [
+        "プラダ Saffiano Lux Medium トートバッグ",
+        "プラダ Saffiano Lux サフィアーノ",
+        "プラダ Saffiano Lux トートバッグ",
+        "Prada Saffiano Lux Medium Tote"
+      ],
+      "new_market_risk": "NONE"
+    },
+    {
+      "candidate_id": "ac-f1d6149095a1",
+      "title": "Prada Saffiano Triangle Zip Around Wallet Black",
+      "class": "Threshold",
+      "unpublished_reason": "LOW_MATCH_SCORE",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 20,
+      "mercari_raw": 20,
+      "same_model": 1,
+      "accepted": 1,
+      "queries": [
+        "プラダ Saffiano Triangle サフィアーノ",
+        "プラダ Saffiano Triangle ラウンドファスナー",
+        "Prada Saffiano Triangle Saffiano",
+        "Prada Saffiano Triangle Round Zip"
+      ],
+      "new_market_risk": "NONE"
+    },
+    {
+      "candidate_id": "ac-73c938dc1bde",
+      "title": "Prada Saffiano Lux Promenade Tote Argilla",
+      "class": "Liquidity",
+      "unpublished_reason": "OTHER",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 20,
+      "mercari_raw": 20,
+      "same_model": 1,
+      "accepted": 1,
+      "queries": [
+        "プラダ Saffiano Lux サフィアーノ",
+        "プラダ Saffiano Lux トートバッグ",
+        "Prada Saffiano Lux Saffiano",
+        "Prada Saffiano Lux Tote"
+      ],
+      "new_market_risk": "NONE"
+    },
+    {
+      "candidate_id": "ac-673b46bdfb80",
+      "title": "Prada Acetate Symbole Sunglasses SPR 19Z Black",
+      "class": "Liquidity",
+      "unpublished_reason": "OTHER",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 12,
+      "mercari_raw": 20,
+      "same_model": 1,
+      "accepted": 1,
+      "queries": [
+        "プラダ SPR19Z",
+        "Prada SPR19Z sunglasses",
+        "プラダ シンボル サングラス",
+        "Prada Symbole Sunglasses"
+      ],
+      "new_market_risk": "NONE"
+    },
+    {
+      "candidate_id": "ac-50fbb91ae7cc",
+      "title": "Prada Saffiano Lux Medium Tote Cammeo",
+      "class": "Threshold",
+      "unpublished_reason": "LOW_MATCH_SCORE",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 20,
+      "mercari_raw": 20,
+      "same_model": 2,
+      "accepted": 2,
+      "queries": [
+        "プラダ Saffiano Lux Medium トートバッグ",
+        "プラダ Saffiano Lux サフィアーノ",
+        "プラダ Saffiano Lux トートバッグ",
+        "Prada Saffiano Lux Medium Tote"
+      ],
+      "new_market_risk": "NONE"
+    },
+    {
+      "candidate_id": "ac-dbc5a6055fcb",
+      "title": "Prada Acetate Sunglasses SPR 16R Black Tortoise Grey",
+      "class": "Liquidity",
+      "unpublished_reason": "OTHER",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 2,
+      "mercari_raw": 20,
+      "same_model": 1,
+      "accepted": 1,
+      "queries": [
+        "プラダ SPR16R",
+        "Prada SPR16R sunglasses"
+      ],
+      "new_market_risk": "NONE"
+    },
+    {
+      "candidate_id": "ac-6f21a76930c5",
+      "title": "Prada Acetate Symbole Sunglasses SPR 19Z Black",
+      "class": "Liquidity",
+      "unpublished_reason": "OTHER",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 12,
+      "mercari_raw": 20,
+      "same_model": 1,
+      "accepted": 1,
+      "queries": [
+        "プラダ SPR19Z",
+        "Prada SPR19Z sunglasses",
+        "プラダ シンボル サングラス",
+        "Prada Symbole Sunglasses"
+      ],
+      "new_market_risk": "NONE"
+    },
+    {
+      "candidate_id": "ac-1dcc68fbdc85",
+      "title": "Prada Saffiano Lux Logo Embossed Medium Shoulder Tote Handbag White",
+      "class": "Threshold",
+      "unpublished_reason": "LOW_MATCH_SCORE",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 20,
+      "mercari_raw": 20,
+      "same_model": 2,
+      "accepted": 2,
+      "queries": [
+        "プラダ Saffiano Lux Medium トートバッグ",
+        "プラダ Saffiano Lux サフィアーノ",
+        "プラダ Saffiano Lux トートバッグ",
+        "Prada Saffiano Lux Medium Tote"
+      ],
+      "new_market_risk": "NONE"
+    },
+    {
+      "candidate_id": "ac-b318faca2c94",
+      "title": "Prada Acetate Oval Sunglasses SPR 26Z Pink",
+      "class": "Liquidity",
+      "unpublished_reason": "OTHER",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 5,
+      "mercari_raw": 20,
+      "same_model": 2,
+      "accepted": 2,
+      "queries": [
+        "プラダ SPR26Z",
+        "Prada SPR26Z sunglasses"
+      ],
+      "new_market_risk": "NONE"
+    },
+    {
+      "candidate_id": "ac-d4728dd38172",
+      "title": "Prada Acetate Symbole Sunglasses SPR 17W Plum Beige",
+      "class": "Liquidity",
+      "unpublished_reason": "OTHER",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 12,
+      "mercari_raw": 20,
+      "same_model": 2,
+      "accepted": 2,
+      "queries": [
+        "プラダ SPR17W",
+        "Prada SPR17W sunglasses",
+        "プラダ シンボル サングラス",
+        "Prada Symbole Sunglasses"
+      ],
+      "new_market_risk": "NONE"
+    },
+    {
+      "candidate_id": "ac-b12f8797f0ff",
+      "title": "Prada Acetate Symbole Sunglasses SPR 14Z Black Marble",
+      "class": "Liquidity",
+      "unpublished_reason": "OTHER",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 10,
+      "mercari_raw": 20,
+      "same_model": 1,
+      "accepted": 1,
+      "queries": [
+        "プラダ SPR14Z",
+        "Prada SPR14Z sunglasses",
+        "プラダ シンボル サングラス",
+        "Prada Symbole Sunglasses"
+      ],
+      "new_market_risk": "NONE"
+    },
+    {
+      "candidate_id": "ac-6fa85f0a8493",
+      "title": "Prada Saffiano Medium Galleria Double Zip Tote Black",
+      "class": "Threshold",
+      "unpublished_reason": "LOW_MATCH_SCORE",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 20,
+      "mercari_raw": 20,
+      "same_model": 2,
+      "accepted": 2,
+      "queries": [
+        "プラダ ガレリア",
+        "プラダ ガレリア トート",
+        "プラダ ガレリア スモール",
+        "プラダ ガレリア ミディアム"
+      ],
+      "new_market_risk": "NONE"
+    },
+    {
+      "candidate_id": "ac-42944092a499",
+      "title": "Gucci GG Supreme Monogram Blooms Mini Dionysus Chain Wallet Beige Blue Navy Vintage Blue",
+      "class": "Threshold",
+      "unpublished_reason": "NO_SAME_MODEL",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 20,
+      "mercari_raw": 20,
+      "same_model": 0,
+      "accepted": 0,
+      "queries": [
+        "グッチ ディオニュソス",
+        "グッチ ディオニソス",
+        "グッチ ディオニュソス ショルダー",
+        "グッチ ディオニュソス タイガーヘッド"
+      ],
+      "new_market_risk": "NONE"
+    },
+    {
+      "candidate_id": "ac-1daeb8c6fa46",
+      "title": "Gucci GG Supreme Monogram Web Small Ophidia Belt Bag 90 36 Beige Ebony White",
+      "class": "Liquidity",
+      "unpublished_reason": "OTHER",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 20,
+      "mercari_raw": 20,
+      "same_model": 2,
+      "accepted": 2,
+      "queries": [
+        "グッチ BAG90",
+        "Gucci BAG90",
+        "グッチ オフィディア",
+        "グッチ オフィディア スモール"
+      ],
+      "new_market_risk": "NONE"
+    },
+    {
+      "candidate_id": "ac-d5eb8849884a",
+      "title": "Gucci Calfskin Matelasse Mini GG Marmont Chain Shoulder Bag Porcelain Rose",
+      "class": "Threshold",
+      "unpublished_reason": "LOW_MATCH_SCORE",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 20,
+      "mercari_raw": 20,
+      "same_model": 2,
+      "accepted": 2,
+      "queries": [
+        "グッチ マーモント",
+        "グッチ GGマーモント",
+        "グッチ マーモント ミニ",
+        "グッチ マーモント カーフスキン"
+      ],
+      "new_market_risk": "NONE"
+    },
+    {
+      "candidate_id": "ac-78a1e48c4c74",
+      "title": "Gucci Metallic Dollar Calfskin Mini GG Marmont Chain Wallet Silver",
+      "class": "Liquidity",
+      "unpublished_reason": "OTHER",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 20,
+      "mercari_raw": 20,
+      "same_model": 1,
+      "accepted": 1,
+      "queries": [
+        "グッチ マーモント",
+        "グッチ GGマーモント",
+        "グッチ マーモント ミニ",
+        "グッチ マーモント カーフスキン"
+      ],
+      "new_market_risk": "NONE"
+    },
+    {
+      "candidate_id": "ac-efc6027af2a6",
+      "title": "Prada Canvas Stripe Metal Triangle Logo Mini Drawcord Pouch Shoulder Bag Avorio Rosso",
+      "class": "Threshold",
+      "unpublished_reason": "LOW_MATCH_SCORE",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 20,
+      "mercari_raw": 20,
+      "same_model": 1,
+      "accepted": 1,
+      "queries": [
+        "プラダ Canvas Stripe Mini ショルダーバッグ",
+        "プラダ Canvas Stripe CANVAS",
+        "プラダ Canvas Stripe ショルダーバッグ",
+        "Prada Canvas Stripe Mini Shoulder Bag"
+      ],
+      "new_market_risk": "NONE"
+    },
+    {
+      "candidate_id": "ac-0dcc09454b1e",
+      "title": "Prada Acetate Symbole SPR 19W Sunglasses Black",
+      "class": "Liquidity",
+      "unpublished_reason": "OTHER",
+      "quality": "INSUFFICIENT",
+      "yahoo_raw": 12,
+      "mercari_raw": 20,
+      "same_model": 1,
+      "accepted": 1,
+      "queries": [
+        "プラダ SPR19W",
+        "Prada SPR19W sunglasses",
+        "プラダ シンボル サングラス",
+        "Prada Symbole Sunglasses"
+      ],
+      "new_market_risk": "NONE"
+    }
+  ]
+}

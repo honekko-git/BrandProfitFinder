@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block page_title %}{{ title }} — 中古高級品ダッシュボード{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>{{ title }}</h1>
+    <p class="subtitle">{{ subtitle }}</p>
+    {% if saved_message %}
+    <p class="notice">{{ saved_message }}</p>
+    {% endif %}
+</section>
+
+<section class="search-panel">
+    <h2>検索条件</h2>
+    <form action="/search" method="post" class="search-form">
+        <label>
+            ブランド
+            <input type="text" name="brand" value="{{ form.brand }}" required>
+        </label>
+        <label>
+            カテゴリ
+            <input type="text" name="category" value="{{ form.category }}" required>
+        </label>
+        <label>
+            市場モード
+            <select name="market_mode">
+                <option value="FIXTURE" {% if form.market_mode == "FIXTURE" %}selected{% endif %}>FIXTURE</option>
+                <option value="LIVE" {% if form.market_mode == "LIVE" %}selected{% endif %}>LIVE</option>
+            </select>
+        </label>
+        <button type="submit">中古高級品を検索</button>
+    </form>
+</section>
+
+<section class="results-panel" id="rankings">
+    <div class="results-header">
+        <h2>アービトラージ順位</h2>
+        <span class="result-count">{{ result_count }} 件 · 市場モード {{ form.market_mode }}</span>
+    </div>
+
+    {% if connector_executions %}
+    <div class="connector-status">
+        <h3>接続状態</h3>
+        <ul>
+            {% for execution in connector_executions %}
+            <li>
+                {{ execution.market_name }}:
+                要求 {{ execution.requested_source }},
+                実際 {{ execution.actual_source }}
+                {% if execution.fallback_used %}（フォールバック使用）{% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if cards %}
+    <div class="card-grid">
+        {% for card in cards %}
+        <article class="rank-card">
+            <div class="rank-badge">#{{ card.rank }}</div>
+            <h3><a href="/product/{{ card.product_id }}">{{ card.product }}</a></h3>
+            <p class="meta">{{ card.brand }} · {{ card.category }}</p>
+
+            <dl class="metric-list">
+                <div><dt>仕入先</dt><dd>{{ card.purchase_source }}</dd></div>
+                <div><dt>仕入価格</dt><dd>{{ card.purchase_price }}</dd></div>
+                <div><dt>販売市場</dt><dd>{{ card.selling_market }}</dd></div>
+                <div><dt>販売価格</dt><dd>{{ card.selling_price }}</dd></div>
+                <div><dt>推定利益</dt><dd class="profit">{{ card.estimated_profit }}</dd></div>
+                <div><dt>利益率</dt><dd>{{ card.profit_margin }}</dd></div>
+                <div><dt>需要スコア</dt><dd>{{ "%.0f"|format(card.demand_score) }}</dd></div>
+                <div><dt>回転スコア</dt><dd>{{ "%.1f"|format(card.turnover_score) }}</dd></div>
+                <div><dt>裁定スコア</dt><dd>{{ "%.1f"|format(card.arbitrage_score) }}</dd></div>
+                <div><dt>取得元</dt><dd>{{ card.listing_source }}</dd></div>
+                <div><dt>価格</dt><dd>{{ card.listing_price }}</dd></div>
+                <div><dt>状態</dt><dd>{{ card.condition }}</dd></div>
+                <div><dt>市場ソース</dt><dd>{{ card.market_source }}</dd></div>
+                <div><dt>判定</dt><dd class="decision decision-{{ card.decision|lower }}">{{ card.decision }}</dd></div>
+            </dl>
+
+            <div class="url-links">
+                {% if card.listing_url %}
+                <a href="{{ card.listing_url }}" target="_blank" rel="noopener noreferrer">URL</a>
+                {% endif %}
+                {% if card.purchase_url %}
+                <a href="{{ card.purchase_url }}" target="_blank" rel="noopener noreferrer">仕入URL</a>
+                {% endif %}
+                {% if card.selling_url %}
+                <a href="{{ card.selling_url }}" target="_blank" rel="noopener noreferrer">販売URL</a>
+                {% endif %}
+            </div>
+            <form action="/opportunities/{{ card.product_id }}/save" method="post" class="save-form">
+                <button type="submit">候補を保存</button>
+            </form>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="empty-state">検索を実行すると中古高級品の裁定ランキングが表示されます。</p>
+    {% endif %}
+</section>
+{% endblock %}

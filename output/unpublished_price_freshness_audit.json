@@ -1,0 +1,16 @@
+{
+  "audit_timestamp": "2026-08-01T10:49:42.827607+00:00",
+  "workspace_batch_id": "ws-20260731183118-b673ef",
+  "sold_date_available_count": 0,
+  "sold_date_unknown_count": 4,
+  "newest_sold_date": null,
+  "oldest_sold_date": null,
+  "age_distribution": {
+    "0_30_days": 0,
+    "31_90_days": 0,
+    "91_180_days": 0,
+    "over_180_days": 0,
+    "unknown": 4
+  },
+  "finding": "Missing sold dates inflate unknown bucket; rules themselves unchanged. If unknown is large relative to dated sold comps, data-status recovery (class E) is indicated."
+}

@@ -1,0 +1,1066 @@
+{
+  "audit_timestamp": "2026-08-01T11:09:32.916407+00:00",
+  "workspace_batch_id": "ws-20260731183118-b673ef",
+  "traces": [
+    {
+      "class": "collection_cahier",
+      "candidate_id": "ac-b8cd31819368",
+      "imported_title": "Prada Snakeskin Cahier Pochette Naturale",
+      "extracted_identity": {
+        "brand": "PRADA",
+        "category": "BAG",
+        "references": [],
+        "collection": "Cahier",
+        "family": "Cahier",
+        "material": "",
+        "size": "",
+        "color": "",
+        "bag_model_family": "Cahier"
+      },
+      "query_tiers": [
+        {
+          "query": "プラダ カイエ",
+          "tier": "COLLECTION_FAMILY_SIZE",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ カイエ ポシェット",
+          "tier": "COLLECTION_FAMILY_SIZE",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "Prada Cahier",
+          "tier": "COLLECTION_FAMILY_CATEGORY_EN",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "en"
+        },
+        {
+          "query": "Prada Cahier Pochette",
+          "tier": "COLLECTION_FAMILY_CATEGORY_EN",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "en"
+        }
+      ],
+      "queries_sent_planned": [
+        "プラダ カイエ",
+        "プラダ カイエ ポシェット",
+        "Prada Cahier",
+        "Prada Cahier Pochette"
+      ],
+      "stored_before": {
+        "yahoo_queries": [
+          "プラダ バッグ",
+          "Prada bag"
+        ],
+        "yahoo_raw": 20,
+        "yahoo_status": "LIVE",
+        "mercari": {
+          "marketplace": "Mercari",
+          "search_executed": false,
+          "queries": [
+            "プラダ バッグ",
+            "Prada bag"
+          ],
+          "request_status": "REQUEST_FAILED",
+          "raw_candidates": 0,
+          "after_marketplace_filtering": 0,
+          "after_normalization": 0,
+          "after_deterministic_matching": 0,
+          "rejection_reason_counts": {},
+          "sold_listing_evidence_count": 0,
+          "active_listing_evidence_count": 0,
+          "price_values_for_median": [],
+          "median_sold_price_jpy": null,
+          "final_selected": null,
+          "failure_stage": "MERCARI_REQUEST_FAILED",
+          "failure_detail": "Error: BrowserType.launch: Executable doesn't exist at C:\\Users\\メイン\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     playwright install                                     ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
+          "evidence_note": "Mercari sold_out/trading only for price estimation; active listings are excluded."
+        }
+      },
+      "note": "Live re-execution requires Playwright chromium; planned queries shown here."
+    },
+    {
+      "class": "collection_family_galleria",
+      "candidate_id": "ac-6a938b9e0886",
+      "imported_title": "Prada Saffiano Small Galleria Double Zip Tote Cobalto",
+      "extracted_identity": {
+        "brand": "PRADA",
+        "category": "TOTE_BAG",
+        "references": [],
+        "collection": "Galleria",
+        "family": "Galleria",
+        "material": "SAFFIANO",
+        "size": "Small",
+        "color": "",
+        "bag_model_family": "Galleria"
+      },
+      "query_tiers": [
+        {
+          "query": "プラダ ガレリア",
+          "tier": "COLLECTION_FAMILY_SIZE",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ ガレリア トート",
+          "tier": "COLLECTION_FAMILY_SIZE",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ ガレリア スモール",
+          "tier": "COLLECTION_FAMILY_CATEGORY",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ ガレリア Other",
+          "tier": "COLLECTION_FAMILY_CATEGORY",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "ja"
+        }
+      ],
+      "queries_sent_planned": [
+        "プラダ ガレリア",
+        "プラダ ガレリア トート",
+        "プラダ ガレリア スモール",
+        "プラダ ガレリア Other"
+      ],
+      "stored_before": {
+        "yahoo_queries": [],
+        "yahoo_raw": 0,
+        "yahoo_status": "REQUEST_FAILED",
+        "mercari": {
+          "marketplace": "Mercari",
+          "search_executed": false,
+          "queries": [],
+          "request_status": "REQUEST_FAILED",
+          "raw_candidates": 0,
+          "after_marketplace_filtering": 0,
+          "after_normalization": 0,
+          "after_deterministic_matching": 0,
+          "rejection_reason_counts": {},
+          "sold_listing_evidence_count": 0,
+          "active_listing_evidence_count": 0,
+          "price_values_for_median": [],
+          "median_sold_price_jpy": null,
+          "final_selected": null,
+          "failure_stage": "MERCARI_REQUEST_FAILED",
+          "failure_detail": "Error: BrowserType.launch: Executable doesn't exist at C:\\Users\\メイン\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     playwright install                                     ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
+          "evidence_note": "Mercari sold_out/trading only for price estimation; active listings are excluded."
+        }
+      },
+      "note": "Live re-execution requires Playwright chromium; planned queries shown here."
+    },
+    {
+      "class": "exact_reference_sunglasses",
+      "candidate_id": "ac-11e11571d077",
+      "imported_title": "Prada Acetate Oval Sunglasses SPR 26Z-F Black",
+      "extracted_identity": {
+        "brand": "PRADA",
+        "category": "SUNGLASSES",
+        "references": [
+          "SPR26Z"
+        ],
+        "collection": "",
+        "family": "",
+        "material": "ACETATE",
+        "size": "",
+        "color": "BLACK",
+        "bag_model_family": ""
+      },
+      "query_tiers": [
+        {
+          "query": "プラダ SPR26Z",
+          "tier": "REFERENCE_EXACT",
+          "signals": [
+            "brand",
+            "reference"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "Prada SPR26Z sunglasses",
+          "tier": "REFERENCE_EXACT_EN",
+          "signals": [
+            "brand",
+            "reference"
+          ],
+          "language": "en"
+        }
+      ],
+      "queries_sent_planned": [
+        "プラダ SPR26Z",
+        "Prada SPR26Z sunglasses"
+      ],
+      "stored_before": {
+        "yahoo_queries": [],
+        "yahoo_raw": 0,
+        "yahoo_status": "REQUEST_FAILED",
+        "mercari": {
+          "marketplace": "Mercari",
+          "search_executed": false,
+          "queries": [],
+          "request_status": "REQUEST_FAILED",
+          "raw_candidates": 0,
+          "after_marketplace_filtering": 0,
+          "after_normalization": 0,
+          "after_deterministic_matching": 0,
+          "rejection_reason_counts": {},
+          "sold_listing_evidence_count": 0,
+          "active_listing_evidence_count": 0,
+          "price_values_for_median": [],
+          "median_sold_price_jpy": null,
+          "final_selected": null,
+          "failure_stage": "MERCARI_REQUEST_FAILED",
+          "failure_detail": "Error: BrowserType.launch: Executable doesn't exist at C:\\Users\\メイン\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     playwright install                                     ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
+          "evidence_note": "Mercari sold_out/trading only for price estimation; active listings are excluded."
+        }
+      },
+      "note": "Live re-execution requires Playwright chromium; planned queries shown here."
+    },
+    {
+      "class": "collection_family_galleria",
+      "candidate_id": "ac-aabb65d6fd13",
+      "imported_title": "Prada Saffiano Medium Galleria Double Zip Tote Cammeo",
+      "extracted_identity": {
+        "brand": "PRADA",
+        "category": "TOTE_BAG",
+        "references": [],
+        "collection": "Galleria",
+        "family": "Galleria",
+        "material": "SAFFIANO",
+        "size": "Medium",
+        "color": "",
+        "bag_model_family": "Galleria"
+      },
+      "query_tiers": [
+        {
+          "query": "プラダ ガレリア",
+          "tier": "COLLECTION_FAMILY_SIZE",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ ガレリア トート",
+          "tier": "COLLECTION_FAMILY_SIZE",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ ガレリア スモール",
+          "tier": "COLLECTION_FAMILY_CATEGORY",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ ガレリア ミディアム",
+          "tier": "COLLECTION_FAMILY_CATEGORY",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "ja"
+        }
+      ],
+      "queries_sent_planned": [
+        "プラダ ガレリア",
+        "プラダ ガレリア トート",
+        "プラダ ガレリア スモール",
+        "プラダ ガレリア ミディアム"
+      ],
+      "stored_before": {
+        "yahoo_queries": [],
+        "yahoo_raw": 0,
+        "yahoo_status": "REQUEST_FAILED",
+        "mercari": {
+          "marketplace": "Mercari",
+          "search_executed": false,
+          "queries": [],
+          "request_status": "REQUEST_FAILED",
+          "raw_candidates": 0,
+          "after_marketplace_filtering": 0,
+          "after_normalization": 0,
+          "after_deterministic_matching": 0,
+          "rejection_reason_counts": {},
+          "sold_listing_evidence_count": 0,
+          "active_listing_evidence_count": 0,
+          "price_values_for_median": [],
+          "median_sold_price_jpy": null,
+          "final_selected": null,
+          "failure_stage": "MERCARI_REQUEST_FAILED",
+          "failure_detail": "Error: BrowserType.launch: Executable doesn't exist at C:\\Users\\メイン\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     playwright install                                     ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
+          "evidence_note": "Mercari sold_out/trading only for price estimation; active listings are excluded."
+        }
+      },
+      "note": "Live re-execution requires Playwright chromium; planned queries shown here."
+    },
+    {
+      "class": "collection_cahier",
+      "candidate_id": "ac-8a8df8241876",
+      "imported_title": "Prada City Calfskin Saffiano Cahier Top Handle Bag Black",
+      "extracted_identity": {
+        "brand": "PRADA",
+        "category": "BAG",
+        "references": [],
+        "collection": "Calfskin Saffiano",
+        "family": "Calfskin Saffiano",
+        "material": "CALFSKIN",
+        "size": "",
+        "color": "BLACK",
+        "bag_model_family": "Cahier"
+      },
+      "query_tiers": [
+        {
+          "query": "プラダ カイエ",
+          "tier": "COLLECTION_FAMILY_SIZE",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ カイエ ポシェット",
+          "tier": "COLLECTION_FAMILY_SIZE",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ カイエ カーフスキン",
+          "tier": "COLLECTION_FAMILY_CATEGORY",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "Prada Cahier",
+          "tier": "COLLECTION_FAMILY_CATEGORY_EN",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "en"
+        }
+      ],
+      "queries_sent_planned": [
+        "プラダ カイエ",
+        "プラダ カイエ ポシェット",
+        "プラダ カイエ カーフスキン",
+        "Prada Cahier"
+      ],
+      "stored_before": {
+        "yahoo_queries": [],
+        "yahoo_raw": 0,
+        "yahoo_status": "REQUEST_FAILED",
+        "mercari": {
+          "marketplace": "Mercari",
+          "search_executed": false,
+          "queries": [],
+          "request_status": "REQUEST_FAILED",
+          "raw_candidates": 0,
+          "after_marketplace_filtering": 0,
+          "after_normalization": 0,
+          "after_deterministic_matching": 0,
+          "rejection_reason_counts": {},
+          "sold_listing_evidence_count": 0,
+          "active_listing_evidence_count": 0,
+          "price_values_for_median": [],
+          "median_sold_price_jpy": null,
+          "final_selected": null,
+          "failure_stage": "MERCARI_REQUEST_FAILED",
+          "failure_detail": "Error: BrowserType.launch: Executable doesn't exist at C:\\Users\\メイン\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     playwright install                                     ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
+          "evidence_note": "Mercari sold_out/trading only for price estimation; active listings are excluded."
+        }
+      },
+      "note": "Live re-execution requires Playwright chromium; planned queries shown here."
+    },
+    {
+      "class": "saffiano_lux_medium_tote",
+      "candidate_id": "ac-cd724ef75f0d",
+      "imported_title": "Prada Saffiano Lux Small Tote Argilla",
+      "extracted_identity": {
+        "brand": "PRADA",
+        "category": "TOTE_BAG",
+        "references": [],
+        "collection": "Saffiano Lux",
+        "family": "Saffiano Lux",
+        "material": "SAFFIANO",
+        "size": "Small",
+        "color": "",
+        "bag_model_family": "Tote"
+      },
+      "query_tiers": [
+        {
+          "query": "プラダ Saffiano Lux Small トートバッグ",
+          "tier": "COLLECTION_FAMILY_SIZE",
+          "signals": [
+            "brand",
+            "collection",
+            "size",
+            "category"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ Saffiano Lux サフィアーノ",
+          "tier": "COLLECTION_FAMILY_MATERIAL",
+          "signals": [
+            "brand",
+            "collection",
+            "material"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ Saffiano Lux トートバッグ",
+          "tier": "COLLECTION_FAMILY_CATEGORY",
+          "signals": [
+            "brand",
+            "collection",
+            "category"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "Prada Saffiano Lux Small Tote",
+          "tier": "COLLECTION_FAMILY_SIZE_EN",
+          "signals": [
+            "brand",
+            "collection",
+            "size",
+            "category"
+          ],
+          "language": "en"
+        }
+      ],
+      "queries_sent_planned": [
+        "プラダ Saffiano Lux Small トートバッグ",
+        "プラダ Saffiano Lux サフィアーノ",
+        "プラダ Saffiano Lux トートバッグ",
+        "Prada Saffiano Lux Small Tote"
+      ],
+      "stored_before": {
+        "yahoo_queries": [],
+        "yahoo_raw": 0,
+        "yahoo_status": "REQUEST_FAILED",
+        "mercari": {
+          "marketplace": "Mercari",
+          "search_executed": false,
+          "queries": [],
+          "request_status": "REQUEST_FAILED",
+          "raw_candidates": 0,
+          "after_marketplace_filtering": 0,
+          "after_normalization": 0,
+          "after_deterministic_matching": 0,
+          "rejection_reason_counts": {},
+          "sold_listing_evidence_count": 0,
+          "active_listing_evidence_count": 0,
+          "price_values_for_median": [],
+          "median_sold_price_jpy": null,
+          "final_selected": null,
+          "failure_stage": "MERCARI_REQUEST_FAILED",
+          "failure_detail": "Error: BrowserType.launch: Executable doesn't exist at C:\\Users\\メイン\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     playwright install                                     ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
+          "evidence_note": "Mercari sold_out/trading only for price estimation; active listings are excluded."
+        }
+      },
+      "note": "Live re-execution requires Playwright chromium; planned queries shown here."
+    },
+    {
+      "class": "saffiano_lux_medium_tote",
+      "candidate_id": "ac-ff55fb8bb2ce",
+      "imported_title": "Prada Saffiano Lux Medium Promenade Tote Talco",
+      "extracted_identity": {
+        "brand": "PRADA",
+        "category": "TOTE_BAG",
+        "references": [],
+        "collection": "Saffiano Lux",
+        "family": "Saffiano Lux",
+        "material": "SAFFIANO",
+        "size": "Medium",
+        "color": "",
+        "bag_model_family": "Tote"
+      },
+      "query_tiers": [
+        {
+          "query": "プラダ Saffiano Lux Medium トートバッグ",
+          "tier": "COLLECTION_FAMILY_SIZE",
+          "signals": [
+            "brand",
+            "collection",
+            "size",
+            "category"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ Saffiano Lux サフィアーノ",
+          "tier": "COLLECTION_FAMILY_MATERIAL",
+          "signals": [
+            "brand",
+            "collection",
+            "material"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ Saffiano Lux トートバッグ",
+          "tier": "COLLECTION_FAMILY_CATEGORY",
+          "signals": [
+            "brand",
+            "collection",
+            "category"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "Prada Saffiano Lux Medium Tote",
+          "tier": "COLLECTION_FAMILY_SIZE_EN",
+          "signals": [
+            "brand",
+            "collection",
+            "size",
+            "category"
+          ],
+          "language": "en"
+        }
+      ],
+      "queries_sent_planned": [
+        "プラダ Saffiano Lux Medium トートバッグ",
+        "プラダ Saffiano Lux サフィアーノ",
+        "プラダ Saffiano Lux トートバッグ",
+        "Prada Saffiano Lux Medium Tote"
+      ],
+      "stored_before": {
+        "yahoo_queries": [],
+        "yahoo_raw": 0,
+        "yahoo_status": "REQUEST_FAILED",
+        "mercari": {
+          "marketplace": "Mercari",
+          "search_executed": false,
+          "queries": [],
+          "request_status": "REQUEST_FAILED",
+          "raw_candidates": 0,
+          "after_marketplace_filtering": 0,
+          "after_normalization": 0,
+          "after_deterministic_matching": 0,
+          "rejection_reason_counts": {},
+          "sold_listing_evidence_count": 0,
+          "active_listing_evidence_count": 0,
+          "price_values_for_median": [],
+          "median_sold_price_jpy": null,
+          "final_selected": null,
+          "failure_stage": "MERCARI_REQUEST_FAILED",
+          "failure_detail": "Error: BrowserType.launch: Executable doesn't exist at C:\\Users\\メイン\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     playwright install                                     ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
+          "evidence_note": "Mercari sold_out/trading only for price estimation; active listings are excluded."
+        }
+      },
+      "note": "Live re-execution requires Playwright chromium; planned queries shown here."
+    },
+    {
+      "class": "collection_family_galleria",
+      "candidate_id": "ac-179efdb9c20f",
+      "imported_title": "Prada Saffiano Vernice Medium Galleria Double Zip Azzurro Azzurro",
+      "extracted_identity": {
+        "brand": "PRADA",
+        "category": "BAG",
+        "references": [],
+        "collection": "Galleria",
+        "family": "Galleria",
+        "material": "SAFFIANO",
+        "size": "Medium",
+        "color": "",
+        "bag_model_family": "Galleria"
+      },
+      "query_tiers": [
+        {
+          "query": "プラダ ガレリア",
+          "tier": "COLLECTION_FAMILY_SIZE",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ ガレリア トート",
+          "tier": "COLLECTION_FAMILY_SIZE",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ ガレリア スモール",
+          "tier": "COLLECTION_FAMILY_CATEGORY",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ ガレリア ミディアム",
+          "tier": "COLLECTION_FAMILY_CATEGORY",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "ja"
+        }
+      ],
+      "queries_sent_planned": [
+        "プラダ ガレリア",
+        "プラダ ガレリア トート",
+        "プラダ ガレリア スモール",
+        "プラダ ガレリア ミディアム"
+      ],
+      "stored_before": {
+        "yahoo_queries": [],
+        "yahoo_raw": 0,
+        "yahoo_status": "REQUEST_FAILED",
+        "mercari": {
+          "marketplace": "Mercari",
+          "search_executed": false,
+          "queries": [],
+          "request_status": "REQUEST_FAILED",
+          "raw_candidates": 0,
+          "after_marketplace_filtering": 0,
+          "after_normalization": 0,
+          "after_deterministic_matching": 0,
+          "rejection_reason_counts": {},
+          "sold_listing_evidence_count": 0,
+          "active_listing_evidence_count": 0,
+          "price_values_for_median": [],
+          "median_sold_price_jpy": null,
+          "final_selected": null,
+          "failure_stage": "MERCARI_REQUEST_FAILED",
+          "failure_detail": "Error: BrowserType.launch: Executable doesn't exist at C:\\Users\\メイン\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     playwright install                                     ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
+          "evidence_note": "Mercari sold_out/trading only for price estimation; active listings are excluded."
+        }
+      },
+      "note": "Live re-execution requires Playwright chromium; planned queries shown here."
+    },
+    {
+      "class": "saffiano_lux_medium_tote",
+      "candidate_id": "ac-73c938dc1bde",
+      "imported_title": "Prada Saffiano Lux Promenade Tote Argilla",
+      "extracted_identity": {
+        "brand": "PRADA",
+        "category": "TOTE_BAG",
+        "references": [],
+        "collection": "Saffiano Lux",
+        "family": "Saffiano Lux",
+        "material": "SAFFIANO",
+        "size": "",
+        "color": "",
+        "bag_model_family": "Tote"
+      },
+      "query_tiers": [
+        {
+          "query": "プラダ Saffiano Lux サフィアーノ",
+          "tier": "COLLECTION_FAMILY_MATERIAL",
+          "signals": [
+            "brand",
+            "collection",
+            "material"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ Saffiano Lux トートバッグ",
+          "tier": "COLLECTION_FAMILY_CATEGORY",
+          "signals": [
+            "brand",
+            "collection",
+            "category"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "Prada Saffiano Lux Saffiano",
+          "tier": "COLLECTION_FAMILY_MATERIAL_EN",
+          "signals": [
+            "brand",
+            "collection",
+            "material"
+          ],
+          "language": "en"
+        },
+        {
+          "query": "Prada Saffiano Lux Tote",
+          "tier": "COLLECTION_FAMILY_CATEGORY_EN",
+          "signals": [
+            "brand",
+            "collection",
+            "category"
+          ],
+          "language": "en"
+        }
+      ],
+      "queries_sent_planned": [
+        "プラダ Saffiano Lux サフィアーノ",
+        "プラダ Saffiano Lux トートバッグ",
+        "Prada Saffiano Lux Saffiano",
+        "Prada Saffiano Lux Tote"
+      ],
+      "stored_before": {
+        "yahoo_queries": [],
+        "yahoo_raw": 0,
+        "yahoo_status": "REQUEST_FAILED",
+        "mercari": {
+          "marketplace": "Mercari",
+          "search_executed": false,
+          "queries": [],
+          "request_status": "REQUEST_FAILED",
+          "raw_candidates": 0,
+          "after_marketplace_filtering": 0,
+          "after_normalization": 0,
+          "after_deterministic_matching": 0,
+          "rejection_reason_counts": {},
+          "sold_listing_evidence_count": 0,
+          "active_listing_evidence_count": 0,
+          "price_values_for_median": [],
+          "median_sold_price_jpy": null,
+          "final_selected": null,
+          "failure_stage": "MERCARI_REQUEST_FAILED",
+          "failure_detail": "Error: BrowserType.launch: Executable doesn't exist at C:\\Users\\メイン\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     playwright install                                     ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
+          "evidence_note": "Mercari sold_out/trading only for price estimation; active listings are excluded."
+        }
+      },
+      "note": "Live re-execution requires Playwright chromium; planned queries shown here."
+    },
+    {
+      "class": "saffiano_lux_medium_tote",
+      "candidate_id": "ac-50fbb91ae7cc",
+      "imported_title": "Prada Saffiano Lux Medium Tote Cammeo",
+      "extracted_identity": {
+        "brand": "PRADA",
+        "category": "TOTE_BAG",
+        "references": [],
+        "collection": "Saffiano Lux",
+        "family": "Saffiano Lux",
+        "material": "SAFFIANO",
+        "size": "Medium",
+        "color": "",
+        "bag_model_family": "Tote"
+      },
+      "query_tiers": [
+        {
+          "query": "プラダ Saffiano Lux Medium トートバッグ",
+          "tier": "COLLECTION_FAMILY_SIZE",
+          "signals": [
+            "brand",
+            "collection",
+            "size",
+            "category"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ Saffiano Lux サフィアーノ",
+          "tier": "COLLECTION_FAMILY_MATERIAL",
+          "signals": [
+            "brand",
+            "collection",
+            "material"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ Saffiano Lux トートバッグ",
+          "tier": "COLLECTION_FAMILY_CATEGORY",
+          "signals": [
+            "brand",
+            "collection",
+            "category"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "Prada Saffiano Lux Medium Tote",
+          "tier": "COLLECTION_FAMILY_SIZE_EN",
+          "signals": [
+            "brand",
+            "collection",
+            "size",
+            "category"
+          ],
+          "language": "en"
+        }
+      ],
+      "queries_sent_planned": [
+        "プラダ Saffiano Lux Medium トートバッグ",
+        "プラダ Saffiano Lux サフィアーノ",
+        "プラダ Saffiano Lux トートバッグ",
+        "Prada Saffiano Lux Medium Tote"
+      ],
+      "stored_before": {
+        "yahoo_queries": [],
+        "yahoo_raw": 0,
+        "yahoo_status": "REQUEST_FAILED",
+        "mercari": {
+          "marketplace": "Mercari",
+          "search_executed": false,
+          "queries": [],
+          "request_status": "REQUEST_FAILED",
+          "raw_candidates": 0,
+          "after_marketplace_filtering": 0,
+          "after_normalization": 0,
+          "after_deterministic_matching": 0,
+          "rejection_reason_counts": {},
+          "sold_listing_evidence_count": 0,
+          "active_listing_evidence_count": 0,
+          "price_values_for_median": [],
+          "median_sold_price_jpy": null,
+          "final_selected": null,
+          "failure_stage": "MERCARI_REQUEST_FAILED",
+          "failure_detail": "Error: BrowserType.launch: Executable doesn't exist at C:\\Users\\メイン\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     playwright install                                     ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
+          "evidence_note": "Mercari sold_out/trading only for price estimation; active listings are excluded."
+        }
+      },
+      "note": "Live re-execution requires Playwright chromium; planned queries shown here."
+    },
+    {
+      "class": "saffiano_lux_medium_tote",
+      "candidate_id": "ac-1dcc68fbdc85",
+      "imported_title": "Prada Saffiano Lux Logo Embossed Medium Shoulder Tote Handbag White",
+      "extracted_identity": {
+        "brand": "PRADA",
+        "category": "TOTE_BAG",
+        "references": [],
+        "collection": "Saffiano Lux",
+        "family": "Saffiano Lux",
+        "material": "SAFFIANO",
+        "size": "Medium",
+        "color": "WHITE",
+        "bag_model_family": "Tote"
+      },
+      "query_tiers": [
+        {
+          "query": "プラダ Saffiano Lux Medium トートバッグ",
+          "tier": "COLLECTION_FAMILY_SIZE",
+          "signals": [
+            "brand",
+            "collection",
+            "size",
+            "category"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ Saffiano Lux サフィアーノ",
+          "tier": "COLLECTION_FAMILY_MATERIAL",
+          "signals": [
+            "brand",
+            "collection",
+            "material"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ Saffiano Lux トートバッグ",
+          "tier": "COLLECTION_FAMILY_CATEGORY",
+          "signals": [
+            "brand",
+            "collection",
+            "category"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "Prada Saffiano Lux Medium Tote",
+          "tier": "COLLECTION_FAMILY_SIZE_EN",
+          "signals": [
+            "brand",
+            "collection",
+            "size",
+            "category"
+          ],
+          "language": "en"
+        }
+      ],
+      "queries_sent_planned": [
+        "プラダ Saffiano Lux Medium トートバッグ",
+        "プラダ Saffiano Lux サフィアーノ",
+        "プラダ Saffiano Lux トートバッグ",
+        "Prada Saffiano Lux Medium Tote"
+      ],
+      "stored_before": {
+        "yahoo_queries": [],
+        "yahoo_raw": 0,
+        "yahoo_status": "REQUEST_FAILED",
+        "mercari": {
+          "marketplace": "Mercari",
+          "search_executed": false,
+          "queries": [],
+          "request_status": "REQUEST_FAILED",
+          "raw_candidates": 0,
+          "after_marketplace_filtering": 0,
+          "after_normalization": 0,
+          "after_deterministic_matching": 0,
+          "rejection_reason_counts": {},
+          "sold_listing_evidence_count": 0,
+          "active_listing_evidence_count": 0,
+          "price_values_for_median": [],
+          "median_sold_price_jpy": null,
+          "final_selected": null,
+          "failure_stage": "MERCARI_REQUEST_FAILED",
+          "failure_detail": "Error: BrowserType.launch: Executable doesn't exist at C:\\Users\\メイン\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     playwright install                                     ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
+          "evidence_note": "Mercari sold_out/trading only for price estimation; active listings are excluded."
+        }
+      },
+      "note": "Live re-execution requires Playwright chromium; planned queries shown here."
+    },
+    {
+      "class": "collection_family_galleria",
+      "candidate_id": "ac-8ffdaf5e6545",
+      "imported_title": "Prada Saffiano Small Galleria Double Zip Tote Glicine",
+      "extracted_identity": {
+        "brand": "PRADA",
+        "category": "TOTE_BAG",
+        "references": [],
+        "collection": "Galleria",
+        "family": "Galleria",
+        "material": "SAFFIANO",
+        "size": "Small",
+        "color": "",
+        "bag_model_family": "Galleria"
+      },
+      "query_tiers": [
+        {
+          "query": "プラダ ガレリア",
+          "tier": "COLLECTION_FAMILY_SIZE",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ ガレリア トート",
+          "tier": "COLLECTION_FAMILY_SIZE",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ ガレリア スモール",
+          "tier": "COLLECTION_FAMILY_CATEGORY",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "ja"
+        },
+        {
+          "query": "プラダ ガレリア Other",
+          "tier": "COLLECTION_FAMILY_CATEGORY",
+          "signals": [
+            "brand",
+            "family",
+            "dictionary_alias"
+          ],
+          "language": "ja"
+        }
+      ],
+      "queries_sent_planned": [
+        "プラダ ガレリア",
+        "プラダ ガレリア トート",
+        "プラダ ガレリア スモール",
+        "プラダ ガレリア Other"
+      ],
+      "stored_before": {
+        "yahoo_queries": [],
+        "yahoo_raw": 0,
+        "yahoo_status": "REQUEST_FAILED",
+        "mercari": {
+          "marketplace": "Mercari",
+          "search_executed": false,
+          "queries": [],
+          "request_status": "REQUEST_FAILED",
+          "raw_candidates": 0,
+          "after_marketplace_filtering": 0,
+          "after_normalization": 0,
+          "after_deterministic_matching": 0,
+          "rejection_reason_counts": {},
+          "sold_listing_evidence_count": 0,
+          "active_listing_evidence_count": 0,
+          "price_values_for_median": [],
+          "median_sold_price_jpy": null,
+          "final_selected": null,
+          "failure_stage": "MERCARI_REQUEST_FAILED",
+          "failure_detail": "Error: BrowserType.launch: Executable doesn't exist at C:\\Users\\メイン\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     playwright install                                     ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
+          "evidence_note": "Mercari sold_out/trading only for price estimation; active listings are excluded."
+        }
+      },
+      "note": "Live re-execution requires Playwright chromium; planned queries shown here."
+    }
+  ]
+}

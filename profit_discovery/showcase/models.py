@@ -20,3 +20,16 @@ class ShowcaseOpportunity:
     decision: str
     category: str
     brand: str
+    market_source: str = "Fixture"
+    requested_market_mode: str = "FIXTURE"
+    actual_market_source: str = "Fixture"
+    fallback_used: bool = False
+    business_mode: str = ""
+    market_coverage: str = ""
+    profit_rank: int | None = None
+    turnover_score: float | None = None
+    purchase_source: str = ""
+    purchase_url: str = ""
+    selling_market: str = ""
+    selling_url: str = ""
+    estimated_profit: Decimal | None = None

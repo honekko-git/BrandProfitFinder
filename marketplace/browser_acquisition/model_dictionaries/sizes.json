@@ -1,0 +1,26 @@
+{
+  "sizes": [
+    {
+      "id": "Mini",
+      "aliases": ["super mini", "mini", "ミニ", "ナノ"]
+    },
+    {
+      "id": "Small",
+      "aliases": ["small", "スモール", "pm", "20cm", "20 cm", "２０ｃｍ"]
+    },
+    {
+      "id": "Medium",
+      "aliases": ["medium", "ミディアム", "ｍｍ", "mm", "25cm", "25 cm", "２５ｃｍ", " 25 "]
+    },
+    {
+      "id": "Large",
+      "aliases": ["large", "ラージ", "gm", "jumbo", "30cm", "30 cm", "３０ｃｍ"]
+    }
+  ],
+  "size_ja": {
+    "Mini": "ミニ",
+    "Small": "スモール",
+    "Medium": "ミディアム",
+    "Large": "ラージ"
+  }
+}

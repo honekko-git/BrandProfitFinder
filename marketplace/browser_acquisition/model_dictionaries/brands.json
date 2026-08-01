@@ -1,0 +1,24 @@
+{
+  "brands": {
+    "CHANEL": {
+      "ja": "シャネル",
+      "aliases": ["chanel", "シャネル"]
+    },
+    "LOUIS VUITTON": {
+      "ja": "ルイヴィトン",
+      "aliases": ["louis vuitton", "louisvuitton", "lv", "ルイヴィトン", "ルイビトン", "ヴィトン"]
+    },
+    "HERMES": {
+      "ja": "エルメス",
+      "aliases": ["hermes", "hermès", "エルメス"]
+    },
+    "GUCCI": {
+      "ja": "グッチ",
+      "aliases": ["gucci", "グッチ"]
+    },
+    "PRADA": {
+      "ja": "プラダ",
+      "aliases": ["prada", "プラダ"]
+    }
+  }
+}
